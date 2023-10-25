@@ -20,7 +20,6 @@ public class BasicReversi implements ReversiModel {
   boolean isGameON = false;
 
   private int sideLength;
-  private int numRows;
 
   public BasicReversi() {
     this.horizontalRows = new ArrayList<ArrayList<Cell>> ();
@@ -28,13 +27,63 @@ public class BasicReversi implements ReversiModel {
     this.downLeftRows = new ArrayList<ArrayList<Cell>> ();
   }
 
-  //put the cell with the given coordinates at the right spot in all three lists
-  private void setEmptyCellAt(int row, int col) {
-    Cell c = new Cell(new Location(row, col));
-    int mid = sideLength + 1;
-    int hIndex = Math.abs(row - mid) - col;
-    horizontalRows.get(row).add(hIndex, c);
-    
+  // put the cell with the given horizontal row and index into the correct location in all three
+  // lists
+  private void setEmptyCellAt(int hRow, int hIndex) {
+    Cell c = new Cell(new Location(hRow, hIndex));
+    horizontalRows.get(hRow).add(hIndex, c);
+    int lRow = getLRow(hRow, hIndex);
+    int lIndex = getLIndex(hRow, hIndex);
+    downLeftRows.get(lRow).add(lIndex, c);
+    int rRow = getRRow(hRow, hIndex);
+    int rIndex = getRIndex(hRow, hIndex);
+    downRightRows.get(rRow).add(rIndex, c);
+  }
+
+  //get the downRightRow row coordinate of the cell at the given horizontal row and index
+  private int getRRow(int hRow, int hIndex) {
+    if (hRow <= sideLength) {
+      //at and above the centerline the RRow is mid - hIndex + hRow
+      return sideLength - hIndex + hRow;
+    } else {
+      //n rows below the centerline the RRow is mid - hIndex + hRow - n
+      return 2 * sideLength - hIndex;
+    }
+  }
+
+  //get the downRightRow index coordinate of the cell at the given horizontal row and index
+  private int getRIndex(int hRow, int hIndex) {
+    int rRow = getRRow(hRow, hIndex);
+    if (rRow <= sideLength) {
+      // left of the downLeft centerline the lIndex is the horizontal row
+      return hRow;
+    } else {
+      // n hIndicies to the right of downLeft centerline the lIndex is the hRow - n
+      return hRow - rRow + sideLength;
+    }
+  }
+
+  //get the downLeftRow row coordinate of the cell at the given horizontal row and index
+  private int getLRow(int hRow, int hIndex) {
+    if (hRow <= sideLength) {
+      //at and above the centerline the LRow is simply the hIndex
+      return hIndex;
+    } else {
+      //n rows below the centerline the LRow is hIndex + n
+      return hIndex + hRow - sideLength;
+    }
+  }
+
+  //get the downLeftRow index coordinate of the cell at the given horizontal row and index
+  private int getLIndex(int hRow, int hIndex) {
+    int lRow = getLRow(hRow, hIndex);
+    if (lRow <= sideLength) {
+      // left of the downLeft centerline the lIndex is the horizontal row
+      return hRow;
+    } else {
+      // n hIndicies to the right of downLeft centerline the lIndex is the hRow - n
+      return hRow - lRow + sideLength;
+    }
   }
 
   @Override
@@ -49,28 +98,36 @@ public class BasicReversi implements ReversiModel {
     //initialize game
     this.sideLength = sideLength;
     this.isGameON = true;
-    numRows = 2 * this.sideLength + 1;
 
     int rowSize = sideLength;
-    int middleRowNum = sideLength;
+    int totalNumRows = 2 * this.sideLength + 1;
+
+    //create empty arrayLists to hold cells
+    for (int row = 0; row < totalNumRows; row++) {
+      this.horizontalRows.add(new ArrayList<>());
+      this.downRightRows.add(new ArrayList<>());
+      this.downLeftRows.add(new ArrayList<>());
+    }
 
     // build grid
-
-    for (int rowNum = 0; rowNum < sideLength; rowNum++) {
-      ArrayList<Cell> rows = new ArrayList<Cell>();
+    for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
       for (int col = 0; col < rowSize; col++) {
-        Cell pt = new Cell(new Location(rowNum, col));
-        rows.add(pt);
+        setEmptyCellAt(rowNum, col);
       }
-      grid.add(rows);
+      if (rowNum < sideLength) {
+        rowSize++;
+      } else {
+        rowSize--;
+      }
     }
 
       //place each players 2 discs
-      int startPosition = (sideLength/2) - 1;
-      grid.get(startPosition).get(startPosition).setState(CellState.BLACK);
-      grid.get(startPosition).get(startPosition+1).setState(CellState.WHITE);
-      grid.get(startPosition+1).get(startPosition).setState(CellState.WHITE);
-      grid.get(startPosition+1).get(startPosition+1).setState(CellState.BLACK);
+      horizontalRows.get(this.sideLength - 1).get(this.sideLength - 1).setState(CellState.BLACK);
+      horizontalRows.get(this.sideLength - 1).get(this.sideLength).setState(CellState.WHITE);
+      horizontalRows.get(this.sideLength).get(this.sideLength - 1).setState(CellState.WHITE);
+      horizontalRows.get(this.sideLength).get(this.sideLength + 1).setState(CellState.BLACK);
+    horizontalRows.get(this.sideLength + 1).get(this.sideLength).setState(CellState.BLACK);
+    horizontalRows.get(this.sideLength + 1).get(this.sideLength + 1).setState(CellState.WHITE);
   }
 
   public ArrayList<ArrayList<Cell>> getGrid() {
