@@ -215,7 +215,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   private void flipTiles() {
-    
+
   }
 
   private void setTileToCurrentPlayer(int row, int index) {
@@ -235,7 +235,7 @@ public class BasicReversi implements ReversiModel {
 
   @Override
   public void passTurn() {
-
+    switchTurn();
   }
 
   public ArrayList<ArrayList<Cell>> getGrid() {
