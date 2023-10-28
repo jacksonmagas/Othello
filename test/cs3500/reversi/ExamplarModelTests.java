@@ -15,7 +15,6 @@ public class ExamplarModelTests {
   @Test
   public void testReversiGame() {
     ReversiModel model = new BasicReversi();
-    model.startGame(4);
     model.startGame(6);
     Assert.assertEquals("Game is started",
             "     _ _ _ _ _ _      \n" +
