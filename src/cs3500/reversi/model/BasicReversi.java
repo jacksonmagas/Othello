@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * It implements the primary model interface for playing a game of Reversi.
+ * Moves to this model are made using the coordinate system (row, index) where the row is the
+ * horizontal row number and the index is the location in the row 0 indexed from left.
  */
 public class BasicReversi implements ReversiModel {
   //Keeps track of the cells in the game in 3 lists, one for each principal direction of a hexagon
