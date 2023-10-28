@@ -31,7 +31,7 @@ public class ReversiTextualController implements ReversiController {
     }
     ReversiTextualView view = new ReversiTextualView(model, this.out);
     try {
-      model.startGame(noOfCells, 0);
+      model.startGame(noOfCells);
       view.render();
     }
     catch (IllegalArgumentException e) {

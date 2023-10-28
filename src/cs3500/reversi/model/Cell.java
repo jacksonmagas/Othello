@@ -38,7 +38,7 @@ class Cell {
 
   @Override
   public String toString() {
-    String output = "-";
+    String output = "_";
     if (this.state != null) {
       output = this.state.toString();
     }

@@ -20,6 +20,7 @@ public class BasicReversi implements ReversiModel {
   boolean isGameON = false;
 
   private int sideLength;
+  private int totalNumRows;
 
   public BasicReversi() {
     this.horizontalRows = new ArrayList<ArrayList<Cell>> ();
@@ -32,12 +33,14 @@ public class BasicReversi implements ReversiModel {
   private void setEmptyCellAt(int hRow, int hIndex) {
     Cell c = new Cell(new Location(hRow, hIndex));
     horizontalRows.get(hRow).add(hIndex, c);
+    /*
     int lRow = getLRow(hRow, hIndex);
     int lIndex = getLIndex(hRow, hIndex);
     downLeftRows.get(lRow).add(lIndex, c);
     int rRow = getRRow(hRow, hIndex);
     int rIndex = getRIndex(hRow, hIndex);
     downRightRows.get(rRow).add(rIndex, c);
+    */
   }
 
   //get the downRightRow row coordinate of the cell at the given horizontal row and index
@@ -91,8 +94,8 @@ public class BasicReversi implements ReversiModel {
     if (this.isGameON) {
       throw new IllegalStateException("Game is already started!");
     }
-    if (sideLength <= 3 || (sideLength % 2) != 0) {
-      throw new IllegalArgumentException("sideLength should be at-least 4 or above and even !");
+    if (sideLength < 6 || (sideLength % 2) != 0) {
+      throw new IllegalArgumentException("sideLength should be at-least 6 or above and even !");
     }
 
     //initialize game
@@ -100,7 +103,7 @@ public class BasicReversi implements ReversiModel {
     this.isGameON = true;
 
     int rowSize = sideLength;
-    int totalNumRows = 2 * this.sideLength + 1;
+    totalNumRows = 2 * this.sideLength - 1;
 
     //create empty arrayLists to hold cells
     for (int row = 0; row < totalNumRows; row++) {
@@ -122,17 +125,17 @@ public class BasicReversi implements ReversiModel {
     }
 
       //place each players 2 discs
-      horizontalRows.get(this.sideLength - 1).get(this.sideLength - 1).setState(CellState.BLACK);
-      horizontalRows.get(this.sideLength - 1).get(this.sideLength).setState(CellState.WHITE);
-      horizontalRows.get(this.sideLength).get(this.sideLength - 1).setState(CellState.WHITE);
-      horizontalRows.get(this.sideLength).get(this.sideLength + 1).setState(CellState.BLACK);
-    horizontalRows.get(this.sideLength + 1).get(this.sideLength).setState(CellState.BLACK);
-    horizontalRows.get(this.sideLength + 1).get(this.sideLength + 1).setState(CellState.WHITE);
+    horizontalRows.get(this.sideLength - 2).get(this.sideLength - 2).setState(CellState.BLACK);
+    horizontalRows.get(this.sideLength - 2).get(this.sideLength - 1).setState(CellState.WHITE);
+    horizontalRows.get(this.sideLength - 1).get(this.sideLength - 2).setState(CellState.WHITE);
+    horizontalRows.get(this.sideLength - 1).get(this.sideLength).setState(CellState.BLACK);
+    horizontalRows.get(this.sideLength).get(this.sideLength - 2).setState(CellState.BLACK);
+    horizontalRows.get(this.sideLength).get(this.sideLength - 1).setState(CellState.WHITE);
   }
 
   public ArrayList<ArrayList<Cell>> getGrid() {
     if (this.isGameON) {
-      return grid;
+      return horizontalRows;
     } else {
       throw new IllegalStateException("Game is not yet started!");
     }
@@ -141,6 +144,7 @@ public class BasicReversi implements ReversiModel {
 
   public List<Cell> getPlayerDiscs(Player player) {
     List<Cell> discs = new ArrayList<Cell> ();
+    /*
     for (int row = 0; row < this.noOfCellsInLongestRow; row++) {
       ArrayList<Cell> rows = new ArrayList<Cell>();
       for (int col = 0; col < noOfCellsInLongestRow; col++) {
@@ -150,18 +154,27 @@ public class BasicReversi implements ReversiModel {
         }
       }
     }
+    */
     return discs;
   }
 
   @Override
   public String toString() {
     String output = "";
-    for (int row = 0; row < this.noOfCellsInLongestRow; row++) {
-      ArrayList<Cell> rows = new ArrayList<Cell>();
-      for (int col = 0; col < noOfCellsInLongestRow; col++) {
-        Cell cell = grid.get(row).get(col);
-        output += cell.toString() + " ";
+    int rowSize = sideLength;
+    for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
+      String rowStr = "";
+      for (int col = 0; col < rowSize; col++) {
+        Cell cell = horizontalRows.get(rowNum).get(col);
+        rowStr += cell.toString() + " ";
       }
+      if (rowNum < sideLength-1) {
+        rowSize++;
+      } else {
+        rowSize--;
+      }
+      int leftSpaces = (totalNumRows + (totalNumRows - 1) - rowStr.length() + 1)/2;
+      output += ((leftSpaces > 0) ? String.format("%-"+leftSpaces+"s", " ") : "") + rowStr + ((leftSpaces > 0) ? String.format("%-"+leftSpaces+"s", " ") : "");
       output += "\n";
     }
     return output;
