@@ -15,11 +15,18 @@ public class ExamplarModelTests {
   @Test
   public void testReversiGame() {
     ReversiModel model = new BasicReversi();
-    model.startGame(4, 0);
+    model.startGame(6);
     Assert.assertEquals("Game is started",
-            "- - - - \n" +
-                    "- X O - \n" +
-                    "- O X - \n" +
-                    "- - - - \n", model.toString());
+            "     _ _ _ _ _ _      \n" +
+                    "    _ _ _ _ _ _ _     \n" +
+                    "   _ _ _ _ _ _ _ _    \n" +
+                    "  _ _ _ _ _ _ _ _ _   \n" +
+                    " _ _ _ _ X O _ _ _ _  \n" +
+                    "_ _ _ _ O _ X _ _ _ _ \n" +
+                    " _ _ _ _ X O _ _ _ _  \n" +
+                    "  _ _ _ _ _ _ _ _ _   \n" +
+                    "   _ _ _ _ _ _ _ _    \n" +
+                    "    _ _ _ _ _ _ _     \n" +
+                    "     _ _ _ _ _ _      \n", model.toString());
   }
 }
