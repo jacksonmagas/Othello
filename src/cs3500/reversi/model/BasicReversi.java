@@ -23,6 +23,7 @@ public class BasicReversi implements ReversiModel {
 
   private int sideLength;
   private int totalNumRows;
+  private CellState currentPlayer;
 
   public BasicReversi() {
     this.horizontalRows = new ArrayList<ArrayList<Cell>> ();
@@ -126,13 +127,115 @@ public class BasicReversi implements ReversiModel {
       }
     }
 
-      //place each players 2 discs
+    //place each players 2 discs
     horizontalRows.get(this.sideLength - 2).get(this.sideLength - 2).setState(CellState.BLACK);
     horizontalRows.get(this.sideLength - 2).get(this.sideLength - 1).setState(CellState.WHITE);
     horizontalRows.get(this.sideLength - 1).get(this.sideLength - 2).setState(CellState.WHITE);
     horizontalRows.get(this.sideLength - 1).get(this.sideLength).setState(CellState.BLACK);
     horizontalRows.get(this.sideLength).get(this.sideLength - 2).setState(CellState.BLACK);
     horizontalRows.get(this.sideLength).get(this.sideLength - 1).setState(CellState.WHITE);
+
+    //set black to move first
+    this.currentPlayer = CellState.BLACK;
+  }
+
+  // switch the current player at end of turn
+  private void switchTurn() {
+    this.currentPlayer = this.currentPlayer.opposite();
+  }
+
+  private Cell getCellAt(int hRow, int hIndex) {
+    return this.horizontalRows.get(hRow).get(hIndex);
+  }
+
+  // Given a direction grid and coordinates find if the direction sandwiches
+  // some number of pieces of the other color.
+  private boolean isValidMoveInThisDirection(ArrayList<ArrayList<Cell>> direction,
+      int row, int index) {
+    int rowLen = direction.get(row).size();
+    boolean validInPlus = false;
+    boolean validInMinus = false;
+    CellState oppositeColor = this.currentPlayer.opposite();
+    //Is there an adjacent opponent cell in negative direction?
+    if (index > 0) {
+      Cell prevCell = direction.get(row).get(index - 1);
+      validInMinus = prevCell.getState().equals(oppositeColor);
+    }
+
+    //If is there an ally cell on the other side of opponent cells?
+    if (validInMinus) {
+      for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
+        CellState curCellState = direction.get(row).get(newIndex).getState();
+        if (curCellState == CellState.EMPTY
+            || (newIndex == 0 && curCellState != this.currentPlayer)) {
+          validInMinus = false;
+          break;
+        } else if (curCellState == this.currentPlayer) {
+          break;
+        }
+      }
+    }
+
+    //Is there an adjacent opponent cell in positive direction?
+    if (index < rowLen - 1) {
+      Cell nextCell = direction.get(row).get(index + 1);
+      validInPlus = nextCell.getState().equals(oppositeColor);
+    }
+
+    //If is there an ally cell on the other side of opponent cells?
+    if (validInMinus) {
+      for (int newIndex = index + 1; newIndex < rowLen; newIndex++) {
+        CellState curCellState = direction.get(row).get(newIndex).getState();
+        if (curCellState == CellState.EMPTY
+            || (newIndex == 0 && curCellState != this.currentPlayer)) {
+          validInPlus = false;
+          break;
+        } else if (curCellState == this.currentPlayer) {
+          break;
+        }
+      }
+    }
+
+    return validInMinus || validInPlus;
+  }
+
+  // A move is valid if all the following are true:
+  // - the cell to move in is empty
+  // - the cell to move in is adjacent to the one of the opponent player's cells
+  // - in that direction there is a friendly player cell before empty cell/end of list
+  private boolean isValidMove(int hRow, int hIndex) {
+    return getCellAt(hRow, hIndex).isEmpty()
+    && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
+        || isValidMoveInThisDirection(this.downRightRows,
+            getRRow(hRow, hIndex),
+            getRIndex(hRow, hIndex))
+        || isValidMoveInThisDirection(this.downLeftRows,
+            getLRow(hRow, hIndex),
+            getLIndex(hRow, hIndex)));
+  }
+
+  private void flipTiles() {
+    
+  }
+
+  private void setTileToCurrentPlayer(int row, int index) {
+    horizontalRows.get(row).get(index).setState(this.currentPlayer);
+  }
+
+  @Override
+  public void makeMove(int row, int index) {
+    if (isValidMove(row, index)) {
+      setTileToCurrentPlayer(row, index);
+      flipTiles();
+      switchTurn();
+    } else {
+      throw new IllegalArgumentException("There is no legal move at " + row + ", " + index + ".");
+    }
+  }
+
+  @Override
+  public void passTurn() {
+
   }
 
   public ArrayList<ArrayList<Cell>> getGrid() {

@@ -28,6 +28,14 @@ class Cell {
     this.state = state;
   }
 
+  /**
+   * Finds if this cell is empty.
+   * @return True if this cell is empty.
+   */
+  public boolean isEmpty() {
+    return this.state == CellState.EMPTY;
+  }
+
   public CellState getState() {
     return state;
   }
