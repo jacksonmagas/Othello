@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment="" />
+    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment="Added tests">
+      <change afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,10 +35,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -39,8 +58,36 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698524927626</updated>
-      <workItem from="1698524928668" duration="1000" />
+      <workItem from="1698524928668" duration="5549000" />
     </task>
+    <task id="LOCAL-00001" summary="textual view test">
+      <option name="closed" value="true" />
+      <created>1698525860975</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698525860975</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="textual view test" />
+    <MESSAGE value="Added tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tests" />
   </component>
 </project>
