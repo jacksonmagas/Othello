@@ -14,6 +14,7 @@ public class ReversiTextualController implements ReversiController {
 
   final Readable in;
   final Appendable out;
+
   /**
    * Constructor for ReversiTextualController class.
    */
@@ -25,6 +26,7 @@ public class ReversiTextualController implements ReversiController {
     this.out = out;
   }
 
+  // plays the hexagon reversi game.
   @Override
   public void playGame(ReversiModel model, int noOfCells) {
     if (model == null) {

@@ -31,10 +31,13 @@ public class BasicReversi implements ReversiModel {
   private int blackPlayerPassTurnsCount;
   private int whitePlayerPassTurnsCount;
 
+  /**
+   * Constructor for BasicReversi public class.
+   */
   public BasicReversi() {
-    this.horizontalRows = new ArrayList<ArrayList<Cell>> ();
-    this.downRightRows = new ArrayList<ArrayList<Cell>> ();
-    this.downLeftRows = new ArrayList<ArrayList<Cell>> ();
+    this.horizontalRows = new ArrayList<ArrayList<Cell>>();
+    this.downRightRows = new ArrayList<ArrayList<Cell>>();
+    this.downLeftRows = new ArrayList<ArrayList<Cell>>();
     yourScore = 0;
     computerScore = 0;
     blackPlayerPassTurnsCount = 0;
@@ -94,6 +97,7 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  // starts the reversi game
   @Override
   public void startGame(int sideLength) {
     if (this.isGameON) {
@@ -149,6 +153,7 @@ public class BasicReversi implements ReversiModel {
     this.currentPlayer = this.currentPlayer.opposite();
   }
 
+  // gets the cell at its current position
   private Cell getCellAt(int hRow, int hIndex) {
     return this.horizontalRows.get(hRow).get(hIndex);
   }
@@ -210,7 +215,7 @@ public class BasicReversi implements ReversiModel {
   // - in that direction there is a friendly player cell before empty cell/end of list
   private boolean isValidMove(int hRow, int hIndex) {
     return getCellAt(hRow, hIndex).isEmpty()
-    && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
+      && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
         || isValidMoveInThisDirection(this.downRightRows,
             getRRow(hRow, hIndex),
             getRIndex(hRow, hIndex))
@@ -219,6 +224,7 @@ public class BasicReversi implements ReversiModel {
             getLIndex(hRow, hIndex)));
   }
 
+  // flips the player disc if the move is valid
   private void flipTilesIfValid(ArrayList<ArrayList<Cell>> direction,
                                              int row, int index) {
     boolean validInPlus = false;
@@ -299,6 +305,7 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  // flips the player tiles once prompted
   private void flipTiles(int hRow, int hIndex) {
     flipTilesIfValid(this.horizontalRows, hRow, hIndex);
     flipTilesIfValid(this.downLeftRows,
@@ -309,6 +316,7 @@ public class BasicReversi implements ReversiModel {
             getRIndex(hRow, hIndex));
   }
 
+  // gives an empty tile space to the current player
   private void setEmptyTileToCurrentPlayer(int row, int index) {
     horizontalRows.get(row).get(index).setState(this.currentPlayer);
     if (this.currentPlayer.equals(CellState.BLACK)) {
@@ -318,6 +326,7 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  // flips the tile to the current player
   private void flipTileToCurrentPlayer(int row, int index) {
     horizontalRows.get(row).get(index).setState(this.currentPlayer);
     if (this.currentPlayer.equals(CellState.BLACK)) {
@@ -329,6 +338,7 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  // makes the move a player prompted
   @Override
   public void makeMove(int row, int index) {
     if (row < 0 || index < 0) {
@@ -349,6 +359,7 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  // passes the turn of the player if there are no legal moves left for that player
   @Override
   public void passTurn() {
     if (!isGameON) {
@@ -377,16 +388,19 @@ public class BasicReversi implements ReversiModel {
 
   }
 
+  // gets the score of the game for the human player
   @Override
   public int getYourScore() {
     return this.yourScore;
   }
 
+  // gets the score of the game for the computer player
   @Override
   public int getComputerScore() {
     return this.computerScore;
   }
 
+  // returns the output in a string format
   @Override
   public String toString() {
     String output = "";
@@ -404,13 +418,14 @@ public class BasicReversi implements ReversiModel {
           computerScore++;
         }
       }
-      if (rowNum < sideLength-1) {
+      if (rowNum < sideLength - 1) {
         rowSize++;
       } else {
         rowSize--;
       }
-      int leftSpaces = (totalNumRows + (totalNumRows - 1) - rowStr.length() + 1)/2;
-      output += ((leftSpaces > 0) ? String.format("%-"+leftSpaces+"s", " ") : "") + rowStr + ((leftSpaces > 0) ? String.format("%-"+leftSpaces+"s", " ") : "");
+      int leftSpaces = (totalNumRows + (totalNumRows - 1) - rowStr.length() + 1) / 2;
+      output += ((leftSpaces > 0) ? String.format("%-" + leftSpaces + "s", " ") : "") + rowStr
+              + ((leftSpaces > 0) ? String.format("%-" + leftSpaces + "s", " ") : "");
       output += "\n";
     }
     output += "Your Score: " + yourScore + "\n";

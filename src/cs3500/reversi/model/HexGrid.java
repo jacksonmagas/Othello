@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 public class HexGrid<T> {
   //outer list is q coordinate, inner is r
   private final HexList<HexList<T>> grid;
-  private final int offset;
 
   /**
    * Creates a new point up hexagonal array.
@@ -24,7 +23,7 @@ public class HexGrid<T> {
    */
   public HexGrid(int size) {
     this.grid = new HexList<HexList<T>>(size);
-    this.offset = (size - 1) / 2;
+    int offset = (size - 1) / 2;
     int rowSize = size % 2 + 1;
     for (int q = -offset; q <= offset; q++) {
       this.grid.set(q, new HexList<T>(rowSize));
@@ -36,6 +35,7 @@ public class HexGrid<T> {
   private static final class HexList<U> implements Iterable<U> {
     private final int offset;
     private final ArrayList<U> baseList;
+
     private HexList(int length) {
       if (length % 2 == 0) {
         throw new IllegalArgumentException("length must be odd");
@@ -64,7 +64,7 @@ public class HexGrid<T> {
      * Get the value at the given index.
      * @param index the location in this list to get the element
      * @return the element at the given location in the list or null if no element has been put in
-     * this list yet
+     *         this list yet
      */
     U get(int index) {
       if (Math.abs(index) > offset) {

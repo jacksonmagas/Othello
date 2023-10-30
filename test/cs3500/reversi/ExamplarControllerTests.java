@@ -13,6 +13,9 @@ import cs3500.reversi.model.ReversiModel;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests methods from controller classes.
+ */
 public class ExamplarControllerTests {
   @Test
   public void testStartGame() {

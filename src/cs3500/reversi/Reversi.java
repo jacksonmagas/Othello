@@ -12,6 +12,9 @@ import cs3500.reversi.model.ReversiModel;
  */
 public class Reversi {
 
+  /**
+   * Constructor for Reversi public class.
+   */
   public static void main(String[] args) {
     // defaults to 4
     int noOfCells = 4;
