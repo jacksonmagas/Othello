@@ -169,7 +169,9 @@ public class BasicReversi implements ReversiModel {
 
   // Given a direction grid and coordinates find if pieces of the current color sandwich
   // some number of pieces of the other color along this axis in the increasing index direction.
-  private boolean isValidInThisDirectionPlus(ArrayList<ArrayList<Cell>> direction, int row, int index) {
+  private boolean isValidInThisDirectionPlus(ArrayList<ArrayList<Cell>> direction,
+      int row,
+      int index) {
     int rowLen = direction.get(row).size();
     boolean validInPlus = false;
     CellState oppositeColor = this.currentPlayer.opposite();
@@ -197,7 +199,9 @@ public class BasicReversi implements ReversiModel {
 
   // Given a direction grid and coordinates find if pieces of the current color sandwich
   // some number of pieces of the other color along this axis in the decreasing index direction.
-  private boolean isValidInThisDirectionMinus(ArrayList<ArrayList<Cell>> direction, int row, int index) {
+  private boolean isValidInThisDirectionMinus(ArrayList<ArrayList<Cell>> direction,
+      int row,
+      int index) {
     boolean validInMinus = false;
     CellState oppositeColor = this.currentPlayer.opposite();
     //Is there an adjacent opponent cell in negative direction?
@@ -249,7 +253,8 @@ public class BasicReversi implements ReversiModel {
         curCellState = direction.get(row).get(newIndex).getState();
         flipTileToCurrentPlayer(row, newIndex);
         newIndex--;
-      } while (curCellState == oppositeColor);
+      }
+      while (curCellState == oppositeColor);
     }
 
     // valid so flip tile now
@@ -260,7 +265,8 @@ public class BasicReversi implements ReversiModel {
         curCellState = direction.get(row).get(newIndex).getState();
         flipTileToCurrentPlayer(row, newIndex);
         newIndex++;
-      } while (curCellState == oppositeColor);
+      }
+      while (curCellState == oppositeColor);
     }
   }
 
