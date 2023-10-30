@@ -19,12 +19,7 @@ If a player has no legal moves, they are required to pass.
 If both players pass in a row, the game ends.
 
 Modeling game:
-You will need to represent the board and its contents. You likely will have to figure out how to represent
-the coordinate system of the board, to describe the locations of all the cells.
-
-You will need to figure out how to let players make moves. Your implementation will need to (among other
-tasks) enforce the rules of the game, to make sure that players take turns, that moves are legal, that discs
-are flipped, and that the winner of the game can be determined.
+The board is represented by 3 2d arrays of cells representing the cells of the game ordered along all three axis of a hexagon.
 
 Visualizing game:
 You are not required in this assignment to create a GUI view of your game. Instead, you will start with a
