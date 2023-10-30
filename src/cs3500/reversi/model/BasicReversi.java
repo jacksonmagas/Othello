@@ -21,7 +21,7 @@ public class BasicReversi implements ReversiModel {
   boolean isGameON = false;
   boolean isGameOver = false;
 
-  private int sideLength;
+  private int center;
   private int totalNumRows;
   private CellState currentPlayer;
 
@@ -53,47 +53,48 @@ public class BasicReversi implements ReversiModel {
 
   //get the downRightRow row coordinate of the cell at the given horizontal row and index
   private int getRRow(int hRow, int hIndex) {
-    if (hRow <= sideLength) {
+
+    if (hRow <= center) {
       //at and above the centerline the RRow is mid - hIndex + hRow
-      return sideLength - hIndex + hRow;
+      return center - hIndex + hRow;
     } else {
       //n rows below the centerline the RRow is mid - hIndex + hRow - n
-      return 2 * sideLength - hIndex;
+      return 2 * center - hIndex;
     }
   }
 
   //get the downRightRow index coordinate of the cell at the given horizontal row and index
   private int getRIndex(int hRow, int hIndex) {
     int rRow = getRRow(hRow, hIndex);
-    if (rRow <= sideLength) {
+    if (rRow <= center) {
       // left of the downLeft centerline the lIndex is the horizontal row
       return hRow;
     } else {
       // n hIndicies to the right of downLeft centerline the lIndex is the hRow - n
-      return hRow - rRow + sideLength;
+      return hRow - rRow + center;
     }
   }
 
   //get the downLeftRow row coordinate of the cell at the given horizontal row and index
   private int getLRow(int hRow, int hIndex) {
-    if (hRow <= sideLength) {
+    if (hRow <= center) {
       //at and above the centerline the LRow is simply the hIndex
       return hIndex;
     } else {
       //n rows below the centerline the LRow is hIndex + n
-      return hIndex + hRow - sideLength;
+      return hIndex + hRow - center;
     }
   }
 
   //get the downLeftRow index coordinate of the cell at the given horizontal row and index
   private int getLIndex(int hRow, int hIndex) {
     int lRow = getLRow(hRow, hIndex);
-    if (lRow <= sideLength) {
+    if (lRow <= center) {
       // left of the downLeft centerline the lIndex is the horizontal row
       return hRow;
     } else {
       // n hIndicies to the right of downLeft centerline the lIndex is the hRow - n
-      return hRow - lRow + sideLength;
+      return hRow - lRow + center;
     }
   }
 
@@ -108,12 +109,12 @@ public class BasicReversi implements ReversiModel {
     }
 
     //initialize game
-    this.sideLength = sideLength;
+    this.center = sideLength - 1;
     this.isGameON = true;
     this.isGameOver = false;
 
     int rowSize = sideLength;
-    totalNumRows = 2 * this.sideLength - 1;
+    totalNumRows = 2 * sideLength - 1;
 
     //create empty arrayLists to hold cells
     for (int row = 0; row < totalNumRows; row++) {
@@ -135,12 +136,12 @@ public class BasicReversi implements ReversiModel {
     }
 
     //place each players 2 discs
-    horizontalRows.get(this.sideLength - 2).get(this.sideLength - 2).setState(CellState.BLACK);
-    horizontalRows.get(this.sideLength - 2).get(this.sideLength - 1).setState(CellState.WHITE);
-    horizontalRows.get(this.sideLength - 1).get(this.sideLength - 2).setState(CellState.WHITE);
-    horizontalRows.get(this.sideLength - 1).get(this.sideLength).setState(CellState.BLACK);
-    horizontalRows.get(this.sideLength).get(this.sideLength - 2).setState(CellState.BLACK);
-    horizontalRows.get(this.sideLength).get(this.sideLength - 1).setState(CellState.WHITE);
+    horizontalRows.get(this.center - 1).get(this.center - 1).setState(CellState.BLACK);
+    horizontalRows.get(this.center - 1).get(this.center).setState(CellState.WHITE);
+    horizontalRows.get(this.center).get(this.center - 1).setState(CellState.WHITE);
+    horizontalRows.get(this.center).get(this.center + 1).setState(CellState.BLACK);
+    horizontalRows.get(this.center + 1).get(this.center - 1).setState(CellState.BLACK);
+    horizontalRows.get(this.center + 1).get(this.center).setState(CellState.WHITE);
     yourScore = 3;
     computerScore = 3;
 
@@ -158,34 +159,20 @@ public class BasicReversi implements ReversiModel {
     return this.horizontalRows.get(hRow).get(hIndex);
   }
 
-  // Given a direction grid and coordinates find if the direction sandwiches
-  // some number of pieces of the other color.
+  // Given a direction grid and coordinates find if pieces of the current color sandwich
+  // some number of pieces of the other color along this axis.
   private boolean isValidMoveInThisDirection(ArrayList<ArrayList<Cell>> direction,
       int row, int index) {
+    return isValidInThisDirectionMinus(direction, row, index)
+        || isValidInThisDirectionPlus(direction, row, index);
+  }
+
+  // Given a direction grid and coordinates find if pieces of the current color sandwich
+  // some number of pieces of the other color along this axis in the increasing index direction.
+  private boolean isValidInThisDirectionPlus(ArrayList<ArrayList<Cell>> direction, int row, int index) {
     int rowLen = direction.get(row).size();
     boolean validInPlus = false;
-    boolean validInMinus = false;
     CellState oppositeColor = this.currentPlayer.opposite();
-    //Is there an adjacent opponent cell in negative direction?
-    if (index > 0 && direction.get(row).size() > 0) {
-      Cell prevCell = direction.get(row).get(index - 1);
-      validInMinus = prevCell.getState().equals(oppositeColor);
-    }
-
-    //If is there an ally cell on the other side of opponent cells?
-    if (validInMinus) {
-      for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
-        CellState curCellState = direction.get(row).get(newIndex).getState();
-        if (curCellState == CellState.EMPTY
-            || (newIndex == 0 && curCellState != this.currentPlayer)) {
-          validInMinus = false;
-          break;
-        } else if (curCellState == this.currentPlayer) {
-          break;
-        }
-      }
-    }
-
     //Is there an adjacent opponent cell in positive direction?
     if (index < rowLen - 1) {
       Cell nextCell = direction.get(row).get(index + 1);
@@ -205,8 +192,33 @@ public class BasicReversi implements ReversiModel {
         }
       }
     }
+    return validInPlus;
+  }
 
-    return validInMinus || validInPlus;
+  // Given a direction grid and coordinates find if pieces of the current color sandwich
+  // some number of pieces of the other color along this axis in the decreasing index direction.
+  private boolean isValidInThisDirectionMinus(ArrayList<ArrayList<Cell>> direction, int row, int index) {
+    boolean validInMinus = false;
+    CellState oppositeColor = this.currentPlayer.opposite();
+    //Is there an adjacent opponent cell in negative direction?
+    if (index > 0 && !direction.get(row).isEmpty()) {
+      Cell prevCell = direction.get(row).get(index - 1);
+      validInMinus = prevCell.getState().equals(oppositeColor);
+    }
+    //If is there an ally cell on the other side of opponent cells?
+    if (validInMinus) {
+      for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
+        CellState curCellState = direction.get(row).get(newIndex).getState();
+        if (curCellState == CellState.EMPTY
+            || (newIndex == 0 && curCellState != this.currentPlayer)) {
+          validInMinus = false;
+          break;
+        } else if (curCellState == this.currentPlayer) {
+          break;
+        }
+      }
+    }
+    return validInMinus;
   }
 
   // A move is valid if all the following are true:
@@ -227,81 +239,28 @@ public class BasicReversi implements ReversiModel {
   // flips the player disc if the move is valid
   private void flipTilesIfValid(ArrayList<ArrayList<Cell>> direction,
                                              int row, int index) {
-    boolean validInPlus = false;
-    boolean validInMinus = false;
+
     CellState oppositeColor = this.currentPlayer.opposite();
-    //Is there an adjacent opponent cell in negative direction?
-    if (index > 0 && direction.size() > row && direction.get(row).size() > 0) {
-      Cell prevCell = direction.get(row).get(index - 1);
-      validInMinus = prevCell.getState().equals(oppositeColor);
-    }
-
-    //If is there an ally cell on the other side of opponent cells?
-    if (validInMinus) {
-      for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
-        CellState curCellState = direction.get(row).get(newIndex).getState();
-        if (curCellState == CellState.EMPTY
-                || (newIndex == 0 && curCellState != this.currentPlayer)) {
-          validInMinus = false;
-          break;
-        } else if (curCellState == this.currentPlayer) {
-          break;
-        }
-      }
-    }
     // valid so flip tile now
-    if (validInMinus) {
-      for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
-        CellState curCellState = direction.get(row).get(newIndex).getState();
-        if (curCellState == CellState.EMPTY
-                || (newIndex == 0 && curCellState != this.currentPlayer)) {
-          validInMinus = false;
-          break;
-        } else if (curCellState == this.currentPlayer) {
-          break;
-        } else {
-          flipTileToCurrentPlayer(row, newIndex);
-        }
-      }
+    if (isValidInThisDirectionMinus(direction, row, index)) {
+      int newIndex = index - 1;
+      CellState curCellState;
+      do {
+        curCellState = direction.get(row).get(newIndex).getState();
+        flipTileToCurrentPlayer(row, newIndex);
+        newIndex--;
+      } while (curCellState == oppositeColor);
     }
 
-    if (direction.size() > row) {
-      int rowLen = direction.get(row).size();
-      //Is there an adjacent opponent cell in positive direction?
-      if (index < rowLen - 1) {
-        Cell nextCell = direction.get(row).get(index + 1);
-        validInPlus = nextCell.getState().equals(oppositeColor);
-      }
-
-      //If is there an ally cell on the other side of opponent cells?
-      if (validInPlus) {
-        for (int newIndex = index + 1; newIndex < rowLen; newIndex++) {
-          CellState curCellState = direction.get(row).get(newIndex).getState();
-          if (curCellState == CellState.EMPTY
-                  || (newIndex == 0 && curCellState != this.currentPlayer)) {
-            validInPlus = false;
-            break;
-          } else if (curCellState == this.currentPlayer) {
-            break;
-          }
-        }
-      }
-
-      // valid so flip tile now
-      if (validInPlus) {
-        for (int newIndex = index + 1; newIndex < rowLen; newIndex++) {
-          CellState curCellState = direction.get(row).get(newIndex).getState();
-          if (curCellState == CellState.EMPTY
-                  || (newIndex == 0 && curCellState != this.currentPlayer)) {
-            validInPlus = false;
-            break;
-          } else if (curCellState == this.currentPlayer) {
-            break;
-          } else {
-            flipTileToCurrentPlayer(row, newIndex);
-          }
-        }
-      }
+    // valid so flip tile now
+    if (isValidInThisDirectionPlus(direction, row, index)) {
+      int newIndex = index + 1;
+      CellState curCellState;
+      do {
+        curCellState = direction.get(row).get(newIndex).getState();
+        flipTileToCurrentPlayer(row, newIndex);
+        newIndex++;
+      } while (curCellState == oppositeColor);
     }
   }
 
@@ -351,8 +310,8 @@ public class BasicReversi implements ReversiModel {
       throw new IllegalStateException("Game is over!");
     }
     if (isValidMove(row, index)) {
-      flipTiles(row, index);
       setEmptyTileToCurrentPlayer(row, index);
+      flipTiles(row, index);
       switchTurn();
     } else {
       throw new IllegalStateException("There is no legal move at " + row + ", " + index + ".");
@@ -406,7 +365,7 @@ public class BasicReversi implements ReversiModel {
     String output = "";
     int yourScore = 0;
     int computerScore = 0;
-    int rowSize = sideLength;
+    int rowSize = center + 1;
     for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
       String rowStr = "";
       for (int col = 0; col < rowSize; col++) {
@@ -418,7 +377,7 @@ public class BasicReversi implements ReversiModel {
           computerScore++;
         }
       }
-      if (rowNum < sideLength - 1) {
+      if (rowNum < center) {
         rowSize++;
       } else {
         rowSize--;
