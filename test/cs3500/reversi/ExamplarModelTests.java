@@ -207,6 +207,58 @@ public class ExamplarModelTests {
   }
 
   @Test
+  public void testReversiGameWithWin() {
+    ReversiModel model = new BasicReversi();
+    model.startGame(3);
+    Assert.assertEquals("Game is started",
+            "  _ _ _   \n" +
+                    " _ X O _  \n" +
+                    "_ O _ X _ \n" +
+                    " _ X O _  \n" +
+                    "  _ _ _   \n" +
+                    "Your Score: 3\n" +
+                    "Computer Score: 3\n" +
+                    "Your turn (Black Disc)!\n",
+            model.toString());
+    model.makeMove(1, 3);
+    Assert.assertEquals("Game is updated",
+            "  _ _ _   \n" +
+                    " _ X X X  \n" +
+                    "_ O _ X _ \n" +
+                    " _ X O _  \n" +
+                    "  _ _ _   \n" +
+                    "Your Score: 5\n" +
+                    "Computer Score: 2\n" +
+                    "Computer turn (White Disc)!\n",
+            model.toString());
+    model.makeMove(3, 0);
+    Assert.assertEquals("Game is updated",
+            "  _ _ _   \n" +
+                    " _ X X X  \n" +
+                    "_ O _ X _ \n" +
+                    " O O O _  \n" +
+                    "  _ _ _   \n" +
+                    "Your Score: 4\n" +
+                    "Computer Score: 4\n" +
+                    "Your turn (Black Disc)!\n",
+            model.toString());
+
+    /*
+    model.makeMove(4, 1);
+    Assert.assertEquals("Game is updated",
+            "  _ _ _   \n" +
+                    " _ X X X  \n" +
+                    "_ O _ X _ \n" +
+                    " O O X _  \n" +
+                    "  _ X _   \n" +
+                    "Your Score: 6\n" +
+                    "Computer Score: 3\n" +
+                    "Your turn (Black Disc)!\n",
+            model.toString());
+    */
+  }
+
+  @Test
   public void testReversiGamePassTurn() {
     ReversiModel model = new BasicReversi();
     model.startGame(4);
