@@ -362,15 +362,15 @@ public class BasicReversi implements ReversiModel {
   // returns the output in a string format
   @Override
   public String toString() {
-    String output = "";
+    StringBuilder output = new StringBuilder();
     int yourScore = 0;
     int computerScore = 0;
     int rowSize = center + 1;
     for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
-      String rowStr = "";
+      StringBuilder rowStr = new StringBuilder();
       for (int col = 0; col < rowSize; col++) {
         Cell cell = horizontalRows.get(rowNum).get(col);
-        rowStr += cell.toString() + " ";
+        rowStr.append(cell.toString()).append(" ");
         if (cell.getState().equals(CellState.BLACK)) {
           yourScore++;
         } else if (cell.getState().equals(CellState.WHITE)) {
@@ -382,22 +382,23 @@ public class BasicReversi implements ReversiModel {
       } else {
         rowSize--;
       }
-      int leftSpaces = (totalNumRows + (totalNumRows - 1) - rowStr.length() + 1) / 2;
-      output += ((leftSpaces > 0) ? String.format("%-" + leftSpaces + "s", " ") : "") + rowStr
-              + ((leftSpaces > 0) ? String.format("%-" + leftSpaces + "s", " ") : "");
-      output += "\n";
+      int numLeftSpaces = (totalNumRows + (totalNumRows - 1) - rowStr.length() + 1) / 2;
+      String paddingSpaces =
+          (numLeftSpaces > 0) ? String.format("%-" + numLeftSpaces + "s", " ") : "";
+      output.append(paddingSpaces).append(rowStr).append(paddingSpaces);
+      output.append("\n");
     }
-    output += "Your Score: " + yourScore + "\n";
-    output += "Computer Score: " + computerScore + "\n";
+    output.append("Your Score: ").append(yourScore).append("\n");
+    output.append("Computer Score: ").append(computerScore).append("\n");
     if (!isGameOver) {
       if (this.currentPlayer.equals(CellState.BLACK)) {
-        output += "Your turn (Black Disc)!\n";
+        output.append("Your turn (Black Disc)!\n");
       } else {
-        output += "Computer turn (White Disc)!\n";
+        output.append("Computer turn (White Disc)!\n");
       }
     } else {
-      output += "Game is over!\n";
+      output.append("Game is over!\n");
     }
-    return output;
+    return output.toString();
   }
 }
