@@ -2,6 +2,10 @@ package cs3500.reversi.model;
 
 import java.util.Objects;
 
+/**
+ * A WhitePlayer is a player with the black tile and can be either the
+ * computer player or human player.
+ */
 public class WhitePlayer implements Player {
 
   private boolean isComputer = true;
@@ -19,8 +23,12 @@ public class WhitePlayer implements Player {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     WhitePlayer that = (WhitePlayer) o;
     return isComputer == that.isComputer && isPerson == that.isPerson;
   }

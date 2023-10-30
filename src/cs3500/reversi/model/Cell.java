@@ -1,19 +1,21 @@
 package cs3500.reversi.model;
 
+/**
+ * A cell is a space for a tile to be placed in inside the hexagon grid.
+ */
 class Cell {
   private CellState state;
   private Location location;
 
   /**
-   * A location with row 0 indexed from top, and column 0 indexed from right
+   * A location with row 0 indexed from top, and column 0 indexed from right.
    */
-  static class Location
-  {
-    public Location(int row, int column)
-    {
+  static class Location {
+    public Location(int row, int column) {
       this.row = row;
       this.column = column;
     }
+
     public final int row;
     public final int column;
   }
