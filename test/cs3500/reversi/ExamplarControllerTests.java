@@ -21,9 +21,9 @@ public class ExamplarControllerTests {
   public void testStartGame() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("q");
-    ReversiModel model = new BasicReversi();
+    ReversiModel model = new BasicReversi(4);
     ReversiController controller = new ReversiTextualController(in, out);
-    controller.playGame(model, 4);
+    controller.playGame(model);
     assertFalse(out.toString().isEmpty());
     assertTrue(out.toString().contains("Your Score: 3"));
     assertTrue(out.toString().contains("Computer Score: 3"));
@@ -34,9 +34,9 @@ public class ExamplarControllerTests {
   public void testStartGameMakeMoves() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("make-move 2 4 make-move 4 1 q");
-    ReversiModel model = new BasicReversi();
+    ReversiModel model = new BasicReversi(4);
     ReversiController controller = new ReversiTextualController(in, out);
-    controller.playGame(model, 4);
+    controller.playGame(model);
     assertFalse(out.toString().isEmpty());
     assertTrue(out.toString().contains("Your Score: 4"));
     assertTrue(out.toString().contains("Computer Score: 4"));
@@ -47,9 +47,9 @@ public class ExamplarControllerTests {
   public void testStartGamePassTurn() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("pass-turn q");
-    ReversiModel model = new BasicReversi();
+    ReversiModel model = new BasicReversi(4);
     ReversiController controller = new ReversiTextualController(in, out);
-    controller.playGame(model, 4);
+    controller.playGame(model);
     assertFalse(out.toString().isEmpty());
     assertTrue(out.toString().contains("Your Score: 3"));
     assertTrue(out.toString().contains("Computer Score: 3"));
@@ -60,9 +60,9 @@ public class ExamplarControllerTests {
   public void testStartGameBothPassTurns() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("pass-turn pass-turn q");
-    ReversiModel model = new BasicReversi();
+    ReversiModel model = new BasicReversi(4);
     ReversiController controller = new ReversiTextualController(in, out);
-    controller.playGame(model, 4);
+    controller.playGame(model);
     assertFalse(out.toString().isEmpty());
     assertTrue(out.toString().contains("Your Score: 3"));
     assertTrue(out.toString().contains("Computer Score: 3"));
@@ -74,9 +74,9 @@ public class ExamplarControllerTests {
   public void testStartGameInvalidCommand() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("invalid q");
-    ReversiModel model = new BasicReversi();
+    ReversiModel model = new BasicReversi(4);
     ReversiController controller = new ReversiTextualController(in, out);
-    controller.playGame(model, 4);
+    controller.playGame(model);
     assertFalse(out.toString().isEmpty());
     assertTrue(out.toString().contains("Undefined command: invalid"));
   }

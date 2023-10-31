@@ -27,11 +27,11 @@ public class Reversi {
         throw new IllegalArgumentException("Argument " + args[0] + " must be an integer.");
       }
     }
-    ReversiModel reversi = new BasicReversi();
+    ReversiModel reversi = new BasicReversi(noOfCells);
     Readable rd = new InputStreamReader(System.in);
     Appendable ap = System.out;
     ReversiController controller = new ReversiTextualController(rd, ap);
-    controller.playGame(reversi, noOfCells);
+    controller.playGame(reversi);
   }
 
 }

@@ -28,13 +28,12 @@ public class ReversiTextualController implements ReversiController {
 
   // plays the hexagon reversi game.
   @Override
-  public void playGame(ReversiModel model, int noOfCells) {
+  public void playGame(ReversiModel model) {
     if (model == null) {
       throw new IllegalArgumentException("Model is null");
     }
     ReversiTextualView view = new ReversiTextualView(model, this.out);
     try {
-      model.startGame(noOfCells);
       view.render();
     }
     catch (IllegalArgumentException e) {

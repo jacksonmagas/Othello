@@ -11,17 +11,16 @@ import cs3500.reversi.model.ReversiModel;
  * BasicReversi class and other classes.
  */
 public class ExamplarModelTests {
-
   @Test
   public void testReversiGameInvalidArguments() {
-    ReversiModel model = new BasicReversi();
-    Assert.assertThrows(IllegalArgumentException.class, () -> model.startGame(0));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(2));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(-1));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(0));
   }
 
   @Test
   public void testReversiGame() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(6);
+    ReversiModel model = new BasicReversi(6);
     Assert.assertEquals("Game is started",
             "     _ _ _ _ _ _      \n"
                 + "    _ _ _ _ _ _ _     \n"
@@ -40,33 +39,10 @@ public class ExamplarModelTests {
             model.toString());
   }
 
-  @Test
-  public void testReversiGameAlreadyStarted() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(6);
-    Assert.assertEquals("Game is started",
-            "     _ _ _ _ _ _      \n"
-                + "    _ _ _ _ _ _ _     \n"
-                + "   _ _ _ _ _ _ _ _    \n"
-                + "  _ _ _ _ _ _ _ _ _   \n"
-                + " _ _ _ _ X O _ _ _ _  \n"
-                + "_ _ _ _ O _ X _ _ _ _ \n"
-                + " _ _ _ _ X O _ _ _ _  \n"
-                + "  _ _ _ _ _ _ _ _ _   \n"
-                + "   _ _ _ _ _ _ _ _    \n"
-                + "    _ _ _ _ _ _ _     \n"
-                + "     _ _ _ _ _ _      \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
-            model.toString());
-    Assert.assertThrows(IllegalStateException.class, () -> model.startGame(6));
-  }
 
   @Test
   public void testReversiGameSmallestSize() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(3);
+    ReversiModel model = new BasicReversi(3);
     Assert.assertEquals("Game is started",
             "  _ _ _   \n"
                 + " _ X O _  \n"
@@ -81,8 +57,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameSmallSize() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(4);
+    ReversiModel model = new BasicReversi(4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -99,8 +74,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameMediumSize() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(5);
+    ReversiModel model = new BasicReversi(5);
     Assert.assertEquals("Game is started",
             "    _ _ _ _ _     \n"
                 + "   _ _ _ _ _ _    \n"
@@ -119,8 +93,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameLargeSize() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(10);
+    ReversiModel model = new BasicReversi(10);
     Assert.assertEquals("Game is started",
             "         _ _ _ _ _ _ _ _ _ _          \n"
                 + "        _ _ _ _ _ _ _ _ _ _ _         \n"
@@ -149,8 +122,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameMakeMove() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(4);
+    ReversiModel model = new BasicReversi(4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -208,8 +180,8 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameWithWin() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(3);
+    ReversiModel model = new BasicReversi(3);
+    
     Assert.assertEquals("Game is started",
             "  _ _ _   \n" +
                     " _ X O _  \n" +
@@ -260,8 +232,8 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGamePassTurn() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(4);
+    ReversiModel model = new BasicReversi(4);
+    
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -292,8 +264,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameBothPassTurns() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(4);
+    ReversiModel model = new BasicReversi(4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -320,13 +291,12 @@ public class ExamplarModelTests {
                 + "Computer Score: 3\n"
                 + "Game is over!\n",
             model.toString());
-    Assert.assertThrows("Game is over", IllegalStateException.class, () -> model.passTurn());
+    Assert.assertThrows("Game is over", IllegalStateException.class, model::passTurn);
   }
 
   @Test
   public void testReversiGameGetScores() {
-    ReversiModel model = new BasicReversi();
-    model.startGame(4);
+    ReversiModel model = new BasicReversi(4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
