@@ -23,20 +23,20 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(6);
     Assert.assertEquals("Game is started",
-            "     _ _ _ _ _ _      \n" +
-                    "    _ _ _ _ _ _ _     \n" +
-                    "   _ _ _ _ _ _ _ _    \n" +
-                    "  _ _ _ _ _ _ _ _ _   \n" +
-                    " _ _ _ _ X O _ _ _ _  \n" +
-                    "_ _ _ _ O _ X _ _ _ _ \n" +
-                    " _ _ _ _ X O _ _ _ _  \n" +
-                    "  _ _ _ _ _ _ _ _ _   \n" +
-                    "   _ _ _ _ _ _ _ _    \n" +
-                    "    _ _ _ _ _ _ _     \n" +
-                    "     _ _ _ _ _ _      \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "     _ _ _ _ _ _      \n"
+                + "    _ _ _ _ _ _ _     \n"
+                + "   _ _ _ _ _ _ _ _    \n"
+                + "  _ _ _ _ _ _ _ _ _   \n"
+                + " _ _ _ _ X O _ _ _ _  \n"
+                + "_ _ _ _ O _ X _ _ _ _ \n"
+                + " _ _ _ _ X O _ _ _ _  \n"
+                + "  _ _ _ _ _ _ _ _ _   \n"
+                + "   _ _ _ _ _ _ _ _    \n"
+                + "    _ _ _ _ _ _ _     \n"
+                + "     _ _ _ _ _ _      \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -45,20 +45,20 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(6);
     Assert.assertEquals("Game is started",
-            "     _ _ _ _ _ _      \n" +
-                    "    _ _ _ _ _ _ _     \n" +
-                    "   _ _ _ _ _ _ _ _    \n" +
-                    "  _ _ _ _ _ _ _ _ _   \n" +
-                    " _ _ _ _ X O _ _ _ _  \n" +
-                    "_ _ _ _ O _ X _ _ _ _ \n" +
-                    " _ _ _ _ X O _ _ _ _  \n" +
-                    "  _ _ _ _ _ _ _ _ _   \n" +
-                    "   _ _ _ _ _ _ _ _    \n" +
-                    "    _ _ _ _ _ _ _     \n" +
-                    "     _ _ _ _ _ _      \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "     _ _ _ _ _ _      \n"
+                + "    _ _ _ _ _ _ _     \n"
+                + "   _ _ _ _ _ _ _ _    \n"
+                + "  _ _ _ _ _ _ _ _ _   \n"
+                + " _ _ _ _ X O _ _ _ _  \n"
+                + "_ _ _ _ O _ X _ _ _ _ \n"
+                + " _ _ _ _ X O _ _ _ _  \n"
+                + "  _ _ _ _ _ _ _ _ _   \n"
+                + "   _ _ _ _ _ _ _ _    \n"
+                + "    _ _ _ _ _ _ _     \n"
+                + "     _ _ _ _ _ _      \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
     Assert.assertThrows(IllegalStateException.class, () -> model.startGame(6));
   }
@@ -68,14 +68,14 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(3);
     Assert.assertEquals("Game is started",
-            "  _ _ _   \n" +
-                    " _ X O _  \n" +
-                    "_ O _ X _ \n" +
-                    " _ X O _  \n" +
-                    "  _ _ _   \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "  _ _ _   \n"
+                + " _ X O _  \n"
+                + "_ O _ X _ \n"
+                + " _ X O _  \n"
+                + "  _ _ _   \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -84,16 +84,16 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(4);
     Assert.assertEquals("Game is started",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -102,18 +102,18 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(5);
     Assert.assertEquals("Game is started",
-            "    _ _ _ _ _     \n" +
-                    "   _ _ _ _ _ _    \n" +
-                    "  _ _ _ _ _ _ _   \n" +
-                    " _ _ _ X O _ _ _  \n" +
-                    "_ _ _ O _ X _ _ _ \n" +
-                    " _ _ _ X O _ _ _  \n" +
-                    "  _ _ _ _ _ _ _   \n" +
-                    "   _ _ _ _ _ _    \n" +
-                    "    _ _ _ _ _     \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "    _ _ _ _ _     \n"
+                + "   _ _ _ _ _ _    \n"
+                + "  _ _ _ _ _ _ _   \n"
+                + " _ _ _ X O _ _ _  \n"
+                + "_ _ _ O _ X _ _ _ \n"
+                + " _ _ _ X O _ _ _  \n"
+                + "  _ _ _ _ _ _ _   \n"
+                + "   _ _ _ _ _ _    \n"
+                + "    _ _ _ _ _     \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -122,28 +122,28 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(10);
     Assert.assertEquals("Game is started",
-            "         _ _ _ _ _ _ _ _ _ _          \n" +
-                    "        _ _ _ _ _ _ _ _ _ _ _         \n" +
-                    "       _ _ _ _ _ _ _ _ _ _ _ _        \n" +
-                    "      _ _ _ _ _ _ _ _ _ _ _ _ _       \n" +
-                    "     _ _ _ _ _ _ _ _ _ _ _ _ _ _      \n" +
-                    "    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _     \n" +
-                    "   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _    \n" +
-                    "  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _   \n" +
-                    " _ _ _ _ _ _ _ _ X O _ _ _ _ _ _ _ _  \n" +
-                    "_ _ _ _ _ _ _ _ O _ X _ _ _ _ _ _ _ _ \n" +
-                    " _ _ _ _ _ _ _ _ X O _ _ _ _ _ _ _ _  \n" +
-                    "  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _   \n" +
-                    "   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _    \n" +
-                    "    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _     \n" +
-                    "     _ _ _ _ _ _ _ _ _ _ _ _ _ _      \n" +
-                    "      _ _ _ _ _ _ _ _ _ _ _ _ _       \n" +
-                    "       _ _ _ _ _ _ _ _ _ _ _ _        \n" +
-                    "        _ _ _ _ _ _ _ _ _ _ _         \n" +
-                    "         _ _ _ _ _ _ _ _ _ _          \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "         _ _ _ _ _ _ _ _ _ _          \n"
+                + "        _ _ _ _ _ _ _ _ _ _ _         \n"
+                + "       _ _ _ _ _ _ _ _ _ _ _ _        \n"
+                + "      _ _ _ _ _ _ _ _ _ _ _ _ _       \n"
+                + "     _ _ _ _ _ _ _ _ _ _ _ _ _ _      \n"
+                + "    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _     \n"
+                + "   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _    \n"
+                + "  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _   \n"
+                + " _ _ _ _ _ _ _ _ X O _ _ _ _ _ _ _ _  \n"
+                + "_ _ _ _ _ _ _ _ O _ X _ _ _ _ _ _ _ _ \n"
+                + " _ _ _ _ _ _ _ _ X O _ _ _ _ _ _ _ _  \n"
+                + "  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _   \n"
+                + "   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _    \n"
+                + "    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _     \n"
+                + "     _ _ _ _ _ _ _ _ _ _ _ _ _ _      \n"
+                + "      _ _ _ _ _ _ _ _ _ _ _ _ _       \n"
+                + "       _ _ _ _ _ _ _ _ _ _ _ _        \n"
+                + "        _ _ _ _ _ _ _ _ _ _ _         \n"
+                + "         _ _ _ _ _ _ _ _ _ _          \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -152,29 +152,29 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(4);
     Assert.assertEquals("Game is started",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
     model.makeMove(2, 4);
     Assert.assertEquals("Game is updated",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X X X _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 5\n" +
-                    "Computer Score: 2\n" +
-                    "Computer turn (White Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X X X _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 5\n"
+                + "Computer Score: 2\n"
+                + "Computer turn (White Disc)!\n",
             model.toString());
     /* May be issue with this move in direction to down left
     model.makeMove(1, 4);
@@ -193,16 +193,16 @@ public class ExamplarModelTests {
     */
     model.makeMove(4, 1);
     Assert.assertEquals("Game is updated",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X X X _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ O O O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 4\n" +
-                    "Computer Score: 4\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X X X _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ O O O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 4\n"
+                + "Computer Score: 4\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -211,30 +211,30 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(4);
     Assert.assertEquals("Game is started",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
     model.passTurn();
     model.makeMove(4, 1);
     Assert.assertEquals("Game is updated",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ O O O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 2\n" +
-                    "Computer Score: 5\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ O O O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 2\n"
+                + "Computer Score: 5\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
   }
 
@@ -243,30 +243,30 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(4);
     Assert.assertEquals("Game is started",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
     model.passTurn();
     model.passTurn();
     Assert.assertEquals("Game is updated",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Game is over!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Game is over!\n",
             model.toString());
     Assert.assertThrows("Game is over", IllegalStateException.class, () -> model.passTurn());
   }
@@ -276,16 +276,16 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi();
     model.startGame(4);
     Assert.assertEquals("Game is started",
-            "   _ _ _ _    \n" +
-                    "  _ _ _ _ _   \n" +
-                    " _ _ X O _ _  \n" +
-                    "_ _ O _ X _ _ \n" +
-                    " _ _ X O _ _  \n" +
-                    "  _ _ _ _ _   \n" +
-                    "   _ _ _ _    \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+            "   _ _ _ _    \n"
+                + "  _ _ _ _ _   \n"
+                + " _ _ X O _ _  \n"
+                + "_ _ O _ X _ _ \n"
+                + " _ _ X O _ _  \n"
+                + "  _ _ _ _ _   \n"
+                + "   _ _ _ _    \n"
+                + "Your Score: 3\n"
+                + "Computer Score: 3\n"
+                + "Your turn (Black Disc)!\n",
             model.toString());
     Assert.assertEquals("Your score", 3, model.getYourScore());
     Assert.assertEquals("Computer score", 3, model.getComputerScore());

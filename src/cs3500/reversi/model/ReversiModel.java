@@ -10,16 +10,6 @@ package cs3500.reversi.model;
  * indexed from left.
  */
 public interface ReversiModel {
-
-  /**
-   * Starts the Reversi game.
-   * It builds the hexagonal grid using the number of cells provided.
-   * @param noOfCells number of cells to be used for this game
-   * @throws IllegalArgumentException if input parameter is invalid
-   * @throws IllegalStateException if the game is already started
-   */
-  void startGame(int noOfCells);
-
   /**
    * Return the score of the person player, which is the sum of the values of the disc cards.
    * @return the score
