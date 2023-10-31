@@ -20,12 +20,11 @@ public class BasicReversi implements ReversiModel {
 
   boolean isGameOver = false;
 
-  private int center;
-  private int totalNumRows;
+  private final int center;
+  private final int totalNumRows;
   private CellState currentPlayer;
 
-  private int yourScore;
-  private int computerScore;
+  private final int[] playerScores;
 
   private int blackPlayerPassTurnsCount;
   private int whitePlayerPassTurnsCount;
@@ -40,8 +39,7 @@ public class BasicReversi implements ReversiModel {
     this.horizontalRows = new ArrayList<ArrayList<Cell>>();
     this.downRightRows = new ArrayList<ArrayList<Cell>>();
     this.downLeftRows = new ArrayList<ArrayList<Cell>>();
-    yourScore = 0;
-    computerScore = 0;
+    this.playerScores = new int[2];
     blackPlayerPassTurnsCount = 0;
     whitePlayerPassTurnsCount = 0;
     //initialize game
@@ -77,8 +75,8 @@ public class BasicReversi implements ReversiModel {
     horizontalRows.get(this.center).get(this.center + 1).setState(CellState.BLACK);
     horizontalRows.get(this.center + 1).get(this.center - 1).setState(CellState.BLACK);
     horizontalRows.get(this.center + 1).get(this.center).setState(CellState.WHITE);
-    yourScore = 3;
-    computerScore = 3;
+    playerScores[0] = 3;
+    playerScores[1] = 3;
 
     //set black to move first
     this.currentPlayer = CellState.BLACK;
@@ -233,30 +231,27 @@ public class BasicReversi implements ReversiModel {
   // flips the player disc if the move is valid
   private void flipTilesIfValid(ArrayList<ArrayList<Cell>> direction,
                                              int row, int index) {
-
     CellState oppositeColor = this.currentPlayer.opposite();
     // valid so flip tile now
     if (isValidInThisDirectionMinus(direction, row, index)) {
       int newIndex = index - 1;
-      CellState curCellState;
-      do {
-        curCellState = direction.get(row).get(newIndex).getState();
+      CellState curCellState = direction.get(row).get(newIndex).getState();
+      while (curCellState == oppositeColor) {
         flipTileToCurrentPlayer(row, newIndex);
         newIndex--;
+        curCellState = direction.get(row).get(newIndex).getState();
       }
-      while (curCellState == oppositeColor);
     }
 
     // valid so flip tile now
     if (isValidInThisDirectionPlus(direction, row, index)) {
       int newIndex = index + 1;
-      CellState curCellState;
-      do {
-        curCellState = direction.get(row).get(newIndex).getState();
+      CellState curCellState = direction.get(row).get(newIndex).getState();
+      while (curCellState == oppositeColor) {
         flipTileToCurrentPlayer(row, newIndex);
         newIndex++;
+        curCellState = direction.get(row).get(newIndex).getState();
       }
-      while (curCellState == oppositeColor);
     }
   }
 
@@ -275,9 +270,9 @@ public class BasicReversi implements ReversiModel {
   private void setEmptyTileToCurrentPlayer(int row, int index) {
     horizontalRows.get(row).get(index).setState(this.currentPlayer);
     if (this.currentPlayer.equals(CellState.BLACK)) {
-      yourScore++;
+      playerScores[0]++;
     } else {
-      computerScore++;
+      playerScores[1]++;
     }
   }
 
@@ -285,11 +280,11 @@ public class BasicReversi implements ReversiModel {
   private void flipTileToCurrentPlayer(int row, int index) {
     horizontalRows.get(row).get(index).setState(this.currentPlayer);
     if (this.currentPlayer.equals(CellState.BLACK)) {
-      yourScore++;
-      computerScore--;
+      playerScores[0]++;
+      playerScores[1]--;
     } else {
-      computerScore++;
-      yourScore--;
+      playerScores[1]++;
+      playerScores[0]--;
     }
   }
 
@@ -335,32 +330,25 @@ public class BasicReversi implements ReversiModel {
   // gets the score of the game for the human player
   @Override
   public int getYourScore() {
-    return this.yourScore;
+    return this.playerScores[0];
   }
 
   // gets the score of the game for the computer player
   @Override
   public int getComputerScore() {
-    return this.computerScore;
+    return this.playerScores[1];
   }
 
   // returns the output in a string format
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();
-    int yourScore = 0;
-    int computerScore = 0;
     int rowSize = center + 1;
     for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
       StringBuilder rowStr = new StringBuilder();
       for (int col = 0; col < rowSize; col++) {
         Cell cell = horizontalRows.get(rowNum).get(col);
         rowStr.append(cell.toString()).append(" ");
-        if (cell.getState().equals(CellState.BLACK)) {
-          yourScore++;
-        } else if (cell.getState().equals(CellState.WHITE)) {
-          computerScore++;
-        }
       }
       if (rowNum < center) {
         rowSize++;
@@ -373,8 +361,8 @@ public class BasicReversi implements ReversiModel {
       output.append(paddingSpaces).append(rowStr).append(paddingSpaces);
       output.append("\n");
     }
-    output.append("Your Score: ").append(yourScore).append("\n");
-    output.append("Computer Score: ").append(computerScore).append("\n");
+    output.append("Your Score: ").append(playerScores[0]).append("\n");
+    output.append("Computer Score: ").append(playerScores[1]).append("\n");
     if (!isGameOver) {
       if (this.currentPlayer.equals(CellState.BLACK)) {
         output.append("Your turn (Black Disc)!\n");
