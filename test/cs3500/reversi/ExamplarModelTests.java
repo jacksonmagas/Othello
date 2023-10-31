@@ -233,7 +233,6 @@ public class ExamplarModelTests {
   @Test
   public void testReversiGamePassTurn() {
     ReversiModel model = new BasicReversi(4);
-    
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"

@@ -327,16 +327,14 @@ public class BasicReversi implements ReversiModel {
     return horizontalRows;
   }
 
-  // gets the score of the game for the human player
+  // gets the score of the game for the given player
   @Override
-  public int getYourScore() {
-    return this.playerScores[0];
-  }
-
-  // gets the score of the game for the computer player
-  @Override
-  public int getComputerScore() {
-    return this.playerScores[1];
+  public int getPlayerScore(int playerNum) {
+    try {
+      return this.playerScores[playerNum];
+    } catch (IndexOutOfBoundsException e) {
+      throw new IllegalArgumentException("playerNum must be a valid player number.");
+    }
   }
 
   // returns the output in a string format
@@ -361,13 +359,13 @@ public class BasicReversi implements ReversiModel {
       output.append(paddingSpaces).append(rowStr).append(paddingSpaces);
       output.append("\n");
     }
-    output.append("Your Score: ").append(playerScores[0]).append("\n");
-    output.append("Computer Score: ").append(playerScores[1]).append("\n");
+    output.append("Player one Score: ").append(playerScores[0]).append("\n");
+    output.append("Player two Score: ").append(playerScores[1]).append("\n");
     if (!isGameOver) {
       if (this.currentPlayer.equals(CellState.BLACK)) {
-        output.append("Your turn (Black Disc)!\n");
+        output.append("Player one turn (Black)!\n");
       } else {
-        output.append("Computer turn (White Disc)!\n");
+        output.append("Player two turn (White)!\n");
       }
     } else {
       output.append("Game is over!\n");

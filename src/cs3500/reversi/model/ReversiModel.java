@@ -11,18 +11,11 @@ package cs3500.reversi.model;
  */
 public interface ReversiModel {
   /**
-   * Return the score of the person player, which is the sum of the values of the disc cards.
+   * Return the score of the given player, which is the sum of the values of the disc cards.
    * @return the score
    * @throws IllegalStateException if the game hasn't been started yet
    */
-  public int getYourScore();
-
-  /**
-   * Return the score of the computer player, which is the sum of the values of the disc cards.
-   * @return the score
-   * @throws IllegalStateException if the game hasn't been started yet
-   */
-  public int getComputerScore();
+  public int getPlayerScore(int playerNum);
 
   /**
    * Allow current player to make move disc to given row and column if allowable by the rules
