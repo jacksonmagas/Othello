@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment="Added tests" />
+    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment="small update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BlackPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BlackPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/CellState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/CellState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/HexGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/HexGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/WhitePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/WhitePlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/TextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/TextualView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,49 +43,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.ExamplarModelTests">
-    <configuration name="Reversi" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.Reversi" />
-      <module name="CS3500-Reversi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs3500.reversi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExamplarModelTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CS3500-Reversi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs3500.reversi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cs3500.reversi" />
-      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RunManager">
     <configuration name="ExamplarModelTests.testReversiGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CS3500-Reversi" />
       <extension name="coverage">
@@ -84,60 +74,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExamplarModelTests.testReversiGameInvalidArguments" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CS3500-Reversi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs3500.reversi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cs3500.reversi" />
-      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
-      <option name="METHOD_NAME" value="testReversiGameInvalidArguments" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExamplarModelTests.testReversiGameMakeMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CS3500-Reversi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs3500.reversi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cs3500.reversi" />
-      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
-      <option name="METHOD_NAME" value="testReversiGameMakeMove" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExamplarModelTests.testReversiGamePassTurn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CS3500-Reversi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cs3500.reversi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cs3500.reversi" />
-      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
-      <option name="METHOD_NAME" value="testReversiGamePassTurn" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ExamplarModelTests" />
-        <item itemvalue="JUnit.ExamplarModelTests.testReversiGamePassTurn" />
-        <item itemvalue="JUnit.ExamplarModelTests.testReversiGameMakeMove" />
-        <item itemvalue="JUnit.ExamplarModelTests.testReversiGameInvalidArguments" />
         <item itemvalue="JUnit.ExamplarModelTests.testReversiGame" />
       </list>
     </recent_temporary>
@@ -168,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698603510104</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="small update">
+      <option name="closed" value="true" />
+      <created>1698691432988</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698691432988</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,24 +131,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java</url>
-          <line>248</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java</url>
-          <line>279</line>
-          <properties class="cs3500.reversi.model.BasicReversi" method="flipTileToCurrentPlayer">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="small update" />
+    <option name="LAST_COMMIT_MESSAGE" value="small update" />
   </component>
 </project>

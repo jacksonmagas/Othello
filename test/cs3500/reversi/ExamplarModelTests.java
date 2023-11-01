@@ -33,9 +33,9 @@ public class ExamplarModelTests {
                 + "   _ _ _ _ _ _ _ _    \n"
                 + "    _ _ _ _ _ _ _     \n"
                 + "     _ _ _ _ _ _      \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -49,9 +49,9 @@ public class ExamplarModelTests {
                 + "_ O _ X _ \n"
                 + " _ X O _  \n"
                 + "  _ _ _   \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -66,9 +66,9 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -85,9 +85,9 @@ public class ExamplarModelTests {
                 + "  _ _ _ _ _ _ _   \n"
                 + "   _ _ _ _ _ _    \n"
                 + "    _ _ _ _ _     \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -114,9 +114,9 @@ public class ExamplarModelTests {
                 + "       _ _ _ _ _ _ _ _ _ _ _ _        \n"
                 + "        _ _ _ _ _ _ _ _ _ _ _         \n"
                 + "         _ _ _ _ _ _ _ _ _ _          \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -131,9 +131,9 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
     model.makeMove(2, 4);
     Assert.assertEquals("Game is updated",
@@ -144,9 +144,9 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 5\n"
-                + "Computer Score: 2\n"
-                + "Computer turn (White Disc)!\n",
+                + "Player one Score: 5\n"
+                + "Player two Score: 2\n"
+                + "Player two turn (White)!\n",
             model.toString());
     /* May be issue with this move in direction to down left
     model.makeMove(1, 4);
@@ -158,8 +158,8 @@ public class ExamplarModelTests {
                     " _ _ X O _ _  \n" +
                     "  _ _ _ _ _   \n" +
                     "   _ _ _ _    \n"+
-                    "Your Score: 3\n" +
-                    "Computer Score: 5\n" +
+                    "Player one Score: 3\n" +
+                    "Player two Score: 5\n" +
                     "Computer turn (White Disc)!\n",
             model.toString());
     */
@@ -172,9 +172,9 @@ public class ExamplarModelTests {
                 + " _ O O O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 4\n"
-                + "Computer Score: 4\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 4\n"
+                + "Player two Score: 4\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -188,9 +188,9 @@ public class ExamplarModelTests {
                     "_ O _ X _ \n" +
                     " _ X O _  \n" +
                     "  _ _ _   \n" +
-                    "Your Score: 3\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+                    "Player one Score: 3\n" +
+                    "Player two Score: 3\n" +
+                    "Player one turn (Black)!\n",
             model.toString());
     model.makeMove(1, 3);
     Assert.assertEquals("Game is updated",
@@ -199,9 +199,9 @@ public class ExamplarModelTests {
                     "_ O _ X _ \n" +
                     " _ X O _  \n" +
                     "  _ _ _   \n" +
-                    "Your Score: 5\n" +
-                    "Computer Score: 2\n" +
-                    "Computer turn (White Disc)!\n",
+                    "Player one Score: 5\n" +
+                    "Player two Score: 2\n" +
+                    "Player two turn (White)!\n",
             model.toString());
     model.makeMove(3, 0);
     Assert.assertEquals("Game is updated",
@@ -210,9 +210,9 @@ public class ExamplarModelTests {
                     "_ O _ X _ \n" +
                     " O O O _  \n" +
                     "  _ _ _   \n" +
-                    "Your Score: 4\n" +
-                    "Computer Score: 4\n" +
-                    "Your turn (Black Disc)!\n",
+                    "Player one Score: 4\n" +
+                    "Player two Score: 4\n" +
+                    "Player one turn (Black)!\n",
             model.toString());
 
     /*
@@ -223,9 +223,9 @@ public class ExamplarModelTests {
                     "_ O _ X _ \n" +
                     " O O X _  \n" +
                     "  _ X _   \n" +
-                    "Your Score: 6\n" +
-                    "Computer Score: 3\n" +
-                    "Your turn (Black Disc)!\n",
+                    "Player one Score: 6\n" +
+                    "Player two Score: 3\n" +
+                    "Player one turn (Black)!\n",
             model.toString());
     */
   }
@@ -241,9 +241,9 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
     model.passTurn();
     model.makeMove(4, 1);
@@ -255,9 +255,9 @@ public class ExamplarModelTests {
                 + " _ O O O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 2\n"
-                + "Computer Score: 5\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 2\n"
+                + "Player two Score: 5\n"
+                + "Player one turn (Black)!\n",
             model.toString());
   }
 
@@ -272,9 +272,9 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
     model.passTurn();
     model.passTurn();
@@ -286,8 +286,8 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
                 + "Game is over!\n",
             model.toString());
     Assert.assertThrows("Game is over", IllegalStateException.class, model::passTurn);
@@ -304,11 +304,11 @@ public class ExamplarModelTests {
                 + " _ _ X O _ _  \n"
                 + "  _ _ _ _ _   \n"
                 + "   _ _ _ _    \n"
-                + "Your Score: 3\n"
-                + "Computer Score: 3\n"
-                + "Your turn (Black Disc)!\n",
+                + "Player one Score: 3\n"
+                + "Player two Score: 3\n"
+                + "Player one turn (Black)!\n",
             model.toString());
-    Assert.assertEquals("Your score", 3, model.getYourScore());
-    Assert.assertEquals("Computer score", 3, model.getComputerScore());
+    Assert.assertEquals("Your score", 3, model.getPlayerScore(0));
+    Assert.assertEquals("Computer score", 3, model.getPlayerScore(1));
   }
 }

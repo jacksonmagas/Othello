@@ -25,9 +25,9 @@ public class ExamplarControllerTests {
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
-    assertTrue(out.toString().contains("Your Score: 3"));
-    assertTrue(out.toString().contains("Computer Score: 3"));
-    assertTrue(out.toString().contains("Your turn (Black Disc)!"));
+    assertTrue(out.toString().contains("Player one Score: 3"));
+    assertTrue(out.toString().contains("Player two Score: 3"));
+    assertTrue(out.toString().contains("Player one turn (Black)!"));
   }
 
   @Test
@@ -38,9 +38,9 @@ public class ExamplarControllerTests {
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
-    assertTrue(out.toString().contains("Your Score: 4"));
-    assertTrue(out.toString().contains("Computer Score: 4"));
-    assertTrue(out.toString().contains("Your turn (Black Disc)!"));
+    assertTrue(out.toString().contains("Player one Score: 4"));
+    assertTrue(out.toString().contains("Player two Score: 4"));
+    assertTrue(out.toString().contains("Player one turn (Black)!"));
   }
 
   @Test
@@ -51,9 +51,9 @@ public class ExamplarControllerTests {
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
-    assertTrue(out.toString().contains("Your Score: 3"));
-    assertTrue(out.toString().contains("Computer Score: 3"));
-    assertTrue(out.toString().contains("Computer turn (White Disc)!"));
+    assertTrue(out.toString().contains("Player one Score: 3"));
+    assertTrue(out.toString().contains("Player two Score: 3"));
+    assertTrue(out.toString().contains("Player two turn (White)!"));
   }
 
   @Test
@@ -64,8 +64,8 @@ public class ExamplarControllerTests {
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
-    assertTrue(out.toString().contains("Your Score: 3"));
-    assertTrue(out.toString().contains("Computer Score: 3"));
+    assertTrue(out.toString().contains("Player one Score: 3"));
+    assertTrue(out.toString().contains("Player two Score: 3"));
     assertTrue(out.toString().contains("Game is over!"));
 
   }

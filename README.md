@@ -35,10 +35,13 @@ Textual view:<br/>
 &nbsp;&nbsp;*\_ _ X O _ _*<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*\_ _ _ _*<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*\_ _ _*   <br/>
+Player one Score: 3<br/>
+Player two Score: 3<br/>
+Player one turn (Black)!<br/>
 <br/>
 where <br/>
-X - You as Player with Black colored Disc<br/>
-O - Computer as Player with White colored Disc
+X - Player one with Black colored Disc<br/>
+O - Player two with White colored Disc
 
 <br/><br/>
 Source details:
