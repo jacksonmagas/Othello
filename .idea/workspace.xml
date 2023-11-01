@@ -4,24 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment="small update">
+    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment=" update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BlackPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BlackPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/CellState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/CellState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/HexGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/HexGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/WhitePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/WhitePlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/TextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/TextualView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarControllerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +15,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,20 +29,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ExamplarModelTests.testReversiGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CS3500-Reversi" />
@@ -114,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698691432988</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary=" update">
+      <option name="closed" value="true" />
+      <created>1698799576326</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698799576326</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +127,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="small update" />
-    <option name="LAST_COMMIT_MESSAGE" value="small update" />
+    <MESSAGE value=" update" />
+    <option name="LAST_COMMIT_MESSAGE" value=" update" />
   </component>
 </project>
