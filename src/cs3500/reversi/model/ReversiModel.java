@@ -1,15 +1,12 @@
 package cs3500.reversi.model;
 
-// import java.util.ArrayList;
-// import java.util.List;
-
 /**
  * Represents the primary model interface for playing a game of Reversi.
  * Moves in this model are made using the coordinate system (row, index) where the row is the
  * horizontal row number 0 indexed from top and the index is the location in the row 0
  * indexed from left.
  */
-public interface ReversiModel {
+public interface ReversiModel extends ReadonlyReversiModel {
   /**
    * Return the score of the given player either 0 or 1, which is the sum
    * of the values of the disc cards.

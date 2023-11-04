@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment=" update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698799576326</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=" update">
+      <option name="closed" value="true" />
+      <created>1698799906235</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698799906235</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
