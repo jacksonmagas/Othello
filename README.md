@@ -45,17 +45,15 @@ O - Player two with White colored Disc
 
 <br/><br/>
 Source details:
-1. BasicReversi model implements the Reversi game.
-   This model uses 2 players Player One and Player Two. It uses Hex coordinates based grid.
-   It has horizontal, down left and down right rows.
-   Each cell extends Location (x,y) coordinates and may have Player's state if it is used by player.
-2. ReadonlyReversiModel interface is created to only support views.
-3. ReversiTextualController to take Player One moves from user input, play move and display the output.
-4. ReversiTextualView to display the textual output.
-5. Reversi Main class allows one to play this Reversi game.
-6. Classes are implemented for future use:<br/>
+1. BasicReversi model implementation of Reversi game.
+   This model uses 2 players BlackPlayer, WhitePlayer. It is currently using Square based grid.
+   Each cell extends Point(x,y) co-ordinates and may have Player if it is used by player.
+2. ReversiTextualController to take Black Player moves from user input, play move and display the output.
+3. ReversiTextualView to display the textual output.
+4. Reversi Main class allows one to play this Reversi game.
+5. Classes are implemented for future use:<br/>
    Player.java, BlackPlayer.java, WhitePlayer.java, HexGrid.java, Point.java
-7. Functionalities need to be updated for future work such as down left or right rows to support those directional moves.
+6. Functionalities need to be updated for future work such as down left or right rows to support those directional moves.
 
 <br/><br/>
 Rule details:

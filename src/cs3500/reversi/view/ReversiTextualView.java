@@ -2,26 +2,26 @@ package cs3500.reversi.view;
 
 import java.io.IOException;
 
-import cs3500.reversi.model.ReadonlyReversiModel;
+import cs3500.reversi.model.ReversiModel;
 
 /**
  * A simple text-based rendering of the Klondike game.
  */
 public class ReversiTextualView implements TextualView {
-  private ReadonlyReversiModel model;
+  private ReversiModel model;
   private Appendable out;
 
   /**
    * Sets constructors for ReversiTextualView class.
    */
-  public ReversiTextualView(ReadonlyReversiModel model) {
+  public ReversiTextualView(ReversiModel model) {
     this.model = model;
   }
 
   /**
    * Constructor for ReversiTextualView class.
    */
-  public ReversiTextualView(ReadonlyReversiModel model, Appendable out) {
+  public ReversiTextualView(ReversiModel model, Appendable out) {
     this.model = model;
     this.out = out;
   }
