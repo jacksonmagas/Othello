@@ -26,15 +26,24 @@ public class BasicReversi implements ReversiModel {
   private final int totalNumRows;
   private CellState currentPlayer;
 
+  //array of 2 elements, playerScores[0] is black score
+  //playerScores[1] is white score
   private final int[] playerScores;
 
   private int blackPlayerPassTurnsCount;
   private int whitePlayerPassTurnsCount;
 
   /**
-   * Constructor for BasicReversi public class.
+   * Detailed constructor for reversi game that allows creating a specified board state.
+   * @param sideLength the side length of the board
+   * @param blackPassTurns the number of turns black has passed in a row
+   * @param whitePassTurns the number of turns white has passed in a row
+   * @param currentPlayer the player whose move it is
+   * @param blackTiles a list of the locations to put black tiles
+   * @param whiteTiles a list of the locations to put white tiles
    */
-  public BasicReversi(int sideLength) {
+  BasicReversi(int sideLength, int blackPassTurns, int whitePassTurns, CellState currentPlayer,
+      List<Cell.Location> blackTiles, List<Cell.Location> whiteTiles) {
     if (sideLength < 3) {
       throw new IllegalArgumentException("sideLength should be at-least 3 or above !");
     }
@@ -70,18 +79,67 @@ public class BasicReversi implements ReversiModel {
       }
     }
 
-    //place each players 2 discs
-    horizontalRows.get(this.center - 1).get(this.center - 1).setState(CellState.BLACK);
-    horizontalRows.get(this.center - 1).get(this.center).setState(CellState.WHITE);
-    horizontalRows.get(this.center).get(this.center - 1).setState(CellState.WHITE);
-    horizontalRows.get(this.center).get(this.center + 1).setState(CellState.BLACK);
-    horizontalRows.get(this.center + 1).get(this.center - 1).setState(CellState.BLACK);
-    horizontalRows.get(this.center + 1).get(this.center).setState(CellState.WHITE);
-    playerScores[0] = 3;
-    playerScores[1] = 3;
+    playerScores[0] = 0;
+    playerScores[1] = 0;
 
-    //set black to move first
-    this.currentPlayer = CellState.BLACK;
+    //Place player discs
+    for (Cell.Location l : blackTiles) {
+      horizontalRows.get(l.row).get(l.column).setState(CellState.BLACK);
+      playerScores[0]++;
+    }
+
+    for (Cell.Location l : whiteTiles) {
+      horizontalRows.get(l.row).get(l.column).setState(CellState.WHITE);
+      playerScores[1]++;
+    }
+
+    //set first move
+    this.currentPlayer = currentPlayer;
+
+    //set pass turns
+    this.blackPlayerPassTurnsCount = blackPassTurns;
+    this.whitePlayerPassTurnsCount = whitePassTurns;
+  }
+
+  /**
+   * Constructor for BasicReversi public class in default start game configuration.
+   */
+  public BasicReversi(int sideLength) {
+    this(sideLength, 0, 0, CellState.BLACK,
+        List.of(new Location(sideLength - 2, sideLength - 2),
+            new Location(sideLength - 1, sideLength),
+            new Location(sideLength, sideLength - 2)),
+        List.of(new Location(sideLength - 2, sideLength - 1),
+            new Location(sideLength - 1, sideLength - 2),
+            new Location(sideLength, sideLength - 1)));
+  }
+
+  /**
+   * Construct a new BasicReversi which is a copy of the base
+   * @param base The BasicReversi model to copy.
+   */
+  public BasicReversi(BasicReversi base) {
+    this.center = base.center;
+    this.totalNumRows = base.totalNumRows;
+    this.whitePlayerPassTurnsCount = base.whitePlayerPassTurnsCount;
+    this.blackPlayerPassTurnsCount = base.blackPlayerPassTurnsCount;
+    this.playerScores = new int[2];
+    this.playerScores[0] = base.playerScores[0];
+    this.playerScores[1] = base.playerScores[1];
+    this.horizontalRows = copyCells(base.horizontalRows);
+    this.downLeftRows = copyCells(base.downLeftRows);
+    this.downRightRows = copyCells(base.downRightRows);
+    this.isGameOver = base.isGameOver;
+    this.currentPlayer = base.currentPlayer;
+  }
+
+  //returns a new list containing copies of the cells
+  private ArrayList<ArrayList<Cell>> copyCells(ArrayList<ArrayList<Cell>> original) {
+    return original.stream()
+        .map((ArrayList<Cell> c) -> c.stream()
+            .map(Cell::new)
+            .collect(Collectors.toCollection(ArrayList::new)))
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 
   // put the cell with the given horizontal row and index into the correct location in all three
@@ -325,10 +383,6 @@ public class BasicReversi implements ReversiModel {
     switchTurn();
   }
 
-  private ArrayList<ArrayList<Cell>> getGrid() {
-    return horizontalRows;
-  }
-
   // gets the score of the game for the given player
   @Override
   public int getPlayerScore(int playerNum) {
@@ -353,6 +407,30 @@ public class BasicReversi implements ReversiModel {
   @Override
   public CellState getTileAt(int hRow, int hIndex) {
     return this.horizontalRows.get(hRow).get(hIndex).getState();
+  }
+
+  @Override
+  public int sideLength() {
+    //center is sideLength - 1
+    return this.center + 1;
+  }
+
+  @Override
+  public boolean anyLegalMoves() {
+    int rowSize = this.sideLength();
+    for (int hRow = 0; hRow < this.totalNumRows; hRow++) {
+      for (int hIndex = 0; hIndex < rowSize; hIndex++) {
+        if (isValidMove(hRow, hIndex)) {
+          return true;
+        }
+      }
+      if (hRow <= center) {
+        rowSize++;
+      } else {
+        rowSize--;
+      }
+    }
+    return false;
   }
 
   // returns the output in a string format

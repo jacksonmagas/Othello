@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment=" update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" afterDir="false" />
-    </list>
+    <list default="true" id="fb74d2b3-2bad-4ef1-abdf-80bdd39de5f9" name="Changes" comment=" update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +40,22 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ExamplarModelTests">
+    <configuration name="ExamplarModelTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CS3500-Reversi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs3500.reversi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs3500.reversi" />
+      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ExamplarModelTests.testReversiGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CS3500-Reversi" />
       <extension name="coverage">
@@ -64,6 +74,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ExamplarModelTests" />
         <item itemvalue="JUnit.ExamplarModelTests.testReversiGame" />
       </list>
     </recent_temporary>

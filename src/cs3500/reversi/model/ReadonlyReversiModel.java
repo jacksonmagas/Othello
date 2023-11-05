@@ -31,4 +31,16 @@ public interface ReadonlyReversiModel {
    * @return The state of the cell
    */
   CellState getTileAt(int hRow, int hIndex);
+
+  /**
+   * Returns the side length of the board.
+   * @return the length of one side of the board.
+   */
+  int sideLength();
+
+  /**
+   * Determines if the current player has any legal moves.
+   * @return True if there are legal moves for the current player.
+   */
+  boolean anyLegalMoves();
 }

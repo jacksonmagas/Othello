@@ -64,4 +64,24 @@ a. The cell to move in is empty.<br/>
 b. The cell to move in is adjacent to the one of the opponent player's cells.<br/>
 c. When moving in that direction there is a friendly player cell before empty cell/end of list.<br/>
 2. Horizontal moves are implemented. It also flips opposite player's discs if move is valid as per the rules of the game.
-3. Game pass turns are implemented. If both players does their passes then game will be over.
+3. Game pass turns are implemented. If both players pass their turns in a row then game will be over.
+
+
+# Changes for part 2
+Added methods:
+1. isGameOver();<br/>
+a. The interface did not expose a way to check if the game was over, so we added a method to do that.<br/>
+2. getTileAt(hRow, hIndex);<br/>
+a. The interface did not expose a way to see the state of a specific tile, so we added a
+method to do that.<br/>
+3. getGameBoard();<br/>
+a. The only way to get the state of the game before was to parse the string from the toString method,
+so we added a method to get the state of each cell.
+
+<br/><br/>
+New constructor:
+1. We did not have a way to set up scenarios to test the model in specific situations,
+so we added a new constructor that takes in a list of locations for white tiles and for black tiles
+as well as other information about the state of the game.<br/>
+2. We also added a copy constructor to be able to make copies of a game in progress.<br/>
+a. This required also adding a copy constructor to the cell class.<br/>
