@@ -1,5 +1,7 @@
 package cs3500.reversi.model;
 
+import java.util.List;
+
 /**
  * Represents the read-only model interface for playing a game of Reversi.
  */
@@ -9,11 +11,24 @@ public interface ReadonlyReversiModel {
    * of the values of the disc cards.
    * @return the score
    */
-  public int getPlayerScore(int playerNum);
+  int getPlayerScore(int playerNum);
 
   /**
    * Checks if the game is over.
    * @return True if the game is over.
    */
-  public boolean isGameOver();
+  boolean isGameOver();
+
+  /**
+   * Returns a copy of the game board.
+   * @return a list containing each row of the game board with the state of each cell in the row.
+   */
+  List<List<CellState>> getGameBoard();
+
+  /**
+   * Returns the state of the cell at the given horizontal row and index.
+   * The state is either empty, occupied by black, or occupied by white.
+   * @return The state of the cell
+   */
+  CellState getTileAt(int hRow, int hIndex);
 }

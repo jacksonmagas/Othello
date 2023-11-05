@@ -2,6 +2,8 @@ package cs3500.reversi.model;
 
 import cs3500.reversi.model.Cell.Location;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * It implements the primary model interface for playing a game of Reversi.
@@ -340,6 +342,17 @@ public class BasicReversi implements ReversiModel {
   @Override
   public boolean isGameOver() {
     return this.isGameOver;
+  }
+
+  @Override
+  public List<List<CellState>> getGameBoard() {
+    return this.horizontalRows.stream().map((ArrayList<Cell> c) -> c.stream().map(Cell::getState).collect(
+        Collectors.toList())).collect(Collectors.toList());
+  }
+
+  @Override
+  public CellState getTileAt(int hRow, int hIndex) {
+    return this.horizontalRows.get(hRow).get(hIndex).getState();
   }
 
   // returns the output in a string format
