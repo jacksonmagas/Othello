@@ -337,6 +337,11 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  @Override
+  public boolean isGameOver() {
+    return this.isGameOver;
+  }
+
   // returns the output in a string format
   @Override
   public String toString() {
