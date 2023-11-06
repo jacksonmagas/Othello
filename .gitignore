@@ -15,7 +15,8 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 CS3500-Reversi.iml
-.idea
+.idea/
+.idea/workspace.xml
 
 ### NetBeans ###
 /nbproject/private/
