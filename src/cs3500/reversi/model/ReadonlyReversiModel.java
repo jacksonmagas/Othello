@@ -25,6 +25,8 @@ public interface ReadonlyReversiModel {
    */
   List<List<CellState>> getGameBoard();
 
+  int[][] getBoard();
+
   /**
    * Returns the state of the cell at the given horizontal row and index.
    * The state is either empty, occupied by black, or occupied by white.
@@ -43,4 +45,8 @@ public interface ReadonlyReversiModel {
    * @return True if there are legal moves for the current player.
    */
   boolean anyLegalMoves();
+
+  String getNextStepInstructions();
+
+  String getLastErrorMessage();
 }

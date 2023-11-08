@@ -125,15 +125,15 @@ public class ExamplarModelTests {
     ReversiModel model = new BasicReversi(4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
-                + "  _ _ _ _ _   \n"
-                + " _ _ X O _ _  \n"
-                + "_ _ O _ X _ _ \n"
-                + " _ _ X O _ _  \n"
-                + "  _ _ _ _ _   \n"
-                + "   _ _ _ _    \n"
-                + "Player one Score: 3\n"
-                + "Player two Score: 3\n"
-                + "Player one turn (Black)!\n",
+                  + "  _ _ _ _ _   \n"
+                  + " _ _ X O _ _  \n"
+                  + "_ _ O _ X _ _ \n"
+                  + " _ _ X O _ _  \n"
+                  + "  _ _ _ _ _   \n"
+                  + "   _ _ _ _    \n"
+                  + "Player one Score: 3\n"
+                  + "Player two Score: 3\n"
+                  + "Player one turn (Black)!\n",
             model.toString());
     model.makeMove(2, 4);
     Assert.assertEquals("Game is updated",
