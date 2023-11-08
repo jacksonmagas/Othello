@@ -71,7 +71,7 @@ public class ReverseHexGridController implements ReversiController {
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       int[][] board = this.model.getBoard();
       //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y+" target row "+row+" col "+col);
+      //System.out.println("Controller mouse click event - x "+x+" y "+y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
@@ -87,6 +87,21 @@ public class ReverseHexGridController implements ReversiController {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           view.setModel(this.model);
           view.repaint();
+        }
+      } else {
+        // check if user click Pass button
+        if (x >= 248 && x <= 299 && y >= 51 && y <= 96) {
+          System.out.println("Pass button is clicked!");
+          try {
+            this.model.passTurn();
+            System.out.println(model.toString());
+            view.setModel(this.model);
+            view.repaint();
+          } catch (IllegalArgumentException | IllegalStateException ex) {
+            System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+            view.setModel(this.model);
+            view.repaint();
+          }
         }
       }
     }

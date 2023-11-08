@@ -80,6 +80,7 @@ so we added a method to get the state of each cell.
 6. ReversiFrame interface is created to support GUI based view. BasicReversiView is implemented to support this interface.
 7. Hexagon is created to build the Hexagon based grid.
 8. Reversi and ReversiGUI Main classes allows one to play this Reversi game in textual and GUI views.
+9. Make move mouse clicks, Pass Turns button clicks are implemented as part of Hexagonal Grid GUI based game.
 
 <br/><br/>
 New constructor:
