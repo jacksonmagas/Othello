@@ -49,13 +49,11 @@ Source details:
    This model uses 2 players Player One and Player Two. It uses Hex coordinates based grid.
    It has horizontal, down left and down right rows.
    Each cell extends Location (x,y) coordinates and may have Player's state if it is used by player.
-2. ReadonlyReversiModel interface is created to only support views.
-3. ReversiTextualController to take Player One moves from user input, play move and display the output.
-4. ReversiTextualView to display the textual output.
-5. Reversi Main class allows one to play this Reversi game.
-6. Classes are implemented for future use:<br/>
+2. ReversiTextualController to take Player One moves from user input, play move and display the output.
+3. ReversiTextualView to display the textual output.
+4. Classes are implemented for future use:<br/>
    Player.java, BlackPlayer.java, WhitePlayer.java, HexGrid.java, Point.java
-7. Functionalities need to be updated for future work such as down left or right rows to support those directional moves.
+5. Functionalities need to be updated for future work such as down left or right rows to support those directional moves.
 
 <br/><br/>
 Rule details:
@@ -68,7 +66,7 @@ c. When moving in that direction there is a friendly player cell before empty ce
 
 
 # Changes for part 2
-Added methods:
+Added:
 1. isGameOver();<br/>
 a. The interface did not expose a way to check if the game was over, so we added a method to do that.<br/>
 2. getTileAt(hRow, hIndex);<br/>
@@ -77,6 +75,11 @@ method to do that.<br/>
 3. getGameBoard();<br/>
 a. The only way to get the state of the game before was to parse the string from the toString method,
 so we added a method to get the state of each cell.
+4. ReadonlyReversiModel interface is created to only support views.
+5. ReversiHexGridController is implemented to support GUI based mouse click game actions and views.
+6. ReversiFrame interface is created to support GUI based view. BasicReversiView is implemented to support this interface.
+7. Hexagon is created to build the Hexagon based grid.
+8. Reversi and ReversiGUI Main classes allows one to play this Reversi game in textual and GUI views.
 
 <br/><br/>
 New constructor:

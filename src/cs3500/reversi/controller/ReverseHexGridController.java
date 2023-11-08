@@ -85,6 +85,8 @@ public class ReverseHexGridController implements ReversiController {
           view.repaint();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+          view.setModel(this.model);
+          view.repaint();
         }
       }
     }

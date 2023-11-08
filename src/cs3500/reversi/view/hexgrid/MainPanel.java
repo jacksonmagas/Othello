@@ -72,6 +72,7 @@ public class MainPanel extends JPanel {
   }
   private void drawErrorMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
+    System.out.println("Error "+model.getLastErrorMessage());
     Graphics2D g2d = (Graphics2D) g;
     if (model.getLastErrorMessage().length() > 0) {
       int x2 = centered ? origin.x - radius : origin.x;

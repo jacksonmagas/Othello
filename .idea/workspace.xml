@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment=" update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiTextualView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +45,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.ExamplarModelTests">
+  <component name="RunManager">
     <configuration name="ExamplarModelTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CS3500-Reversi" />
       <extension name="coverage">
@@ -136,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698799906235</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary=" update">
+      <option name="closed" value="true" />
+      <created>1699460367305</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699460367305</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +161,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="small update" />
+    <MESSAGE value="gui" />
     <MESSAGE value=" update" />
     <option name="LAST_COMMIT_MESSAGE" value=" update" />
   </component>
