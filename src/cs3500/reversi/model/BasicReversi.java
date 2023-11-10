@@ -65,19 +65,30 @@ public class BasicReversi implements ReversiModel {
     int rowSize = sideLength;
     totalNumRows = 2 * sideLength - 1;
 
-    //create empty arrayLists to hold cells
+    //create empty arrayLists to hold cells, and temporarily fills them will nulls
     for (int row = 0; row < totalNumRows; row++) {
       this.horizontalRows.add(new ArrayList<>());
       this.downRightRows.add(new ArrayList<>());
       this.downLeftRows.add(new ArrayList<>());
+      for (int col = 0; col < rowSize; col++) {
+        this.horizontalRows.get(row).add(null);
+        this.downRightRows.get(row).add(null);
+        this.downLeftRows.get(row).add(null);
+      }
+      if (row < center) {
+        rowSize++;
+      } else {
+        rowSize--;
+      }
     }
 
+    rowSize = sideLength;
     // build grid
     for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
       for (int col = 0; col < rowSize; col++) {
         setEmptyCellAt(rowNum, col);
       }
-      if (rowNum < sideLength) {
+      if (rowNum < center) {
         rowSize++;
       } else {
         rowSize--;
@@ -108,6 +119,7 @@ public class BasicReversi implements ReversiModel {
 
   /**
    * Constructor for BasicReversi public class in default start game configuration.
+   * @param sideLength The length of one side of the hexagon board
    */
   public BasicReversi(int sideLength) {
     this(sideLength, 0, 0, CellState.BLACK,
@@ -151,12 +163,13 @@ public class BasicReversi implements ReversiModel {
   // lists
   private void setEmptyCellAt(int hRow, int hIndex) {
     Cell c = new Cell(new Location(hRow, hIndex));
-    horizontalRows.get(hRow).add(hIndex, c);
+    horizontalRows.get(hRow).set(hIndex, c);
+    downRightRows.get(getRRow(hRow, hIndex)).set(getRIndex(hRow, hIndex), c);
+    downLeftRows.get(getLRow(hRow, hIndex)).set(getLIndex(hRow, hIndex), c);
   }
 
   //get the downRightRow row coordinate of the cell at the given horizontal row and index
   private int getRRow(int hRow, int hIndex) {
-
     if (hRow <= center) {
       //at and above the centerline the RRow is mid - hIndex + hRow
       return center - hIndex + hRow;
@@ -302,7 +315,7 @@ public class BasicReversi implements ReversiModel {
       int newIndex = index - 1;
       CellState curCellState = direction.get(row).get(newIndex).getState();
       while (curCellState == oppositeColor) {
-        flipTileToCurrentPlayer(row, newIndex);
+        flipTileToCurrentPlayer(direction, row, newIndex);
         newIndex--;
         curCellState = direction.get(row).get(newIndex).getState();
       }
@@ -313,7 +326,7 @@ public class BasicReversi implements ReversiModel {
       int newIndex = index + 1;
       CellState curCellState = direction.get(row).get(newIndex).getState();
       while (curCellState == oppositeColor) {
-        flipTileToCurrentPlayer(row, newIndex);
+        flipTileToCurrentPlayer(direction, row, newIndex);
         newIndex++;
         curCellState = direction.get(row).get(newIndex).getState();
       }
@@ -342,8 +355,8 @@ public class BasicReversi implements ReversiModel {
   }
 
   // flips the tile to the current player
-  private void flipTileToCurrentPlayer(int row, int index) {
-    horizontalRows.get(row).get(index).setState(this.currentPlayer);
+  private void flipTileToCurrentPlayer(ArrayList<ArrayList<Cell>> direction, int row, int index) {
+    direction.get(row).get(index).setState(this.currentPlayer);
     if (this.currentPlayer.equals(CellState.BLACK)) {
       playerScores[0]++;
       playerScores[1]--;

@@ -7,5 +7,10 @@ public interface Player {
 
   public boolean isComputerPlayer();
 
-  public boolean isPersonPlayer();
+  public boolean isHumanPlayer();
+
+  /**
+   * The player makes a move in the given game of reversi.
+   */
+  public void makeMove(ReversiModel model);
 }
