@@ -25,9 +25,6 @@ public interface ReversiModel extends ReadonlyReversiModel {
    */
   void passTurn();
 
-  /**
-   * Create a new reversi model with the same board state as the current reversi model.
-   * @return A copy of the current model
-   */
-  ReversiModel copy();
+  void restart();
+
 }

@@ -3,10 +3,13 @@ package cs3500.reversi.controller;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
-import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.model.ReversiModel;
+import cs3500.reversi.strategy.Move;
 import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 
@@ -18,10 +21,13 @@ import cs3500.reversi.view.ReversiFrame;
  * constraint: no part of any blob will be in the -ve X and -ve Y space. That is, the smallest
  * region that contains all the blobs has a lower left corner of (0,0) at the least.
  */
-public class ReverseHexGridController implements ReversiController {
+public class ReverseHexGridController implements ReversiPlayerStrategyController {
 
   private ReversiModel model;
   private ReversiFrame view;
+
+  private int playerIndex;
+  private final List<Player> players;
   private final int WIDTH = 1200;
   private final int HEIGHT = 800;
   public ReverseHexGridController(ReversiModel model) {
@@ -29,31 +35,79 @@ public class ReverseHexGridController implements ReversiController {
       throw new IllegalArgumentException("Model is null");
     }
     this.model = model;
+    this.players = new ArrayList<Player>();
   }
 
   @Override
-  public void playGame(ReversiModel model) {
+  public void addPlayer(Player player) {
+    this.players.add(Objects.requireNonNull(player));
+  }
+
+  @Override
+  public void play() {
     if (model == null) {
       throw new IllegalArgumentException("Model is null");
     }
+    if (players == null || players.size() != 2) {
+      throw new IllegalArgumentException("Players are not added!");
+    }
     this.view = new BasicReversiView(WIDTH, HEIGHT, model);
     setMouseListener();
+    this.playerIndex = 0;
+    while (!this.model.isGameOver()) {
+      Move move = this.players.get(this.playerIndex).play(this.model);
+      try {
+        if (move != null) {
+          if (move.getPosn() != null) {
+            try {
+              this.model.makeMove(move.getPosn().row, move.getPosn().col);
+              this.playerIndex = (this.playerIndex + 1) % this.players.size();
+              System.out.println(model.toString());
+              view.setModel(this.model);
+              view.repaint();
+              this.playerIndex = (this.playerIndex + 1) % this.players.size();
+            } catch (IllegalArgumentException | IllegalStateException ex) {
+              System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+              view.setModel(this.model);
+              view.repaint();
+            }
+          } else if (move.isPassTurn()) {
+            try {
+              this.model.passTurn();
+              this.playerIndex = (this.playerIndex + 1) % this.players.size();
+              System.out.println(model.toString());
+              view.setModel(this.model);
+              view.repaint();
+            } catch (IllegalArgumentException | IllegalStateException ex) {
+              System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+              view.setModel(this.model);
+              view.repaint();
+            }
+          }
+        }
+      } catch (Exception ex) {
+        System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+      }
+    }
   }
 
   private void setMouseListener() {
 
-    view.setMouseListener(new MyMouseListener(model, view));
+    view.setMouseListener(new MyMouseListener(model, view, playerIndex, players));
   }
 
   class MyMouseListener extends MouseAdapter {
 
     ReversiModel model;
     ReversiFrame view;
-
-    public MyMouseListener(ReversiModel model, ReversiFrame view) {
+    int playerIndex;
+    final List<Player> players;
+    public MyMouseListener(ReversiModel model, ReversiFrame view, int playerIndex, List<Player> players) {
       super();
       this.model = model;
       this.view = view;
+      this.playerIndex = playerIndex;
+      this.players = players;
     }
 
     @Override
@@ -71,7 +125,7 @@ public class ReverseHexGridController implements ReversiController {
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       int[][] board = this.model.getBoard();
       //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
+      System.out.println("Controller mouse click event - x "+x+" y "+y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
@@ -80,7 +134,25 @@ public class ReverseHexGridController implements ReversiController {
         int col = rowCol.y;
         try {
           this.model.makeMove(row, col);
+          this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println(model.toString());
+          // check if computer move is enabled
+          if (!this.model.isGameOver()) {
+            Move move = this.players.get(this.playerIndex).play(this.model);
+            if (move != null) {
+              if (move.getPosn() != null) {
+                System.out.println("Computer is doing move to "+move.getPosn().row+" "+move.getPosn().col);
+                this.model.makeMove(move.getPosn().row, move.getPosn().col);
+                this.playerIndex = (this.playerIndex + 1) % this.players.size();
+              } else if (move.isPassTurn()) {
+                System.out.println("Computer is passing move");
+                this.model.passTurn();
+                this.playerIndex = (this.playerIndex + 1) % this.players.size();
+              }
+              System.out.println(model.toString());
+            }
+          }
+          // refresh game after both moves
           view.setModel(this.model);
           view.repaint();
         } catch (IllegalArgumentException | IllegalStateException ex) {
@@ -89,11 +161,43 @@ public class ReverseHexGridController implements ReversiController {
           view.repaint();
         }
       } else {
-        // check if user click Pass button
-        if (x >= 248 && x <= 299 && y >= 51 && y <= 96) {
-          System.out.println("Pass button is clicked!");
+        // check if user click Pass Turn button
+        //if (x >= 248 && x <= 299 && y >= 51 && y <= 96) {
+        if (x >= 250 && x <= 363 && y >= 51 && y <= 163) {
+          System.out.println("Pass Turn button is clicked!");
           try {
             this.model.passTurn();
+            this.playerIndex = (this.playerIndex + 1) % this.players.size();
+            System.out.println(model.toString());
+            // check if computer move is enabled
+            if (!this.model.isGameOver()) {
+              Move move = this.players.get(this.playerIndex).play(this.model);
+              if (move != null) {
+                if (move.getPosn() != null) {
+                  System.out.println("Computer is doing move to "+move.getPosn().row+" "+move.getPosn().col);
+                  this.model.makeMove(move.getPosn().row, move.getPosn().col);
+                  this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                } else if (move.isPassTurn()) {
+                  System.out.println("Computer is passing move");
+                  this.model.passTurn();
+                  this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                }
+                System.out.println(model.toString());
+              }
+            }
+            // refresh game after both moves
+            view.setModel(this.model);
+            view.repaint();
+          } catch (IllegalArgumentException | IllegalStateException ex) {
+            System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+            view.setModel(this.model);
+            view.repaint();
+          }
+        } else if (x >= 851 && x <= 931 && y >= 62 && y <= 142) {
+          // check if user click Restart button
+          this.playerIndex = 0;
+          try {
+            this.model.restart();
             System.out.println(model.toString());
             view.setModel(this.model);
             view.repaint();

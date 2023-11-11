@@ -47,7 +47,12 @@ public interface ReadonlyReversiModel {
    */
   boolean anyLegalMoves();
 
+  Cell.Location getFirstAvailableMove();
+
   String getNextStepInstructions();
 
   String getLastErrorMessage();
+
+  CellState getPieceAt(int r, int c);
+
 }

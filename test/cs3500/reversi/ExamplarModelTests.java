@@ -179,6 +179,49 @@ public class ExamplarModelTests {
   }
 
   @Test
+  public void testReversiGameMakeVertMove() {
+    ReversiModel model = new BasicReversi(4);
+    Assert.assertEquals("Game is started",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X O _ _  \n"
+                    + "  _ _ _ _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 3\n"
+                    + "Player two Score: 3\n"
+                    + "Player one turn (Black)!\n",
+            model.toString());
+    model.makeMove(5, 2);
+    Assert.assertEquals("Game is updated",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X X _ _  \n"
+                    + "  _ _ X _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 5\n"
+                    + "Player two Score: 2\n"
+                    + "Player two turn (White)!\n",
+            model.toString());
+    model.makeMove(2, 1);
+    Assert.assertEquals("Game is updated",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ O O O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X X _ _  \n"
+                    + "  _ _ X _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 4\n"
+                    + "Player two Score: 4\n"
+                    + "Player one turn (Black)!\n",
+            model.toString());
+  }
+
+  @Test
   public void testReversiGameWithWin() {
     ReversiModel model = new BasicReversi(3);
     
@@ -288,7 +331,8 @@ public class ExamplarModelTests {
                 + "   _ _ _ _    \n"
                 + "Player one Score: 3\n"
                 + "Player two Score: 3\n"
-                + "Game is over!\n",
+                + "Game is over!\n"
+                + " Tie game",
             model.toString());
     Assert.assertThrows("Game is over", IllegalStateException.class, model::passTurn);
   }

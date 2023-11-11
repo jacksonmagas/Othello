@@ -3,14 +3,14 @@ package cs3500.reversi.model;
 /**
  * A cell is a space for a tile to be placed in inside the hexagon grid.
  */
-class Cell {
+public class Cell {
   private CellState state;
   private Location location;
 
   /**
    * A location with row 0 indexed from top, and column 0 indexed from right.
    */
-  static class Location {
+  public static class Location {
     Location(int row, int column) {
       this.row = row;
       this.column = column;
@@ -18,6 +18,14 @@ class Cell {
 
     final int row;
     final int column;
+
+    public int getRow() {
+      return row;
+    }
+
+    public int getColumn() {
+      return column;
+    }
   }
 
   /**

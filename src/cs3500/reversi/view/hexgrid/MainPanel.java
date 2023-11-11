@@ -49,6 +49,25 @@ public class MainPanel extends JPanel {
     drawStatusMessages(g2d, origin, 380, true, Color.WHITE);
     drawErrorMessages(g2d, origin, 380, true, Color.RED);
     drawPassTurnButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
+    drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
+  }
+
+  private void drawRestartButton(Graphics2D g, Point origin, int radius,
+                                  boolean centered, Color colorValue) {
+    Graphics2D g2d = (Graphics2D) g;
+    int x2 = centered ? origin.x - radius : origin.x;
+    int y2 = centered ? origin.y - radius : origin.y;
+
+    StringBuffer text = new StringBuffer();
+    text.append("Restart");
+    int w = metrics.stringWidth(text.toString());
+    int h = metrics.getHeight();
+
+    g.setColor(colorValue);
+    g.fillOval(x2 + w*15, y2 + w, w * 2, w * 2);
+
+    g.setColor(Color.BLACK);
+    g.drawString(text.toString(), x2 + w*15+18, y2 + w*2);
   }
 
   private void drawPassTurnButton(Graphics2D g, Point origin, int radius,
@@ -58,15 +77,15 @@ public class MainPanel extends JPanel {
     int y2 = centered ? origin.y - radius : origin.y;
 
     StringBuffer text = new StringBuffer();
-    text.append("Pass");
+    text.append("Pass Turn");
     int w = metrics.stringWidth(text.toString());
     int h = metrics.getHeight();
 
     g.setColor(colorValue);
-    g.fillOval(x2 + w, y2 + w, w * 2, w * 2);
+    g.fillOval(x2 + w/2, y2 + w/2, w * 2, w * 2);
 
     g.setColor(Color.BLACK);
-    g.drawString(text.toString(), x2 + w+14, y2 + w*2);
+    g.drawString(text.toString(), x2 + w/2+25, y2 + w+w/2);
   }
   private void drawStatusMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
@@ -101,7 +120,7 @@ public class MainPanel extends JPanel {
       int w = metrics.stringWidth(text.toString());
       int h = metrics.getHeight();
       g2d.setColor(colorValue);
-      g2d.drawString(text.toString(), x2 + w+34, y2 + h * 4);
+      g2d.drawString(text.toString(), x2 + w+72, y2 + h * 4);
     }
   }
 

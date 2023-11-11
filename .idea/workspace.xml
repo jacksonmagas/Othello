@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment=" update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/ReversiGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/ReversiGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ComputerPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/HexGrid.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/HumanPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Point.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2XPJk6v3lfF7CRcnjYODSNLVwiG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="ExamplarModelTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CS3500-Reversi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs3500.reversi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs3500.reversi" />
+      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExamplarModelTests.testReversiGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CS3500-Reversi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs3500.reversi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cs3500.reversi" />
+      <option name="MAIN_CLASS_NAME" value="cs3500.reversi.ExamplarModelTests" />
+      <option name="METHOD_NAME" value="testReversiGame" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ExamplarModelTests" />
+        <item itemvalue="JUnit.ExamplarModelTests.testReversiGame" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment=" update" />
+      <created>1698524927626</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698524927626</updated>
+      <workItem from="1698524928668" duration="9298000" />
+      <workItem from="1699652384493" duration="2851000" />
+    </task>
+    <task id="LOCAL-00001" summary="textual view test">
+      <option name="closed" value="true" />
+      <created>1698525860975</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698525860975</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added tests">
+      <option name="closed" value="true" />
+      <created>1698603510104</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698603510104</updated>
+    </task>
+    <task id="LOCAL-00003" summary="small update">
+      <option name="closed" value="true" />
+      <created>1698691432988</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698691432988</updated>
+    </task>
+    <task id="LOCAL-00004" summary=" update">
+      <option name="closed" value="true" />
+      <created>1698799576326</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698799576326</updated>
+    </task>
+    <task id="LOCAL-00005" summary=" update">
+      <option name="closed" value="true" />
+      <created>1698799906235</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698799906235</updated>
+    </task>
+    <task id="LOCAL-00006" summary=" update">
+      <option name="closed" value="true" />
+      <created>1699460367305</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699460367305</updated>
+    </task>
+    <task id="LOCAL-00007" summary=" update">
+      <option name="closed" value="true" />
+      <created>1699470187978</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1699470187978</updated>
+    </task>
+    <task id="LOCAL-00008" summary=" update">
+      <option name="closed" value="true" />
+      <created>1699470477859</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1699470477859</updated>
+    </task>
+    <task id="LOCAL-00009" summary=" update">
+      <option name="closed" value="true" />
+      <created>1699660368015</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699660368015</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="small update" />
+    <MESSAGE value="gui" />
+    <MESSAGE value=" update" />
+    <option name="LAST_COMMIT_MESSAGE" value=" update" />
+  </component>
+</project>

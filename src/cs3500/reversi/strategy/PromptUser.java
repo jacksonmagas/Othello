@@ -1,0 +1,32 @@
+package cs3500.reversi.strategy;
+
+import java.util.Scanner;
+
+import cs3500.reversi.model.CellState;
+import cs3500.reversi.model.ReversiModel;
+
+/**
+ * A Strategy: ask the user where to play next
+ */
+public class PromptUser implements MoveStrategy {
+  Scanner input;
+  PromptUser() { this(new Scanner(System.in)); }
+  public PromptUser(Scanner input) {
+    this.input = input;
+  }
+  @Override
+  public Move chooseMove(ReversiModel model, CellState player) {
+    System.out.println("Enter a move: make-move row col or pass-turn");
+    String moveCommand = input.next();
+    Move move;
+    if (moveCommand.equalsIgnoreCase("pass-turn")) {
+      move = new Move(true);
+    } else {
+      //System.out.println("Enter a row and column");
+      int r = input.nextInt();
+      int c = input.nextInt();
+      move = new Move(r, c);
+    }
+    return move;
+  }
+}
