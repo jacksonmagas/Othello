@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment=" update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/ReversiGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/ReversiGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ComputerPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/HexGrid.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/HumanPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Point.java" beforeDir="false" />
+    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment=" bug fixes and update">
       <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/SimpleComputerPlayer.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698524927626</updated>
       <workItem from="1698524928668" duration="9298000" />
-      <workItem from="1699652384493" duration="2851000" />
+      <workItem from="1699652384493" duration="3409000" />
     </task>
     <task id="LOCAL-00001" summary="textual view test">
       <option name="closed" value="true" />
@@ -181,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699660368015</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary=" bug fixes and update">
+      <option name="closed" value="true" />
+      <created>1699716867428</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699716867428</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +196,7 @@
     <MESSAGE value="small update" />
     <MESSAGE value="gui" />
     <MESSAGE value=" update" />
-    <option name="LAST_COMMIT_MESSAGE" value=" update" />
+    <MESSAGE value=" bug fixes and update" />
+    <option name="LAST_COMMIT_MESSAGE" value=" bug fixes and update" />
   </component>
 </project>
