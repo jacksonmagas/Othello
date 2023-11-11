@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
  */
 public class BasicReversi implements ReversiModel {
 
-  private final int BSIZE = 14; //board size.
-
   //Keeps track of the cells in the game in 3 lists, one for each principal direction of a hexagon
   //Invariant: All three lists contain the same cells
   //the horizontal rows 0 indexed from top
@@ -148,6 +146,7 @@ public class BasicReversi implements ReversiModel {
     this.downRightRows = copyCells(base.downRightRows);
     this.isGameOver = base.isGameOver;
     this.currentPlayer = base.currentPlayer;
+    this.lastErrorMessage = base.lastErrorMessage;
   }
 
   //returns a new list containing copies of the cells
@@ -407,6 +406,11 @@ public class BasicReversi implements ReversiModel {
     lastErrorMessage = "";
   }
 
+  @Override
+  public ReversiModel copy() {
+    return new BasicReversi(this);
+  }
+
   // gets the score of the game for the given player
   @Override
   public int getPlayerScore(int playerNum) {
@@ -435,6 +439,8 @@ public class BasicReversi implements ReversiModel {
   }
   @Override
   public int[][] getBoard() {
+    //board size.
+    int BSIZE = 14;
     int[][] board = new int[BSIZE][BSIZE];
     // initialize with 0s
     for (int i=0;i<this.horizontalRows.size();i++) {

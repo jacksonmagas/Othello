@@ -21,7 +21,7 @@ public class HumanPlayer implements Player {
   }
 
   @Override
-  public void makeMove(ReversiModel model) {
+  public void makeMove() {
 
   }
 
