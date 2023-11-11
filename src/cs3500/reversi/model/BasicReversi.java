@@ -331,7 +331,7 @@ public class BasicReversi implements ReversiModel {
     //Is there an adjacent opponent cell in positive direction?
     if (index < rowLen - 1) {
       Cell nextCell = direction.get(row).get(index + 1);
-      validInPlus = nextCell.getState().equals(oppositeColor);
+      validInPlus = (nextCell != null && nextCell.getState() != null) ? nextCell.getState().equals(oppositeColor) : false;
     }
 
     //If is there an ally cell on the other side of opponent cells?
