@@ -57,6 +57,7 @@ public class ReversiTextualController implements ReversiController {
     }
   }
 
+  // processes a command given
   private void processCommand(String userCommand, Scanner sc, ReversiModel model) {
     int row;
     int col;
@@ -86,6 +87,7 @@ public class ReversiTextualController implements ReversiController {
     }
   }
 
+  // writes a message to display
   private void writeMessage(String message) {
     try {
       this.out.append(message);

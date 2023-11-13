@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment="small basicReversi change">
+    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment="javaDoc changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/ReversiGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/ReversiGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/Reversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/PlayerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/PlayerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiPlayerStrategyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiPlayerStrategyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReversiTextualController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/CellState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/CellState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/strategy/FirstAvailableOpening.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/strategy/FirstAvailableOpening.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/strategy/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/strategy/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/strategy/MoveStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/strategy/MoveStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/strategy/PromptUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/strategy/PromptUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +106,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698524927626</updated>
       <workItem from="1698524928668" duration="9298000" />
-      <workItem from="1699652384493" duration="6698000" />
+      <workItem from="1699652384493" duration="8866000" />
     </task>
     <task id="LOCAL-00001" summary="textual view test">
       <option name="closed" value="true" />
@@ -193,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699721750826</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="javaDoc changes">
+      <option name="closed" value="true" />
+      <created>1699890202123</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699890202123</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +236,7 @@
     <MESSAGE value=" bug fixes and update" />
     <MESSAGE value="fix" />
     <MESSAGE value="small basicReversi change" />
-    <option name="LAST_COMMIT_MESSAGE" value="small basicReversi change" />
+    <MESSAGE value="javaDoc changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="javaDoc changes" />
   </component>
 </project>

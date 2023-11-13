@@ -76,6 +76,9 @@ public class Cell {
     return this.location;
   }
 
+  /**
+   * Converts output to String.
+   */
   @Override
   public String toString() {
     String output = "_";

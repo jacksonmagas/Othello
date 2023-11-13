@@ -33,5 +33,4 @@ public class Reversi {
     ReversiController controller = new ReversiTextualController(rd, ap);
     controller.playGame(reversi);
   }
-
 }

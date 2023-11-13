@@ -14,14 +14,17 @@ import java.util.stream.Collectors;
 public class BasicReversi implements ReversiModel {
 
   private final int BSIZE = 14; //board size.
+
   private final int TOTALCELLS = 37;
 
   //Keeps track of the cells in the game in 3 lists, one for each principal direction of a hexagon
   //Invariant: All three lists contain the same cells
   //the horizontal rows 0 indexed from top
   private final ArrayList<ArrayList<Cell>> horizontalRows;
+
   //the rows which follow the down-right direction 0 indexed from top right of hexagon
   private final ArrayList<ArrayList<Cell>> downRightRows;
+
   //the rows which follow the down-left direction 0 indexed from top left of hexagon
   private final ArrayList<ArrayList<Cell>> downLeftRows;
 
@@ -36,9 +39,13 @@ public class BasicReversi implements ReversiModel {
   private final int[] playerScores;
 
   private int blackPlayerPassTurnsCount;
+
   private int whitePlayerPassTurnsCount;
+
   private String lastErrorMessage;
+
   private Status gameState;
+
   private CellState winner;
 
   /**
@@ -120,6 +127,9 @@ public class BasicReversi implements ReversiModel {
     this.whitePlayerPassTurnsCount = whitePassTurns;
   }
 
+  /**
+   * Restarts the game.
+   */
   public void restart() {
     lastErrorMessage = "";
     blackPlayerPassTurnsCount = 0;
@@ -241,6 +251,7 @@ public class BasicReversi implements ReversiModel {
     downLeftRows.get(getLRow(hRow, hIndex)).set(getLIndex(hRow, hIndex), c);
   }
 
+  // prints the horizontal rows
   private void printHorizontalRows() {
     int rowSize = center + 1;
     for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
