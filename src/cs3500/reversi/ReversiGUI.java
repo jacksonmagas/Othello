@@ -13,7 +13,7 @@ import cs3500.reversi.strategy.FirstAvailableOpening;
 import cs3500.reversi.strategy.PromptUser;
 
 /**
- * Represent a Reversi game class.
+ * Represent a Reversi game class interactive GUI.
  */
 public class ReversiGUI {
 
