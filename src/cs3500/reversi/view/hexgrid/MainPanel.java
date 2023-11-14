@@ -207,7 +207,8 @@ public class MainPanel extends JPanel {
   }
 
   // draw the hexagon
-  private void drawHex(Graphics g, int posX, int posY, int x, int y, int r, Color colorValue, Color hightlightColor) {
+  private void drawHex(Graphics g, int posX, int posY, int x, int y, int r, Color colorValue,
+                       Color hightlightColor) {
     Graphics2D g2d = (Graphics2D) g;
 
     Hexagon hex = new Hexagon(x, y, r);
