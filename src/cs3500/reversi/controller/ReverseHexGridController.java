@@ -16,6 +16,7 @@ import cs3500.reversi.view.ReversiFrame;
 
 /**
  * This controller updates the model and view according to user input.
+ *
  * In order to ease drawing of the blobs in the view, this controller enforces the following
  * constraint: no part of any blob will be in the -ve X and -ve Y space. That is, the smallest
  * region that contains all the blobs has a lower left corner of (0,0) at the least.
@@ -29,6 +30,10 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
   private final List<Player> players;
   private final int WIDTH = 1200;
   private final int HEIGHT = 800;
+
+  /**
+   * Constructor for ReversiHexGridController.
+   */
   public ReverseHexGridController(ReversiModel model) {
     if (model == null) {
       throw new IllegalArgumentException("Model is null");
@@ -46,7 +51,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
   }
 
   /**
-   * Plays the reversi game.
+   * Plays the game.
    */
   @Override
   public void play() {
@@ -101,9 +106,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
     view.setMouseListener(new MyMouseListener(model, view, playerIndex, players));
   }
 
-  /**
-   * Listen to mouse actions on game screen.
-   */
+  // MyMouseListener class listens for mouse movements.
   class MyMouseListener extends MouseAdapter {
 
     ReversiModel model;
@@ -123,7 +126,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
     }
 
     /**
-     * Once a mouse is clicked it responds appropriately in relation to location.
+     * MouseClicked checks for if a mouse was clicked on the game board.
      */
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -140,11 +143,11 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       int[][] board = this.model.getBoard();
       //board[x][y] = (int)'X';
-      System.out.println("Controller mouse click event - x "+x+" y "+y);
+      //System.out.println("Controller mouse click event - x "+x+" y "+y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
-        System.out.println("row " + rowCol.x + " col " + rowCol.y);
+        //System.out.println("row " + rowCol.x + " col " + rowCol.y);
         int row = rowCol.x;
         int col = rowCol.y;
         try {
@@ -225,7 +228,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       }
     }
 
-    // finds the row and columns of a point
+    // finds the rows and columns of a point
     private Point findRowCols(HashMap<Point, Point> keyMap, Point mouseClickedPoint) {
       Point rowColPoint = null;
       if (keyMap != null && mouseClickedPoint != null) {
@@ -241,12 +244,12 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       return rowColPoint;
     }
 
-    // checks to see if the rows match
+    // checks if the row matches
     boolean isRowMatch(int x1, int x2) {
       return (Math.abs(x1 - x2) <= 44);
     }
 
-    // checks to see if the columns match
+    // checks if the columns matches
     boolean isColMatch(int y1, int y2) {
       return (Math.abs(y1 - y2) <= 33);
     }

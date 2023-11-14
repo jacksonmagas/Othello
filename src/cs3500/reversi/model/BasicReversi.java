@@ -1,7 +1,6 @@
 package cs3500.reversi.model;
 
 import cs3500.reversi.model.Cell.Location;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 public class BasicReversi implements ReversiModel {
 
   private final int BSIZE = 14; //board size.
-
   private final int TOTALCELLS = 37;
 
   //Keeps track of the cells in the game in 3 lists, one for each principal direction of a hexagon
@@ -31,7 +29,9 @@ public class BasicReversi implements ReversiModel {
   boolean isGameOver = false;
 
   private final int center;
+
   private final int totalNumRows;
+
   private CellState currentPlayer;
 
   //array of 2 elements, playerScores[0] is black score
@@ -457,7 +457,7 @@ public class BasicReversi implements ReversiModel {
     setWinOrTieGame();
   }
 
-  // ends the game as either a win or a tie
+  // sets the game to win or tie
   private void setWinOrTieGame() {
     if (playerScores[0]+playerScores[1] == TOTALCELLS) {
       if (playerScores[0] == playerScores[1]) {
@@ -483,7 +483,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Get the cellState piece location at a row and col.
+   * Gets the piece at a row and col location.
    */
   @Override
   public CellState getPieceAt(int row, int col) {
@@ -498,9 +498,7 @@ public class BasicReversi implements ReversiModel {
     return horizontalRows.get(row).get(col).getState();
   }
 
-  /**
-   * Makes the move a player prompted.
-   */
+  // makes the move a player prompted
   @Override
   public void makeMove(int row, int index) {
     if (row < 0 || index < 0) {
@@ -522,9 +520,7 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
-  /**
-   * Passes the turn of the player if there are no legal moves left for that player.
-   */
+  // passes the turn of the player if there are no legal moves left for that player
   @Override
   public void passTurn() {
     if (isGameOver()) {
@@ -543,9 +539,7 @@ public class BasicReversi implements ReversiModel {
     lastErrorMessage = "";
   }
 
-  /**
-   * Gets the score of the game for the given player.
-   */
+  // gets the score of the game for the given player
   @Override
   public int getPlayerScore(int playerNum) {
     try {
@@ -573,13 +567,13 @@ public class BasicReversi implements ReversiModel {
         Collectors.toList())).collect(Collectors.toList());
   }
 
-  // gets the max width of the hexagon
+  // gets the max width of the game board
   private int getMaxWidth() {
     return this.horizontalRows.get(center).size();
   }
 
   /**
-   * Creates and gets the board based on inputted size.
+   * Gets the board.
    */
   @Override
   public int[][] getBoard() {
@@ -623,7 +617,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Gets the tile location cellState at hRow and hIndex.
+   * Gets the tile at a hRow and hIndex location.
    */
   @Override
   public CellState getTileAt(int hRow, int hIndex) {
@@ -631,7 +625,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Gets the sideLength of the board.
+   * Gets the side length of a game board.
    */
   @Override
   public int sideLength() {
@@ -640,7 +634,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Checks if there are any legal moves for a player in a turn.
+   * Checks to see if there are any legal moves.
    */
   @Override
   public boolean anyLegalMoves() {
@@ -661,7 +655,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Returns the first available move for a given location.
+   * Gets the first available move.
    */
   @Override
   public Cell.Location getFirstAvailableMove() {
@@ -682,7 +676,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Returns the next step directions to be displaued on the screen.
+   * Gets the directions for the next step of the game at any given time.
    */
   @Override
   public String getNextStepInstructions() {
@@ -713,7 +707,7 @@ public class BasicReversi implements ReversiModel {
     return lastErrorMessage != null ? lastErrorMessage : "" ;
   }
 
-  // gets the game status
+  // returns the gameStatus
   private Status gameStatus() {
     return this.gameState;
   }
@@ -730,9 +724,7 @@ public class BasicReversi implements ReversiModel {
     return winnerName;
   }
 
-  /**
-   *  Returns the output in a string format.
-   */
+  // returns the output in a string format
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();

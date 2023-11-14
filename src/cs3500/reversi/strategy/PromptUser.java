@@ -1,7 +1,6 @@
 package cs3500.reversi.strategy;
 
 import java.util.Scanner;
-
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 
@@ -9,12 +8,9 @@ import cs3500.reversi.model.ReversiModel;
  * A Strategy: ask the user where to play next
  */
 public class PromptUser implements MoveStrategy {
-
   Scanner input;
 
-  PromptUser() {
-    this(new Scanner(System.in));
-  }
+  PromptUser() { this(new Scanner(System.in)); }
 
   /**
    * Constructor for PromptUser class.
@@ -24,7 +20,7 @@ public class PromptUser implements MoveStrategy {
   }
 
   /**
-   * Chooses a move for player.
+   * Chooses a move for computer player.
    */
   @Override
   public Move chooseMove(ReversiModel model, CellState player) {
@@ -34,7 +30,6 @@ public class PromptUser implements MoveStrategy {
     if (moveCommand.equalsIgnoreCase("pass-turn")) {
       move = new Move(true);
     } else {
-      //System.out.println("Enter a row and column");
       int r = input.nextInt();
       int c = input.nextInt();
       move = new Move(r, c);

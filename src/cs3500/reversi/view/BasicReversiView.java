@@ -1,19 +1,12 @@
 package cs3500.reversi.view;
 
-import com.sun.tools.javac.Main;
-
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
 
 import javax.swing.*;
 
-import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.ReadonlyReversiModel;
-import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.view.hexgrid.Hexagon;
 import cs3500.reversi.view.hexgrid.MainPanel;
 
 public class BasicReversiView extends JFrame implements ReversiFrame {
@@ -30,7 +23,8 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   public BasicReversiView(int width, int height, ReadonlyReversiModel model) {
     setTitle("Reversi Hex Grid Game");
 
-    setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    setSize(new Dimension(WIDTH, HEIGHT));
+    //setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
     drawPanel = new MainPanel(model);
     setContentPane(drawPanel);
@@ -78,16 +72,6 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   @Override
   public HashMap<Point, Point> getMap() {
     return drawPanel.getMap();
-  }
-
-  public static void main(String[] args) {
-    int noOfCells = 4;
-    int WIDTH = 1200;
-    int HEIGHT = 800;
-
-    ReversiModel reversi = new BasicReversi(noOfCells);
-    BasicReversiView view = new BasicReversiView(WIDTH, HEIGHT, reversi);
-
   }
 
 }

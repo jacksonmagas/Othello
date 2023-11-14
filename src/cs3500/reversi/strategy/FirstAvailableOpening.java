@@ -10,7 +10,7 @@ import cs3500.reversi.model.ReversiModel;
 public class FirstAvailableOpening implements MoveStrategy {
 
   /**
-   * Chooses a move for computer player.
+   * Chooses the move for computer player.
    */
   @Override
   public Move chooseMove(ReversiModel model, CellState player) {

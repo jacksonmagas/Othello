@@ -82,11 +82,11 @@ so we added a method to get the state of each cell.
 8. Reversi and ReversiGUI Main classes allows one to play this Reversi game in textual and GUI views.
 9. Make move mouse clicks, Pass Turn button clicks and Restart button clicks are implemented as part of Hexagonal Grid GUI based game.
 10. Strategy pattern is implemented to simulate the computer Move for selected player.
-    PromptUser, FirstAvailableOpening moves are so far implemented.
+    PromptUser, FirstAvailableOpening moves are implemented.
 11. Player is implemented to run as per his strategical move.
 12. If computer player do not have any valid moves left then computer will automatically pass turn.
 13. Vertical down left and right moves are implemented.
-14. Winner message display is implemented.
+14. Display of Winner and Tie messages are implemented.
 
 <br/><br/>
 New constructor:

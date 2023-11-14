@@ -2,7 +2,6 @@ package cs3500.reversi;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.ReversiModel;
 

@@ -1,16 +1,9 @@
 package cs3500.reversi.view.hexgrid;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
-
 import javax.swing.*;
-
-import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.ReadonlyReversiModel;
-import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.view.BasicReversiView;
 
 public class MainPanel extends JPanel {
   private final int WIDTH = 1200;
@@ -228,6 +221,7 @@ public class MainPanel extends JPanel {
     g.setStroke(tmpS);
   }
 
+  /*
   public static void main(String[] args) {
 
     int noOfCells = 4;
@@ -242,5 +236,6 @@ public class MainPanel extends JPanel {
     f.setLocationRelativeTo(null);
     f.setVisible(true);
   }
+  */
 
 }
