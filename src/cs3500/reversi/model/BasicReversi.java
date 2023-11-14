@@ -257,7 +257,7 @@ public class BasicReversi implements ReversiModel {
       for (int col = 0; col < rowSize; col++) {
         System.out.println("Horizontal (" + rowNum + "," + col + ") -> DownLeft (" +
                 getLRow(rowNum, col) + "," + getLIndex(rowNum, col) + ") -> DownRight (" +
-                getRRow(rowNum, col)+"," + getRIndex(rowNum, col) + ")");
+                getRRow(rowNum, col) + "," + getRIndex(rowNum, col) + ")");
       }
       if (rowNum < (center + 1)) {
         rowSize++;
@@ -584,7 +584,7 @@ public class BasicReversi implements ReversiModel {
     // initialize with 0s
     for (int i = 0; i < this.horizontalRows.size(); i++) {
       for (int j = 0; j < this.horizontalRows.size(); j++) {
-        board[i][j]=0;
+        board[i][j] = 0;
       }
     }
 

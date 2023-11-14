@@ -42,7 +42,9 @@ public class MainPanel extends JPanel {
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 
-  // sets the model
+  /**
+   * Sets the model.
+   */
   public void setModel(ReadonlyReversiModel model) {
     this.model = model;
     this.board = model.getBoard();
@@ -124,7 +126,7 @@ public class MainPanel extends JPanel {
     int w = metrics.stringWidth(text.toString());
     int h = metrics.getHeight();
     g2d.setColor(colorValue);
-    g2d.drawString(text.toString(), x2 + w/2, y2 + h*2);
+    g2d.drawString(text.toString(), x2 + w / 2, y2 + h * 2);
   }
 
   // draws the error messages
@@ -230,7 +232,9 @@ public class MainPanel extends JPanel {
     return (value > 0 ? "+" : "") + Integer.toString(value);
   }
 
-  // draws the rectangle
+  /**
+   * Draws the rectangle.
+   */
   public void drawRectangle(Graphics2D g, Point origin, int radius,
                          boolean centered, boolean filled, Color colorValue, int lineThickness) {
     // Store before changing.
