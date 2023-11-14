@@ -10,7 +10,7 @@ public enum CellState {
 
   private final String descriptor;
 
-  // converts descriptor to string.
+  // converts descriptor to string.2
   public String toString() {
     return descriptor;
   }

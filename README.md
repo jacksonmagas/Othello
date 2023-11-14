@@ -1,5 +1,10 @@
 # CS3500-Reversi
 Overview:
+
+Invariants:
+- All three lists contain the same cells
+- The horizontal rows 0 indexed from top
+
 Reversi is a two-player game played on a regular grid of cells. Each player has a color—black or white—and
 the game pieces are discs colored black on one side and white on the other. Game play begins with equal
 numbers of both colors of discs arranged in the middle of the grid. In our game, our grid will be made up of
