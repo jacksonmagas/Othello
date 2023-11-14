@@ -237,7 +237,7 @@ public class ExamplarModelTests {
                     + "Player one turn (Black)!\n",
             model.toString());
     Assert.assertThrows("There is no legal move at 1, 1", IllegalStateException.class, ()
-            -> model.makeMove(1, 1));
+        -> model.makeMove(1, 1));
   }
 
   @Test
@@ -257,7 +257,7 @@ public class ExamplarModelTests {
                     + "Player one turn (Black)!\n",
             model.toString());
     Assert.assertThrows("There is no legal move at -1, -1", IllegalStateException.class, ()
-            -> model.makeMove(-1, -1));
+        -> model.makeMove(-1, -1));
   }
 
   @Test
@@ -277,7 +277,7 @@ public class ExamplarModelTests {
                     + "Player one turn (Black)!\n",
             model.toString());
     Assert.assertThrows("There is no legal move at 15, 15", IllegalStateException.class, ()
-            -> model.makeMove(15, 15));
+        -> model.makeMove(15, 15));
   }
 
   @Test
