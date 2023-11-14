@@ -15,6 +15,9 @@ public class BasicReversi implements ReversiModel {
   private final int BSIZE = 14; //board size.
   private final int TOTALCELLS = 37;
 
+  private int currentRow = 0;
+  private int currentCol = 0;
+
   //Keeps track of the cells in the game in 3 lists, one for each principal direction of a hexagon
   //Invariant: All three lists contain the same cells
   //the horizontal rows 0 indexed from top
@@ -733,6 +736,15 @@ public class BasicReversi implements ReversiModel {
       winnerName = "two (White)";
     }
     return winnerName;
+  }
+
+  public void setHighlightedCell(int row, int col) {
+    this.currentRow = row;
+    this.currentCol = col;
+  }
+
+  public Cell.Location getHighlightedCell() {
+    return new Cell.Location(this.currentRow, this.currentCol);
   }
 
   // returns the output in a string format

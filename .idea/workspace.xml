@@ -9,8 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment="java style">
-      <change beforePath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/cs3500/reversi/ExamplarModelTests.java" afterDir="false" />
+    <list default="true" id="64cb6fd4-3083-4559-a400-b4c5f126523d" name="Changes" comment="manifest">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/controller/ReverseHexGridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/BasicReversi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReadonlyReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/model/ReversiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/BasicReversiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/BasicReversiView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/ReversiFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/reversi/view/hexgrid/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698524927626</updated>
       <workItem from="1698524928668" duration="9298000" />
-      <workItem from="1699652384493" duration="23950000" />
+      <workItem from="1699652384493" duration="24790000" />
     </task>
     <task id="LOCAL-00001" summary="textual view test">
       <option name="closed" value="true" />
@@ -278,7 +285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699996687393</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="java style">
+      <option name="closed" value="true" />
+      <created>1699997098952</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1699997098952</updated>
+    </task>
+    <task id="LOCAL-00024" summary="manifest">
+      <option name="closed" value="true" />
+      <created>1699997118368</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1699997118368</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +328,7 @@
     <MESSAGE value="javaDoc changes" />
     <MESSAGE value="update" />
     <MESSAGE value="java style" />
-    <option name="LAST_COMMIT_MESSAGE" value="java style" />
+    <MESSAGE value="manifest" />
+    <option name="LAST_COMMIT_MESSAGE" value="manifest" />
   </component>
 </project>

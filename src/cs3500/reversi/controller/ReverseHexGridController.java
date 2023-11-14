@@ -103,6 +103,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
   private void setMouseListener() {
 
     view.setMouseListener(new MyMouseListener(model, view, playerIndex, players));
+    view.setMouseMotionListener(new MyMouseListener(model, view, playerIndex, players));
   }
 
   // MyMouseListener class listens for mouse movements.
@@ -123,6 +124,37 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       this.view = view;
       this.playerIndex = playerIndex;
       this.players = players;
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+      int x = e.getX();
+      int y = e.getY();
+
+      // Determine row, col using x, y
+      HashMap<Point, Point> keyMap = view.getMap();
+      //Point rowCol = (Point) keyMap.get(new Point(x, y));
+      // 0,0=467,170 0,1=555,170 0,2=644,170
+      // 1,0=423,247 1,1=511,247 1,2=600,247
+      // horizontal cell distance 44
+      // vertical cell distance 33
+      Point rowCol = findRowCols(keyMap, new Point(x, y));
+      int[][] board = this.model.getBoard();
+      //board[x][y] = (int)'X';
+      //System.out.println("Controller mouse click event - x "+x+" y "+y);
+      //System.out.println("Component "+e.getComponent().toString());
+      //System.out.println("Source "+e.getSource());
+      int row = -1;
+      int col = -1;
+      if (rowCol != null) {
+        //System.out.println("row " + rowCol.x + " col " + rowCol.y);
+        row = rowCol.x;
+        col = rowCol.y;
+      }
+      // highlight cell
+      this.model.setHighlightedCell(row, col);
+      view.setModel(this.model);
+      view.repaint();
     }
 
     /**

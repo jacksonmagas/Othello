@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import javax.swing.JPanel;
 
+import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.ReadonlyReversiModel;
 
 /**
@@ -28,6 +29,9 @@ public class MainPanel extends JPanel {
   FontMetrics metrics;
 
   private static int[][] board;
+
+  private int currentRow = 0;
+  private int currentCol = 0;
 
   private ReadonlyReversiModel model;
 
@@ -48,6 +52,9 @@ public class MainPanel extends JPanel {
   public void setModel(ReadonlyReversiModel model) {
     this.model = model;
     this.board = model.getBoard();
+    Cell.Location location = model.getHighlightedCell();
+    this.currentRow = location.getRow();
+    this.currentCol = location.getColumn();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 
@@ -178,14 +185,18 @@ public class MainPanel extends JPanel {
         int y = (int) (origin.y + yOff * (row - half) * 3);
         POINTS_TO_ROW_COLS.put(new Point(x, y), new Point(row, col));
         defaultValue = null;
+        Color hightlightColor = null;
         if (board[row][col] != 0) {
           if (board[row][col] == (int)'X') {
             defaultValue = Color.BLACK;
           } else if (board[row][col] == (int)'O') {
             defaultValue = Color.WHITE;
           }
+          if (this.currentRow == row && this.currentCol == col) {
+            hightlightColor = Color.CYAN;
+          }
         }
-        drawHex(g, xLbl, yLbl, x, y, radius, defaultValue);
+        drawHex(g, xLbl, yLbl, x, y, radius, defaultValue, hightlightColor);
       }
     }
   }
@@ -196,7 +207,7 @@ public class MainPanel extends JPanel {
   }
 
   // draw the hexagon
-  private void drawHex(Graphics g, int posX, int posY, int x, int y, int r, Color colorValue) {
+  private void drawHex(Graphics g, int posX, int posY, int x, int y, int r, Color colorValue, Color hightlightColor) {
     Graphics2D g2d = (Graphics2D) g;
 
     Hexagon hex = new Hexagon(x, y, r);
@@ -206,7 +217,11 @@ public class MainPanel extends JPanel {
     int w = metrics.stringWidth(text);
     int h = metrics.getHeight();
 
-    hex.draw(g2d, x, y, 0, Color.GRAY, true);
+    if (hightlightColor != null) {
+      hex.draw(g2d, x, y, 0, hightlightColor, true);
+    } else {
+      hex.draw(g2d, x, y, 0, Color.GRAY, true);
+    }
     hex.draw(g2d, x, y, 4, Color.DARK_GRAY, false);
 
 

@@ -54,4 +54,5 @@ public interface ReadonlyReversiModel {
 
   CellState getPieceAt(int r, int c);
 
+  Cell.Location getHighlightedCell();
 }

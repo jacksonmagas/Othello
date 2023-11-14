@@ -27,4 +27,5 @@ public interface ReversiModel extends ReadonlyReversiModel {
 
   void restart();
 
+  void setHighlightedCell(int row, int col);
 }

@@ -2,6 +2,7 @@ package cs3500.reversi.view;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
 import cs3500.reversi.model.ReadonlyReversiModel;
@@ -22,6 +23,11 @@ public interface ReversiFrame {
    * This method will be called to set a mouse listener.
    */
   void setMouseListener(MouseListener listener);
+
+  /**
+   * This method will be called to set a mouse motion listener.
+   */
+  void setMouseMotionListener(MouseMotionListener listener);
 
   public void repaint();
 

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
@@ -84,6 +85,12 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   @Override
   public void setMouseListener(MouseListener listener) {
     drawPanel.addMouseListener(listener);
+  }
+
+  // sets the mouse motion listener
+  @Override
+  public void setMouseMotionListener(MouseMotionListener listener) {
+    drawPanel.addMouseMotionListener(listener);
   }
 
   // gets the hashMap

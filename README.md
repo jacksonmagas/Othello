@@ -90,6 +90,7 @@ so we added a method to get the state of each cell.
 12. If computer player do not have any valid moves left then computer will automatically pass turn.
 13. Vertical down left and right moves are implemented.
 14. Display of Winner and Tie messages are implemented.
+15. Mouse move over motion is implemented to display the associated cell as highlighted.
 
 <br/><br/>
 New constructor:
