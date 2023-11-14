@@ -6,6 +6,7 @@ package cs3500.reversi.controller;
 public interface ReversiPlayerStrategyController {
 
   void addPlayer(Player player);
+
   void play();
 
 }

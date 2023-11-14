@@ -1,6 +1,6 @@
 package cs3500.reversi.controller;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import cs3500.reversi.view.ReversiFrame;
 
 /**
  * This controller updates the model and view according to user input.
- *
  * In order to ease drawing of the blobs in the view, this controller enforces the following
  * constraint: no part of any blob will be in the -ve X and -ve Y space. That is, the smallest
  * region that contains all the blobs has a lower left corner of (0,0) at the least.
@@ -117,7 +116,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
     /**
      * Constructor for MyMouseListener class.
      */
-    public MyMouseListener(ReversiModel model, ReversiFrame view, int playerIndex, List<Player> players) {
+    public MyMouseListener(ReversiModel model, ReversiFrame view,
+                           int playerIndex, List<Player> players) {
       super();
       this.model = model;
       this.view = view;
@@ -159,7 +159,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             Move move = this.players.get(this.playerIndex).play(this.model);
             if (move != null) {
               if (move.getPosn() != null) {
-                System.out.println("Computer is doing move to "+move.getPosn().row+" "+move.getPosn().col);
+                System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                        move.getPosn().col);
                 this.model.makeMove(move.getPosn().row, move.getPosn().col);
                 this.playerIndex = (this.playerIndex + 1) % this.players.size();
               } else if (move.isPassTurn()) {
@@ -192,7 +193,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               Move move = this.players.get(this.playerIndex).play(this.model);
               if (move != null) {
                 if (move.getPosn() != null) {
-                  System.out.println("Computer is doing move to "+move.getPosn().row+" "+move.getPosn().col);
+                  System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                          move.getPosn().col);
                   this.model.makeMove(move.getPosn().row, move.getPosn().col);
                   this.playerIndex = (this.playerIndex + 1) % this.players.size();
                 } else if (move.isPassTurn()) {

@@ -6,13 +6,13 @@ import cs3500.reversi.strategy.Move;
 import cs3500.reversi.strategy.MoveStrategy;
 
 /**
- * A simple Player implementation that delegates most of its
- * complexity to a {@link MoveStrategy}
- * for choosing where to play next
+ * A simple Player implementation that delegates most of its complexity to a {@link MoveStrategy}
+ * for choosing where to play next.
  */
 public class PlayerImpl implements Player {
 
   private final CellState piece;
+
   private MoveStrategy moveStrategy;
 
   /**

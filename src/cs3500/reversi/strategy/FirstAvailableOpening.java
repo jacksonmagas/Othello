@@ -5,7 +5,7 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 
 /**
- * A Strategy: find the first (topmost-leftmost) available spot
+ * A Strategy: find the first (topmost-leftmost) available spot.
  */
 public class FirstAvailableOpening implements MoveStrategy {
 

@@ -21,8 +21,8 @@ public class ReversiGUI {
   public static void main(String[] args) {
     // defaults to 4
     int noOfCells = 4;
-    int WIDTH = 1200;
-    int HEIGHT = 800;
+    int width = 1200;
+    int height = 800;
 
     if (args.length > 0) {
       try {

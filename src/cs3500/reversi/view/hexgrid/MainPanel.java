@@ -1,33 +1,55 @@
 package cs3500.reversi.view.hexgrid;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Stroke;
 import java.util.HashMap;
-import javax.swing.*;
+
+import javax.swing.JPanel;
+
 import cs3500.reversi.model.ReadonlyReversiModel;
 
+/**
+ * Public class MainPanel creates the panel of the hexgrid view.
+ */
 public class MainPanel extends JPanel {
   private final int WIDTH = 1200;
+
   private final int HEIGHT = 800;
 
   private Font font = new Font("Arial", Font.BOLD, 12);
+
   FontMetrics metrics;
+
   private static int[][] board;
+
   private ReadonlyReversiModel model;
 
-  public static HashMap<Point, Point> pointsToRowCols = new HashMap<Point, Point> ();
+  public static HashMap<Point, Point> pointsToRowCols = new HashMap<Point, Point>();
 
+  /**
+   * Constructor for MainPanel class.
+   */
   public MainPanel(ReadonlyReversiModel model) {
     this.model = model;
     this.board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 
+  // sets the model
   public void setModel(ReadonlyReversiModel model) {
     this.model = model;
     this.board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 
+  // paints the component
   @Override
   public void paintComponent(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
@@ -45,6 +67,7 @@ public class MainPanel extends JPanel {
     drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
   }
 
+  // draws the restart button
   private void drawRestartButton(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
     Graphics2D g2d = (Graphics2D) g;
@@ -57,12 +80,13 @@ public class MainPanel extends JPanel {
     int h = metrics.getHeight();
 
     g.setColor(colorValue);
-    g.fillOval(x2 + w*15, y2 + w, w * 2, w * 2);
+    g.fillOval(x2 + w * 15, y2 + w, w * 2, w * 2);
 
     g.setColor(Color.BLACK);
-    g.drawString(text.toString(), x2 + w*15+18, y2 + w*2);
+    g.drawString(text.toString(), x2 + w * 15 + 18, y2 + w * 2);
   }
 
+  // draws the passTurn button
   private void drawPassTurnButton(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
     Graphics2D g2d = (Graphics2D) g;
@@ -75,11 +99,13 @@ public class MainPanel extends JPanel {
     int h = metrics.getHeight();
 
     g.setColor(colorValue);
-    g.fillOval(x2 + w/2, y2 + w/2, w * 2, w * 2);
+    g.fillOval(x2 + w / 2, y2 + w / 2, w * 2, w * 2);
 
     g.setColor(Color.BLACK);
-    g.drawString(text.toString(), x2 + w/2+25, y2 + w+w/2);
+    g.drawString(text.toString(), x2 + w / 2 + 25, y2 + w + w / 2);
   }
+
+  // draws the status messages
   private void drawStatusMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
     Graphics2D g2d = (Graphics2D) g;
@@ -100,6 +126,8 @@ public class MainPanel extends JPanel {
     g2d.setColor(colorValue);
     g2d.drawString(text.toString(), x2 + w/2, y2 + h*2);
   }
+
+  // draws the error messages
   private void drawErrorMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
     //System.out.println("Error "+model.getLastErrorMessage());
@@ -113,10 +141,11 @@ public class MainPanel extends JPanel {
       int w = metrics.stringWidth(text.toString());
       int h = metrics.getHeight();
       g2d.setColor(colorValue);
-      g2d.drawString(text.toString(), x2 + w+72, y2 + h * 4);
+      g2d.drawString(text.toString(), x2 + w + 72, y2 + h * 4);
     }
   }
 
+  // draws the hexgrid loop
   private void drawHexGridLoop(Graphics g, Point origin, int size, int radius, int padding) {
     double ang30 = Math.toRadians(30);
     double xOff = Math.cos(ang30) * (radius + padding);
@@ -159,15 +188,18 @@ public class MainPanel extends JPanel {
     }
   }
 
+  // gets the map
   public HashMap<Point, Point> getMap() {
     return pointsToRowCols;
   }
+
+  // draw the hexagon
   private void drawHex(Graphics g, int posX, int posY, int x, int y, int r, Color colorValue) {
     Graphics2D g2d = (Graphics2D) g;
 
     Hexagon hex = new Hexagon(x, y, r);
 
-    char bulletSymbol='⚪';
+    char bulletSymbol = '⚪';
     String text = String.format("%s : %s", coord(posX), coord(posY));
     int w = metrics.stringWidth(text);
     int h = metrics.getHeight();
@@ -178,7 +210,7 @@ public class MainPanel extends JPanel {
 
     if (colorValue != null) {
       g.setColor(colorValue);
-      g.drawString(text, x - w/2, y + h/2);
+      g.drawString(text, x - w / 2, y + h / 2);
       g.fillOval(x - w, y - w, w * 2, w * 2);
 
     }
@@ -193,10 +225,12 @@ public class MainPanel extends JPanel {
     */
   }
 
+  // coordinate value of a point
   private String coord(int value) {
     return (value > 0 ? "+" : "") + Integer.toString(value);
   }
 
+  // draws the rectangle
   public void drawRectangle(Graphics2D g, Point origin, int radius,
                          boolean centered, boolean filled, Color colorValue, int lineThickness) {
     // Store before changing.
@@ -211,10 +245,12 @@ public class MainPanel extends JPanel {
     int x2 = centered ? origin.x - radius : origin.x;
     int y2 = centered ? origin.y - radius : origin.y;
 
-    if (filled)
+    if (filled) {
       g.fillRect(x2, y2, diameter, diameter);
-    else
+    }
+    else {
       g.drawRect(x2, y2, diameter, diameter);
+    }
 
     // Set values to previous when done.
     g.setColor(tmpC);
@@ -237,5 +273,4 @@ public class MainPanel extends JPanel {
     f.setVisible(true);
   }
   */
-
 }

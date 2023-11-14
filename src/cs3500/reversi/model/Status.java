@@ -1,7 +1,7 @@
 package cs3500.reversi.model;
 
 /**
- * Game status
+ * Game status.
  */
 public enum Status {
   Playing, Won, Tied

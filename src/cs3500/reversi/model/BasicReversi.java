@@ -714,7 +714,9 @@ public class BasicReversi implements ReversiModel {
 
   // gets the winner of the game
   private String getWinner() {
-    if (!isGameOver()) throw new IllegalStateException("Game isn't over");
+    if (!isGameOver()) {
+      throw new IllegalStateException("Game isn't over");
+    }
     String winnerName = "";
     if (this.winner == CellState.BLACK) {
       winnerName = "one (Back)";
