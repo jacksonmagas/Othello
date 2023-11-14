@@ -405,7 +405,7 @@ public class BasicReversi implements ReversiModel {
               || isValidMoveInThisDirection(this.downLeftRows,
               getLRow(hRow, hIndex),
               getLIndex(hRow, hIndex)));
-    } catch(IndexOutOfBoundsException ex) {
+    } catch (IndexOutOfBoundsException ex) {
       return false;
     }
   }
