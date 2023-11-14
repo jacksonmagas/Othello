@@ -1,6 +1,6 @@
 package cs3500.reversi.view;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
 

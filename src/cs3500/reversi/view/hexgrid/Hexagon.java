@@ -51,7 +51,9 @@ public class Hexagon extends Polygon {
     return radius;
   }
 
-  // sets the radius
+  /**
+   * Sets the radius.
+   */
   public void setRadius(int radius) {
     this.radius = radius;
 
@@ -63,14 +65,18 @@ public class Hexagon extends Polygon {
     return rotation;
   }
 
-  // sets the rotation
+  /**
+   * Sets the rotation of the hexagon.
+   */
   public void setRotation(int rotation) {
     this.rotation = rotation;
 
     updatePoints();
   }
 
-  // sets the center
+  /**
+   * Sets the center in the hexagon.
+   */
   public void setCenter(Point center) {
     this.center = center;
 
@@ -106,8 +112,11 @@ public class Hexagon extends Polygon {
     }
   }
 
-  // draws the hexagon
-  public void draw(Graphics2D g, int x, int y, int lineThickness, Color colorValue, boolean filled) {
+  /**
+   * Draws the hexagon.
+   */
+  public void draw(Graphics2D g, int x, int y, int lineThickness,
+                   Color colorValue, boolean filled) {
     // Store before changing.
     Stroke tmpS = g.getStroke();
     Color tmpC = g.getColor();
@@ -115,10 +124,12 @@ public class Hexagon extends Polygon {
     g.setColor(colorValue);
     g.setStroke(new BasicStroke(lineThickness, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
 
-    if (filled)
+    if (filled) {
       g.fillPolygon(xpoints, ypoints, npoints);
-    else
+    }
+    else {
       g.drawPolygon(xpoints, ypoints, npoints);
+    }
 
     // Set values to previous when done.
     g.setColor(tmpC);

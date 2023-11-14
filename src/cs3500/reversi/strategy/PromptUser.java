@@ -5,12 +5,14 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 
 /**
- * A Strategy: ask the user where to play next
+ * A Strategy: ask the user where to play next.
  */
 public class PromptUser implements MoveStrategy {
   Scanner input;
 
-  PromptUser() { this(new Scanner(System.in)); }
+  PromptUser() {
+    this(new Scanner(System.in));
+  }
 
   /**
    * Constructor for PromptUser class.

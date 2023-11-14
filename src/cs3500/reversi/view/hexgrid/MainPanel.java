@@ -31,7 +31,7 @@ public class MainPanel extends JPanel {
 
   private ReadonlyReversiModel model;
 
-  public static HashMap<Point, Point> pointsToRowCols = new HashMap<Point, Point>();
+  public static HashMap<Point, Point> POINTS_TO_ROW_COLS = new HashMap<Point, Point>();
 
   /**
    * Constructor for MainPanel class.
@@ -152,7 +152,7 @@ public class MainPanel extends JPanel {
     double yOff = Math.sin(ang30) * (radius + padding);
     int half = size / 2;
 
-    pointsToRowCols = new HashMap<Point, Point>();
+    POINTS_TO_ROW_COLS = new HashMap<Point, Point>();
     /*
     System.out.println("size "+size+" half "+half+" board length "+board.length);
     System.out.println("Printing the game board");
@@ -174,7 +174,7 @@ public class MainPanel extends JPanel {
         yLbl = col;
         int x = (int) (origin.x + xOff * (col * 2 + 1 - cols));
         int y = (int) (origin.y + yOff * (row - half) * 3);
-        pointsToRowCols.put(new Point(x, y), new Point(row, col));
+        POINTS_TO_ROW_COLS.put(new Point(x, y), new Point(row, col));
         defaultValue = null;
         if (board[row][col] != 0) {
           if (board[row][col] == (int)'X') {
@@ -190,7 +190,7 @@ public class MainPanel extends JPanel {
 
   // gets the map
   public HashMap<Point, Point> getMap() {
-    return pointsToRowCols;
+    return POINTS_TO_ROW_COLS;
   }
 
   // draw the hexagon

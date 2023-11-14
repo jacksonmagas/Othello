@@ -213,8 +213,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Construct a new BasicReversi which is a copy of the base
-   * @param base The BasicReversi model to copy.
+   * Construct a new BasicReversi which is a copy of the base.
    */
   public BasicReversi(BasicReversi base) {
     this.center = base.center;
@@ -256,7 +255,9 @@ public class BasicReversi implements ReversiModel {
     int rowSize = center + 1;
     for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
       for (int col = 0; col < rowSize; col++) {
-        System.out.println("Horizontal ("+rowNum+","+col+") -> DownLeft ("+getLRow(rowNum, col)+","+getLIndex(rowNum, col)+") -> DownRight ("+getRRow(rowNum, col)+","+getRIndex(rowNum, col)+")");
+        System.out.println("Horizontal (" + rowNum + "," + col + ") -> DownLeft (" +
+                getLRow(rowNum, col) + "," + getLIndex(rowNum, col) + ") -> DownRight (" +
+                getRRow(rowNum, col)+"," + getRIndex(rowNum, col) + ")");
       }
       if (rowNum < (center + 1)) {
         rowSize++;
@@ -342,7 +343,8 @@ public class BasicReversi implements ReversiModel {
     //Is there an adjacent opponent cell in positive direction?
     if (index < rowLen - 1) {
       Cell nextCell = direction.get(row).get(index + 1);
-      validInPlus = (nextCell != null && nextCell.getState() != null) ? nextCell.getState().equals(oppositeColor) : false;
+      validInPlus = (nextCell != null && nextCell.getState() != null) ?
+              nextCell.getState().equals(oppositeColor) : false;
     }
 
     //If is there an ally cell on the other side of opponent cells?
@@ -459,7 +461,7 @@ public class BasicReversi implements ReversiModel {
 
   // sets the game to win or tie
   private void setWinOrTieGame() {
-    if (playerScores[0]+playerScores[1] == TOTALCELLS) {
+    if (playerScores[0] + playerScores[1] == TOTALCELLS) {
       if (playerScores[0] == playerScores[1]) {
         this.gameState = Status.Tied;
       } else {
@@ -563,7 +565,8 @@ public class BasicReversi implements ReversiModel {
    */
   @Override
   public List<List<CellState>> getGameBoard() {
-    return this.horizontalRows.stream().map((ArrayList<Cell> c) -> c.stream().map(Cell::getState).collect(
+    return this.horizontalRows.stream().map((ArrayList<Cell> c) ->
+            c.stream().map(Cell::getState).collect(
         Collectors.toList())).collect(Collectors.toList());
   }
 
@@ -579,8 +582,8 @@ public class BasicReversi implements ReversiModel {
   public int[][] getBoard() {
     int[][] board = new int[BSIZE][BSIZE];
     // initialize with 0s
-    for (int i=0;i<this.horizontalRows.size();i++) {
-      for (int j=0;j<this.horizontalRows.size();j++) {
+    for (int i = 0; i < this.horizontalRows.size(); i++) {
+      for (int j = 0; j < this.horizontalRows.size(); j++) {
         board[i][j]=0;
       }
     }
@@ -606,8 +609,8 @@ public class BasicReversi implements ReversiModel {
       row2++;
     }
 
-    for (int i=0;i<board.length;i++) {
-      for (int j=0;j<board.length;j++) {
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board.length; j++) {
         if (board[i][j] == (int)'_') {
           board[i][j] = (int)' ';
         }

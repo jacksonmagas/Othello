@@ -22,7 +22,7 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
    */
   @Override
   public void addFeatureListener(ViewFeatures features) {
-
+    // adds feature listener
   }
 
   private MainPanel drawPanel;
