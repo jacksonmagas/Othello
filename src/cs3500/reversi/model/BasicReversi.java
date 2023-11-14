@@ -396,14 +396,18 @@ public class BasicReversi implements ReversiModel {
   // - the cell to move in is adjacent to the one of the opponent player's cells
   // - in that direction there is a friendly player cell before empty cell/end of list
   private boolean isValidMove(int hRow, int hIndex) {
-    return getCellAt(hRow, hIndex).isEmpty()
-      && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
-        || isValidMoveInThisDirection(this.downRightRows,
-            getRRow(hRow, hIndex),
-            getRIndex(hRow, hIndex))
-        || isValidMoveInThisDirection(this.downLeftRows,
-            getLRow(hRow, hIndex),
-            getLIndex(hRow, hIndex)));
+    try {
+      return getCellAt(hRow, hIndex).isEmpty()
+              && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
+              || isValidMoveInThisDirection(this.downRightRows,
+              getRRow(hRow, hIndex),
+              getRIndex(hRow, hIndex))
+              || isValidMoveInThisDirection(this.downLeftRows,
+              getLRow(hRow, hIndex),
+              getLIndex(hRow, hIndex)));
+    } catch(IndexOutOfBoundsException ex) {
+      return false;
+    }
   }
 
   // flips the player disc if the move is valid
@@ -504,8 +508,10 @@ public class BasicReversi implements ReversiModel {
   @Override
   public void makeMove(int row, int index) {
     if (row < 0 || index < 0) {
-      lastErrorMessage = "Input parameters either row or column is invalid!";
-      throw new IllegalArgumentException("Input parameters either row or column is invalid!");
+      //lastErrorMessage = "Input parameters either row or column is invalid!";
+      //throw new IllegalArgumentException("Input parameters either row or column is invalid!");
+      lastErrorMessage = "There is no legal move at " + row + ", " + index + ".";
+      throw new IllegalStateException("There is no legal move at " + row + ", " + index + ".");
     }
     if (isGameOver()) {
       lastErrorMessage = "Game is over!";

@@ -35,8 +35,8 @@ public class Hexagon extends Polygon {
     this.center = center;
     this.radius = radius;
 
-    updatePoints();
     points = new Point[SIDES];
+    updatePoints();
   }
 
   /**

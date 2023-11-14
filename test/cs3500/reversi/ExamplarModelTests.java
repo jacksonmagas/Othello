@@ -221,6 +221,63 @@ public class ExamplarModelTests {
   }
 
   @Test
+  public void testReversiGameMakeVertInvalidMoveExpectError() {
+    // confirm that a player cannot move to a location that won't flip any tiles
+    ReversiModel model = new BasicReversi(4);
+    Assert.assertEquals("Game is started",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X O _ _  \n"
+                    + "  _ _ _ _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 3\n"
+                    + "Player two Score: 3\n"
+                    + "Player one turn (Black)!\n",
+            model.toString());
+    Assert.assertThrows("There is no legal move at 1, 1", IllegalStateException.class, () -> model.makeMove(1, 1));
+  }
+
+  @Test
+  public void testReversiGameMakeVertOutOfBoundsMoveExpectError() {
+    // confirm that a player cannot move to a location that's out of bounds negative coordinates
+    ReversiModel model = new BasicReversi(4);
+    Assert.assertEquals("Game is started",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X O _ _  \n"
+                    + "  _ _ _ _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 3\n"
+                    + "Player two Score: 3\n"
+                    + "Player one turn (Black)!\n",
+            model.toString());
+    Assert.assertThrows("There is no legal move at -1, -1", IllegalStateException.class, () -> model.makeMove(-1, -1));
+  }
+
+  @Test
+  public void testReversiGameMakeVertOutOfBoundsMoveExpectError2() {
+    // confirm that a player cannot move to a location that's out of bounds beyond coordinates
+    ReversiModel model = new BasicReversi(4);
+    Assert.assertEquals("Game is started",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X O _ _  \n"
+                    + "  _ _ _ _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 3\n"
+                    + "Player two Score: 3\n"
+                    + "Player one turn (Black)!\n",
+            model.toString());
+    Assert.assertThrows("There is no legal move at 15, 15", IllegalStateException.class, () -> model.makeMove(15, 15));
+  }
+
+  @Test
   public void testReversiGameWithWin() {
     ReversiModel model = new BasicReversi(3);
     
