@@ -7,7 +7,7 @@ import cs3500.reversi.model.ReversiModel;
 /**
  * A Strategy: find the first (topmost-leftmost) available spot
  */
-public class FirstAvailableOpening implements MoveStrategy {
+public class FirstAvailableOpening implements InfallibleMoveStrategy {
 
   /**
    * Chooses a move for computer player.

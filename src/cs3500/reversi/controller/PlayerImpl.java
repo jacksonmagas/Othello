@@ -3,21 +3,21 @@ package cs3500.reversi.controller;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
-import cs3500.reversi.strategy.MoveStrategy;
+import cs3500.reversi.strategy.InfallibleMoveStrategy;
 
 /**
  * A simple Player implementation that delegates most of its
- * complexity to a {@link MoveStrategy}
+ * complexity to a {@link InfallibleMoveStrategy}
  * for choosing where to play next
  */
 public class PlayerImpl implements Player {
   private final CellState piece;
-  private MoveStrategy moveStrategy;
+  private InfallibleMoveStrategy moveStrategy;
 
   /**
    * Constructor for PlayerImpl class.
    */
-  public PlayerImpl(CellState piece, MoveStrategy strategy) {
+  public PlayerImpl(CellState piece, InfallibleMoveStrategy strategy) {
     this.piece = piece;
     this.moveStrategy = strategy;
   }

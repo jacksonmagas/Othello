@@ -55,4 +55,9 @@ public interface ReadonlyReversiModel {
 
   CellState getPieceAt(int r, int c);
 
+  /**
+   * Create a read/write copy of the read only model.
+   * @return A copy of the model
+   */
+  ReversiModel copy();
 }

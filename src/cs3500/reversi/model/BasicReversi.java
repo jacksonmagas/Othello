@@ -227,10 +227,11 @@ public class BasicReversi implements ReversiModel {
     this.horizontalRows = copyCells(base.horizontalRows);
     this.downLeftRows = copyCells(base.downLeftRows);
     this.downRightRows = copyCells(base.downRightRows);
-    //this.isGameOver = base.isGameOver;
+    this.isGameOver = base.isGameOver;
     this.gameState = base.gameState;
     this.winner = base.winner;
     this.currentPlayer = base.currentPlayer;
+    this.lastErrorMessage = base.lastErrorMessage;
   }
 
   //returns a new list containing copies of the cells
@@ -773,5 +774,10 @@ public class BasicReversi implements ReversiModel {
     }
     //printHorizontalRows();
     return output.toString();
+  }
+
+  @Override
+  public ReversiModel copy() {
+    return new BasicReversi(this);
   }
 }
