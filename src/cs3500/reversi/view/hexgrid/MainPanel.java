@@ -1,5 +1,6 @@
 package cs3500.reversi.view.hexgrid;
 
+import cs3500.reversi.model.CellState;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -95,10 +96,10 @@ public class MainPanel extends JPanel {
 
     StringBuffer text = new StringBuffer();
     text.append("Player one Score: ");
-    text.append(model.getPlayerScore(0));
+    text.append(model.getPlayerScore(CellState.BLACK));
     text.append(", ");
     text.append("Player two Score: ");
-    text.append(model.getPlayerScore(1));
+    text.append(model.getPlayerScore(CellState.WHITE));
     text.append(", ");
     text.append(model.getNextStepInstructions());
     text.append(", ");

@@ -1,18 +1,23 @@
 package cs3500.reversi.model;
 
+import cs3500.reversi.strategy.Move;
 import java.util.List;
 
 /**
  * Represents the read-only model interface for playing a game of Reversi.
  */
 public interface ReadonlyReversiModel {
-
   /**
-   * Return the score of the given player either 0 or 1, which is the sum
-   * of the values of the disc cards.
+   * Return the score of the player with the given cell state
    * @return the score
    */
-  int getPlayerScore(int playerNum);
+  int getPlayerScore(CellState player);
+
+  /**
+   * Get the cell state of the current player.
+   * @return the cell state of the player to move
+   */
+  CellState getCurrentPlayer();
 
   /**
    * Checks if the game is over.
@@ -60,4 +65,16 @@ public interface ReadonlyReversiModel {
    * @return A copy of the model
    */
   ReversiModel copy();
+
+  /**
+   * Create a new reversi model of the same type in the new game configuration.
+   */
+  ReversiModel newGame();
+
+  /**
+   * Get a list of the legal moves for this model.
+   * The list is ordered so that the topmost leftmost moves come first.
+   * @return the legal moves for this model.
+   */
+  List<Move> getLegalMoves();
 }

@@ -212,7 +212,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           // check if user click Restart button
           this.playerIndex = 0;
           try {
-            this.model.restart();
+            this.model = this.model.newGame();
             System.out.println(model.toString());
             view.setModel(this.model);
             view.repaint();

@@ -1,5 +1,6 @@
 package cs3500.reversi;
 
+import cs3500.reversi.model.CellState;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -352,7 +353,7 @@ public class ExamplarModelTests {
                 + "Player two Score: 3\n"
                 + "Player one turn (Black)!\n",
             model.toString());
-    Assert.assertEquals("Your score", 3, model.getPlayerScore(0));
-    Assert.assertEquals("Computer score", 3, model.getPlayerScore(1));
+    Assert.assertEquals("Your score", 3, model.getPlayerScore(CellState.BLACK));
+    Assert.assertEquals("Computer score", 3, model.getPlayerScore(CellState.WHITE));
   }
 }

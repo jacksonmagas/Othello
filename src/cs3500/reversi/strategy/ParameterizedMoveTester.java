@@ -44,13 +44,4 @@ public class ParameterizedMoveTester implements MoveTester {
     makeMove(testModel, move);
     return evalFunc.apply(testModel);
   }
-
-  @Override
-  public int testMoveSequence(Move... moves) throws IllegalArgumentException {
-    ReversiModel testModel = baseModel.copy();
-    for (Move m: moves) {
-      makeMove(testModel, m);
-    }
-    return evalFunc.apply(testModel);
-  }
 }
