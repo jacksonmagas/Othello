@@ -1,5 +1,7 @@
 package cs3500.reversi.model;
 
+import cs3500.reversi.strategy.Move;
+
 /**
  * Represents the primary model interface for playing a game of Reversi.
  * Moves in this model are made using the coordinate system (row, index) where the row is the
@@ -17,6 +19,14 @@ public interface ReversiModel extends ReadonlyReversiModel {
    * @throws IllegalStateException if the move is not allowable or if game is over!
    */
   void makeMove(int row, int column);
+
+  /**
+   * Allow current player to make the given move, which is either a pass or a valid move
+   * of the game.
+   * @param move the move to make
+   * @throws IllegalStateException if the move is not allowable or if game is over!
+   */
+  void makeMove(Move move);
 
   /**
    * Allow current player to pass the move.

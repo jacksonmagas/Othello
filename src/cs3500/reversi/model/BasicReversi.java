@@ -2,10 +2,12 @@ package cs3500.reversi.model;
 
 import cs3500.reversi.model.Cell.Location;
 
+import cs3500.reversi.strategy.Move;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 /**
@@ -309,6 +311,11 @@ public class BasicReversi implements ReversiModel {
             getLIndex(hRow, hIndex)));
   }
 
+  //Overload that works with moves
+  private boolean isValidMove(Move m) {
+    return isValidMove(m.getPosn().row, m.getPosn().col);
+  }
+
   // flips the player disc if the move is valid
   private void flipTilesIfValid(ArrayList<ArrayList<Cell>> direction,
                                              int row, int index) {
@@ -412,6 +419,15 @@ public class BasicReversi implements ReversiModel {
     } else {
       lastErrorMessage = "There is no legal move at " + row + ", " + index + ".";
       throw new IllegalStateException("There is no legal move at " + row + ", " + index + ".");
+    }
+  }
+
+  @Override
+  public void makeMove(Move move) {
+    if (move.isPassTurn()) {
+      passTurn();
+    } else {
+      makeMove(move.getPosn().row, move.getPosn().col);
     }
   }
 
@@ -670,5 +686,28 @@ public class BasicReversi implements ReversiModel {
   @Override
   public ReversiModel newGame() {
     return new BasicReversi(this.sideLength());
+  }
+
+  //take a cell and get the move that would go in that cell for that cell
+  private Move cellToMove(Cell c) {
+    return new Move(c.getLocation().getRow(), c.getLocation().getColumn());
+  }
+
+  @Override
+  public List<Move> getLegalMoves() {
+    BinaryOperator<ArrayList<Cell>> collapseNestedList;
+    collapseNestedList = (ArrayList<Cell> row1, ArrayList<Cell> row2) -> {
+      row1.addAll(row2);
+      return row1;
+    };
+
+    List<Move> result = this.horizontalRows.stream()
+        .reduce(new ArrayList<>(), collapseNestedList).stream()
+        .map(this::cellToMove)
+        .filter(this::isValidMove)
+        .collect(Collectors.toList());
+    result.add(new Move(true));
+
+    return result;
   }
 }
