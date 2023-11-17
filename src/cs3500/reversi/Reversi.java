@@ -1,7 +1,6 @@
 package cs3500.reversi;
 
 import java.io.InputStreamReader;
-
 import cs3500.reversi.controller.ReversiController;
 import cs3500.reversi.controller.ReversiTextualController;
 import cs3500.reversi.model.BasicReversi;

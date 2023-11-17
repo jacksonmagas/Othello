@@ -77,4 +77,7 @@ public interface ReadonlyReversiModel {
    * @return the legal moves for this model.
    */
   List<Move> getLegalMoves();
+
+  //TODO
+  Cell.Location getHighlightedCell();
 }

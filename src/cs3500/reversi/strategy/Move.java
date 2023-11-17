@@ -2,7 +2,7 @@ package cs3500.reversi.strategy;
 
 /**
  * A value object representing move details:
- * coordinates in the board or pass turn
+ * coordinates in the board or pass turn.
  */
 public class Move {
   boolean passTurn;
@@ -24,20 +24,32 @@ public class Move {
     this.posn = new Posn(row, col);
   }
 
+  // checks if the turn is passed
   public boolean isPassTurn() {
     return passTurn;
   }
 
+  // gets the positon
   public Posn getPosn() {
     return posn;
   }
 
+  /**
+   * Public class Posn is the position of a move.
+   */
   public static class Posn {
-    public final int row, col;
+    public final int row;
+
+    public final int col;
+
+    /**
+     * Constructor for Posn class.
+     */
     public Posn(int row, int col) {
+
       this.row = row;
+
       this.col = col;
     }
   }
-
 }

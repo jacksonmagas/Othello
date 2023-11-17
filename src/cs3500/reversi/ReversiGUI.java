@@ -1,10 +1,8 @@
 package cs3500.reversi;
 
 import java.util.Scanner;
-
 import cs3500.reversi.controller.PlayerImpl;
 import cs3500.reversi.controller.ReverseHexGridController;
-import cs3500.reversi.controller.ReversiController;
 import cs3500.reversi.controller.ReversiPlayerStrategyController;
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
@@ -13,7 +11,7 @@ import cs3500.reversi.strategy.FirstAvailableOpening;
 import cs3500.reversi.strategy.PromptUser;
 
 /**
- * Represent a Reversi game class interactive GUI.
+ * Represent a Reversi game class.
  */
 public class ReversiGUI {
 
@@ -23,8 +21,8 @@ public class ReversiGUI {
   public static void main(String[] args) {
     // defaults to 4
     int noOfCells = 4;
-    int WIDTH = 1200;
-    int HEIGHT = 800;
+    int width = 1200;
+    int height = 800;
 
     if (args.length > 0) {
       try {
@@ -37,9 +35,8 @@ public class ReversiGUI {
 
     ReversiModel reversi = new BasicReversi(noOfCells);
     ReversiPlayerStrategyController controller = new ReverseHexGridController(reversi);
-    controller.addPlayer(new PlayerImpl(CellState.BLACK, new PromptUser(new Scanner(System.in))));
+    controller.addPlayer(new PlayerImpl(CellState.BLACK, new PromptUser()));
     controller.addPlayer(new PlayerImpl(CellState.WHITE, new FirstAvailableOpening()));
     controller.play();
   }
-
 }

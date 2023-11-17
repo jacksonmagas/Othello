@@ -34,4 +34,7 @@ public interface ReversiModel extends ReadonlyReversiModel {
    * @throws IllegalStateException if game is over!
    */
   void passTurn();
+
+//TODO fix this
+  void setHighlightedCell(int row, int col);
 }

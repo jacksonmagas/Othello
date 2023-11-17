@@ -1,7 +1,6 @@
 package cs3500.reversi.model;
 
 import cs3500.reversi.model.Cell.Location;
-
 import cs3500.reversi.strategy.Move;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +27,11 @@ public class BasicReversi implements ReversiModel {
   private final ArrayList<ArrayList<Cell>> downLeftRows;
 
   private final int center;
+
   private final int totalNumRows;
+  private int currentRow;
+  private int currentCol;
+
   private CellState currentPlayer;
 
   private final Map<CellState, Integer> playerScores;
@@ -129,8 +132,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Construct a new BasicReversi which is a copy of the base
-   * @param base The BasicReversi model to copy.
+   * Construct a new BasicReversi which is a copy of the base.
    */
   public BasicReversi(BasicReversi base) {
     this.center = base.center;
@@ -144,6 +146,8 @@ public class BasicReversi implements ReversiModel {
     this.winner = base.winner;
     this.currentPlayer = base.currentPlayer;
     this.lastErrorMessage = base.lastErrorMessage;
+    this.currentRow = base.currentRow;
+    this.currentCol = base.currentCol;
   }
 
   private void incrementScore(CellState player) {
@@ -301,14 +305,18 @@ public class BasicReversi implements ReversiModel {
   // - the cell to move in is adjacent to the one of the opponent player's cells
   // - in that direction there is a friendly player cell before empty cell/end of list
   private boolean isValidMove(int hRow, int hIndex) {
-    return getCellAt(hRow, hIndex).isEmpty()
-      && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
-        || isValidMoveInThisDirection(this.downRightRows,
-            getRRow(hRow, hIndex),
-            getRIndex(hRow, hIndex))
-        || isValidMoveInThisDirection(this.downLeftRows,
-            getLRow(hRow, hIndex),
-            getLIndex(hRow, hIndex)));
+    try {
+      return getCellAt(hRow, hIndex).isEmpty()
+              && (isValidMoveInThisDirection(this.horizontalRows, hRow, hIndex)
+              || isValidMoveInThisDirection(this.downRightRows,
+              getRRow(hRow, hIndex),
+              getRIndex(hRow, hIndex))
+              || isValidMoveInThisDirection(this.downLeftRows,
+              getLRow(hRow, hIndex),
+              getLIndex(hRow, hIndex)));
+    } catch (IndexOutOfBoundsException ex) {
+      return false;
+    }
   }
 
   //Overload that works with moves
@@ -364,7 +372,7 @@ public class BasicReversi implements ReversiModel {
     incrementScore(this.currentPlayer);
   }
 
-  // ends the game as either a win or a tie
+  // sets the game to win or tie
   private void setWinOrTieGame() {
     if (playerScores.get(CellState.BLACK).equals(playerScores.get(CellState.WHITE))) {
       this.gameState = Status.Tied;
@@ -383,7 +391,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Get the cellState piece location at a row and col.
+   * Gets the piece at a row and col location.
    */
   @Override
   public CellState getPieceAt(int row, int col) {
@@ -398,14 +406,14 @@ public class BasicReversi implements ReversiModel {
     return horizontalRows.get(row).get(col).getState();
   }
 
-  /**
-   * Makes the move a player prompted.
-   */
+  // makes the move a player prompted
   @Override
   public void makeMove(int row, int index) {
     if (row < 0 || index < 0) {
-      lastErrorMessage = "Input parameters either row or column is invalid!";
-      throw new IllegalArgumentException("Input parameters either row or column is invalid!");
+      //lastErrorMessage = "Input parameters either row or column is invalid!";
+      //throw new IllegalArgumentException("Input parameters either row or column is invalid!");
+      lastErrorMessage = "There is no legal move at " + row + ", " + index + ".";
+      throw new IllegalStateException("There is no legal move at " + row + ", " + index + ".");
     }
     if (isGameOver()) {
       lastErrorMessage = "Game is over!";
@@ -449,9 +457,7 @@ public class BasicReversi implements ReversiModel {
     lastErrorMessage = "";
   }
 
-  /**
-   * Gets the score of the game for the given player.
-   */
+  // gets the score of the game for the given player
   @Override
   public int getPlayerScore(CellState player) {
     return this.playerScores.get(player);
@@ -475,12 +481,14 @@ public class BasicReversi implements ReversiModel {
    */
   @Override
   public List<List<CellState>> getGameBoard() {
-    return this.horizontalRows.stream().map((ArrayList<Cell> c) -> c.stream().map(Cell::getState).collect(
+    return this.horizontalRows.stream().map((ArrayList<Cell> c) ->
+            c.stream().map(Cell::getState).collect(
         Collectors.toList())).collect(Collectors.toList());
   }
 
+
   /**
-   * Creates and gets the board based on inputted size.
+   * Gets the board.
    */
   @Override
   public int[][] getBoard() {
@@ -489,9 +497,9 @@ public class BasicReversi implements ReversiModel {
     int BSIZE = 14;
     int[][] board = new int[BSIZE][BSIZE];
     // initialize with 0s
-    for (int i=0;i<this.horizontalRows.size();i++) {
-      for (int j=0;j<this.horizontalRows.size();j++) {
-        board[i][j]=0;
+    for (int i = 0; i < this.horizontalRows.size(); i++) {
+      for (int j = 0; j < this.horizontalRows.size(); j++) {
+        board[i][j] = 0;
       }
     }
 
@@ -515,8 +523,8 @@ public class BasicReversi implements ReversiModel {
       row2++;
     }
 
-    for (int i=0;i<board.length;i++) {
-      for (int j=0;j<board.length;j++) {
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board.length; j++) {
         if (board[i][j] == (int)'_') {
           board[i][j] = ' ';
         }
@@ -526,7 +534,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Gets the tile location cellState at hRow and hIndex.
+   * Gets the tile at a hRow and hIndex location.
    */
   @Override
   public CellState getTileAt(int hRow, int hIndex) {
@@ -534,7 +542,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Gets the sideLength of the board.
+   * Gets the side length of a game board.
    */
   @Override
   public int sideLength() {
@@ -543,7 +551,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Checks if there are any legal moves for a player in a turn.
+   * Checks to see if there are any legal moves.
    */
   @Override
   public boolean anyLegalMoves() {
@@ -564,7 +572,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Returns the first available move for a given location.
+   * Gets the first available move.
    */
   @Override
   public Cell.Location getFirstAvailableMove() {
@@ -585,7 +593,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Returns the next step directions to be displaued on the screen.
+   * Gets the directions for the next step of the game at any given time.
    */
   @Override
   public String getNextStepInstructions() {
@@ -616,14 +624,16 @@ public class BasicReversi implements ReversiModel {
     return lastErrorMessage != null ? lastErrorMessage : "" ;
   }
 
-  // gets the game status
+  // returns the gameStatus
   private Status gameStatus() {
     return this.gameState;
   }
 
   // gets the winner of the game
   private String getWinner() {
-    if (!isGameOver()) throw new IllegalStateException("Game isn't over");
+    if (!isGameOver()) {
+      throw new IllegalStateException("Game isn't over");
+    }
     String winnerName;
     if (this.winner == CellState.BLACK) {
       winnerName = "one (Back)";
@@ -633,9 +643,16 @@ public class BasicReversi implements ReversiModel {
     return winnerName;
   }
 
-  /**
-   *  Returns the output in a string format.
-   */
+  public void setHighlightedCell(int row, int col) {
+    this.currentRow = row;
+    this.currentCol = col;
+  }
+
+  public Cell.Location getHighlightedCell() {
+    return new Cell.Location(this.currentRow, this.currentCol);
+  }
+
+  // returns the output in a string format
   @Override
   public String toString() {
     StringBuilder output = new StringBuilder();

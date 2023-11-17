@@ -2,12 +2,11 @@ package cs3500.reversi.strategy;
 
 import java.io.IOException;
 import java.util.Scanner;
-
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 
 /**
- * A Strategy: ask the user where to play next
+ * A Strategy: ask the user where to play next.
  */
 public class PromptUser implements InfallibleMoveStrategy {
 
@@ -44,6 +43,7 @@ public class PromptUser implements InfallibleMoveStrategy {
         break;
       }
       System.out.println("Invalid move, move must be one of: make-move row col or pass-turn");
+
     }
     return move;
   }

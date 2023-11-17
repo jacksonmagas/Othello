@@ -11,11 +11,13 @@ import cs3500.reversi.strategy.InfallibleMoveStrategy;
  * for choosing where to play next
  */
 public class PlayerImpl implements Player {
+
   private final CellState piece;
-  private InfallibleMoveStrategy moveStrategy;
+  private final InfallibleMoveStrategy moveStrategy;
+
 
   /**
-   * Constructor for PlayerImpl class.
+   * Constructor for PlayerImp class.
    */
   public PlayerImpl(CellState piece, InfallibleMoveStrategy strategy) {
     this.piece = piece;
@@ -23,7 +25,7 @@ public class PlayerImpl implements Player {
   }
 
   /**
-   * Moves a tile for computer player.
+   * Plays the game.
    */
   @Override
   public Move play(ReversiModel model) {
@@ -31,7 +33,7 @@ public class PlayerImpl implements Player {
   }
 
   /**
-   * Gets the piece and returns it.
+   * Gets the piece cellState.
    */
   @Override
   public CellState getPiece() {

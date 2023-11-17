@@ -1,15 +1,12 @@
 package cs3500.reversi;
 
 import org.junit.Test;
-
 import java.io.Reader;
 import java.io.StringReader;
-
 import cs3500.reversi.controller.ReversiController;
 import cs3500.reversi.controller.ReversiTextualController;
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.ReversiModel;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

@@ -5,12 +5,12 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 
 /**
- * A Strategy: find the first (topmost-leftmost) available spot
+ * A Strategy: find the first (topmost-leftmost) available spot.
  */
 public class FirstAvailableOpening implements InfallibleMoveStrategy {
 
   /**
-   * Chooses a move for computer player.
+   * Chooses the move for computer player.
    */
   @Override
   public Move chooseMove(ReversiModel model, CellState player) {

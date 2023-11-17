@@ -1,36 +1,45 @@
 package cs3500.reversi.view;
 
-import com.sun.tools.javac.Main;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Point;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
-import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.ReadonlyReversiModel;
-import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.view.hexgrid.Hexagon;
 import cs3500.reversi.view.hexgrid.MainPanel;
 
+/**
+ * BasicReversiView creates a frame for a view.
+ */
 public class BasicReversiView extends JFrame implements ReversiFrame {
+
+  /**
+   * Adds a listener.
+   */
   @Override
   public void addFeatureListener(ViewFeatures features) {
-
+    // adds feature listener
   }
 
   private MainPanel drawPanel;
 
   private Font font = new Font("Arial", Font.BOLD, 22);
+
   FontMetrics metrics;
 
+  /**
+   * Constructor for BasicReversiView.
+   */
   public BasicReversiView(int width, int height, ReadonlyReversiModel model) {
     setTitle("Reversi Hex Grid Game");
 
-    setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    setSize(new Dimension(WIDTH, HEIGHT));
+    //setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
     drawPanel = new MainPanel(model);
     setContentPane(drawPanel);
@@ -48,7 +57,6 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
    * This will cause its parent, the scrollbar, to update itself. Read more at {@see <a
    * href="https://docs.oracle.com/javase/7/docs/api/javax/swing/JComponent.html#revalidate()"
    * revalidate documentation</a>}
-   *
    * Finally, call repaint to redraw the panel
    */
   @Override
@@ -58,10 +66,13 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.repaint();
   }
 
+  // sets the model
   @Override
   public void setModel(ReadonlyReversiModel model) {
     drawPanel.setModel(model);
   }
+
+  // repaints the board
   @Override
   public void repaint() {
     drawPanel.removeAll();
@@ -70,24 +81,21 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.repaint();
   }
 
+  // sets the mouse listener
   @Override
   public void setMouseListener(MouseListener listener) {
     drawPanel.addMouseListener(listener);
   }
 
+  // sets the mouse motion listener
+  @Override
+  public void setMouseMotionListener(MouseMotionListener listener) {
+    drawPanel.addMouseMotionListener(listener);
+  }
+
+  // gets the hashMap
   @Override
   public HashMap<Point, Point> getMap() {
     return drawPanel.getMap();
   }
-
-  public static void main(String[] args) {
-    int noOfCells = 4;
-    int WIDTH = 1200;
-    int HEIGHT = 800;
-
-    ReversiModel reversi = new BasicReversi(noOfCells);
-    BasicReversiView view = new BasicReversiView(WIDTH, HEIGHT, reversi);
-
-  }
-
 }

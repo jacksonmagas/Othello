@@ -1,6 +1,6 @@
 package cs3500.reversi.controller;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -22,19 +22,21 @@ import cs3500.reversi.view.ReversiFrame;
  */
 public class ReverseHexGridController implements ReversiPlayerStrategyController {
 
-  private ReversiModel model;
+  private final ReversiModel model;
   private ReversiFrame view;
 
   private int playerIndex;
   private final List<Player> players;
-  private final int WIDTH = 1200;
-  private final int HEIGHT = 800;
+
+  /**
+   * Constructor for ReversiHexGridController.
+   */
   public ReverseHexGridController(ReversiModel model) {
     if (model == null) {
       throw new IllegalArgumentException("Model is null");
     }
     this.model = model;
-    this.players = new ArrayList<Player>();
+    this.players = new ArrayList<>();
   }
 
   /**
@@ -46,16 +48,15 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
   }
 
   /**
-   * Plays the reversi game.
+   * Plays the game.
    */
   @Override
   public void play() {
-    if (model == null) {
-      throw new IllegalArgumentException("Model is null");
-    }
-    if (players == null || players.size() != 2) {
+    if (players.size() != 2) {
       throw new IllegalArgumentException("Players are not added!");
     }
+    int WIDTH = 1200;
+    int HEIGHT = 800;
     this.view = new BasicReversiView(WIDTH, HEIGHT, model);
     setMouseListener();
     this.playerIndex = 0;
@@ -67,7 +68,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             try {
               this.model.makeMove(move.getPosn().row, move.getPosn().col);
               this.playerIndex = (this.playerIndex + 1) % this.players.size();
-              System.out.println(model.toString());
+              System.out.println(model);
               view.setModel(this.model);
               view.repaint();
               this.playerIndex = (this.playerIndex + 1) % this.players.size();
@@ -80,7 +81,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             try {
               this.model.passTurn();
               this.playerIndex = (this.playerIndex + 1) % this.players.size();
-              System.out.println(model.toString());
+              System.out.println(model);
               view.setModel(this.model);
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
@@ -99,12 +100,11 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
   private void setMouseListener() {
 
     view.setMouseListener(new MyMouseListener(model, view, playerIndex, players));
+    view.setMouseMotionListener(new MyMouseListener(model, view, playerIndex, players));
   }
 
-  /**
-   * Listen to mouse actions on game screen.
-   */
-  class MyMouseListener extends MouseAdapter {
+  // MyMouseListener class listens for mouse movements.
+  static class MyMouseListener extends MouseAdapter {
 
     ReversiModel model;
     ReversiFrame view;
@@ -114,7 +114,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
     /**
      * Constructor for MyMouseListener class.
      */
-    public MyMouseListener(ReversiModel model, ReversiFrame view, int playerIndex, List<Player> players) {
+    public MyMouseListener(ReversiModel model, ReversiFrame view,
+                           int playerIndex, List<Player> players) {
       super();
       this.model = model;
       this.view = view;
@@ -122,8 +123,39 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       this.players = players;
     }
 
+    @Override
+    public void mouseMoved(MouseEvent e) {
+      int x = e.getX();
+      int y = e.getY();
+
+      // Determine row, col using x, y
+      HashMap<Point, Point> keyMap = view.getMap();
+      //Point rowCol = (Point) keyMap.get(new Point(x, y));
+      // 0,0=467,170 0,1=555,170 0,2=644,170
+      // 1,0=423,247 1,1=511,247 1,2=600,247
+      // horizontal cell distance 44
+      // vertical cell distance 33
+      Point rowCol = findRowCols(keyMap, new Point(x, y));
+      this.model.getBoard();
+      //board[x][y] = (int)'X';
+      //System.out.println("Controller mouse click event - x "+x+" y "+y);
+      //System.out.println("Component "+e.getComponent().toString());
+      //System.out.println("Source "+e.getSource());
+      int row = -1;
+      int col = -1;
+      if (rowCol != null) {
+        //System.out.println("row " + rowCol.x + " col " + rowCol.y);
+        row = rowCol.x;
+        col = rowCol.y;
+      }
+      // highlight cell
+      this.model.setHighlightedCell(row, col);
+      view.setModel(this.model);
+      view.repaint();
+    }
+
     /**
-     * Once a mouse is clicked it responds appropriately in relation to location.
+     * MouseClicked checks for if a mouse was clicked on the game board.
      */
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -138,13 +170,13 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       // horizontal cell distance 44
       // vertical cell distance 33
       Point rowCol = findRowCols(keyMap, new Point(x, y));
-      int[][] board = this.model.getBoard();
+      this.model.getBoard();
       //board[x][y] = (int)'X';
-      System.out.println("Controller mouse click event - x "+x+" y "+y);
+      //System.out.println("Controller mouse click event - x "+x+" y "+y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
-        System.out.println("row " + rowCol.x + " col " + rowCol.y);
+        //System.out.println("row " + rowCol.x + " col " + rowCol.y);
         int row = rowCol.x;
         int col = rowCol.y;
         try {
@@ -156,7 +188,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             Move move = this.players.get(this.playerIndex).play(this.model);
             if (move != null) {
               if (move.getPosn() != null) {
-                System.out.println("Computer is doing move to "+move.getPosn().row+" "+move.getPosn().col);
+                System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                        move.getPosn().col);
                 this.model.makeMove(move.getPosn().row, move.getPosn().col);
                 this.playerIndex = (this.playerIndex + 1) % this.players.size();
               } else if (move.isPassTurn()) {
@@ -189,7 +222,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               Move move = this.players.get(this.playerIndex).play(this.model);
               if (move != null) {
                 if (move.getPosn() != null) {
-                  System.out.println("Computer is doing move to "+move.getPosn().row+" "+move.getPosn().col);
+                  System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                          move.getPosn().col);
                   this.model.makeMove(move.getPosn().row, move.getPosn().col);
                   this.playerIndex = (this.playerIndex + 1) % this.players.size();
                 } else if (move.isPassTurn()) {
@@ -225,7 +259,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       }
     }
 
-    // finds the row and columns of a point
+    // finds the rows and columns of a point
     private Point findRowCols(HashMap<Point, Point> keyMap, Point mouseClickedPoint) {
       Point rowColPoint = null;
       if (keyMap != null && mouseClickedPoint != null) {
@@ -241,12 +275,12 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       return rowColPoint;
     }
 
-    // checks to see if the rows match
+    // checks if the row matches
     boolean isRowMatch(int x1, int x2) {
       return (Math.abs(x1 - x2) <= 44);
     }
 
-    // checks to see if the columns match
+    // checks if the columns matches
     boolean isColMatch(int y1, int y2) {
       return (Math.abs(y1 - y2) <= 33);
     }
