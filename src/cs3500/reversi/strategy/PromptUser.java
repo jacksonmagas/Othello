@@ -12,7 +12,7 @@ public class PromptUser implements InfallibleMoveStrategy {
 
   Scanner input;
 
-  PromptUser() {
+  public PromptUser() {
     this(new Scanner(System.in));
   }
 
