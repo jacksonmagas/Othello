@@ -1,11 +1,6 @@
 package cs3500.reversi.view.hexgrid;
 
-<<<<<<< HEAD
 import cs3500.reversi.model.CellState;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-=======
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,7 +10,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Stroke;
->>>>>>> refs/remotes/origin/main
 import java.util.HashMap;
 
 import javax.swing.JPanel;

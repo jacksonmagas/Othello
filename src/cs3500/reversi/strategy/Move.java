@@ -6,13 +6,17 @@ package cs3500.reversi.strategy;
  */
 public class Move {
   boolean passTurn;
+  boolean restartGame;
+  boolean quitGame;
   Posn posn;
 
   /**
    * Constructor for Move class.
    */
-  public Move(boolean passTurn) {
+  public Move(boolean passTurn, boolean restartGame, boolean quitGame) {
     this.passTurn = passTurn;
+    this.restartGame = restartGame;
+    this.quitGame = quitGame;
     this.posn = null;
   }
 
@@ -24,9 +28,19 @@ public class Move {
     this.posn = new Posn(row, col);
   }
 
-  // checks if the turn is passed
+  // checks if the turn is being passed
   public boolean isPassTurn() {
     return passTurn;
+  }
+
+  // checks if game is being restarted
+  public boolean isRestartGame() {
+    return restartGame;
+  }
+
+  // checks if game is being quit
+  public boolean isQuitGame() {
+    return quitGame;
   }
 
   // gets the positon

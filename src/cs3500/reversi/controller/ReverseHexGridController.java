@@ -69,9 +69,26 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               this.model.makeMove(move.getPosn().row, move.getPosn().col);
               this.playerIndex = (this.playerIndex + 1) % this.players.size();
               System.out.println(model);
+              // check if computer move is enabled
+              if (!this.model.isGameOver()) {
+                move = this.players.get(this.playerIndex).play(this.model);
+                if (move != null) {
+                  if (move.getPosn() != null) {
+                    System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                            move.getPosn().col);
+                    this.model.makeMove(move.getPosn().row, move.getPosn().col);
+                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                  } else if (move.isPassTurn()) {
+                    System.out.println("Computer is passing move");
+                    this.model.passTurn();
+                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                  }
+                  System.out.println(model);
+                }
+              }
+              // refresh game after both moves
               view.setModel(this.model);
               view.repaint();
-              this.playerIndex = (this.playerIndex + 1) % this.players.size();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
               view.setModel(this.model);
@@ -82,6 +99,24 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               this.model.passTurn();
               this.playerIndex = (this.playerIndex + 1) % this.players.size();
               System.out.println(model);
+              // check if computer move is enabled
+              if (!this.model.isGameOver()) {
+                move = this.players.get(this.playerIndex).play(this.model);
+                if (move != null) {
+                  if (move.getPosn() != null) {
+                    System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                            move.getPosn().col);
+                    this.model.makeMove(move.getPosn().row, move.getPosn().col);
+                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                  } else if (move.isPassTurn()) {
+                    System.out.println("Computer is passing move");
+                    this.model.passTurn();
+                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                  }
+                  System.out.println(model);
+                }
+              }
+              // refresh game after both moves
               view.setModel(this.model);
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
@@ -89,6 +124,21 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.setModel(this.model);
               view.repaint();
             }
+          } else if (move.isRestartGame()) {
+            this.playerIndex = 0;
+            try {
+              this.model.newGame();
+              view.setModel(this.model);
+              System.out.println(this.model.toString());
+              view.repaint();
+            } catch (IllegalArgumentException | IllegalStateException ex) {
+              System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+              view.setModel(this.model);
+              view.repaint();
+            }
+          } else if (move.isQuitGame()) {
+            System.out.println(this.model.toString());
+            System.exit(0);
           }
         }
       } catch (Exception ex) {
@@ -244,11 +294,12 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           }
         } else if (x >= 851 && x <= 931 && y >= 62 && y <= 142) {
           // check if user click Restart button
+          System.out.println("Restart button is clicked!");
           this.playerIndex = 0;
           try {
-            this.model = this.model.newGame();
-            System.out.println(model.toString());
+            this.model.newGame();
             view.setModel(this.model);
+            System.out.println(this.model.toString());
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());

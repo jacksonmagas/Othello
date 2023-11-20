@@ -63,6 +63,7 @@ public class ExamplarControllerTests {
     assertFalse(out.toString().isEmpty());
     assertTrue(out.toString().contains("Player one Score: 3"));
     assertTrue(out.toString().contains("Player two Score: 3"));
+    System.out.println(out);
     assertTrue(out.toString().contains("Game is over!"));
 
   }

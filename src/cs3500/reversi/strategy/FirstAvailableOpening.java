@@ -20,7 +20,7 @@ public class FirstAvailableOpening implements InfallibleMoveStrategy {
       move = new Move(location.getRow(), location.getColumn());
     } else {
       // no valid move remaining hence pass-turn
-      move = new Move(true);
+      move = new Move(true, false, false);
     }
     return move;
   }

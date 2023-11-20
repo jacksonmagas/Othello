@@ -142,6 +142,7 @@ public class BasicReversi implements ReversiModel {
     this.horizontalRows = copyCells(base.horizontalRows);
     this.downLeftRows = copyCells(base.downLeftRows);
     this.downRightRows = copyCells(base.downRightRows);
+    //this.isGameOver = base.isGameOver;
     this.gameState = base.gameState;
     this.winner = base.winner;
     this.currentPlayer = base.currentPlayer;
@@ -370,16 +371,22 @@ public class BasicReversi implements ReversiModel {
   private void setEmptyTileToCurrentPlayer(int row, int index) {
     horizontalRows.get(row).get(index).setState(this.currentPlayer);
     incrementScore(this.currentPlayer);
+    setWinOrTieGame(false);
   }
 
   // sets the game to win or tie
-  private void setWinOrTieGame() {
-    if (playerScores.get(CellState.BLACK).equals(playerScores.get(CellState.WHITE))) {
-      this.gameState = Status.Tied;
-    } else {
-      this.gameState = Status.Won;
-      this.winner = (playerScores.get(CellState.BLACK) > playerScores.get(CellState.WHITE))
-          ? CellState.BLACK : CellState.WHITE;
+  private void setWinOrTieGame(boolean passTurnsReached) {
+    int TOTALCELLS = 37;
+    if ((!passTurnsReached
+            && playerScores.get(CellState.BLACK) + playerScores.get(CellState.WHITE) == TOTALCELLS)
+            || (passTurnsReached)) {
+      if (playerScores.get(CellState.BLACK).equals(playerScores.get(CellState.WHITE))) {
+        this.gameState = Status.Tied;
+      } else {
+        this.gameState = Status.Won;
+        this.winner = (playerScores.get(CellState.BLACK) > playerScores.get(CellState.WHITE))
+                ? CellState.BLACK : CellState.WHITE;
+      }
     }
   }
 
@@ -388,6 +395,7 @@ public class BasicReversi implements ReversiModel {
     direction.get(row).get(index).setState(this.currentPlayer);
     incrementScore(this.currentPlayer);
     decrementScore(this.currentPlayer.opposite());
+    setWinOrTieGame(false);
   }
 
   /**
@@ -449,7 +457,7 @@ public class BasicReversi implements ReversiModel {
       throw new IllegalStateException("Game is over!");
     }
     if (lastPlayerPassed) {
-      this.setWinOrTieGame();
+      this.setWinOrTieGame(true);
     } else {
       lastPlayerPassed = true;
       switchTurn();
@@ -701,8 +709,74 @@ public class BasicReversi implements ReversiModel {
   }
 
   @Override
-  public ReversiModel newGame() {
-    return new BasicReversi(this.sideLength());
+  public void newGame() {
+    // Keep model reference same but reset all params to start new game
+    lastErrorMessage = "";
+
+    //initialize game
+    int sideLength = center + 1;
+    this.gameState = Status.Playing;
+
+    this.lastPlayerPassed = false;
+
+    int rowSize = sideLength;
+
+    //create empty arrayLists to hold cells, and temporarily fills them will nulls
+    for (int row = 0; row < totalNumRows; row++) {
+      this.horizontalRows.remove(row);
+      this.downRightRows.remove(row);
+      this.downLeftRows.remove(row);
+      this.horizontalRows.add(new ArrayList<>());
+      this.downRightRows.add(new ArrayList<>());
+      this.downLeftRows.add(new ArrayList<>());
+      for (int col = 0; col < rowSize; col++) {
+        this.horizontalRows.get(row).add(null);
+        this.downRightRows.get(row).add(null);
+        this.downLeftRows.get(row).add(null);
+      }
+      if (row < center) {
+        rowSize++;
+      } else {
+        rowSize--;
+      }
+    }
+
+    rowSize = sideLength;
+    // build grid
+    for (int rowNum = 0; rowNum < totalNumRows; rowNum++) {
+      for (int col = 0; col < rowSize; col++) {
+        setEmptyCellAt(rowNum, col);
+      }
+      if (rowNum < center) {
+        rowSize++;
+      } else {
+        rowSize--;
+      }
+    }
+
+    playerScores.put(CellState.BLACK, 0);
+    playerScores.put(CellState.WHITE, 0);
+
+    //Place player discs
+    List<Cell.Location> blackTiles = List.of(new Location(sideLength - 2, sideLength - 2),
+            new Location(sideLength - 1, sideLength),
+            new Location(sideLength, sideLength - 2));
+    for (Cell.Location l : blackTiles) {
+      horizontalRows.get(l.row).get(l.column).setState(CellState.BLACK);
+      incrementScore(CellState.BLACK);
+    }
+
+    List<Cell.Location> whiteTiles = List.of(new Location(sideLength - 2, sideLength - 1),
+            new Location(sideLength - 1, sideLength - 2),
+            new Location(sideLength, sideLength - 1));
+    for (Cell.Location l : whiteTiles) {
+      horizontalRows.get(l.row).get(l.column).setState(CellState.WHITE);
+      incrementScore(CellState.WHITE);
+    }
+
+    //set first move
+    this.currentPlayer = currentPlayer;
+
   }
 
   //take a cell and get the move that would go in that cell for that cell
@@ -723,7 +797,7 @@ public class BasicReversi implements ReversiModel {
         .map(this::cellToMove)
         .filter(this::isValidMove)
         .collect(Collectors.toList());
-    result.add(new Move(true));
+    result.add(new Move(true, false, false));
 
     return result;
   }

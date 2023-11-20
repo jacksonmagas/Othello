@@ -33,13 +33,19 @@ public class PromptUser implements InfallibleMoveStrategy {
     while (true) {
       String moveCommand = input.next();
       if (moveCommand.equalsIgnoreCase("pass-turn")) {
-        move = new Move(true);
+        move = new Move(true, false, false);
         break;
       } else if (moveCommand.equalsIgnoreCase("make-move")) {
         //System.out.println("Enter a row and column");
         int r = input.nextInt();
         int c = input.nextInt();
         move = new Move(r, c);
+        break;
+      } else if (moveCommand.equalsIgnoreCase("restart")) {
+        move = new Move(false, true, false);
+        break;
+      } else if (moveCommand.equalsIgnoreCase("quit")) {
+        move = new Move(false, false, true);
         break;
       }
       System.out.println("Invalid move, move must be one of: make-move row col or pass-turn");

@@ -61,17 +61,6 @@ public interface ReadonlyReversiModel {
   CellState getPieceAt(int r, int c);
 
   /**
-   * Create a read/write copy of the read only model.
-   * @return A copy of the model
-   */
-  ReversiModel copy();
-
-  /**
-   * Create a new reversi model of the same type in the new game configuration.
-   */
-  ReversiModel newGame();
-
-  /**
    * Get a list of the legal moves for this model.
    * The list is ordered so that the topmost leftmost moves come first.
    * @return the legal moves for this model.
@@ -80,4 +69,10 @@ public interface ReadonlyReversiModel {
 
   //TODO
   Cell.Location getHighlightedCell();
+
+  /**
+   * Create a read/write copy of the read only model.
+   * @return A copy of the model
+   */
+  ReversiModel copy();
 }

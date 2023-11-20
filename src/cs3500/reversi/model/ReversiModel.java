@@ -35,6 +35,12 @@ public interface ReversiModel extends ReadonlyReversiModel {
    */
   void passTurn();
 
-//TODO fix this
+  //TODO fix this
   void setHighlightedCell(int row, int col);
+
+  /**
+   * Create a new reversi model of the same type in the new game configuration.
+   */
+  void newGame();
+
 }
