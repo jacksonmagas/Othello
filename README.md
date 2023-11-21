@@ -91,6 +91,7 @@ so we added a method to get the state of each cell.
 13. Vertical down left and right moves are implemented.
 14. Display of Winner and Tie messages are implemented.
 15. Mouse move over motion is implemented to display the associated cell as highlighted.
+16. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of Reversi GUI.
 
 <br/><br/>
 New constructor:

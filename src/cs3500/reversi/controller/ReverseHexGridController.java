@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import javax.swing.*;
+
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
 import cs3500.reversi.view.BasicReversiView;
@@ -91,6 +93,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -121,6 +124,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -133,6 +137,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -143,6 +148,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
         }
       } catch (Exception ex) {
         System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+        JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -255,13 +261,15 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           view.repaint();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
           view.setModel(this.model);
           view.repaint();
         }
       } else {
         // check if user click Pass Turn button
         //if (x >= 248 && x <= 299 && y >= 51 && y <= 96) {
-        if (x >= 250 && x <= 363 && y >= 51 && y <= 163) {
+        //if (x >= 250 && x <= 363 && y >= 51 && y <= 163) {
+        if (x >= 33 && x <= 148 && y >= 33 && y <= 142) {
           System.out.println("Pass Turn button is clicked!");
           try {
             this.model.passTurn();
@@ -289,10 +297,12 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+            JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
             view.setModel(this.model);
             view.repaint();
           }
-        } else if (x >= 851 && x <= 931 && y >= 62 && y <= 142) {
+          //} else if (x >= 851 && x <= 931 && y >= 62 && y <= 142) {
+        } else if (x >= 146 && x <= 716 && y >= 43 && y <= 128) {
           // check if user click Restart button
           System.out.println("Restart button is clicked!");
           this.playerIndex = 0;
@@ -303,6 +313,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+            JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
             view.setModel(this.model);
             view.repaint();
           }

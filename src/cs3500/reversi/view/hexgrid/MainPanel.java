@@ -12,7 +12,7 @@ import java.awt.Point;
 import java.awt.Stroke;
 import java.util.HashMap;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.ReadonlyReversiModel;
@@ -21,9 +21,9 @@ import cs3500.reversi.model.ReadonlyReversiModel;
  * Public class MainPanel creates the panel of the hexgrid view.
  */
 public class MainPanel extends JPanel {
-  private final int WIDTH = 1200;
+  private final int WIDTH = 764;
 
-  private final int HEIGHT = 800;
+  private final int HEIGHT = 764;
 
   private Font font = new Font("Arial", Font.BOLD, 12);
 
@@ -72,7 +72,7 @@ public class MainPanel extends JPanel {
     drawRectangle(g2d, origin, 380, true, true, Color.BLACK, 0);
     drawHexGridLoop(g2d, origin, 7, 50, 1);
     drawStatusMessages(g2d, origin, 380, true, Color.WHITE);
-    drawErrorMessages(g2d, origin, 380, true, Color.RED);
+    //drawErrorMessages(g2d, origin, 380, true, Color.RED);
     drawPassTurnButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
     drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
   }
@@ -118,6 +118,7 @@ public class MainPanel extends JPanel {
   // draws the status messages
   private void drawStatusMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
+
     Graphics2D g2d = (Graphics2D) g;
     int x2 = centered ? origin.x - radius : origin.x;
     int y2 = centered ? origin.y - radius : origin.y;
@@ -130,11 +131,11 @@ public class MainPanel extends JPanel {
     text.append(model.getPlayerScore(CellState.WHITE));
     text.append(", ");
     text.append(model.getNextStepInstructions());
-    text.append(", ");
     int w = metrics.stringWidth(text.toString());
     int h = metrics.getHeight();
     g2d.setColor(colorValue);
-    g2d.drawString(text.toString(), x2 + w / 2, y2 + h * 2);
+    int xpos = (x2 + w / 2) > 188 ? 188 : (x2 + w / 2);
+    g2d.drawString(text.toString(), xpos, y2 + h * 2);
   }
 
   // draws the error messages
