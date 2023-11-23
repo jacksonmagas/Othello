@@ -92,6 +92,7 @@ so we added a method to get the state of each cell.
 14. Display of Winner and Tie messages are implemented.
 15. Mouse move over motion is implemented to display the associated cell as highlighted.
 16. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of Reversi GUI.
+17. Implemented to accept command line strategies from user to simulate the computer player strategy.
 
 <br/><br/>
 New constructor:

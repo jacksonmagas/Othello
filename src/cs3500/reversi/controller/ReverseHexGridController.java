@@ -228,7 +228,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       this.model.getBoard();
       //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
+      System.out.println("Controller mouse click event - x "+x+" y "+y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
@@ -239,6 +239,9 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           this.model.makeMove(row, col);
           this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println(model.toString());
+          //view.setModel(this.model);
+          //view.repaint();
+
           // check if computer move is enabled
           if (!this.model.isGameOver()) {
             Move move = this.players.get(this.playerIndex).play(this.model);
@@ -275,6 +278,9 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             this.model.passTurn();
             this.playerIndex = (this.playerIndex + 1) % this.players.size();
             System.out.println(model.toString());
+            //view.setModel(this.model);
+            //view.repaint();
+
             // check if computer move is enabled
             if (!this.model.isGameOver()) {
               Move move = this.players.get(this.playerIndex).play(this.model);
@@ -308,8 +314,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           this.playerIndex = 0;
           try {
             this.model.newGame();
-            view.setModel(this.model);
             System.out.println(this.model.toString());
+            view.setModel(this.model);
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
