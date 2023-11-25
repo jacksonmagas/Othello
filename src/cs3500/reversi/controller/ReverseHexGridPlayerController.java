@@ -159,7 +159,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void yourTurn() {
-    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer() + " with model\n" + this.model.toString());
+    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer() +
+            " with model\n" + this.model.toString());
     // Make view visible
     view.setModel(this.model);
     //view.repaint();
@@ -169,7 +170,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     Move move = this.player.play(this.model);
     if (move != null) {
       if (move.getPosn() != null) {
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " + move.getPosn().row + " " +
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
+                move.getPosn().row + " " +
                 move.getPosn().col);
         this.model.makeMove(move.getPosn().row, move.getPosn().col);
         //System.out.println(model.toString());
@@ -190,7 +192,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void refreshView() {
-    System.out.println("Refresh View event received for player " + this.model.getCurrentPlayer() + " with model\n" + this.model.toString());
+    System.out.println("Refresh View event received for player " + this.model.getCurrentPlayer() +
+            " with model\n" + this.model.toString());
     view.setModel(this.model);
     view.repaint();
   }
@@ -285,7 +288,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         int row = rowCol.x;
         int col = rowCol.y;
         try {
-          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " + row + " " + col);
+          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
+                  row + " " + col);
           this.model.makeMove(row, col);
           //this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println("model after move\n" + this.model.toString());
