@@ -159,7 +159,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void yourTurn() {
-    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer());
+    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer() + " with model\n" + this.model.toString());
     // Make view visible
     view.setModel(this.model);
     //view.repaint();
@@ -169,18 +169,18 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     Move move = this.player.play(this.model);
     if (move != null) {
       if (move.getPosn() != null) {
-        System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " + move.getPosn().row + " " +
                 move.getPosn().col);
         this.model.makeMove(move.getPosn().row, move.getPosn().col);
         //System.out.println(model.toString());
         //this.playerIndex = (this.playerIndex + 1) % this.players.size();
       } else if (move.isPassTurn()) {
-        System.out.println("Computer is passing move");
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
         this.model.passTurn();
         //System.out.println(model.toString());
         //this.playerIndex = (this.playerIndex + 1) % this.players.size();
       }
-      System.out.println(model.toString());
+      System.out.println("model after move\n" + model.toString());
       view.setModel(this.model);
       //view.repaint();
       //view.setVisibleView(false);
@@ -190,6 +190,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void refreshView() {
+    System.out.println("Refresh View event received for player " + this.model.getCurrentPlayer() + " with model\n" + this.model.toString());
     view.setModel(this.model);
     view.repaint();
   }
@@ -284,9 +285,10 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         int row = rowCol.x;
         int col = rowCol.y;
         try {
+          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " + row + " " + col);
           this.model.makeMove(row, col);
           //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-          System.out.println(model.toString());
+          System.out.println("model after move\n" + this.model.toString());
           //view.setModel(this.model);
           //view.repaint();
           //view.setVisibleView(true);
@@ -327,9 +329,10 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         if (x >= 33 && x <= 148 && y >= 33 && y <= 142) {
           System.out.println("Pass Turn button is clicked!");
           try {
+            System.out.println("Player " + this.model.getCurrentPlayer() + " is is passing turn");
             this.model.passTurn();
             //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-            System.out.println(model.toString());
+            System.out.println("model after pass-turn\n" + this.model.toString());
             //view.setModel(this.model);
             //view.repaint();
             //view.setVisibleView(true);
@@ -370,7 +373,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           //this.playerIndex = 0;
           try {
             this.model.newGame();
-            System.out.println(this.model.toString());
+            System.out.println("model after restart\n" + this.model.toString());
             view.setModel(this.model);
             view.repaint();
             //view.setVisibleView(true);

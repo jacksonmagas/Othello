@@ -118,6 +118,7 @@ public class BasicReversi implements ReversiModel {
 
     //set first move
     this.currentPlayer = currentPlayer;
+    System.out.println("Initial model\n" + this.toString());
     notifyPlayer();
   }
 
@@ -241,7 +242,7 @@ public class BasicReversi implements ReversiModel {
   // switch the current player at end of turn
   private void switchTurn() {
     this.currentPlayer = this.currentPlayer.opposite();
-
+    //System.out.println("switchTurn model\n" + this.toString());
     notifyPlayer();
   }
 
