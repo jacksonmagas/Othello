@@ -1,16 +1,13 @@
 package cs3500.reversi.controller;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
@@ -84,7 +81,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+               "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -115,7 +113,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+              "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -128,7 +127,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+              "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -139,7 +139,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         }
       } catch (Exception ex) {
         System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-        JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+        "Message", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -158,7 +159,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void yourTurn() {
-    System.out.println("Your Turn event received for player "+this.model.getCurrentPlayer());
+    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer());
     // Make view visible
     view.setModel(this.model);
     //view.repaint();
@@ -314,7 +315,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           */
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                  "Message", JOptionPane.ERROR_MESSAGE);
           view.setModel(this.model);
           view.repaint();
         }
@@ -356,7 +358,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
             */
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-            JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
+                    "Message", JOptionPane.ERROR_MESSAGE);
             view.setModel(this.model);
             view.repaint();
           }
@@ -373,7 +376,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
             //view.setVisibleView(true);
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-            JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                    "Message", JOptionPane.ERROR_MESSAGE);
             view.setModel(this.model);
             view.repaint();
           }

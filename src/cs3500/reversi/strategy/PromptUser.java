@@ -1,6 +1,5 @@
 package cs3500.reversi.strategy;
 
-import java.io.IOException;
 import java.util.Scanner;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;

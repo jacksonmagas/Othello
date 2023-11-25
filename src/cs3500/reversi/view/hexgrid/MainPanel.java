@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.ReadonlyReversiModel;
@@ -35,8 +35,9 @@ public class MainPanel extends JPanel {
   private static int[][] board;
 
   private int currentRow = 0;
+
   private int currentCol = 0;
-  private CellState currentPlayer;
+
   private List<CellState> players;
 
   private ReadonlyReversiModel model;
@@ -69,7 +70,7 @@ public class MainPanel extends JPanel {
     Cell.Location location = model.getHighlightedCell();
     this.currentRow = location.getRow();
     this.currentCol = location.getColumn();
-    this.currentPlayer = model.getCurrentPlayer();
+    CellState currentPlayer = model.getCurrentPlayer();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 

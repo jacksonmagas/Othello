@@ -1,13 +1,14 @@
 package cs3500.reversi.strategy;
 
-import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.model.ReversiModel;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.function.Function;
 
+/**
+ * Class manages highest scoring move in game play for infallible move strategy.
+ */
 public class HighestScoringMove implements InfallibleMoveStrategy {
 
   /**
@@ -15,7 +16,9 @@ public class HighestScoringMove implements InfallibleMoveStrategy {
    * making the move. (Which is the opposite of the current player after the move is made.)
    */
   private static class ScoreTester implements MoveTester {
+
     private final MoveTester delegate;
+
     private ScoreTester(ReversiModel model) {
       this.delegate = new ParameterizedMoveTester(model,
           (ReadonlyReversiModel m) -> m.getPlayerScore(m.getCurrentPlayer().opposite()));

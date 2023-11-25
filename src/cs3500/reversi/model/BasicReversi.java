@@ -258,6 +258,9 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  /**
+   * Refreshes the view of the game.
+   */
   public void refreshView() {
     //System.out.println("refreshView method invoked for player "+this.currentPlayer);
     if (CellState.BLACK.equals(this.currentPlayer)) {
@@ -432,9 +435,9 @@ public class BasicReversi implements ReversiModel {
 
   // sets the game to win or tie
   private void setWinOrTieGame(boolean passTurnsReached) {
-    int TOTALCELLS = 37;
+    int totalCells = 37;
     if ((!passTurnsReached
-            && playerScores.get(CellState.BLACK) + playerScores.get(CellState.WHITE) == TOTALCELLS)
+            && playerScores.get(CellState.BLACK) + playerScores.get(CellState.WHITE) == totalCells)
             || (passTurnsReached)) {
       if (playerScores.get(CellState.BLACK).equals(playerScores.get(CellState.WHITE))) {
         this.gameState = Status.Tied;
@@ -558,8 +561,8 @@ public class BasicReversi implements ReversiModel {
   public int[][] getBoard() {
     //board size.
     //TODO fix hardcoded board size
-    int BSIZE = 14;
-    int[][] board = new int[BSIZE][BSIZE];
+    int bSize = 14;
+    int[][] board = new int[bSize][bSize];
     // initialize with 0s
     for (int i = 0; i < this.horizontalRows.size(); i++) {
       for (int j = 0; j < this.horizontalRows.size(); j++) {

@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
-import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 
 
@@ -99,7 +99,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                      "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -130,7 +131,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                      "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -143,7 +145,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                      "Message", JOptionPane.ERROR_MESSAGE);
               view.setModel(this.model);
               view.repaint();
             }
@@ -154,7 +157,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
         }
       } catch (Exception ex) {
         System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-        JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                "Message", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -270,7 +274,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           view.repaint();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                  "Message", JOptionPane.ERROR_MESSAGE);
           view.setModel(this.model);
           view.repaint();
         }
@@ -309,7 +314,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-            JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
+                    "Message", JOptionPane.ERROR_MESSAGE);
             view.setModel(this.model);
             view.repaint();
           }
@@ -325,7 +331,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-            JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                    "Message", JOptionPane.ERROR_MESSAGE);
             view.setModel(this.model);
             view.repaint();
           }

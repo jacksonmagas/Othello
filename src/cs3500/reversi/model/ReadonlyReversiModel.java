@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface ReadonlyReversiModel {
   /**
-   * Return the score of the player with the given cell state
+   * Return the score of the player with the given cell state.
    * @return the score
    */
   int getPlayerScore(CellState player);

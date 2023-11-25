@@ -8,7 +8,7 @@ import cs3500.reversi.strategy.InfallibleMoveStrategy;
 /**
  * A simple Player implementation that delegates most of its
  * complexity to a {@link InfallibleMoveStrategy}
- * for choosing where to play next
+ * for choosing where to play next.
  */
 public class PlayerImpl implements Player {
 

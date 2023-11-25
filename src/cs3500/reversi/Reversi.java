@@ -31,8 +31,8 @@ public class Reversi {
     int noOfCells = 4;
     String player1Strategy = HUMAN;
     String player2Strategy = STRATEGY1;
-    int WIDTH = 1200;
-    int HEIGHT = 800;
+    int width = 1200;
+    int height = 800;
 
     if (args.length > 0) {
       try {
@@ -56,13 +56,15 @@ public class Reversi {
     }
 
     ReversiModel reversi = new BasicReversi(noOfCells);
-    ReversiFrame viewPlayer1 = new BasicReversiView(WIDTH, HEIGHT, reversi);
-    ReversiFrame viewPlayer2 = new BasicReversiView(WIDTH, HEIGHT, reversi);
+    ReversiFrame viewPlayer1 = new BasicReversiView(width, height, reversi);
+    ReversiFrame viewPlayer2 = new BasicReversiView(width, height, reversi);
 
     Player player1 = getPlayerUsingStrategy(player1Strategy, CellState.BLACK);
     Player player2 = getPlayerUsingStrategy(player2Strategy, CellState.WHITE);
-    ReverseHexGridPlayerController controller1 = new ReverseHexGridPlayerController(reversi, viewPlayer1, player1);
-    ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi, viewPlayer2, player2);
+    ReverseHexGridPlayerController controller1 = new ReverseHexGridPlayerController(reversi,
+            viewPlayer1, player1);
+    ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
+            viewPlayer2, player2);
     reversi.addYourTurnListener(controller1);
     reversi.addYourTurnListener(controller2);
     viewPlayer1.setVisibleView(true);
@@ -70,6 +72,7 @@ public class Reversi {
     reversi.startGame();
   }
 
+  // gets player using strategy
   private static Player getPlayerUsingStrategy(String strategy, CellState cellState) {
     Player player;
     if (STRATEGY1.equalsIgnoreCase(strategy)) {
