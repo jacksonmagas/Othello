@@ -10,7 +10,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Stroke;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 import javax.swing.*;
 
@@ -33,6 +36,8 @@ public class MainPanel extends JPanel {
 
   private int currentRow = 0;
   private int currentCol = 0;
+  private CellState currentPlayer;
+  private List<CellState> players;
 
   private ReadonlyReversiModel model;
 
@@ -45,6 +50,14 @@ public class MainPanel extends JPanel {
     this.model = model;
     this.board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    this.players = new ArrayList<CellState>();
+  }
+
+  /**
+   * Adds a player to the view.
+   */
+  public void addPlayer(CellState player) {
+    this.players.add(Objects.requireNonNull(player));
   }
 
   /**
@@ -56,6 +69,7 @@ public class MainPanel extends JPanel {
     Cell.Location location = model.getHighlightedCell();
     this.currentRow = location.getRow();
     this.currentCol = location.getColumn();
+    this.currentPlayer = model.getCurrentPlayer();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 
@@ -124,7 +138,8 @@ public class MainPanel extends JPanel {
     int y2 = centered ? origin.y - radius : origin.y;
 
     StringBuffer text = new StringBuffer();
-    text.append("Player one Score: ");
+    text.append(model.getCurrentPlayer());
+    text.append(" Player one Score: ");
     text.append(model.getPlayerScore(CellState.BLACK));
     text.append(", ");
     text.append("Player two Score: ");

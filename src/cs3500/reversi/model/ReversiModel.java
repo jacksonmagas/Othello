@@ -1,5 +1,6 @@
 package cs3500.reversi.model;
 
+import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.strategy.Move;
 
 /**
@@ -43,4 +44,12 @@ public interface ReversiModel extends ReadonlyReversiModel {
    */
   void newGame();
 
+  /**
+   * Starts the game.
+   */
+  void startGame();
+
+  void addYourTurnListener(YourTurnListener listener);
+
+  void refreshView();
 }

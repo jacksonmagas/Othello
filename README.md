@@ -91,13 +91,27 @@ so we added a method to get the state of each cell.
 13. Vertical down left and right moves are implemented.
 14. Display of Winner and Tie messages are implemented.
 15. Mouse move over motion is implemented to display the associated cell as highlighted.
-16. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of Reversi GUI.
-17. Implemented to accept command line strategies from user to simulate the computer player strategy.
+16. Keyboard support is implemented to support make-move and pass-turn commends as part of Reversi GUI.
+
 
 <br/><br/>
 New constructor:
 1. We did not have a way to set up scenarios to test the model in specific situations,
-so we added a new constructor that takes in a list of locations for white tiles and for black tiles
-as well as other information about the state of the game.<br/>
+   so we added a new constructor that takes in a list of locations for white tiles and for black tiles
+   as well as other information about the state of the game.<br/>
 2. We also added a copy constructor to be able to make copies of a game in progress.<br/>
-a. This required also adding a copy constructor to the cell class.<br/>
+   a. This required also adding a copy constructor to the cell class.<br/>
+
+
+# Changes for part 3
+Added:
+1. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of ReversiGUI.
+2. Implemented to accept command line strategies from user to simulate the computer player strategy.
+    For example:
+    ReversiGUI "Human" "Strategy1"
+    ReversiGUI "Human" "Strategy2"
+    ReversiGUI "Human" "Strategy3"
+3. Implemented 2 Controllers and 2 Views as Part3 requirements as part of Reversi main class method and kept Part 2 implementation as part of previous ReversiGUI main class method.
+4. Your Turn and Refresh View events are implemented to enable Player 2 to simulate the moves as per implemented strategies.
+5. Manifest file is now using cs3500.reversi.Reversi as main class.
+

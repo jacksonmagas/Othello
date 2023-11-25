@@ -1,6 +1,6 @@
 package cs3500.reversi.controller;
 
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -10,9 +10,10 @@ import java.util.Objects;
 
 import javax.swing.*;
 
+import cs3500.reversi.model.Cell;
+import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
-import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 
 
@@ -22,50 +23,34 @@ import cs3500.reversi.view.ReversiFrame;
  * constraint: no part of any blob will be in the -ve X and -ve Y space. That is, the smallest
  * region that contains all the blobs has a lower left corner of (0,0) at the least.
  */
-public class ReverseHexGridController implements ReversiPlayerStrategyController {
+public class ReverseHexGridPlayerController implements YourTurnListener {
 
   private final ReversiModel model;
   private ReversiFrame view;
-
-  private int playerIndex;
-  private final List<Player> players;
+  private final Player player;
 
   /**
    * Constructor for ReversiHexGridController.
    */
-  public ReverseHexGridController(ReversiModel model, ReversiFrame view) {
-    if (model == null) {
-      throw new IllegalArgumentException("Model is null");
+  public ReverseHexGridPlayerController(ReversiModel model, ReversiFrame view, Player player) {
+    if (model == null || view == null || player == null) {
+      throw new IllegalArgumentException("Model or View or Player is null");
     }
     this.model = model;
-    this.players = new ArrayList<>();
+    this.player = player;
     this.view = view;
-  }
-
-  /**
-   * Adds a player to the game.
-   */
-  @Override
-  public void addPlayer(Player player) {
-    this.players.add(Objects.requireNonNull(player));
-    this.view.addPlayer(player.getPiece());
+    setMouseListener();
   }
 
   /**
    * Plays the game.
    */
+  /*
   @Override
   public void play() {
-    if (players.size() != 2) {
-      throw new IllegalArgumentException("Players are not added!");
+    if (player == null) {
+      throw new IllegalArgumentException("Player is not present!");
     }
-    this.model.startGame();
-    this.view.setVisibleView(true);
-    /*
-    int WIDTH = 1200;
-    int HEIGHT = 800;
-    this.view = new BasicReversiView(WIDTH, HEIGHT, model);
-    */
     setMouseListener();
     this.playerIndex = 0;
     while (!this.model.isGameOver()) {
@@ -158,11 +143,54 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       }
     }
   }
+  */
 
   private void setMouseListener() {
 
-    view.setMouseListener(new MyMouseListener(model, view, playerIndex, players));
-    view.setMouseMotionListener(new MyMouseListener(model, view, playerIndex, players));
+    view.setMouseListener(new MyMouseListener(model, view, player));
+    view.setMouseMotionListener(new MyMouseListener(model, view, player));
+  }
+
+  @Override
+  public CellState getPlayer() {
+    return this.player.getPiece();
+  }
+
+  @Override
+  public void yourTurn() {
+    System.out.println("Your Turn event received for player "+this.model.getCurrentPlayer());
+    // Make view visible
+    view.setModel(this.model);
+    //view.repaint();
+    //view.setVisibleView(false);
+
+    // check if computer move is enabled
+    Move move = this.player.play(this.model);
+    if (move != null) {
+      if (move.getPosn() != null) {
+        System.out.println("Computer is doing move to " + move.getPosn().row + " " +
+                move.getPosn().col);
+        this.model.makeMove(move.getPosn().row, move.getPosn().col);
+        //System.out.println(model.toString());
+        //this.playerIndex = (this.playerIndex + 1) % this.players.size();
+      } else if (move.isPassTurn()) {
+        System.out.println("Computer is passing move");
+        this.model.passTurn();
+        //System.out.println(model.toString());
+        //this.playerIndex = (this.playerIndex + 1) % this.players.size();
+      }
+      System.out.println(model.toString());
+      view.setModel(this.model);
+      //view.repaint();
+      //view.setVisibleView(false);
+      this.model.refreshView();
+    }
+  }
+
+  @Override
+  public void refreshView() {
+    view.setModel(this.model);
+    view.repaint();
   }
 
   // MyMouseListener class listens for mouse movements.
@@ -170,23 +198,32 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
 
     ReversiModel model;
     ReversiFrame view;
-    int playerIndex;
-    final List<Player> players;
+    //int playerIndex;
+    final Player player;
 
     /**
      * Constructor for MyMouseListener class.
      */
     public MyMouseListener(ReversiModel model, ReversiFrame view,
-                           int playerIndex, List<Player> players) {
+                           Player player) {
       super();
       this.model = model;
       this.view = view;
-      this.playerIndex = playerIndex;
-      this.players = players;
+      this.player = player;
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+      CellState currentPlayer = this.model.getCurrentPlayer();
+      if (!(currentPlayer != null && currentPlayer.equals(this.player.getPiece()))) {
+        // un highlight cell
+        //Cell.Location currentCell = this.model.getHighlightedCell();
+        this.model.setHighlightedCell(-1, -1);
+
+        view.setModel(this.model);
+        view.repaint();
+        return;
+      }
       int x = e.getX();
       int y = e.getY();
 
@@ -221,6 +258,10 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+      CellState currentPlayer = this.model.getCurrentPlayer();
+      if (!(currentPlayer != null && currentPlayer.equals(this.player.getPiece()))) {
+        return;
+      }
       int x = e.getX();
       int y = e.getY();
 
@@ -243,24 +284,26 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
         int col = rowCol.y;
         try {
           this.model.makeMove(row, col);
-          this.playerIndex = (this.playerIndex + 1) % this.players.size();
+          //this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println(model.toString());
           //view.setModel(this.model);
           //view.repaint();
+          //view.setVisibleView(true);
 
+          /*
           // check if computer move is enabled
           if (!this.model.isGameOver()) {
-            Move move = this.players.get(this.playerIndex).play(this.model);
+            Move move = this.player.play(this.model);
             if (move != null) {
               if (move.getPosn() != null) {
                 System.out.println("Computer is doing move to " + move.getPosn().row + " " +
                         move.getPosn().col);
                 this.model.makeMove(move.getPosn().row, move.getPosn().col);
-                this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                //this.playerIndex = (this.playerIndex + 1) % this.players.size();
               } else if (move.isPassTurn()) {
                 System.out.println("Computer is passing move");
                 this.model.passTurn();
-                this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                //this.playerIndex = (this.playerIndex + 1) % this.players.size();
               }
               System.out.println(model.toString());
             }
@@ -268,6 +311,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           // refresh game after both moves
           view.setModel(this.model);
           view.repaint();
+          */
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
@@ -282,24 +326,26 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
           System.out.println("Pass Turn button is clicked!");
           try {
             this.model.passTurn();
-            this.playerIndex = (this.playerIndex + 1) % this.players.size();
+            //this.playerIndex = (this.playerIndex + 1) % this.players.size();
             System.out.println(model.toString());
             //view.setModel(this.model);
             //view.repaint();
+            //view.setVisibleView(true);
 
+            /*
             // check if computer move is enabled
             if (!this.model.isGameOver()) {
-              Move move = this.players.get(this.playerIndex).play(this.model);
+              Move move = this.player.play(this.model);
               if (move != null) {
                 if (move.getPosn() != null) {
                   System.out.println("Computer is doing move to " + move.getPosn().row + " " +
                           move.getPosn().col);
                   this.model.makeMove(move.getPosn().row, move.getPosn().col);
-                  this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                  //this.playerIndex = (this.playerIndex + 1) % this.players.size();
                 } else if (move.isPassTurn()) {
                   System.out.println("Computer is passing move");
                   this.model.passTurn();
-                  this.playerIndex = (this.playerIndex + 1) % this.players.size();
+                  //this.playerIndex = (this.playerIndex + 1) % this.players.size();
                 }
                 System.out.println(model.toString());
               }
@@ -307,6 +353,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             // refresh game after both moves
             view.setModel(this.model);
             view.repaint();
+            */
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
             JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
@@ -317,12 +364,13 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
         } else if (x >= 146 && x <= 716 && y >= 43 && y <= 128) {
           // check if user click Restart button
           System.out.println("Restart button is clicked!");
-          this.playerIndex = 0;
+          //this.playerIndex = 0;
           try {
             this.model.newGame();
             System.out.println(this.model.toString());
             view.setModel(this.model);
             view.repaint();
+            //view.setVisibleView(true);
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
             JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);

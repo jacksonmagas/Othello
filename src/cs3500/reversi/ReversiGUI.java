@@ -1,6 +1,6 @@
 package cs3500.reversi;
 
-import java.util.Scanner;
+import cs3500.reversi.controller.Player;
 import cs3500.reversi.controller.PlayerImpl;
 import cs3500.reversi.controller.ReverseHexGridController;
 import cs3500.reversi.controller.ReversiPlayerStrategyController;
@@ -10,6 +10,8 @@ import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.FirstAvailableOpening;
 import cs3500.reversi.strategy.HighestScoringMove;
 import cs3500.reversi.strategy.PromptUser;
+import cs3500.reversi.view.BasicReversiView;
+import cs3500.reversi.view.ReversiFrame;
 
 /**
  * Represent a Reversi game class.
@@ -30,6 +32,8 @@ public class ReversiGUI {
     int noOfCells = 4;
     String player1Strategy = HUMAN;
     String player2Strategy = STRATEGY1;
+    int WIDTH = 1200;
+    int HEIGHT = 800;
 
     if (args.length > 0) {
       try {
@@ -53,22 +57,27 @@ public class ReversiGUI {
     }
 
     ReversiModel reversi = new BasicReversi(noOfCells);
-    ReversiPlayerStrategyController controller = new ReverseHexGridController(reversi);
-    setPlayerStrategy(player1Strategy, CellState.BLACK, controller);
-    setPlayerStrategy(player2Strategy, CellState.WHITE, controller);
+    ReversiFrame view = new BasicReversiView(WIDTH, HEIGHT, reversi);
+    Player player1 = getPlayerUsingStrategy(player1Strategy, CellState.BLACK);
+    Player player2 = getPlayerUsingStrategy(player2Strategy, CellState.WHITE);
+    ReversiPlayerStrategyController controller = new ReverseHexGridController(reversi, view);
+    controller.addPlayer(player1);
+    controller.addPlayer(player2);
     controller.play();
   }
 
-  private static void setPlayerStrategy(String strategy, CellState cellState, ReversiPlayerStrategyController controller) {
+  private static Player getPlayerUsingStrategy(String strategy, CellState cellState) {
+    Player player;
     if (STRATEGY1.equalsIgnoreCase(strategy)) {
-      controller.addPlayer(new PlayerImpl(cellState, new FirstAvailableOpening()));
+      player = new PlayerImpl(cellState, new FirstAvailableOpening());
     } else if (STRATEGY2.equalsIgnoreCase(strategy)) {
-      controller.addPlayer(new PlayerImpl(cellState, new HighestScoringMove()));
+      player = new PlayerImpl(cellState, new HighestScoringMove());
     } else if (STRATEGY3.equalsIgnoreCase(strategy)) {
-      controller.addPlayer(new PlayerImpl(cellState, new HighestScoringMove()));
+      player = new PlayerImpl(cellState, new HighestScoringMove());
     } else {
       // defaults to HUMAN Strategy
-      controller.addPlayer(new PlayerImpl(cellState, new PromptUser()));
+      player = new PlayerImpl(cellState, new PromptUser());
     }
+    return player;
   }
 }

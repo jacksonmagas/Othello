@@ -75,4 +75,5 @@ public interface ReadonlyReversiModel {
    * @return A copy of the model
    */
   ReversiModel copy();
+
 }

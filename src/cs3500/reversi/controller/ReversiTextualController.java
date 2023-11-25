@@ -32,6 +32,7 @@ public class ReversiTextualController implements ReversiController {
     if (model == null) {
       throw new IllegalArgumentException("Model is null");
     }
+    model.startGame();
     ReversiTextualView view = new ReversiTextualView(model, this.out);
     try {
       view.render();

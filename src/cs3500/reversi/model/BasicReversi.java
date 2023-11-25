@@ -1,5 +1,6 @@
 package cs3500.reversi.model;
 
+import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.strategy.Move;
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class BasicReversi implements ReversiModel {
 
   private CellState winner;
 
+  private List<YourTurnListener> listeners = new ArrayList<YourTurnListener>();
+
   /**
    * Detailed constructor for reversi game that allows creating a specified board state.
    * @param sideLength the side length of the board
@@ -64,7 +67,7 @@ public class BasicReversi implements ReversiModel {
     this.lastPlayerPassed = lastPlayerPassed;
     //initialize game
     this.center = sideLength - 1;
-    this.gameState = Status.Playing;
+    this.gameState = Status.NotStarted;
 
     int rowSize = sideLength;
     totalNumRows = 2 * sideLength - 1;
@@ -115,6 +118,7 @@ public class BasicReversi implements ReversiModel {
 
     //set first move
     this.currentPlayer = currentPlayer;
+    notifyPlayer();
   }
 
   /**
@@ -149,6 +153,16 @@ public class BasicReversi implements ReversiModel {
     this.lastErrorMessage = base.lastErrorMessage;
     this.currentRow = base.currentRow;
     this.currentCol = base.currentCol;
+  }
+
+  @Override
+  public void startGame() {
+    if (this.gameState == null || this.gameState != Status.NotStarted) {
+      throw new IllegalStateException("Game is already started!");
+    } else {
+      this.gameState = Status.Playing;
+      notifyPlayer();
+    }
   }
 
   private void incrementScore(CellState player) {
@@ -227,6 +241,39 @@ public class BasicReversi implements ReversiModel {
   // switch the current player at end of turn
   private void switchTurn() {
     this.currentPlayer = this.currentPlayer.opposite();
+
+    notifyPlayer();
+  }
+
+  private void notifyPlayer() {
+    //System.out.println("notifyPlayer method invoked for player "+this.currentPlayer);
+    if (!this.isGameOver() && CellState.WHITE.equals(this.currentPlayer)) {
+      // Notify controller that has current turn
+      for (YourTurnListener listener : listeners) {
+        if (listener != null && listener.getPlayer().equals(CellState.WHITE)) {
+          //System.out.println("notifyPlayer event is sent for player "+CellState.WHITE);
+          listener.yourTurn();
+        }
+      }
+    }
+  }
+
+  public void refreshView() {
+    //System.out.println("refreshView method invoked for player "+this.currentPlayer);
+    if (CellState.BLACK.equals(this.currentPlayer)) {
+      // Notify controller to refresh view
+      for (YourTurnListener listener : listeners) {
+        if (listener != null && listener.getPlayer().equals(CellState.BLACK)) {
+          //System.out.println("refreshView event is sent for player " + CellState.BLACK);
+          listener.refreshView();
+        }
+      }
+    }
+  }
+
+  @Override
+  public void addYourTurnListener(YourTurnListener listener) {
+    listeners.add(listener);
   }
 
   // gets the cell at its current position
@@ -249,26 +296,30 @@ public class BasicReversi implements ReversiModel {
       int index) {
     int rowLen = direction.get(row).size();
     boolean validInPlus = false;
-    CellState oppositeColor = this.currentPlayer.opposite();
-    //Is there an adjacent opponent cell in positive direction?
-    if (index < rowLen - 1) {
-      Cell nextCell = direction.get(row).get(index + 1);
-      validInPlus = nextCell != null && nextCell.getState() != null && nextCell.getState()
-          .equals(oppositeColor);
-    }
+    try {
+      CellState oppositeColor = this.currentPlayer.opposite();
+      //Is there an adjacent opponent cell in positive direction?
+      if (index < rowLen - 1) {
+        Cell nextCell = direction.get(row).get(index + 1);
+        validInPlus = nextCell != null && nextCell.getState() != null && nextCell.getState()
+                .equals(oppositeColor);
+      }
 
-    //If is there an ally cell on the other side of opponent cells?
-    if (validInPlus) {
-      for (int newIndex = index + 1; newIndex < rowLen; newIndex++) {
-        CellState curCellState = direction.get(row).get(newIndex).getState();
-        if (curCellState == CellState.EMPTY
-            || (newIndex == 0 && curCellState != this.currentPlayer)) {
-          validInPlus = false;
-          break;
-        } else if (curCellState == this.currentPlayer) {
-          break;
+      //If is there an ally cell on the other side of opponent cells?
+      if (validInPlus) {
+        for (int newIndex = index + 1; newIndex < rowLen; newIndex++) {
+          CellState curCellState = direction.get(row).get(newIndex).getState();
+          if (curCellState == CellState.EMPTY
+                  || (newIndex == 0 && curCellState != this.currentPlayer)) {
+            validInPlus = false;
+            break;
+          } else if (curCellState == this.currentPlayer) {
+            break;
+          }
         }
       }
+    } catch (Exception ex) {
+      return false;
     }
     return validInPlus;
   }
@@ -279,24 +330,28 @@ public class BasicReversi implements ReversiModel {
       int row,
       int index) {
     boolean validInMinus = false;
-    CellState oppositeColor = this.currentPlayer.opposite();
-    //Is there an adjacent opponent cell in negative direction?
-    if (index > 0 && !direction.get(row).isEmpty()) {
-      Cell prevCell = direction.get(row).get(index - 1);
-      validInMinus = prevCell.getState().equals(oppositeColor);
-    }
-    //If is there an ally cell on the other side of opponent cells?
-    if (validInMinus) {
-      for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
-        CellState curCellState = direction.get(row).get(newIndex).getState();
-        if (curCellState == CellState.EMPTY
-            || (newIndex == 0 && curCellState != this.currentPlayer)) {
-          validInMinus = false;
-          break;
-        } else if (curCellState == this.currentPlayer) {
-          break;
+    try {
+      CellState oppositeColor = this.currentPlayer.opposite();
+      //Is there an adjacent opponent cell in negative direction?
+      if (index > 0 && !direction.get(row).isEmpty()) {
+        Cell prevCell = direction.get(row).get(index - 1);
+        validInMinus = prevCell.getState().equals(oppositeColor);
+      }
+      //If is there an ally cell on the other side of opponent cells?
+      if (validInMinus) {
+        for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
+          CellState curCellState = direction.get(row).get(newIndex).getState();
+          if (curCellState == CellState.EMPTY
+                  || (newIndex == 0 && curCellState != this.currentPlayer)) {
+            validInMinus = false;
+            break;
+          } else if (curCellState == this.currentPlayer) {
+            break;
+          }
         }
       }
+    } catch (Exception ex) {
+      return false;
     }
     return validInMinus;
   }
@@ -482,7 +537,7 @@ public class BasicReversi implements ReversiModel {
    */
   @Override
   public boolean isGameOver() {
-    return this.gameState != Status.Playing;
+    return this.gameState != Status.Playing && this.gameState != Status.NotStarted;
   }
 
   /**
@@ -777,7 +832,7 @@ public class BasicReversi implements ReversiModel {
 
     //set first move
     this.currentPlayer = currentPlayer;
-
+    notifyPlayer();
   }
 
   //take a cell and get the move that would go in that cell for that cell

@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 import javax.swing.JFrame;
 
+import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.view.hexgrid.MainPanel;
 
@@ -49,6 +50,17 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     setResizable(true);
     setVisible(true);
 
+  }
+
+  @Override
+  public void addPlayer(CellState viewPlayer) {
+    drawPanel.addPlayer(viewPlayer);
+  }
+
+  @Override
+  public void setVisibleView(boolean visible) {
+    drawPanel.setVisible(visible);
+    this.setVisible(visible);
   }
 
   /**

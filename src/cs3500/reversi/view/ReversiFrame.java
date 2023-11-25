@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
+import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 
 /**
@@ -34,4 +35,8 @@ public interface ReversiFrame {
   HashMap<Point, Point> getMap();
 
   public void setModel(ReadonlyReversiModel model);
+
+  void addPlayer(CellState viewPlayer);
+
+  void setVisibleView(boolean visible);
 }
