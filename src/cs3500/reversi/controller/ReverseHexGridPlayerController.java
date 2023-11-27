@@ -1,6 +1,9 @@
 package cs3500.reversi.controller;
 
 import java.awt.Point;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
@@ -36,120 +40,14 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     this.model = model;
     this.player = player;
     this.view = view;
-    setMouseListener();
+    setListeners();
   }
 
-  /**
-   * Plays the game.
-   */
-  /*
-  @Override
-  public void play() {
-    if (player == null) {
-      throw new IllegalArgumentException("Player is not present!");
-    }
-    setMouseListener();
-    this.playerIndex = 0;
-    while (!this.model.isGameOver()) {
-      Move move = this.players.get(this.playerIndex).play(this.model);
-      try {
-        if (move != null) {
-          if (move.getPosn() != null) {
-            try {
-              this.model.makeMove(move.getPosn().row, move.getPosn().col);
-              this.playerIndex = (this.playerIndex + 1) % this.players.size();
-              System.out.println(model);
-              // check if computer move is enabled
-              if (!this.model.isGameOver()) {
-                move = this.players.get(this.playerIndex).play(this.model);
-                if (move != null) {
-                  if (move.getPosn() != null) {
-                    System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                            move.getPosn().col);
-                    this.model.makeMove(move.getPosn().row, move.getPosn().col);
-                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
-                  } else if (move.isPassTurn()) {
-                    System.out.println("Computer is passing move");
-                    this.model.passTurn();
-                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
-                  }
-                  System.out.println(model);
-                }
-              }
-              // refresh game after both moves
-              view.setModel(this.model);
-              view.repaint();
-            } catch (IllegalArgumentException | IllegalStateException ex) {
-              System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
-               "Message", JOptionPane.ERROR_MESSAGE);
-              view.setModel(this.model);
-              view.repaint();
-            }
-          } else if (move.isPassTurn()) {
-            try {
-              this.model.passTurn();
-              this.playerIndex = (this.playerIndex + 1) % this.players.size();
-              System.out.println(model);
-              // check if computer move is enabled
-              if (!this.model.isGameOver()) {
-                move = this.players.get(this.playerIndex).play(this.model);
-                if (move != null) {
-                  if (move.getPosn() != null) {
-                    System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                            move.getPosn().col);
-                    this.model.makeMove(move.getPosn().row, move.getPosn().col);
-                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
-                  } else if (move.isPassTurn()) {
-                    System.out.println("Computer is passing move");
-                    this.model.passTurn();
-                    this.playerIndex = (this.playerIndex + 1) % this.players.size();
-                  }
-                  System.out.println(model);
-                }
-              }
-              // refresh game after both moves
-              view.setModel(this.model);
-              view.repaint();
-            } catch (IllegalArgumentException | IllegalStateException ex) {
-              System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
-              "Message", JOptionPane.ERROR_MESSAGE);
-              view.setModel(this.model);
-              view.repaint();
-            }
-          } else if (move.isRestartGame()) {
-            this.playerIndex = 0;
-            try {
-              this.model.newGame();
-              view.setModel(this.model);
-              System.out.println(this.model.toString());
-              view.repaint();
-            } catch (IllegalArgumentException | IllegalStateException ex) {
-              System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-              JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
-              "Message", JOptionPane.ERROR_MESSAGE);
-              view.setModel(this.model);
-              view.repaint();
-            }
-          } else if (move.isQuitGame()) {
-            System.out.println(this.model.toString());
-            System.exit(0);
-          }
-        }
-      } catch (Exception ex) {
-        System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-        JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
-        "Message", JOptionPane.ERROR_MESSAGE);
-      }
-    }
-  }
-  */
-
-  private void setMouseListener() {
+  private void setListeners() {
 
     view.setMouseListener(new MyMouseListener(model, view, player));
     view.setMouseMotionListener(new MyMouseListener(model, view, player));
+    view.setKeyListener(new MyKeyListener(model, view, player));
   }
 
   @Override
@@ -417,6 +315,154 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     boolean isColMatch(int y1, int y2) {
       return (Math.abs(y1 - y2) <= 33);
     }
+
   }
+
+  // MyMouseListener class listens for mouse movements.
+  static class MyKeyListener extends KeyAdapter implements KeyListener {
+    ReversiModel model;
+    ReversiFrame view;
+    //int playerIndex;
+    final Player player;
+
+    /**
+     * Constructor for MyMouseListener class.
+     */
+    public MyKeyListener(ReversiModel model, ReversiFrame view,
+                           Player player) {
+      super();
+      this.model = model;
+      this.view = view;
+      this.player = player;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+      //System.out.println("KEY TYPED");
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+      //System.out.println("KEY PRESSED");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+      CellState currentPlayer = this.model.getCurrentPlayer();
+      if (!(currentPlayer != null && currentPlayer.equals(this.player.getPiece()))) {
+        // un highlight cell
+        //Cell.Location currentCell = this.model.getHighlightedCell();
+        this.model.setHighlightedCell(-1, -1);
+
+        view.setModel(this.model);
+        view.repaint();
+        return;
+      }
+      System.out.println("KEY RELEASED");
+
+      this.model.getBoard();
+      int rowsCount = this.model.getRows();
+
+      Cell.Location currentCell = this.model.getHighlightedCell();
+      int row = currentCell.getRow();
+      int col = currentCell.getColumn();
+      if (row <= 0) {
+        row = 0;
+      }
+      if (col <= 0) {
+        col = 0;
+      }
+      int colsCount = model.getColumns(row);
+      if (e.getKeyCode() == KeyEvent.VK_UP) {
+        System.out.println("Up Arrow Key pressed!");
+        if (row > 0) {
+          row--;
+        }
+        // highlight cell
+        this.model.setHighlightedCell(row, col);
+        view.setModel(this.model);
+        view.repaint();
+      } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        System.out.println("Down arrow Key pressed!");
+        if (row+1 < rowsCount) {
+          row++;
+        }
+        // highlight cell
+        this.model.setHighlightedCell(row, col);
+        view.setModel(this.model);
+        view.repaint();
+      } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        System.out.println("Left Arrow Key pressed!");
+        if (col > 0) {
+          col--;
+        }
+        // highlight cell
+        this.model.setHighlightedCell(row, col);
+        view.setModel(this.model);
+        view.repaint();
+      } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        System.out.println("Right Arrow Key pressed!");
+        if (col+1 < colsCount) {
+          col++;
+        }
+        // highlight cell
+        this.model.setHighlightedCell(row, col);
+        view.setModel(this.model);
+        view.repaint();
+      }
+
+      if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        System.out.println("Space Key pressed!");
+        try {
+          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to "
+                  + row + " " + col);
+          this.model.makeMove(row, col);
+          System.out.println("model after move\n" + this.model.toString());
+        } catch (IllegalArgumentException | IllegalStateException ex) {
+          System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                  "Message", JOptionPane.ERROR_MESSAGE);
+          view.setModel(this.model);
+          view.repaint();
+        }
+      }  else if (e.getKeyCode() == KeyEvent.VK_P) {
+        System.out.println("P Key pressed!");
+        System.out.println("Pass Turn button is clicked!");
+        try {
+          System.out.println("Player " + this.model.getCurrentPlayer() + " is is passing turn");
+          this.model.passTurn();
+          System.out.println("model after pass-turn\n" + this.model.toString());
+        } catch (IllegalArgumentException | IllegalStateException ex) {
+          System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+          JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
+                  "Message", JOptionPane.ERROR_MESSAGE);
+          view.setModel(this.model);
+          view.repaint();
+        }
+      } else if (e.getKeyCode() == KeyEvent.VK_R) {
+        System.out.println("R Key pressed!");
+        System.out.println("Restart button is clicked!");
+        try {
+          this.model.newGame();
+          System.out.println("model after restart\n" + this.model.toString());
+          view.setModel(this.model);
+          view.repaint();
+        } catch (IllegalArgumentException | IllegalStateException ex) {
+          System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
+                  "Message", JOptionPane.ERROR_MESSAGE);
+          view.setModel(this.model);
+          view.repaint();
+        }
+
+      } else if (e.getKeyCode() == KeyEvent.VK_Q) {
+        System.out.println("Q Key pressed!");
+        System.out.println("User wants to quit the game!");
+        System.out.println("model before exit\n" + this.model.toString());
+        System.exit(1);
+      }
+    }
+  }
+
 }
 

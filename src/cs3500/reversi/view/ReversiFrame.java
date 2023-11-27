@@ -1,6 +1,7 @@
 package cs3500.reversi.view;
 
 import java.awt.Point;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
@@ -39,4 +40,9 @@ public interface ReversiFrame {
   void addPlayer(CellState viewPlayer);
 
   void setVisibleView(boolean visible);
+
+  /**
+   * This method will be called to set a key listener.
+   */
+  void setKeyListener(KeyListener listener);
 }

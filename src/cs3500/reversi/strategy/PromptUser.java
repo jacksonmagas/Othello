@@ -28,8 +28,8 @@ public class PromptUser implements InfallibleMoveStrategy {
   @Override
   public Move chooseMove(ReversiModel model, CellState player) {
     System.out.println("Enter a move: make-move row col or pass-turn");
-    Move move;
-    while (true) {
+    Move move = null;
+    while (!model.isGameOver()) {
       String moveCommand = input.next();
       if (moveCommand.equalsIgnoreCase("pass-turn")) {
         move = new Move(true, false, false);

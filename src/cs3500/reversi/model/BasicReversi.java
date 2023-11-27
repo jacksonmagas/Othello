@@ -474,6 +474,19 @@ public class BasicReversi implements ReversiModel {
     return horizontalRows.get(row).get(col).getState();
   }
 
+  @Override
+  public int getColumns(int row) {
+    int colsCount = 0;
+    if (row < this.horizontalRows.size()) {
+      colsCount = horizontalRows.get(row).size();
+    }
+    return colsCount;
+  }
+
+  @Override
+  public int getRows() {
+    return this.horizontalRows.size();
+  }
   // makes the move a player prompted
   @Override
   public void makeMove(int row, int index) {
@@ -518,6 +531,7 @@ public class BasicReversi implements ReversiModel {
     }
     if (lastPlayerPassed) {
       this.setWinOrTieGame(true);
+      refreshView();
     } else {
       lastPlayerPassed = true;
       switchTurn();

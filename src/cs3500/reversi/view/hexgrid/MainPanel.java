@@ -10,12 +10,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Stroke;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.ReadonlyReversiModel;
@@ -52,7 +54,97 @@ public class MainPanel extends JPanel {
     this.board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     this.players = new ArrayList<CellState>();
+    setFocusable(true);
+    requestFocusInWindow();
+
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
+    this.getActionMap().put(LEFT, left);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), RIGHT);
+    this.getActionMap().put(RIGHT, right);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), UP);
+    this.getActionMap().put(UP, up);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), DOWN);
+    this.getActionMap().put(DOWN, down);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), P);
+    this.getActionMap().put(P, p);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), R);
+    this.getActionMap().put(R, r);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), Q);
+    this.getActionMap().put(Q, q);
+    this.getInputMap().put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), SPACE);
+    this.getActionMap().put(SPACE, space);
   }
+
+  private static final String LEFT = "Left";
+  private Action left = new AbstractAction(LEFT) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(LEFT);
+    }
+  };
+  private static final String RIGHT = "Right";
+  private Action right = new AbstractAction(RIGHT) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(RIGHT);
+    }
+  };
+
+  private static final String UP = "Up";
+  private Action up = new AbstractAction(UP) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(UP);
+    }
+  };
+
+  private static final String DOWN = "Down";
+  private Action down = new AbstractAction(DOWN) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(DOWN);
+    }
+  };
+
+  private static final String P = "P";
+  private Action p = new AbstractAction(P) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(P);
+    }
+  };
+
+  private static final String R = "R";
+  private Action r = new AbstractAction(R) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(R);
+    }
+  };
+
+  private static final String Q = "Q";
+  private Action q = new AbstractAction(Q) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(Q);
+    }
+  };
+
+  private static final String SPACE = "Space";
+  private Action space = new AbstractAction(SPACE) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(SPACE);
+    }
+  };
 
   /**
    * Adds a player to the view.
@@ -180,16 +272,6 @@ public class MainPanel extends JPanel {
     int half = size / 2;
 
     POINTS_TO_ROW_COLS = new HashMap<Point, Point>();
-    /*
-    System.out.println("size "+size+" half "+half+" board length "+board.length);
-    System.out.println("Printing the game board");
-    for (int row = 0; row < board.length; row++) {
-      for (int col = 0; col < board.length; col++) {
-        System.out.print(board[row][col]);
-      }
-      System.out.println("");
-    }
-    */
     Color defaultValue = null;
     for (int row = 0; row < size; row++) {
       int cols = size - java.lang.Math.abs(row - half);
@@ -251,14 +333,6 @@ public class MainPanel extends JPanel {
 
     }
 
-    // debug
-    /*
-    if (colorValue == null) {
-      colorValue = Color.WHITE;
-    }
-    g.setColor(colorValue);
-    g.drawString(text, x - w/2, y + h/2);
-    */
   }
 
   // coordinate value of a point

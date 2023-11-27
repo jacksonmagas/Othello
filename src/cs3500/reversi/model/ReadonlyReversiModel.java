@@ -76,4 +76,7 @@ public interface ReadonlyReversiModel {
    */
   ReversiModel copy();
 
+  int getColumns(int row);
+
+  int getRows();
 }

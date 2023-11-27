@@ -84,7 +84,7 @@ so we added a method to get the state of each cell.
 7. Hexagon is created to build the Hexagon based grid.
 8. Reversi and ReversiGUI Main classes allows one to play this Reversi game in textual and GUI views.
 9. Make move mouse clicks, Pass Turn button clicks and Restart button clicks are implemented as part of Hexagonal Grid GUI based game.
-10. Strategy pattern is implemented to simulate the computer Move for selected player.
+10. Strategy pattern is implemented to simulate the computer Move for selected player.<br/>
     PromptUser, FirstAvailableOpening moves are implemented.
 11. Player is implemented to run as per his strategical move.
 12. If computer player do not have any valid moves left then computer will automatically pass turn.
@@ -106,12 +106,16 @@ New constructor:
 # Changes for part 3
 Added:
 1. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of ReversiGUI.
-2. Implemented to accept command line strategies from user to simulate the computer player strategy.
-    For example:
-    ReversiGUI "Human" "Strategy1"
-    ReversiGUI "Human" "Strategy2"
-    ReversiGUI "Human" "Strategy3"
+2. Implemented to accept command line strategies from user to simulate the computer player strategy.<br/>
+    For example:<br/>
+    ReversiGUI "Human" "Strategy1"<br/>
+    ReversiGUI "Human" "Strategy2"<br/>
+    ReversiGUI "Human" "Strategy3"<br/>
 3. Implemented 2 Controllers and 2 Views as Part3 requirements as part of Reversi main class method and kept Part 2 implementation as part of previous ReversiGUI main class method.
 4. Your Turn and Refresh View events are implemented to enable Player 2 to simulate the moves as per implemented strategies.
 5. Manifest file is now using cs3500.reversi.Reversi as main class.
+6. Keyboard support is implemented to support below keys using Key Listener, Key Bindings and Key Release event<br/>
+   Up, Down, Left and Right Arrow keys will allow user to move selected cell on the game board.<br/>
+   P for Pass-Turn, R for Restart and Q for Quit will allow user to make actions on the game board.<br/>
+
 

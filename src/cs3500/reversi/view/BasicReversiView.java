@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Point;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
@@ -43,12 +44,14 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     //setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
     drawPanel = new MainPanel(model);
+    drawPanel.setFocusable(true);
     setContentPane(drawPanel);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     pack();
     setLocationRelativeTo(null);
     setResizable(true);
     setVisible(true);
+    setFocusable(true);
 
   }
 
@@ -103,6 +106,13 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   @Override
   public void setMouseMotionListener(MouseMotionListener listener) {
     drawPanel.addMouseMotionListener(listener);
+  }
+
+  // sets the key listener
+  @Override
+  public void setKeyListener(KeyListener listener) {
+    drawPanel.setFocusable(true);
+    drawPanel.addKeyListener(listener);
   }
 
   // gets the hashMap
