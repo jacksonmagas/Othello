@@ -26,22 +26,10 @@ public class ParameterizedMoveTester implements MoveTester {
     this.evalFunc = evalFunc;
   }
 
-  /**
-   * Make the given move in the given model handling passed turns.
-   * @throws IllegalArgumentException if the move is not legal for the model.
-   */
-  private void makeMove(ReversiModel model, Move move) throws IllegalArgumentException {
-    if (move.isPassTurn()) {
-      model.passTurn();
-    } else {
-      model.makeMove(move.getPosn().row, move.getPosn().col);
-    }
-  }
-
   @Override
   public int testMove(Move move) throws IllegalArgumentException {
     ReversiModel testModel = baseModel.copy();
-    makeMove(testModel, move);
+    testModel.makeMove(move);
     return evalFunc.apply(testModel);
   }
 }

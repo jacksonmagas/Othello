@@ -16,7 +16,7 @@ public class Cell {
     /**
      * Constructor for public class Location.
      */
-    Location(int row, int column) {
+    public Location(int row, int column) {
       this.row = row;
       this.column = column;
     }
