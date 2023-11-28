@@ -17,7 +17,7 @@ public interface ReversiModel extends ReadonlyReversiModel {
    * @param row the 0-based indexed from top i.e. the horizontal row number
    * @param column the 0-based indexed from left i.e. vertical column number
    * @throws IllegalArgumentException if either input parameters are invalid
-   * @throws IllegalStateException if the move is not allowable or if game is over!
+   * @throws IllegalStateException if the game is over!
    */
   void makeMove(int row, int column);
 
@@ -25,7 +25,8 @@ public interface ReversiModel extends ReadonlyReversiModel {
    * Allow current player to make the given move, which is either a pass or a valid move
    * of the game.
    * @param move the move to make
-   * @throws IllegalStateException if the move is not allowable or if game is over!
+   * @throws IllegalArgumentException if either input parameters are invalid
+   * @throws IllegalStateException if the game is over!
    */
   void makeMove(Move move);
 

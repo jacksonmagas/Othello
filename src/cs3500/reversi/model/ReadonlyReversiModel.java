@@ -52,12 +52,16 @@ public interface ReadonlyReversiModel {
    */
   boolean anyLegalMoves();
 
+  //TODO
   Cell.Location getFirstAvailableMove();
 
+  //TODO
   String getNextStepInstructions();
 
+  //TODO
   String getLastErrorMessage();
 
+  //TODO
   CellState getPieceAt(int r, int c);
 
   /**
@@ -76,7 +80,17 @@ public interface ReadonlyReversiModel {
    */
   ReversiModel copy();
 
+
+  /**
+   * Get the number of columns in the given row if the row exists in this game.
+   * @param row the row whose length to get
+   * @return the length of the row
+   */
   int getColumns(int row);
 
+  /**
+   * Get the total number of rows in the board for this game.
+   * @return the total number of rows
+   */
   int getRows();
 }

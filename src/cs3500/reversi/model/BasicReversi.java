@@ -495,7 +495,7 @@ public class BasicReversi implements ReversiModel {
       //lastErrorMessage = "Input parameters either row or column is invalid!";
       //throw new IllegalArgumentException("Input parameters either row or column is invalid!");
       lastErrorMessage = "There is no legal move at " + row + ", " + index + ".";
-      throw new IllegalStateException("There is no legal move at " + row + ", " + index + ".");
+      throw new IllegalArgumentException("There is no legal move at " + row + ", " + index + ".");
     }
     if (isGameOver()) {
       lastErrorMessage = "Game is over!";
@@ -508,7 +508,7 @@ public class BasicReversi implements ReversiModel {
       lastErrorMessage = "";
     } else {
       lastErrorMessage = "There is no legal move at " + row + ", " + index + ".";
-      throw new IllegalStateException("There is no legal move at " + row + ", " + index + ".");
+      throw new IllegalArgumentException("There is no legal move at " + row + ", " + index + ".");
     }
   }
 
