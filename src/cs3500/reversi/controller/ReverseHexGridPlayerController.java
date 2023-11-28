@@ -384,7 +384,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         view.repaint();
       } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
         System.out.println("Down arrow Key pressed!");
-        if (row+1 < rowsCount) {
+        if (row + 1 < rowsCount) {
           row++;
         }
         // highlight cell
@@ -402,7 +402,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         view.repaint();
       } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
         System.out.println("Right Arrow Key pressed!");
-        if (col+1 < colsCount) {
+        if (col + 1 < colsCount) {
           col++;
         }
         // highlight cell

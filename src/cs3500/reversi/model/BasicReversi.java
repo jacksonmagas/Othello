@@ -487,6 +487,7 @@ public class BasicReversi implements ReversiModel {
   public int getRows() {
     return this.horizontalRows.size();
   }
+
   // makes the move a player prompted
   @Override
   public void makeMove(int row, int index) {

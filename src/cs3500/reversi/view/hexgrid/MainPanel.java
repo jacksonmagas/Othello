@@ -17,7 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.ReadonlyReversiModel;
