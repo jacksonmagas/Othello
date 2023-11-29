@@ -10,10 +10,14 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 
 /**
- * Interface ReversiFrame creates frame.
+ * Interface ReversiFrame creates frame for Reversi game. Sets the mouse/key listeners, view
+ * and size for the game.
  */
 public interface ReversiFrame {
 
+  /**
+   * Adds a feature listener to the reversiFrame.
+   */
   void addFeatureListener(ViewFeatures features);
 
   /**
@@ -36,7 +40,9 @@ public interface ReversiFrame {
    */
   public void repaint();
 
-  //TODO javadoc
+  /**
+   * Gets the map for ReversiFrame.
+   */
   HashMap<Point, Point> getMap();
 
   /**

@@ -16,7 +16,8 @@ import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.view.hexgrid.MainPanel;
 
 /**
- * BasicReversiView creates a frame for a view.
+ * BasicReversiView creates a frame for a view extending JFrame and implementing the ReversiFrame.
+ * It sets the size, model, view and mouse/key listeners for the game.
  */
 public class BasicReversiView extends JFrame implements ReversiFrame {
 
