@@ -65,7 +65,6 @@ public class ExamplarControllerTests {
     assertTrue(out.toString().contains("Player two Score: 3"));
     System.out.println(out);
     assertTrue(out.toString().contains("Game is over!"));
-
   }
 
   @Test

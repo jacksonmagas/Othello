@@ -244,7 +244,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   private void notifyPlayer() {
-    if (!this.isGameOver()) {
+    if (!this.isGameOver() && !listeners.isEmpty()) {
       // Notify controller that has current turn
       for (YourTurnListener listener : listeners) {
         if (listener != null && listener.getPlayer().equals(this.currentPlayer)) {

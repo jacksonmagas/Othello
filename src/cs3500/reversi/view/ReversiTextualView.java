@@ -8,7 +8,7 @@ import cs3500.reversi.model.ReadonlyReversiModel;
  * A simple text-based rendering of the Klondike game.
  */
 public class ReversiTextualView implements TextualView {
-  private ReadonlyReversiModel model;
+  private final ReadonlyReversiModel model;
   private Appendable out;
 
   /**
@@ -28,9 +28,7 @@ public class ReversiTextualView implements TextualView {
 
   @Override
   public String toString() {
-    StringBuffer buffer = new StringBuffer();
-    buffer.append(this.model.toString());
-    return buffer.toString();
+    return this.model.toString();
   }
 
   /**

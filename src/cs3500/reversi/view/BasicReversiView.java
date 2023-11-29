@@ -1,19 +1,15 @@
 package cs3500.reversi.view;
 
+import cs3500.reversi.model.CellState;
+import cs3500.reversi.model.ReadonlyReversiModel;
+import cs3500.reversi.view.hexgrid.MainPanel;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
-
 import javax.swing.JFrame;
-
-import cs3500.reversi.model.CellState;
-import cs3500.reversi.model.ReadonlyReversiModel;
-import cs3500.reversi.view.hexgrid.MainPanel;
 
 /**
  * BasicReversiView creates a frame for a view.
@@ -28,16 +24,12 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     // adds feature listener
   }
 
-  private MainPanel drawPanel;
-
-  private Font font = new Font("Arial", Font.BOLD, 22);
-
-  FontMetrics metrics;
+  private final MainPanel drawPanel;
 
   /**
    * Constructor for BasicReversiView.
    */
-  public BasicReversiView(int width, int height, ReadonlyReversiModel model) {
+  public BasicReversiView(ReadonlyReversiModel model) {
     setTitle("Reversi Hex Grid Game");
 
     setSize(new Dimension(WIDTH, HEIGHT));

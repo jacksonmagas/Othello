@@ -33,7 +33,7 @@ public class MainPanel extends JPanel {
 
   private final int HEIGHT = 764;
 
-  private Font font = new Font("Arial", Font.BOLD, 12);
+  private final Font font = new Font("Arial", Font.BOLD, 12);
 
   FontMetrics metrics;
 
@@ -47,107 +47,107 @@ public class MainPanel extends JPanel {
 
   private ReadonlyReversiModel model;
 
-  public static HashMap<Point, Point> POINTS_TO_ROW_COLS = new HashMap<Point, Point>();
+  public static HashMap<Point, Point> POINTS_TO_ROW_COLS = new HashMap<>();
 
   /**
    * Constructor for MainPanel class.
    */
   public MainPanel(ReadonlyReversiModel model) {
     this.model = model;
-    this.board = model.getBoard();
+    board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    this.players = new ArrayList<CellState>();
+    this.players = new ArrayList<>();
     setFocusable(true);
     requestFocusInWindow();
 
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
+    Action left = new AbstractAction(LEFT) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(LEFT);
+      }
+    };
     this.getActionMap().put(LEFT, left);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), RIGHT);
+    Action right = new AbstractAction(RIGHT) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(RIGHT);
+      }
+    };
     this.getActionMap().put(RIGHT, right);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), UP);
+    Action up = new AbstractAction(UP) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(UP);
+      }
+    };
     this.getActionMap().put(UP, up);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), DOWN);
+    Action down = new AbstractAction(DOWN) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(DOWN);
+      }
+    };
     this.getActionMap().put(DOWN, down);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), P);
+    Action p = new AbstractAction(P) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(P);
+      }
+    };
     this.getActionMap().put(P, p);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), R);
+    Action r = new AbstractAction(R) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(R);
+      }
+    };
     this.getActionMap().put(R, r);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), Q);
+    Action q = new AbstractAction(Q) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(Q);
+      }
+    };
     this.getActionMap().put(Q, q);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), SPACE);
+    Action space = new AbstractAction(SPACE) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(SPACE);
+      }
+    };
     this.getActionMap().put(SPACE, space);
   }
 
   private static final String LEFT = "Left";
-  private Action left = new AbstractAction(LEFT) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(LEFT);
-    }
-  };
   private static final String RIGHT = "Right";
-  private Action right = new AbstractAction(RIGHT) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(RIGHT);
-    }
-  };
 
   private static final String UP = "Up";
-  private Action up = new AbstractAction(UP) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(UP);
-    }
-  };
 
   private static final String DOWN = "Down";
-  private Action down = new AbstractAction(DOWN) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(DOWN);
-    }
-  };
 
   private static final String P = "P";
-  private Action p = new AbstractAction(P) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(P);
-    }
-  };
 
   private static final String R = "R";
-  private Action r = new AbstractAction(R) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(R);
-    }
-  };
 
   private static final String Q = "Q";
-  private Action q = new AbstractAction(Q) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(Q);
-    }
-  };
 
   private static final String SPACE = "Space";
-  private Action space = new AbstractAction(SPACE) {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println(SPACE);
-    }
-  };
 
   /**
    * Adds a player to the view.
@@ -161,11 +161,11 @@ public class MainPanel extends JPanel {
    */
   public void setModel(ReadonlyReversiModel model) {
     this.model = model;
-    this.board = model.getBoard();
+    board = model.getBoard();
     Cell.Location location = model.getHighlightedCell();
     this.currentRow = location.getRow();
     this.currentCol = location.getColumn();
-    CellState currentPlayer = model.getCurrentPlayer();
+    model.getCurrentPlayer();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
   }
 
@@ -190,11 +190,10 @@ public class MainPanel extends JPanel {
   // draws the restart button
   private void drawRestartButton(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
-    Graphics2D g2d = (Graphics2D) g;
     int x2 = centered ? origin.x - radius : origin.x;
     int y2 = centered ? origin.y - radius : origin.y;
 
-    StringBuffer text = new StringBuffer();
+    StringBuilder text = new StringBuilder();
     text.append("Restart");
     int w = metrics.stringWidth(text.toString());
     int h = metrics.getHeight();
@@ -209,11 +208,10 @@ public class MainPanel extends JPanel {
   // draws the passTurn button
   private void drawPassTurnButton(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
-    Graphics2D g2d = (Graphics2D) g;
     int x2 = centered ? origin.x - radius : origin.x;
     int y2 = centered ? origin.y - radius : origin.y;
 
-    StringBuffer text = new StringBuffer();
+    StringBuilder text = new StringBuilder();
     text.append("Pass Turn");
     int w = metrics.stringWidth(text.toString());
     int h = metrics.getHeight();
@@ -229,11 +227,10 @@ public class MainPanel extends JPanel {
   private void drawStatusMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
 
-    Graphics2D g2d = (Graphics2D) g;
     int x2 = centered ? origin.x - radius : origin.x;
     int y2 = centered ? origin.y - radius : origin.y;
 
-    StringBuffer text = new StringBuffer();
+    StringBuilder text = new StringBuilder();
     //text.append(model.getCurrentPlayer());
     text.append("Player one Score: ");
     text.append(model.getPlayerScore(CellState.BLACK));
@@ -244,26 +241,25 @@ public class MainPanel extends JPanel {
     text.append(model.getNextStepInstructions());
     int w = metrics.stringWidth(text.toString());
     int h = metrics.getHeight();
-    g2d.setColor(colorValue);
-    int xpos = (x2 + w / 2) > 188 ? 188 : (x2 + w / 2);
-    g2d.drawString(text.toString(), xpos, y2 + h * 2);
+    g.setColor(colorValue);
+    int xpos = Math.min((x2 + w / 2), 188);
+    g.drawString(text.toString(), xpos, y2 + h * 2);
   }
 
   // draws the error messages
   private void drawErrorMessages(Graphics2D g, Point origin, int radius,
                                   boolean centered, Color colorValue) {
     //System.out.println("Error "+model.getLastErrorMessage());
-    Graphics2D g2d = (Graphics2D) g;
-    if (model.getLastErrorMessage().length() > 0) {
+    if (!model.getLastErrorMessage().isEmpty()) {
       int x2 = centered ? origin.x - radius : origin.x;
       int y2 = centered ? origin.y - radius : origin.y;
 
-      StringBuffer text = new StringBuffer();
+      StringBuilder text = new StringBuilder();
       text.append(model.getLastErrorMessage());
       int w = metrics.stringWidth(text.toString());
       int h = metrics.getHeight();
-      g2d.setColor(colorValue);
-      g2d.drawString(text.toString(), x2 + w + 72, y2 + h * 4);
+      g.setColor(colorValue);
+      g.drawString(text.toString(), x2 + w + 72, y2 + h * 4);
     }
   }
 
@@ -274,14 +270,14 @@ public class MainPanel extends JPanel {
     double yOff = Math.sin(ang30) * (radius + padding);
     int half = size / 2;
 
-    POINTS_TO_ROW_COLS = new HashMap<Point, Point>();
-    Color defaultValue = null;
+    POINTS_TO_ROW_COLS = new HashMap<>();
+    Color defaultValue;
     for (int row = 0; row < size; row++) {
       int cols = size - java.lang.Math.abs(row - half);
       //System.out.println("cols "+cols);
       for (int col = 0; col < cols; col++) {
-        int xLbl = row < half ? col - row : col - half;
-        int yLbl = row - half;
+        int xLbl;
+        int yLbl;
         xLbl = row;
         yLbl = col;
         int x = (int) (origin.x + xOff * (col * 2 + 1 - cols));
@@ -316,17 +312,16 @@ public class MainPanel extends JPanel {
 
     Hexagon hex = new Hexagon(x, y, r);
 
-    char bulletSymbol = '⚪';
     String text = String.format("%s : %s", coord(posX), coord(posY));
     int w = metrics.stringWidth(text);
     int h = metrics.getHeight();
 
     if (hightlightColor != null) {
-      hex.draw(g2d, x, y, 0, hightlightColor, true);
+      hex.draw(g2d, 0, hightlightColor, true);
     } else {
-      hex.draw(g2d, x, y, 0, Color.GRAY, true);
+      hex.draw(g2d, 0, Color.GRAY, true);
     }
-    hex.draw(g2d, x, y, 4, Color.DARK_GRAY, false);
+    hex.draw(g2d, 4, Color.DARK_GRAY, false);
 
 
     if (colorValue != null) {
@@ -340,7 +335,7 @@ public class MainPanel extends JPanel {
 
   // coordinate value of a point
   private String coord(int value) {
-    return (value > 0 ? "+" : "") + Integer.toString(value);
+    return (value > 0 ? "+" : "") + value;
   }
 
   /**

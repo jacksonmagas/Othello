@@ -10,6 +10,8 @@ public interface ViewFeatures {
    */
   void selectedCell();
 
+  //TODO: selecting cell and making move should be separate
+
   /**
    * A game of reversi can be quit.
    */

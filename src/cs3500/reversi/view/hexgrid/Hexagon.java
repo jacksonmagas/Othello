@@ -16,9 +16,10 @@ public class Hexagon extends Polygon {
 
   public static final int SIDES = 6;
 
-  private Point[] points;
+  //TODO: this isn't read for some reason
+  private final Point[] points;
 
-  private Point center = new Point(0, 0);
+  private Point center;
 
   private int radius;
 
@@ -115,7 +116,7 @@ public class Hexagon extends Polygon {
   /**
    * Draws the hexagon.
    */
-  public void draw(Graphics2D g, int x, int y, int lineThickness,
+  public void draw(Graphics2D g, int lineThickness,
                    Color colorValue, boolean filled) {
     // Store before changing.
     Stroke tmpS = g.getStroke();

@@ -25,7 +25,7 @@ import cs3500.reversi.view.ReversiFrame;
 public class ReverseHexGridController implements ReversiPlayerStrategyController {
 
   private final ReversiModel model;
-  private ReversiFrame view;
+  private final ReversiFrame view;
 
   private int playerIndex;
   private final List<Player> players;
@@ -61,11 +61,6 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
     }
     this.model.startGame();
     this.view.setVisibleView(true);
-    /*
-    int WIDTH = 1200;
-    int HEIGHT = 800;
-    this.view = new BasicReversiView(WIDTH, HEIGHT, model);
-    */
     setMouseListener();
     this.playerIndex = 0;
     while (!this.model.isGameOver()) {
@@ -141,7 +136,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             try {
               this.model.newGame();
               view.setModel(this.model);
-              System.out.println(this.model.toString());
+              System.out.println(this.model);
               view.repaint();
             } catch (IllegalArgumentException | IllegalStateException ex) {
               System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
@@ -151,7 +146,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               view.repaint();
             }
           } else if (move.isQuitGame()) {
-            System.out.println(this.model.toString());
+            System.out.println(this.model);
             System.exit(0);
           }
         }
@@ -203,10 +198,7 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       // vertical cell distance 33
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       this.model.getBoard();
-      //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
-      //System.out.println("Component "+e.getComponent().toString());
-      //System.out.println("Source "+e.getSource());
+
       int row = -1;
       int col = -1;
       if (rowCol != null) {
@@ -237,10 +229,6 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
       // vertical cell distance 33
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       this.model.getBoard();
-      //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
-      //System.out.println("Component "+e.getComponent().toString());
-      //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
         //System.out.println("row " + rowCol.x + " col " + rowCol.y);
         int row = rowCol.x;

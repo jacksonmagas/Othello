@@ -6,10 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -59,7 +57,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   @Override
   public void yourTurn() {
     System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer() +
-            " with model\n" + this.model.toString());
+            " with model\n" + this.model);
     // Make view visible
     view.setModel(this.model);
     view.repaint();
@@ -77,7 +75,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
         this.model.passTurn();
       }
-      System.out.println("model after move\n" + model.toString());
+      System.out.println("model after move\n" + model);
       view.repaint();
     }
   }
@@ -98,14 +96,6 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       System.out.println("That was an illegal move.");
       makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
-  }
-
-  @Override
-  public void refreshView() {
-    System.out.println("Refresh View event received for player " + this.model.getCurrentPlayer() +
-            " with model\n" + this.model.toString());
-    view.setModel(this.model);
-    view.repaint();
   }
 
   // MyMouseListener class listens for mouse movements.

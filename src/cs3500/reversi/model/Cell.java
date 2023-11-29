@@ -6,7 +6,7 @@ package cs3500.reversi.model;
 public class Cell {
 
   private CellState state;
-  private Location location;
+  private final Location location;
 
   /**
    * A location with row 0 indexed from top, and column 0 indexed from right.

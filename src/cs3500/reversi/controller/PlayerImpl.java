@@ -1,13 +1,9 @@
 package cs3500.reversi.controller;
 
-import java.util.Optional;
-
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.strategy.FallibleMoveStrategy;
-import cs3500.reversi.strategy.Move;
 import cs3500.reversi.strategy.InfallibleMoveStrategy;
-import cs3500.reversi.strategy.MoveStrategy;
+import cs3500.reversi.strategy.Move;
 
 /**
  * A simple Player implementation that delegates most of its

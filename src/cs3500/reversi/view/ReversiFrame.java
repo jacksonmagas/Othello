@@ -34,16 +34,19 @@ public interface ReversiFrame {
   /**
    * Redraws the view.
    */
-  public void repaint();
+  void repaint();
 
-  //TODO javadoc
+  /**
+   * Get a map from points on the GUI to the corresponding logical coordinates for the game
+   * @return The map from point to coordinate
+   */
   HashMap<Point, Point> getMap();
 
   /**
    * Sets the model that the main panel will use to draw the game.
    * @param model the model to draw.
    */
-  public void setModel(ReadonlyReversiModel model);
+  void setModel(ReadonlyReversiModel model);
 
   /**
    * Add the given player to the view. //TODO: the view doesn't seem to interact with the player. Is this an oversight?

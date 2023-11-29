@@ -61,7 +61,12 @@ public interface ReadonlyReversiModel {
   //TODO
   String getLastErrorMessage();
 
-  //TODO
+  /**
+   * Get the state of the piece at the given location.
+   * @param r the row of the piece
+   * @param c the column of the piece
+   * @return the state of the piece at that row
+   */
   CellState getPieceAt(int r, int c);
 
   /**

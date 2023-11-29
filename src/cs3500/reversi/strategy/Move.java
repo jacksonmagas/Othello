@@ -45,7 +45,7 @@ public class Move {
     return quitGame;
   }
 
-  // gets the positon
+  // gets the position
   public Posn getPosn() {
     return posn;
   }

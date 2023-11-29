@@ -65,8 +65,8 @@ public class Reversi {
     }
 
     ReversiModel reversi = new BasicReversi(noOfCells);
-    ReversiFrame viewPlayer1 = new BasicReversiView(width, height, reversi);
-    ReversiFrame viewPlayer2 = new BasicReversiView(width, height, reversi);
+    ReversiFrame viewPlayer1 = new BasicReversiView(reversi);
+    ReversiFrame viewPlayer2 = new BasicReversiView(reversi);
 
     Player player1 = getPlayerUsingStrategy(player1Strategy, CellState.BLACK);
     Player player2 = getPlayerUsingStrategy(player2Strategy, CellState.WHITE);
