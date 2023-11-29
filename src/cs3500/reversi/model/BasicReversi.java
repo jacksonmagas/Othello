@@ -45,7 +45,7 @@ public class BasicReversi implements ReversiModel {
 
   private CellState winner;
 
-  private List<YourTurnListener> listeners = new ArrayList<YourTurnListener>();
+  private final List<YourTurnListener> listeners = new ArrayList<>();
 
   /**
    * Detailed constructor for reversi game that allows creating a specified board state.
@@ -118,8 +118,7 @@ public class BasicReversi implements ReversiModel {
 
     //set first move
     this.currentPlayer = currentPlayer;
-    System.out.println("Initial model\n" + this.toString());
-    notifyPlayer();
+    System.out.println("Initial model\n" + this);
   }
 
   /**
@@ -242,36 +241,17 @@ public class BasicReversi implements ReversiModel {
   // switch the current player at end of turn
   private void switchTurn() {
     this.currentPlayer = this.currentPlayer.opposite();
-    //System.out.println("switchTurn model\n" + this.toString());
-    notifyPlayer();
   }
 
   private void notifyPlayer() {
-    //System.out.println("notifyPlayer method invoked for player "+this.currentPlayer);
-    if (!this.isGameOver() && CellState.WHITE.equals(this.currentPlayer)) {
+    if (!this.isGameOver()) {
       // Notify controller that has current turn
       for (YourTurnListener listener : listeners) {
-        if (listener != null && listener.getPlayer().equals(CellState.WHITE)) {
-          //System.out.println("notifyPlayer event is sent for player "+CellState.WHITE);
+        if (listener != null && listener.getPlayer().equals(this.currentPlayer)) {
           listener.yourTurn();
         }
       }
-    }
-  }
-
-  /**
-   * Refreshes the view of the game.
-   */
-  public void refreshView() {
-    //System.out.println("refreshView method invoked for player "+this.currentPlayer);
-    if (CellState.BLACK.equals(this.currentPlayer)) {
-      // Notify controller to refresh view
-      for (YourTurnListener listener : listeners) {
-        if (listener != null && listener.getPlayer().equals(CellState.BLACK)) {
-          //System.out.println("refreshView event is sent for player " + CellState.BLACK);
-          listener.refreshView();
-        }
-      }
+      notifyPlayer();
     }
   }
 
@@ -437,9 +417,8 @@ public class BasicReversi implements ReversiModel {
   // sets the game to win or tie
   private void setWinOrTieGame(boolean passTurnsReached) {
     int totalCells = 37;
-    if ((!passTurnsReached
-            && playerScores.get(CellState.BLACK) + playerScores.get(CellState.WHITE) == totalCells)
-            || (passTurnsReached)) {
+    if (passTurnsReached
+        || playerScores.get(CellState.BLACK) + playerScores.get(CellState.WHITE) == totalCells) {
       if (playerScores.get(CellState.BLACK).equals(playerScores.get(CellState.WHITE))) {
         this.gameState = Status.Tied;
       } else {
@@ -532,7 +511,6 @@ public class BasicReversi implements ReversiModel {
     }
     if (lastPlayerPassed) {
       this.setWinOrTieGame(true);
-      refreshView();
     } else {
       lastPlayerPassed = true;
       switchTurn();
@@ -849,9 +827,8 @@ public class BasicReversi implements ReversiModel {
       incrementScore(CellState.WHITE);
     }
 
-    //set first move
-    this.currentPlayer = currentPlayer;
-    notifyPlayer();
+    //restart
+    this.startGame();
   }
 
   //take a cell and get the move that would go in that cell for that cell

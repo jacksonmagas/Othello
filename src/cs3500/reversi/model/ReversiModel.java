@@ -25,7 +25,7 @@ public interface ReversiModel extends ReadonlyReversiModel {
    * Allow current player to make the given move, which is either a pass or a valid move
    * of the game.
    * @param move the move to make
-   * @throws IllegalArgumentException if either input parameters are invalid
+   * @throws IllegalArgumentException if the move is not valid
    * @throws IllegalStateException if the game is over!
    */
   void makeMove(Move move);
@@ -50,7 +50,9 @@ public interface ReversiModel extends ReadonlyReversiModel {
    */
   void startGame();
 
+  /**
+   * Add a new controller that will be notified whenever it is their turn.
+   * @param listener A controller that will listen for their turn
+   */
   void addYourTurnListener(YourTurnListener listener);
-
-  void refreshView();
 }

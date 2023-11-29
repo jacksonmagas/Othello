@@ -17,13 +17,13 @@ import cs3500.reversi.strategy.MoveStrategy;
 public class PlayerImpl implements Player {
 
   private final CellState piece;
-  private final MoveStrategy moveStrategy;
+  private final InfallibleMoveStrategy moveStrategy;
 
 
   /**
    * Constructor for PlayerImp class.
    */
-  public PlayerImpl(CellState piece, MoveStrategy strategy) {
+  public PlayerImpl(CellState piece, InfallibleMoveStrategy strategy) {
     this.piece = piece;
     this.moveStrategy = strategy;
   }
@@ -33,18 +33,7 @@ public class PlayerImpl implements Player {
    */
   @Override
   public Move play(ReversiModel model) {
-    if (moveStrategy instanceof FallibleMoveStrategy) {
-      Optional<Move> move = ((FallibleMoveStrategy)moveStrategy).chooseMove(model, this.piece);
-      if (move != null && move.isPresent()) {
-        Move movePresent = move.get();
-        return movePresent;
-      } else {
-        return new Move(true, false, false);
-      }
-    } else if (moveStrategy instanceof InfallibleMoveStrategy) {
-      return ((InfallibleMoveStrategy)moveStrategy).chooseMove(model, this.piece);
-    }
-    return new Move(true, false, false);
+    return moveStrategy.chooseMove(model, this.piece);
   }
 
   /**

@@ -27,7 +27,7 @@ import cs3500.reversi.view.ReversiFrame;
 public class ReverseHexGridPlayerController implements YourTurnListener {
 
   private final ReversiModel model;
-  private ReversiFrame view;
+  private final ReversiFrame view;
   private final Player player;
 
   /**
@@ -44,7 +44,6 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   }
 
   private void setListeners() {
-
     view.setMouseListener(new MyMouseListener(model, view, player));
     view.setMouseMotionListener(new MyMouseListener(model, view, player));
     view.setKeyListener(new MyKeyListener(model, view, player));
@@ -61,7 +60,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
             " with model\n" + this.model.toString());
     // Make view visible
     view.setModel(this.model);
-    //view.repaint();
+    view.repaint();
     //view.setVisibleView(false);
 
     // check if computer move is enabled
@@ -71,20 +70,31 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
                 move.getPosn().row + " " +
                 move.getPosn().col);
-        this.model.makeMove(move.getPosn().row, move.getPosn().col);
-        //System.out.println(model.toString());
-        //this.playerIndex = (this.playerIndex + 1) % this.players.size();
+        makeMoveUntilLegalOrTooManyAttempts(move, 0);
       } else if (move.isPassTurn()) {
         System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
         this.model.passTurn();
-        //System.out.println(model.toString());
-        //this.playerIndex = (this.playerIndex + 1) % this.players.size();
       }
       System.out.println("model after move\n" + model.toString());
-      view.setModel(this.model);
-      //view.repaint();
-      //view.setVisibleView(false);
-      this.model.refreshView();
+      view.repaint();
+    }
+  }
+
+  /**
+   * Make the given move and if it is not a legal move ask the player to play another move.
+   * @param move the move to attempt to play
+   * @param numAttempts the number of move attempts played so far
+   * @throws IllegalStateException if more than 100 illegal moves in a row are made
+   */
+  private void makeMoveUntilLegalOrTooManyAttempts(Move move, int numAttempts) {
+    if (numAttempts > 100) {
+      throw new IllegalStateException("Too many invalid moves provided.");
+    }
+    try {
+      this.model.makeMove(move);
+    } catch (IllegalArgumentException e) {
+      System.out.println("That was an illegal move.");
+      makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
   }
 

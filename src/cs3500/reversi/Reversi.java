@@ -17,17 +17,20 @@ import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 
 /**
- * Represent a Reversi game class as proposed in Part3 requirements.
+ * Represent a Reversi game class which creates two views of reversi, one for each player.
+ * The main expects 3 command line arguments: an integer representing the size of the board,
+ * the strategy for the first player, and the strategy for the second player.
+ *
  */
 public class Reversi {
 
-  static final String HUMAN = "HUMAN";
-  static final String STRATEGY1 = "Strategy1";
-  static final String STRATEGY2 = "Strategy2";
-  static final String STRATEGY3 = "Strategy3";
-  static final String STRATEGY4 = "Strategy4";
-  static final String STRATEGY5 = "Strategy5";
-  static final String STRATEGY6 = "Strategy6";
+  static final String HUMAN = "human";
+  static final String STRATEGY1 = "firstmove";
+  static final String STRATEGY2 = "highestscoring";
+  static final String STRATEGY3 = "combined";
+  static final String STRATEGY4 = "minimax";
+  //static final String STRATEGY5 = "Strategy5";
+  //static final String STRATEGY6 = "Strategy6";
 
   /**
    * Constructor for Reversi public class.
@@ -75,28 +78,28 @@ public class Reversi {
     reversi.addYourTurnListener(controller1);
     reversi.addYourTurnListener(controller2);
     viewPlayer1.setVisibleView(true);
-    viewPlayer2.setVisibleView(false);
+    viewPlayer2.setVisibleView(true);
     reversi.startGame();
   }
 
   // gets player using strategy
   private static Player getPlayerUsingStrategy(String strategy, CellState cellState) {
     Player player;
-    if (STRATEGY1.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new FirstAvailableOpening());
-    } else if (STRATEGY2.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new BasicMinimaxStrategy());
-    } else if (STRATEGY3.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new HighestScoringMove());
-    } else if (STRATEGY4.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new CombinedMoveStrategy());
-    } else if (STRATEGY5.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new CornersStrategy());
-    } else if (STRATEGY6.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new PassIfWin());
-    } else {
-      // defaults to HUMAN Strategy
-      player = new PlayerImpl(cellState, new PromptUser());
+    switch (strategy.toLowerCase()) {
+      case STRATEGY1:
+        player = new PlayerImpl(cellState, new FirstAvailableOpening());
+        break;
+      case STRATEGY2:
+        player = new PlayerImpl(cellState, new BasicMinimaxStrategy());
+        break;
+      case STRATEGY3:
+        player = new PlayerImpl(cellState, new HighestScoringMove());
+        break;
+      case STRATEGY4:
+        player = new PlayerImpl(cellState, new CombinedMoveStrategy());
+        break;
+      default:
+        player = new PlayerImpl(cellState, new PromptUser());
     }
     return player;
   }

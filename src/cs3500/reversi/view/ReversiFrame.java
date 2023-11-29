@@ -31,14 +31,30 @@ public interface ReversiFrame {
    */
   void setMouseMotionListener(MouseMotionListener listener);
 
+  /**
+   * Redraws the view.
+   */
   public void repaint();
 
+  //TODO javadoc
   HashMap<Point, Point> getMap();
 
+  /**
+   * Sets the model that the main panel will use to draw the game.
+   * @param model the model to draw.
+   */
   public void setModel(ReadonlyReversiModel model);
 
+  /**
+   * Add the given player to the view. //TODO: the view doesn't seem to interact with the player. Is this an oversight?
+   * @param viewPlayer the player to add to the view
+   */
   void addPlayer(CellState viewPlayer);
 
+  /**
+   * Make the view visible or invisible.
+   * @param visible A boolean representing whether the view should be visible
+   */
   void setVisibleView(boolean visible);
 
   /**

@@ -43,7 +43,7 @@ public class MainPanel extends JPanel {
 
   private int currentCol = 0;
 
-  private List<CellState> players;
+  private final List<CellState> players;
 
   private ReadonlyReversiModel model;
 

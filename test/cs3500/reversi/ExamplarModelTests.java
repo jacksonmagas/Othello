@@ -639,4 +639,7 @@ public class ExamplarModelTests {
                     "Player one turn (Black)!\n",
             model.toString());
   }
+
+  //TODO test legal moves near corners (and illegal moves)
+  //right now if you have _XX the game will accept O in the blank and flip all the black tiles
 }
