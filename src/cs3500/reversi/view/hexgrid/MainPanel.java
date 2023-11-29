@@ -182,7 +182,6 @@ public class MainPanel extends JPanel {
     drawRectangle(g2d, origin, 380, true, true, Color.BLACK, 0);
     drawHexGridLoop(g2d, origin, 7, 50, 1);
     drawStatusMessages(g2d, origin, 380, true, Color.WHITE);
-    //drawErrorMessages(g2d, origin, 380, true, Color.RED);
     drawPassTurnButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
     drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
   }
@@ -231,7 +230,6 @@ public class MainPanel extends JPanel {
     int y2 = centered ? origin.y - radius : origin.y;
 
     StringBuilder text = new StringBuilder();
-    //text.append(model.getCurrentPlayer());
     text.append("Player one Score: ");
     text.append(model.getPlayerScore(CellState.BLACK));
     text.append(", ");
