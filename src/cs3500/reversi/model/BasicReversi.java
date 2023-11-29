@@ -827,6 +827,8 @@ public class BasicReversi implements ReversiModel {
       incrementScore(CellState.WHITE);
     }
 
+    this.gameState = Status.NotStarted;
+
     //restart
     this.startGame();
   }
