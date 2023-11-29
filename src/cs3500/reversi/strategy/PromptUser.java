@@ -1,6 +1,5 @@
 package cs3500.reversi.strategy;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
@@ -30,41 +29,23 @@ public class PromptUser implements InfallibleMoveStrategy {
   public Move chooseMove(ReversiModel model, CellState player) {
     System.out.println("Enter a move: make-move row col or pass-turn");
     Move move = null;
-    waitForInput: while (!model.isGameOver()) {
-      String moveCommand = input.next().toLowerCase();
-      switch (moveCommand) {
-        case "pass-turn":
-          move = new Move(true, false, false);
-          break waitForInput;
-        case "make-move":
-          //System.out.println("Enter a row and column");
-          int r = -1;
-          int c = -1;
-          boolean rAssigned = false;
-          while (input.hasNext()) {
-            if (input.hasNextInt()) {
-              if (!rAssigned) {
-                r = input.nextInt();
-                rAssigned = true;
-              } else {
-                c = input.nextInt();
-                break;
-              }
-            } else {
-              input.next();
-            }
-          }
-          if (r == -1 || c == -1) {
-            throw new IllegalStateException("Scanner out of input");
-          }
-          move = new Move(r, c);
-          break waitForInput;
-        case "restart":
-          move = new Move(false, true, false);
-          break waitForInput;
-        case "quit":
-          move = new Move(false, false, true);
-          break waitForInput;
+    while (!model.isGameOver()) {
+      String moveCommand = input.next();
+      if (moveCommand.equalsIgnoreCase("pass-turn")) {
+        move = new Move(true, false, false);
+        break;
+      } else if (moveCommand.equalsIgnoreCase("make-move")) {
+        //System.out.println("Enter a row and column");
+        int r = input.nextInt();
+        int c = input.nextInt();
+        move = new Move(r, c);
+        break;
+      } else if (moveCommand.equalsIgnoreCase("restart")) {
+        move = new Move(false, true, false);
+        break;
+      } else if (moveCommand.equalsIgnoreCase("quit")) {
+        move = new Move(false, false, true);
+        break;
       }
       System.out.println("Invalid move, move must be one of: make-move row col or pass-turn");
 

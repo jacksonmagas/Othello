@@ -106,16 +106,28 @@ New constructor:
 # Changes for part 3
 Added:
 1. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of ReversiGUI.
-2. Implemented to accept command line strategies from user to simulate the computer player strategy.<br/>
+2. Reversi main class is created to accept command line strategies from user to simulate the computer player strategy.<br/>
+   If Strategy is unable to return valid move then it defaults to pass turn.
     For example:<br/>
-    ReversiGUI "Human" "Strategy1"<br/>
-    ReversiGUI "Human" "Strategy2"<br/>
-    ReversiGUI "Human" "Strategy3"<br/>
+    Reversi "Human" "Strategy1"<br/>
+    Reversi "Human" "Strategy2"<br/>
+    Reversi "Human" "Strategy3"<br/>
+    Reversi "Human" "Strategy4"<br/>
+    Reversi "Human" "Strategy5"<br/>
+    Reversi "Human" "Strategy6"<br/>
+    where<br/>
+    Strategy1 - First Available Opening Strategy<br/>
+    Strategy2 - Basic Minimax Strategy<br/>
+    Strategy3 - Highest Scoring Move Strategy<br/>
+    Strategy4 - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
+    Strategy5 - Fallible Corners Strategy<br/>
+    Strategy6 - Fallible Pass If Win Strategy<br/>
 3. Implemented 2 Controllers and 2 Views as Part3 requirements as part of Reversi main class method and kept Part 2 implementation as part of previous ReversiGUI main class method.
 4. Your Turn and Refresh View events are implemented to enable Player 2 to simulate the moves as per implemented strategies.
 5. Manifest file is now using cs3500.reversi.Reversi as main class.
 6. Keyboard support is implemented to support below keys using Key Listener, Key Bindings and Key Release event<br/>
    Up, Down, Left and Right Arrow keys will allow user to move selected cell on the game board.<br/>
    P for Pass-Turn, R for Restart and Q for Quit will allow user to make actions on the game board.<br/>
+7. Above Strategies are tested through test class.
 
 

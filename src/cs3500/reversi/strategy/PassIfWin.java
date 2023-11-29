@@ -11,10 +11,9 @@ import java.util.Optional;
 public class PassIfWin implements FallibleMoveStrategy {
   @Override
   public Optional<Move> chooseMove(ReversiModel model, CellState player) {
-    ReversiModel copy = model.copy();
-    copy.passTurn();
-    if (copy.isGameOver()
-        && copy.getPlayerScore(player) > copy.getPlayerScore(player.opposite())) {
+    model.copy().passTurn();
+    if (model.isGameOver()
+        && model.getPlayerScore(player) > model.getPlayerScore(player.opposite())) {
       return Optional.of(new Move(true, false, false));
     } else {
       return Optional.empty();

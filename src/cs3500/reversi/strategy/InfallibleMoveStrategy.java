@@ -6,7 +6,7 @@ import cs3500.reversi.model.ReversiModel;
 /**
  * A Strategy interface for choosing where to play next for the given player.
  */
-public interface InfallibleMoveStrategy {
+public interface InfallibleMoveStrategy extends MoveStrategy {
   /**
    * Choose a move to make in the given model. This method is guaranteed to produce a move
    * @param model the reversi game to choose a move for

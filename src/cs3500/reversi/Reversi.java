@@ -6,8 +6,12 @@ import cs3500.reversi.controller.ReverseHexGridPlayerController;
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
+import cs3500.reversi.strategy.BasicMinimaxStrategy;
+import cs3500.reversi.strategy.CombinedMoveStrategy;
+import cs3500.reversi.strategy.CornersStrategy;
 import cs3500.reversi.strategy.FirstAvailableOpening;
 import cs3500.reversi.strategy.HighestScoringMove;
+import cs3500.reversi.strategy.PassIfWin;
 import cs3500.reversi.strategy.PromptUser;
 import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
@@ -21,6 +25,9 @@ public class Reversi {
   static final String STRATEGY1 = "Strategy1";
   static final String STRATEGY2 = "Strategy2";
   static final String STRATEGY3 = "Strategy3";
+  static final String STRATEGY4 = "Strategy4";
+  static final String STRATEGY5 = "Strategy5";
+  static final String STRATEGY6 = "Strategy6";
 
   /**
    * Constructor for Reversi public class.
@@ -78,9 +85,15 @@ public class Reversi {
     if (STRATEGY1.equalsIgnoreCase(strategy)) {
       player = new PlayerImpl(cellState, new FirstAvailableOpening());
     } else if (STRATEGY2.equalsIgnoreCase(strategy)) {
-      player = new PlayerImpl(cellState, new HighestScoringMove());
+      player = new PlayerImpl(cellState, new BasicMinimaxStrategy());
     } else if (STRATEGY3.equalsIgnoreCase(strategy)) {
       player = new PlayerImpl(cellState, new HighestScoringMove());
+    } else if (STRATEGY4.equalsIgnoreCase(strategy)) {
+      player = new PlayerImpl(cellState, new CombinedMoveStrategy());
+    } else if (STRATEGY5.equalsIgnoreCase(strategy)) {
+      player = new PlayerImpl(cellState, new CornersStrategy());
+    } else if (STRATEGY6.equalsIgnoreCase(strategy)) {
+      player = new PlayerImpl(cellState, new PassIfWin());
     } else {
       // defaults to HUMAN Strategy
       player = new PlayerImpl(cellState, new PromptUser());

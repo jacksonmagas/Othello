@@ -227,7 +227,7 @@ public class ExamplarModelTests {
                     + "Player two Score: 3\n"
                     + "Player one turn (Black)!\n",
             model.toString());
-    Assert.assertThrows("There is no legal move at 1, 1", IllegalStateException.class, ()
+    Assert.assertThrows("There is no legal move at 1, 1", IllegalArgumentException.class, ()
         -> model.makeMove(1, 1));
   }
 
@@ -247,7 +247,7 @@ public class ExamplarModelTests {
                     + "Player two Score: 3\n"
                     + "Player one turn (Black)!\n",
             model.toString());
-    Assert.assertThrows("There is no legal move at -1, -1", IllegalStateException.class, ()
+    Assert.assertThrows("There is no legal move at -1, -1", IllegalArgumentException.class, ()
         -> model.makeMove(-1, -1));
   }
 
@@ -267,7 +267,7 @@ public class ExamplarModelTests {
                     + "Player two Score: 3\n"
                     + "Player one turn (Black)!\n",
             model.toString());
-    Assert.assertThrows("There is no legal move at 15, 15", IllegalStateException.class, ()
+    Assert.assertThrows("There is no legal move at 15, 15", IllegalArgumentException.class, ()
         -> model.makeMove(15, 15));
   }
 
