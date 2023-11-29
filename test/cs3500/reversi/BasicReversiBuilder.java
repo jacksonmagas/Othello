@@ -24,26 +24,39 @@ class BasicReversiBuilder {
     this.currentPlayer = CellState.BLACK;
   }
 
+  /**
+   * Terminal operation builds the basic reversi set up by this builder.
+   * @return a configured basic reversi
+   */
   BasicReversi build() {
     return new BasicReversi(sideLength, lastPlayerPassed, currentPlayer, blackTiles, whiteTiles);
   }
 
+  // add a new white tile at the location
   BasicReversiBuilder wAt(int row, int index) {
     this.whiteTiles.add(new Location(row, index));
     return this;
   }
 
+  // add a new black tile at the location
   BasicReversiBuilder bAt(int row, int index) {
     this.blackTiles.add(new Location(row, index));
     return this;
   }
 
+  // ensure that the tile at the location is empty
   BasicReversiBuilder empty(int row, int index) {
     this.whiteTiles.remove(new Location(row, index));
     this.blackTiles.remove(new Location(row, index));
     return this;
   }
 
+  /**
+   * Set the current player for this reversi builder.
+   * This is an intermediate operation.
+   * @param currentPlayer either 'w' for white or 'b' for black
+   * @return the builder
+   */
   BasicReversiBuilder player(char currentPlayer) {
     switch (currentPlayer) {
       case 'b':
@@ -58,6 +71,7 @@ class BasicReversiBuilder {
     return this;
   }
 
+  // set the last turn as passed
   BasicReversiBuilder pass() {
     this.lastPlayerPassed = true;
     return this;

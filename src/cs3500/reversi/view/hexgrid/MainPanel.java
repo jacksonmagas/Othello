@@ -234,8 +234,8 @@ public class MainPanel extends JPanel {
     int y2 = centered ? origin.y - radius : origin.y;
 
     StringBuffer text = new StringBuffer();
-    text.append(model.getCurrentPlayer());
-    text.append(" Player one Score: ");
+    //text.append(model.getCurrentPlayer());
+    text.append("Player one Score: ");
     text.append(model.getPlayerScore(CellState.BLACK));
     text.append(", ");
     text.append("Player two Score: ");
