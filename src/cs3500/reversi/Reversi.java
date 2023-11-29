@@ -8,11 +8,10 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.BasicMinimaxStrategy;
 import cs3500.reversi.strategy.CombinedMoveStrategy;
-import cs3500.reversi.strategy.CornersStrategy;
 import cs3500.reversi.strategy.FirstAvailableOpening;
+import cs3500.reversi.strategy.GUIInputStrategy;
 import cs3500.reversi.strategy.HighestScoringMove;
-import cs3500.reversi.strategy.PassIfWin;
-import cs3500.reversi.strategy.PromptUser;
+import cs3500.reversi.strategy.ConsoleInputStrategy;
 import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 
@@ -20,7 +19,7 @@ import cs3500.reversi.view.ReversiFrame;
  * Represent a Reversi game class which creates two views of reversi, one for each player.
  * The main expects 3 command line arguments: an integer representing the size of the board,
  * the strategy for the first player, and the strategy for the second player.
- *
+ * The valid strategies are: human, firstmove, highestscoring, combined, console, and minimax
  */
 public class Reversi {
 
@@ -29,7 +28,7 @@ public class Reversi {
   static final String STRATEGY2 = "highestscoring";
   static final String STRATEGY3 = "combined";
   static final String STRATEGY4 = "minimax";
-  //static final String STRATEGY5 = "Strategy5";
+  static final String STRATEGY5 = "console";
   //static final String STRATEGY6 = "Strategy6";
 
   /**
@@ -98,8 +97,11 @@ public class Reversi {
       case STRATEGY4:
         player = new PlayerImpl(cellState, new CombinedMoveStrategy());
         break;
+      case STRATEGY5:
+        player = new PlayerImpl(cellState, new ConsoleInputStrategy());
+        break;
       default:
-        player = new PlayerImpl(cellState, new PromptUser());
+        player = new PlayerImpl(cellState, new GUIInputStrategy());
     }
     return player;
   }

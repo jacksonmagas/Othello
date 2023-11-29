@@ -24,4 +24,9 @@ public class FirstAvailableOpening implements InfallibleMoveStrategy {
     }
     return move;
   }
+
+  @Override
+  public void newGUIMove(Move newMove) {
+    //ignore
+  }
 }

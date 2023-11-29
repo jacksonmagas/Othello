@@ -7,7 +7,7 @@ import cs3500.reversi.strategy.CornersStrategy;
 import cs3500.reversi.strategy.InfallibleMoveStrategy;
 import cs3500.reversi.strategy.Move;
 import cs3500.reversi.strategy.PassIfWin;
-import cs3500.reversi.strategy.PromptUser;
+import cs3500.reversi.strategy.ConsoleInputStrategy;
 import java.io.StringReader;
 import java.util.Optional;
 import java.util.Scanner;
@@ -228,7 +228,7 @@ public class StrategyTests {
         .build();
     game.startGame();
     String response = "make-move 0 0";
-    InfallibleMoveStrategy prompt = new PromptUser(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(0, 0));
   }
 
@@ -241,7 +241,7 @@ public class StrategyTests {
     game.startGame();
     String response = "pass-turn";
     StringReader reader = new StringReader(response);
-    InfallibleMoveStrategy prompt = new PromptUser(new Scanner(reader));
+    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(reader));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(true, false, false));
   }
 
@@ -253,7 +253,7 @@ public class StrategyTests {
         .build();
     game.startGame();
     String response = "restart";
-    InfallibleMoveStrategy prompt = new PromptUser(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, true, false));
   }
 
@@ -265,7 +265,7 @@ public class StrategyTests {
         .build();
     game.startGame();
     String response = "quit";
-    InfallibleMoveStrategy prompt = new PromptUser(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, false, true));
   }
 
@@ -278,7 +278,7 @@ public class StrategyTests {
     game.startGame();
     //useless input
     String response = "qoeifnodkf make-move hello 0 1";
-    InfallibleMoveStrategy prompt = new PromptUser(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(0, 1));
   }
 }

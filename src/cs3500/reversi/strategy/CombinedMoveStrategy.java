@@ -14,4 +14,9 @@ public class CombinedMoveStrategy implements InfallibleMoveStrategy {
         .orElse(new CornersStrategy().chooseMove(model, player)
             .orElse(new HighestScoringMove().chooseMove(model, player)));
   }
+
+  @Override
+  public void newGUIMove(Move newMove) {
+    //ignore
+  }
 }

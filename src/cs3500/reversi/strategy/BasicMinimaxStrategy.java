@@ -12,4 +12,9 @@ public class BasicMinimaxStrategy implements InfallibleMoveStrategy {
   public Move chooseMove(ReversiModel model, CellState player) {
     return new GameTree(model, 2).getBestMove();
   }
+
+  @Override
+  public void newGUIMove(Move newMove) {
+    //ignore
+  }
 }

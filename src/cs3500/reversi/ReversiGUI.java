@@ -9,7 +9,7 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.FirstAvailableOpening;
 import cs3500.reversi.strategy.HighestScoringMove;
-import cs3500.reversi.strategy.PromptUser;
+import cs3500.reversi.strategy.ConsoleInputStrategy;
 import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 
@@ -77,7 +77,7 @@ public class ReversiGUI {
       player = new PlayerImpl(cellState, new HighestScoringMove());
     } else {
       // defaults to HUMAN Strategy
-      player = new PlayerImpl(cellState, new PromptUser());
+      player = new PlayerImpl(cellState, new ConsoleInputStrategy());
     }
     return player;
   }

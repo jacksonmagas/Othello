@@ -39,4 +39,9 @@ public class HighestScoringMove implements InfallibleMoveStrategy {
     Comparator<Move> compareScore = Comparator.comparingInt(tester::testMove);
     return Collections.max(model.getLegalMoves(), compareScore);
   }
+
+  @Override
+  public void newGUIMove(Move newMove) {
+    //ignore
+  }
 }

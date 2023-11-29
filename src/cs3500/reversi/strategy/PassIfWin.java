@@ -20,4 +20,9 @@ public class PassIfWin implements FallibleMoveStrategy {
       return Optional.empty();
     }
   }
+
+  @Override
+  public void newGUIMove(Move newMove) {
+    //ignore
+  }
 }

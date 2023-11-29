@@ -14,4 +14,6 @@ public interface InfallibleMoveStrategy extends MoveStrategy {
    * @return the move to make according to this strategy
    */
   Move chooseMove(ReversiModel model, CellState player);
+
+
 }

@@ -43,4 +43,9 @@ public class PlayerImpl implements Player {
   public CellState getPiece() {
     return this.piece;
   }
+
+  @Override
+  public void recieveGUIMove(Move m) {
+    this.moveStrategy.newGUIMove(m);
+  }
 }

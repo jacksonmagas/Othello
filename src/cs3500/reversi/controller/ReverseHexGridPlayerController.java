@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -198,7 +200,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         try {
           System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
                   row + " " + col);
-          this.model.makeMove(row, col);
+          this.player.recieveGUIMove(new Move(row, col));
           //this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println("model after move\n" + this.model.toString());
           //view.setModel(this.model);
