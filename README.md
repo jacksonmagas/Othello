@@ -119,7 +119,7 @@ Added:
     FirstMove - First Available Opening Strategy<br/>
     HighestScoring - Highest Scoring Strategy<br/>
     Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
-    MiniMax - Basic Minimax Strategy<br/>
+    MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
     Console - Console based Moves Strategy<br/>
     Human - Human Mouse or Keys based Moves Strategy<br/>
 3. Implemented 2 Controllers and 2 Views as Part3 requirements as part of Reversi main class method and kept Part 2 implementation as part of previous ReversiGUI main class method.
@@ -129,5 +129,7 @@ Added:
    Up, Down, Left and Right Arrow keys will allow user to move selected cell on the game board.<br/>
    P for Pass-Turn, R for Restart and Q for Quit will allow user to make actions on the game board.<br/>
 7. Above Strategies are tested through test class.
+8. Created mock for the model that records all method calls and their arguments in a transcript including
+   method calls in copies of the model. This allows strategies to be tested by seeing which of the legal moves they check.
 
 
