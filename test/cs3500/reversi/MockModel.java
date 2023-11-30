@@ -36,14 +36,14 @@ public class MockModel implements ReversiModel {
     this.isCopy = true;
   }
 
-  /** 
+  /**
    * print the message to the transcript.
    * @param msg message to print
    */
   private void printT(String msg) {
     transcript.append(msg).append(System.lineSeparator());
   }
-  
+
   @Override
   public int getPlayerScore(CellState player) {
     printT("GetPlayerScore: " + player);

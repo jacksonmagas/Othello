@@ -89,6 +89,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     } catch (IllegalArgumentException e) {
       System.out.println("That was an illegal move.");
       this.refreshView();
+      JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), e.getMessage(),
+              "Message", JOptionPane.ERROR_MESSAGE);
       makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
   }
@@ -167,7 +169,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     @Override
     public void mouseClicked(MouseEvent e) {
       CellState currentPlayer = this.model.getCurrentPlayer();
-      if (currentPlayer == null) {
+      if (currentPlayer == null || currentPlayer != this.player.getPiece()) {
         return;
       }
       int x = e.getX();

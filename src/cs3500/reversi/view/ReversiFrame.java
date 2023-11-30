@@ -57,7 +57,6 @@ public interface ReversiFrame {
    * @param viewPlayer the player to add to the view
    */
   void addPlayer(CellState viewPlayer);
-  //TODO: the view doesn't seem to interact with the player. Is this an oversight?
 
   /**
    * Make the view visible or invisible.
