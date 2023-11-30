@@ -109,8 +109,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
                 move = this.players.get(this.playerIndex).play(this.model);
                 if (move != null) {
                   if (move.getPosn() != null) {
-                    System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                            move.getPosn().col);
+                    System.out.println("Computer is doing move to " + move.getPosn().row + " "
+                            + move.getPosn().col);
                     this.model.makeMove(move.getPosn().row, move.getPosn().col);
                     this.playerIndex = (this.playerIndex + 1) % this.players.size();
                   } else if (move.isPassTurn()) {
@@ -245,8 +245,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
             Move move = this.players.get(this.playerIndex).play(this.model);
             if (move != null) {
               if (move.getPosn() != null) {
-                System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                        move.getPosn().col);
+                System.out.println("Computer is doing move to " + move.getPosn().row + " "
+                        + move.getPosn().col);
                 this.model.makeMove(move.getPosn().row, move.getPosn().col);
                 this.playerIndex = (this.playerIndex + 1) % this.players.size();
               } else if (move.isPassTurn()) {
@@ -285,8 +285,8 @@ public class ReverseHexGridController implements ReversiPlayerStrategyController
               Move move = this.players.get(this.playerIndex).play(this.model);
               if (move != null) {
                 if (move.getPosn() != null) {
-                  System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                          move.getPosn().col);
+                  System.out.println("Computer is doing move to " + move.getPosn().row + " "
+                          + move.getPosn().col);
                   this.model.makeMove(move.getPosn().row, move.getPosn().col);
                   this.playerIndex = (this.playerIndex + 1) % this.players.size();
                 } else if (move.isPassTurn()) {

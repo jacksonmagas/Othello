@@ -4,7 +4,7 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 
 /**
- *
+ * A strategy for choosing a move by waiting for the next move from the GUI.
  */
 public class GUIInputStrategy implements InfallibleMoveStrategy {
   Move move;

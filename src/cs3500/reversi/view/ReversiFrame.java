@@ -41,7 +41,7 @@ public interface ReversiFrame {
   void repaint();
 
   /**
-   * Get a map from points on the GUI to the corresponding logical coordinates for the game
+   * Get a map from points on the GUI to the corresponding logical coordinates for the game.
    * @return The map from point to coordinate
    */
   HashMap<Point, Point> getMap();

@@ -13,7 +13,7 @@ public interface FallibleMoveStrategy extends MoveStrategy {
    * @param model the reversi game to choose a move for
    * @param player Which player to try and make a move for
    * @return An optional containing either the move or an empty optional if this strategy produced
-   * no move
+   *         no move
    */
   Optional<Move> chooseMove(ReversiModel model, CellState player);
 }

@@ -103,7 +103,7 @@ public class Move {
       asString = "Quit Game";
     } else if (isRestartGame()) {
       asString = "Restart Game";
-    } else if (posn != null){
+    } else if (posn != null) {
       asString = String.format("Move at %d, %d", posn.row, posn.col);
     } else {
       asString = "Nonsense Move";

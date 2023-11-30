@@ -1,5 +1,10 @@
 package cs3500.reversi.strategy;
 
+/**
+ * An interface for a game tree for any game whose moves can be represented by Move.
+ * This interface is primarily intended for the game of reversi, and enables a minimax
+ * tree search to find the best move.
+ */
 public interface IGameTree {
   /**
    * Get the expected result if both players play optimally according to this game tree as a
@@ -14,7 +19,7 @@ public interface IGameTree {
   int getExpectedResult();
 
   /**
-   * Determines whether the current IGameTree has any dependent siblings
+   * Determines whether the current IGameTree has any dependent siblings.
    * @return true if the current tree has a sibling
    */
   boolean isLeaf();
@@ -26,13 +31,13 @@ public interface IGameTree {
   Move getBestMove();
 
   /**
-   * Get the next node of the current game tree if it has one
+   * Get the next node of the current game tree if it has one.
    * @return the next node
    */
   IGameTree getNext();
 
   /**
-   * Get the move that lead to this game tree. If there is no recorded move return null
+   * Get the move that lead to this game tree. If there is no recorded move return null.
    * @return the move that lead to this specific game tree
    */
   Move getLastMove();

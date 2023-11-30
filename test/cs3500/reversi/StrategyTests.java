@@ -18,6 +18,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for different strategies of the reversi game.
+ */
 public class StrategyTests {
   BasicReversiBuilder builder;
 
@@ -246,7 +249,8 @@ public class StrategyTests {
         .buildMock();
     game.startGame();
     String response = "make-move 0 0";
-    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt =
+        new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(0, 0));
   }
 
@@ -271,7 +275,8 @@ public class StrategyTests {
         .buildMock();
     game.startGame();
     String response = "restart";
-    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt =
+        new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, true, false));
   }
 
@@ -283,7 +288,8 @@ public class StrategyTests {
         .buildMock();
     game.startGame();
     String response = "quit";
-    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt =
+        new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, false, true));
   }
 
@@ -296,7 +302,8 @@ public class StrategyTests {
     game.startGame();
     //useless input
     String response = "qoeifnodkf make-move hello 0 1";
-    InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(new StringReader(response)));
+    InfallibleMoveStrategy prompt =
+        new ConsoleInputStrategy(new Scanner(new StringReader(response)));
     Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(0, 1));
   }
 }

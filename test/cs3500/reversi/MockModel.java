@@ -7,11 +7,22 @@ import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
 import java.util.List;
 
+/**
+ * A MockModel is a fully functional implementation of a ReversiModel that also stores a log
+ * of every function call that is made to it.
+ * When the MockModel is copied using the copy() method the resulting models also update the same
+ * log, so attempting multiple moves in a strategy will show up in the log.
+ */
 public class MockModel implements ReversiModel {
   private final ReversiModel delegate;
   private final StringBuilder transcript;
   private final boolean isCopy;
 
+  /**
+   * Construct a new mock of the given ReversiModel. It will function identically to the reversi
+   * model passed in, but keep a log of the results.
+   * @param delegate the model to mock
+   */
   public MockModel(ReversiModel delegate) {
     this.delegate = delegate;
     isCopy = false;

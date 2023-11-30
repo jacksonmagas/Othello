@@ -1,8 +1,6 @@
 package cs3500.reversi;
 
 import cs3500.reversi.model.BasicReversi;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -56,8 +56,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void yourTurn() {
-    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer() +
-            " with model\n" + this.model);
+    System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer()
+            + " with model\n" + this.model);
     // Make view visible
     view.setFocusable(true);
     view.repaint();
@@ -95,8 +95,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   @Override
   public void refreshView() {
-    System.out.println("Refresh View event received for player " + this.player.getPiece() +
-            " with model\n" + this.model);
+    System.out.println("Refresh View event received for player " + this.player.getPiece()
+            + " with model\n" + this.model);
     view.setModel(this.model);
     view.repaint();
   }
@@ -184,15 +184,15 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       this.model.getBoard();
 
       //board[x][y] = (int)'X';
-      System.out.println("Controller mouse click event - x "+x+" y "+y);
+      System.out.println("Controller mouse click event - x " + x + " y " + y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
         int row = rowCol.x;
         int col = rowCol.y;
         try {
-          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
-                  row + " " + col);
+          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to "
+                  + row + " " + col);
           this.player.recieveGUIMove(new Move(row, col));
           //this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println("model after move\n" + this.model.toString());

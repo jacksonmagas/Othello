@@ -29,7 +29,6 @@ import cs3500.reversi.model.ReadonlyReversiModel;
  * Public class MainPanel creates the panel of the hexgrid view.
  */
 public class MainPanel extends JPanel {
-  private String playerLabel;
   private final int WIDTH = 764;
 
   private final int HEIGHT = 764;
@@ -54,7 +53,6 @@ public class MainPanel extends JPanel {
    * Constructor for MainPanel class.
    */
   public MainPanel(ReadonlyReversiModel model, String playerLabel) {
-    this.playerLabel = playerLabel;
     this.model = model;
     board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));

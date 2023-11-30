@@ -39,7 +39,7 @@ public interface ReversiModel extends ReadonlyReversiModel {
 
   //TODO The refactor mentioned in readonlyreversimodel will allow removing this too
   /**
-   * Set the highlighted cell in this model to the given cell
+   * Set the highlighted cell in this model to the given cell.
    * @param row the row of the cell
    * @param col the column of the cell
    */

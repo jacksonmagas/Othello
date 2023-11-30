@@ -64,6 +64,8 @@ public class ConsoleInputStrategy implements InfallibleMoveStrategy {
         case "quit":
           move = new Move(false, false, true);
           break waitForInput;
+        default:
+          //empty default for style checker
       }
       System.out.println("Invalid move, move must be one of: make-move row col or pass-turn");
 
