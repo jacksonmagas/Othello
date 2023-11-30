@@ -66,15 +66,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     // check if computer move is enabled
     Move move = this.player.play(this.model);
     if (move != null) {
-      if (move.getPosn() != null) {
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
-                move.getPosn().row + " " +
-                move.getPosn().col);
-        makeMoveUntilLegalOrTooManyAttempts(move, 0);
-      } else if (move.isPassTurn()) {
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
-        this.model.passTurn();
-      }
+      makeMoveUntilLegalOrTooManyAttempts(move, 0);
       System.out.println("model after move\n" + model);
       view.repaint();
     }
@@ -179,12 +171,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       // vertical cell distance 33
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       this.model.getBoard();
-      //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
-      //System.out.println("Component "+e.getComponent().toString());
-      //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
-        //System.out.println("row " + rowCol.x + " col " + rowCol.y);
         int row = rowCol.x;
         int col = rowCol.y;
         try {
@@ -193,32 +180,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           this.player.recieveGUIMove(new Move(row, col));
           //this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println("model after move\n" + this.model.toString());
-          //view.setModel(this.model);
-          //view.repaint();
-          //view.setVisibleView(true);
 
-          /*
-          // check if computer move is enabled
-          if (!this.model.isGameOver()) {
-            Move move = this.player.play(this.model);
-            if (move != null) {
-              if (move.getPosn() != null) {
-                System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                        move.getPosn().col);
-                this.model.makeMove(move.getPosn().row, move.getPosn().col);
-                //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-              } else if (move.isPassTurn()) {
-                System.out.println("Computer is passing move");
-                this.model.passTurn();
-                //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-              }
-              System.out.println(model.toString());
-            }
-          }
-          // refresh game after both moves
-          view.setModel(this.model);
-          view.repaint();
-          */
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
@@ -234,35 +196,9 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           System.out.println("Pass Turn button is clicked!");
           try {
             System.out.println("Player " + this.model.getCurrentPlayer() + " is is passing turn");
-            this.model.passTurn();
+            this.player.recieveGUIMove(new Move(true, false, false));
             //this.playerIndex = (this.playerIndex + 1) % this.players.size();
             System.out.println("model after pass-turn\n" + this.model.toString());
-            //view.setModel(this.model);
-            //view.repaint();
-            //view.setVisibleView(true);
-
-            /*
-            // check if computer move is enabled
-            if (!this.model.isGameOver()) {
-              Move move = this.player.play(this.model);
-              if (move != null) {
-                if (move.getPosn() != null) {
-                  System.out.println("Computer is doing move to " + move.getPosn().row + " " +
-                          move.getPosn().col);
-                  this.model.makeMove(move.getPosn().row, move.getPosn().col);
-                  //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-                } else if (move.isPassTurn()) {
-                  System.out.println("Computer is passing move");
-                  this.model.passTurn();
-                  //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-                }
-                System.out.println(model.toString());
-              }
-            }
-            // refresh game after both moves
-            view.setModel(this.model);
-            view.repaint();
-            */
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
             JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
@@ -274,13 +210,16 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         } else if (x >= 146 && x <= 716 && y >= 43 && y <= 128) {
           // check if user click Restart button
           System.out.println("Restart button is clicked!");
-          //this.playerIndex = 0;
           try {
-            this.model.newGame();
+            if (!this.model.isGameOver()) {
+              this.player.recieveGUIMove(new Move(false, true, false));
+            } else {
+              // when the game is over the player is not listening for moves and can't make moves
+              this.model.newGame();
+            }
             System.out.println("model after restart\n" + this.model.toString());
             view.setModel(this.model);
             view.repaint();
-            //view.setVisibleView(true);
           } catch (IllegalArgumentException | IllegalStateException ex) {
             System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
             JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -289,18 +290,11 @@ public class BasicReversi implements ReversiModel {
                 .equals(oppositeColor);
       }
 
-      //If is there an ally cell on the other side of opponent cells?
+      //Is there an ally cell on the other side of opponent cells?
+      // set invalid then only set back to valid if there is a current player cell before
+      // empty cell or end of the list
       if (validInPlus) {
-        for (int newIndex = index + 1; newIndex < rowLen; newIndex++) {
-          CellState curCellState = direction.get(row).get(newIndex).getState();
-          if (curCellState == CellState.EMPTY
-                  || (newIndex == 0 && curCellState != this.currentPlayer)) {
-            validInPlus = false;
-            break;
-          } else if (curCellState == this.currentPlayer) {
-            break;
-          }
-        }
+        validInPlus = allyCellOnEnd(direction, row, index + 1, rowLen);
       }
     } catch (Exception ex) {
       return false;
@@ -323,21 +317,33 @@ public class BasicReversi implements ReversiModel {
       }
       //If is there an ally cell on the other side of opponent cells?
       if (validInMinus) {
-        for (int newIndex = index - 1; newIndex >= 0; newIndex--) {
-          CellState curCellState = direction.get(row).get(newIndex).getState();
-          if (curCellState == CellState.EMPTY
-                  || (newIndex == 0 && curCellState != this.currentPlayer)) {
-            validInMinus = false;
-            break;
-          } else if (curCellState == this.currentPlayer) {
-            break;
-          }
-        }
+        validInMinus = allyCellOnEnd(direction, row, index - 1, 0);
       }
     } catch (Exception ex) {
       return false;
     }
     return validInMinus;
+  }
+
+  private boolean allyCellOnEnd(ArrayList<ArrayList<Cell>> direction, int row,
+      int from, int to) {
+    boolean valid;
+    valid = false;
+    boolean startGreater = from > to;
+    Predicate<Integer> endCondition =
+        (Integer i) -> (startGreater && i >= to) || (!startGreater && i < to);
+    int step = startGreater ? -1 : 1;
+    for (int newIndex = from; endCondition.test(newIndex); newIndex += step) {
+      CellState curCellState = direction.get(row).get(newIndex).getState();
+      if (curCellState == CellState.EMPTY
+              || (newIndex == 0 && curCellState != this.currentPlayer)) {
+        break;
+      } else if (curCellState == this.currentPlayer) {
+        valid = true;
+        break;
+      }
+    }
+    return valid;
   }
 
   // A move is valid if all the following are true:
@@ -483,6 +489,7 @@ public class BasicReversi implements ReversiModel {
     if (isValidMove(row, index)) {
       setEmptyTileToCurrentPlayer(row, index);
       flipTiles(row, index);
+      this.lastPlayerPassed = false;
       switchTurn();
       lastErrorMessage = "";
     } else {
@@ -495,6 +502,11 @@ public class BasicReversi implements ReversiModel {
   public void makeMove(Move move) {
     if (move.isPassTurn()) {
       passTurn();
+    } else if (move.isRestartGame()) {
+      newGame();
+    } else if (move.isQuitGame()) {
+      //ignore for now
+      return;
     } else {
       makeMove(move.getPosn().row, move.getPosn().col);
     }
@@ -555,7 +567,7 @@ public class BasicReversi implements ReversiModel {
   public int[][] getBoard() {
     //board size.
     //TODO fix hardcoded board size
-    int bSize = 14;
+    int bSize = this.totalNumRows;
     int[][] board = new int[bSize][bSize];
     // initialize with 0s
     for (int i = 0; i < this.horizontalRows.size(); i++) {
@@ -774,11 +786,12 @@ public class BasicReversi implements ReversiModel {
 
     int rowSize = sideLength;
 
-    //create empty arrayLists to hold cells, and temporarily fills them will nulls
+    //empty the arrayLists holding cells, and temporarily fills them will nulls
+    this.horizontalRows.clear();
+    this.downRightRows.clear();
+    this.downLeftRows.clear();
     for (int row = 0; row < totalNumRows; row++) {
-      this.horizontalRows.remove(row);
-      this.downRightRows.remove(row);
-      this.downLeftRows.remove(row);
+
       this.horizontalRows.add(new ArrayList<>());
       this.downRightRows.add(new ArrayList<>());
       this.downLeftRows.add(new ArrayList<>());
