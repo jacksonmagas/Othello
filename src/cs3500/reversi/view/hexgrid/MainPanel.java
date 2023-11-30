@@ -188,6 +188,7 @@ public class MainPanel extends JPanel {
     drawStatusMessages(g2d, origin, 380, true, Color.WHITE);
     drawPassTurnButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
     drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
+    drawErrorMessages(g2d, origin, 380, true, Color.lightGray);
   }
 
   // draws the restart button

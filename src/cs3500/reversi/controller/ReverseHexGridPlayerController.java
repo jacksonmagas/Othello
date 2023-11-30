@@ -97,6 +97,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       this.model.makeMove(move);
     } catch (IllegalArgumentException e) {
       System.out.println("That was an illegal move.");
+      this.refreshView();
       makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
   }

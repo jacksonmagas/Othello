@@ -44,26 +44,26 @@ public class Reversi {
     int height = 800;
 
     if (args.length > 0) {
-      /* Not supported
       try {
         noOfCells = Integer.parseInt(args[0]);
       } catch (NumberFormatException e) {
         System.err.println("Argument 1 - " + args[0] + " must be an integer.");
         throw new IllegalArgumentException("Argument 1 - " + args[0] + " must be an integer.");
       }
-      */
       try {
-        player1Strategy = args[0];
+        player1Strategy = args[1];
       } catch (Exception e) {
         System.err.println("Argument 1 must be present.");
         throw new IllegalArgumentException("Argument 1 must be present.");
       }
       try {
-        player2Strategy = args[1];
+        player2Strategy = args[2];
       } catch (Exception e) {
         System.err.println("Argument 2 must be present.");
         throw new IllegalArgumentException("Argument 2 must be present.");
       }
+    } else {
+      System.err.println("Requires 3 argument.");
     }
 
     ReversiModel reversi = new BasicReversi(noOfCells);
@@ -91,13 +91,13 @@ public class Reversi {
         player = new PlayerImpl(cellState, new FirstAvailableOpening());
         break;
       case STRATEGY2:
-        player = new PlayerImpl(cellState, new BasicMinimaxStrategy());
-        break;
-      case STRATEGY3:
         player = new PlayerImpl(cellState, new HighestScoringMove());
         break;
-      case STRATEGY4:
+      case STRATEGY3:
         player = new PlayerImpl(cellState, new CombinedMoveStrategy());
+        break;
+      case STRATEGY4:
+        player = new PlayerImpl(cellState, new BasicMinimaxStrategy());
         break;
       case STRATEGY5:
         player = new PlayerImpl(cellState, new ConsoleInputStrategy());

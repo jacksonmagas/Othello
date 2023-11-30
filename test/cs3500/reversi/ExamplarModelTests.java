@@ -331,6 +331,7 @@ public class ExamplarModelTests {
                     "Player one turn (Black)!\n",
             model.toString());
     model.passTurn();
+    model.passTurn();
     Assert.assertEquals("Game is updated",
             "  _ O _   \n" +
                     " _ O O X  \n" +
@@ -615,6 +616,7 @@ public class ExamplarModelTests {
                     "Player two Score: 7\n" +
                     "Player one turn (Black)!\n",
             model.toString());
+    model.passTurn();
     model.passTurn();
     Assert.assertEquals("Game is updated",
             "  _ O _   \n" +

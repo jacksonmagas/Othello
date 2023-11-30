@@ -92,4 +92,22 @@ public class Move {
   public int hashCode() {
     return Objects.hash(passTurn, restartGame, quitGame, posn);
   }
+
+
+  @Override
+  public String toString() {
+    String asString;
+    if (passTurn) {
+      asString = "Pass Turn";
+    } else if (isQuitGame()) {
+      asString = "Quit Game";
+    } else if (isRestartGame()) {
+      asString = "Restart Game";
+    } else if (posn != null){
+      asString = String.format("Move at %d, %d", posn.row, posn.col);
+    } else {
+      asString = "Nonsense Move";
+    }
+    return asString;
+  }
 }
