@@ -180,7 +180,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       this.model.getBoard();
       //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
+      System.out.println("Controller mouse click event - x "+x+" y "+y);
       //System.out.println("Component "+e.getComponent().toString());
       //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
