@@ -583,8 +583,7 @@ public class BasicReversi implements ReversiModel {
   @Override
   public int[][] getBoard() {
     //board size.
-    //TODO fix hardcoded board size
-    int bSize = this.totalNumRows;
+    int bSize = 14; //this.totalNumRows;
     int[][] board = new int[bSize][bSize];
     // initialize with 0s
     for (int i = 0; i < this.horizontalRows.size(); i++) {

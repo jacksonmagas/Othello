@@ -184,7 +184,7 @@ public class MainPanel extends JPanel {
     metrics = g.getFontMetrics();
 
     drawRectangle(g2d, origin, 380, true, true, Color.BLACK, 0);
-    drawHexGridLoop(g2d, origin, 7, 50, 1);
+    drawHexGridLoop(g2d, origin, model.getRows(), 50, 1);
     drawStatusMessages(g2d, origin, 380, true, Color.WHITE);
     drawPassTurnButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
     drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);

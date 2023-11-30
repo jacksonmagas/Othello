@@ -84,16 +84,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       throw new IllegalStateException("Too many invalid moves provided.");
     }
     try {
-      if (move.getPosn() != null) {
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
-                move.getPosn().row + " " + move.getPosn().row);
-      } else if (move.isPassTurn()){
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
-      } else if (move.isRestartGame()){
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is restarting the game!");
-      } else if (move.isQuitGame()){
-        System.out.println("Player " + this.model.getCurrentPlayer() + " is exiting the game!");
-      }
+      System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move " + move);
       this.model.makeMove(move);
     } catch (IllegalArgumentException e) {
       System.out.println("That was an illegal move.");
@@ -176,7 +167,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     @Override
     public void mouseClicked(MouseEvent e) {
       CellState currentPlayer = this.model.getCurrentPlayer();
-      if (currentPlayer == null || currentPlayer != this.player.getPiece()) {
+      if (currentPlayer == null) {
         return;
       }
       int x = e.getX();
