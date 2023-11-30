@@ -15,6 +15,6 @@ public class BasicMinimaxStrategy implements InfallibleMoveStrategy {
 
   @Override
   public void newGUIMove(Move newMove) {
-    //ignore
+    // ignore
   }
 }

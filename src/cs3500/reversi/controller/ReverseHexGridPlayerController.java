@@ -156,7 +156,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     @Override
     public void mouseClicked(MouseEvent e) {
       CellState currentPlayer = this.model.getCurrentPlayer();
-      if (!(currentPlayer != null && currentPlayer.equals(this.player.getPiece()))) {
+      if (currentPlayer == null) {
         return;
       }
       int x = e.getX();
@@ -211,13 +211,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           // check if user click Restart button
           System.out.println("Restart button is clicked!");
           try {
-            if (!this.model.isGameOver()) {
-              this.player.recieveGUIMove(new Move(false, true, false));
-            } else {
-              // when the game is over the player is not listening for moves and can't make moves
-              this.model.newGame();
-            }
-            System.out.println("model after restart\n" + this.model.toString());
+            this.player.recieveGUIMove(new Move(false, true, false));
             view.setModel(this.model);
             view.repaint();
           } catch (IllegalArgumentException | IllegalStateException ex) {

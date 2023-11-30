@@ -164,6 +164,10 @@ public class BasicReversi implements ReversiModel {
       this.gameState = Status.Playing;
       notifyPlayer();
     }
+    // let listeners apply restart game command
+    for (YourTurnListener listener : listeners) {
+      listener.yourTurn();
+    }
   }
 
   private void incrementScore(CellState player) {
@@ -839,11 +843,9 @@ public class BasicReversi implements ReversiModel {
       horizontalRows.get(l.row).get(l.column).setState(CellState.WHITE);
       incrementScore(CellState.WHITE);
     }
-
+    this.currentPlayer = CellState.BLACK;
     this.gameState = Status.NotStarted;
-
-    //restart
-    this.startGame();
+    startGame();
   }
 
   //take a cell and get the move that would go in that cell for that cell
