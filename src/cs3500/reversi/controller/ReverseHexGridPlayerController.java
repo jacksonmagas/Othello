@@ -171,6 +171,11 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       // vertical cell distance 33
       Point rowCol = findRowCols(keyMap, new Point(x, y));
       this.model.getBoard();
+
+      //board[x][y] = (int)'X';
+      System.out.println("Controller mouse click event - x "+x+" y "+y);
+      //System.out.println("Component "+e.getComponent().toString());
+      //System.out.println("Source "+e.getSource());
       if (rowCol != null) {
         int row = rowCol.x;
         int col = rowCol.y;

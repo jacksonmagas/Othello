@@ -57,7 +57,7 @@ public class ReversiGUI {
     }
 
     ReversiModel reversi = new BasicReversi(noOfCells);
-    ReversiFrame view = new BasicReversiView(reversi);
+    ReversiFrame view = new BasicReversiView(reversi, "Black");
     Player player1 = getPlayerUsingStrategy(player1Strategy, CellState.BLACK);
     Player player2 = getPlayerUsingStrategy(player2Strategy, CellState.WHITE);
     ReversiPlayerStrategyController controller = new ReverseHexGridController(reversi, view);

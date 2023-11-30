@@ -30,13 +30,13 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   /**
    * Constructor for BasicReversiView.
    */
-  public BasicReversiView(ReadonlyReversiModel model) {
+  public BasicReversiView(ReadonlyReversiModel model, String playerLabel) {
     setTitle("Reversi Hex Grid Game");
 
     setSize(new Dimension(WIDTH, HEIGHT));
     //setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-    drawPanel = new MainPanel(model);
+    drawPanel = new MainPanel(model, playerLabel);
     drawPanel.setFocusable(true);
     setContentPane(drawPanel);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
