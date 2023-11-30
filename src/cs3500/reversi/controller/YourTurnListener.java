@@ -18,4 +18,9 @@ public interface YourTurnListener {
    * When this method is called the listener will interact with the model.
    */
   void yourTurn();
+
+  /**
+   * Refreshes all views on demand such as restart game event.
+   */
+  void refreshView();
 }

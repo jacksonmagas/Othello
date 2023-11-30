@@ -68,4 +68,9 @@ public interface ReversiFrame {
    * This method will be called to set a key listener.
    */
   void setKeyListener(KeyListener listener);
+
+  /**
+   * This method will be called to set focus for keyboard support.
+   */
+  void setFocusable(boolean focus);
 }

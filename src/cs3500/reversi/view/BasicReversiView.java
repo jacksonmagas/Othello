@@ -31,7 +31,12 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
    * Constructor for BasicReversiView.
    */
   public BasicReversiView(ReadonlyReversiModel model, String playerLabel) {
-    setTitle("Reversi Hex Grid Game");
+    StringBuffer text = new StringBuffer();
+    text.append("Reversi Hex Grid Game");
+    text.append(" ");
+    text.append(playerLabel);
+    text.append(" View");
+    setTitle(text.toString());
 
     setSize(new Dimension(WIDTH, HEIGHT));
     //setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -87,6 +92,7 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     drawPanel.revalidate();
     drawPanel.repaint();
+    drawPanel.setFocusable(true);
   }
 
   // sets the mouse listener
@@ -106,6 +112,11 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   public void setKeyListener(KeyListener listener) {
     drawPanel.setFocusable(true);
     drawPanel.addKeyListener(listener);
+  }
+
+  @Override
+  public void setFocusable(boolean focus) {
+    drawPanel.setFocusable(focus);
   }
 
   // gets the hashMap

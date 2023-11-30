@@ -162,6 +162,7 @@ public class BasicReversi implements ReversiModel {
       throw new IllegalStateException("Game is already started!");
     } else {
       this.gameState = Status.Playing;
+      refreshAllViews();
       notifyPlayer();
     }
     // let listeners apply restart game command
@@ -246,6 +247,18 @@ public class BasicReversi implements ReversiModel {
   // switch the current player at end of turn
   private void switchTurn() {
     this.currentPlayer = this.currentPlayer.opposite();
+  }
+
+  /**
+   * Refreshes all views of the game.
+   */
+  public void refreshAllViews() {
+    // Notify controllers to refresh view
+    for (YourTurnListener listener : listeners) {
+      if (listener != null) {
+        listener.refreshView();
+      }
+    }
   }
 
   private void notifyPlayer() {

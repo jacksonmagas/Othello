@@ -64,92 +64,94 @@ public class MainPanel extends JPanel {
 
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), LEFT);
-    Action left = new AbstractAction(LEFT) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(LEFT);
-      }
-    };
     this.getActionMap().put(LEFT, left);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), RIGHT);
-    Action right = new AbstractAction(RIGHT) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(RIGHT);
-      }
-    };
     this.getActionMap().put(RIGHT, right);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), UP);
-    Action up = new AbstractAction(UP) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(UP);
-      }
-    };
     this.getActionMap().put(UP, up);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), DOWN);
-    Action down = new AbstractAction(DOWN) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(DOWN);
-      }
-    };
     this.getActionMap().put(DOWN, down);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), P);
-    Action p = new AbstractAction(P) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(P);
-      }
-    };
     this.getActionMap().put(P, p);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_R, 0), R);
-    Action r = new AbstractAction(R) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(R);
-      }
-    };
     this.getActionMap().put(R, r);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), Q);
-    Action q = new AbstractAction(Q) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(Q);
-      }
-    };
     this.getActionMap().put(Q, q);
     this.getInputMap().put(
             KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), SPACE);
-    Action space = new AbstractAction(SPACE) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println(SPACE);
-      }
-    };
     this.getActionMap().put(SPACE, space);
   }
 
   private static final String LEFT = "Left";
   private static final String RIGHT = "Right";
-
   private static final String UP = "Up";
-
   private static final String DOWN = "Down";
-
   private static final String P = "P";
-
   private static final String R = "R";
-
   private static final String Q = "Q";
-
   private static final String SPACE = "Space";
+
+  private Action left = new AbstractAction(LEFT) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(LEFT);
+    }
+  };
+
+  private Action right = new AbstractAction(RIGHT) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(RIGHT);
+    }
+  };
+
+  private Action up = new AbstractAction(UP) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(UP);
+    }
+  };
+
+  private Action down = new AbstractAction(DOWN) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(DOWN);
+    }
+  };
+
+  private Action p = new AbstractAction(P) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(P);
+    }
+  };
+
+  private Action r = new AbstractAction(R) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(R);
+    }
+  };
+
+  private Action q = new AbstractAction(Q) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(Q);
+    }
+  };
+
+  private Action space = new AbstractAction(SPACE) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println(SPACE);
+    }
+  };
 
   /**
    * Adds a player to the view.
@@ -232,8 +234,6 @@ public class MainPanel extends JPanel {
     int y2 = centered ? origin.y - radius : origin.y;
 
     StringBuilder text = new StringBuilder();
-    text.append(this.playerLabel);
-    text.append(" View - ");
     text.append("Player one Score: ");
     text.append(model.getPlayerScore(CellState.BLACK));
     text.append(", ");

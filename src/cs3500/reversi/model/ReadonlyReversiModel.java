@@ -98,4 +98,9 @@ public interface ReadonlyReversiModel {
    * @return the total number of rows
    */
   int getRows();
+
+  /**
+   * Refreshes all views of the game.
+   */
+  void refreshAllViews();
 }

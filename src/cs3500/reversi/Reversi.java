@@ -44,23 +44,25 @@ public class Reversi {
     int height = 800;
 
     if (args.length > 0) {
+      /* Not supported
       try {
         noOfCells = Integer.parseInt(args[0]);
       } catch (NumberFormatException e) {
         System.err.println("Argument 1 - " + args[0] + " must be an integer.");
         throw new IllegalArgumentException("Argument 1 - " + args[0] + " must be an integer.");
       }
+      */
       try {
-        player1Strategy = args[1];
+        player1Strategy = args[0];
+      } catch (Exception e) {
+        System.err.println("Argument 1 must be present.");
+        throw new IllegalArgumentException("Argument 1 must be present.");
+      }
+      try {
+        player2Strategy = args[1];
       } catch (Exception e) {
         System.err.println("Argument 2 must be present.");
         throw new IllegalArgumentException("Argument 2 must be present.");
-      }
-      try {
-        player2Strategy = args[2];
-      } catch (Exception e) {
-        System.err.println("Argument 3 must be present.");
-        throw new IllegalArgumentException("Argument 3 must be present.");
       }
     }
 

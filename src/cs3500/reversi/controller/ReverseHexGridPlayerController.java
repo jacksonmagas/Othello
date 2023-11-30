@@ -59,7 +59,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer() +
             " with model\n" + this.model);
     // Make view visible
-    view.setModel(this.model);
+    view.setFocusable(true);
     view.repaint();
     //view.setVisibleView(false);
 
@@ -68,6 +68,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     if (move != null) {
       makeMoveUntilLegalOrTooManyAttempts(move, 0);
       System.out.println("model after move\n" + model);
+      view.setModel(this.model);
       view.repaint();
     }
   }
@@ -83,11 +84,29 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       throw new IllegalStateException("Too many invalid moves provided.");
     }
     try {
+      if (move.getPosn() != null) {
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to " +
+                move.getPosn().row + " " + move.getPosn().row);
+      } else if (move.isPassTurn()){
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
+      } else if (move.isRestartGame()){
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is restarting the game!");
+      } else if (move.isQuitGame()){
+        System.out.println("Player " + this.model.getCurrentPlayer() + " is exiting the game!");
+      }
       this.model.makeMove(move);
     } catch (IllegalArgumentException e) {
       System.out.println("That was an illegal move.");
       makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
+  }
+
+  @Override
+  public void refreshView() {
+    System.out.println("Refresh View event received for player " + this.player.getPiece() +
+            " with model\n" + this.model);
+    view.setModel(this.model);
+    view.repaint();
   }
 
   // MyMouseListener class listens for mouse movements.
@@ -156,7 +175,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     @Override
     public void mouseClicked(MouseEvent e) {
       CellState currentPlayer = this.model.getCurrentPlayer();
-      if (currentPlayer == null) {
+      if (currentPlayer == null || currentPlayer != this.player.getPiece()) {
         return;
       }
       int x = e.getX();
@@ -200,7 +219,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         if (x >= 33 && x <= 148 && y >= 33 && y <= 142) {
           System.out.println("Pass Turn button is clicked!");
           try {
-            System.out.println("Player " + this.model.getCurrentPlayer() + " is is passing turn");
+            System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
             this.player.recieveGUIMove(new Move(true, false, false));
             //this.playerIndex = (this.playerIndex + 1) % this.players.size();
             System.out.println("model after pass-turn\n" + this.model.toString());
@@ -356,8 +375,11 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         try {
           System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to "
                   + row + " " + col);
-          this.model.makeMove(row, col);
-          System.out.println("model after move\n" + this.model.toString());
+          this.player.recieveGUIMove(new Move(row, col));
+          System.out.println("model after move\n" + this.model);
+          view.setModel(this.model);
+          view.repaint();
+          this.model.refreshAllViews();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
@@ -369,9 +391,12 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("P Key pressed!");
         System.out.println("Pass Turn button is clicked!");
         try {
-          System.out.println("Player " + this.model.getCurrentPlayer() + " is is passing turn");
-          this.model.passTurn();
-          System.out.println("model after pass-turn\n" + this.model.toString());
+          System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
+          this.player.recieveGUIMove(new Move(true, false, false));
+          System.out.println("model after pass-turn\n" + this.model);
+          view.setModel(this.model);
+          view.repaint();
+          this.model.refreshAllViews();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
@@ -383,10 +408,11 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("R Key pressed!");
         System.out.println("Restart button is clicked!");
         try {
-          this.model.newGame();
-          System.out.println("model after restart\n" + this.model.toString());
+          this.player.recieveGUIMove(new Move(false, true, false));
+          System.out.println("model after restart\n" + this.model);
           view.setModel(this.model);
           view.repaint();
+          this.model.refreshAllViews();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
@@ -398,7 +424,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       } else if (e.getKeyCode() == KeyEvent.VK_Q) {
         System.out.println("Q Key pressed!");
         System.out.println("User wants to quit the game!");
-        System.out.println("model before exit\n" + this.model.toString());
+        System.out.println("model before exit\n" + this.model);
         System.exit(1);
       }
     }
