@@ -52,13 +52,19 @@ public interface ReadonlyReversiModel {
    */
   boolean anyLegalMoves();
 
-  //TODO
-  Cell.Location getFirstAvailableMove();
-
-  //TODO
+  /**
+   * Gets the directions for the next step of the game at any given time.
+   * The directions include telling the players whose turn it is and whether the game is over
+   * or they should make a move.
+   * @return A string containing instructions for the players to play the next move
+   */
   String getNextStepInstructions();
 
-  //TODO
+  /**
+   * Returns the error message corresponding to the last illegal move that was attempted.
+   * Views can use this information to inform users of illegal moves.
+   * @return The error message
+   */
   String getLastErrorMessage();
 
   /**
@@ -76,7 +82,14 @@ public interface ReadonlyReversiModel {
    */
   List<Move> getLegalMoves();
 
-  //TODO
+  /*
+  TODO: reorganize listeners from controller to view and have controller listen to player actions
+  this will allow removal of model interacting with highlighted cell
+  */
+  /**
+   * Get the location of the current active cell in the model.
+   * @return the location of the highlighted cell
+   */
   Cell.Location getHighlightedCell();
 
   /**

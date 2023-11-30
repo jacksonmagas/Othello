@@ -16,9 +16,6 @@ public class Hexagon extends Polygon {
 
   public static final int SIDES = 6;
 
-  //TODO: this isn't read for some reason
-  private final Point[] points;
-
   private Point center;
 
   private int radius;
@@ -36,7 +33,6 @@ public class Hexagon extends Polygon {
     this.center = center;
     this.radius = radius;
 
-    points = new Point[SIDES];
     updatePoints();
   }
 
@@ -109,7 +105,6 @@ public class Hexagon extends Polygon {
       Point point = findPoint(angle);
       xpoints[p] = point.x;
       ypoints[p] = point.y;
-      points[p] = point;
     }
   }
 

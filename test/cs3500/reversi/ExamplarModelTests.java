@@ -1,15 +1,12 @@
 package cs3500.reversi;
 
-import cs3500.reversi.model.Cell;
-import cs3500.reversi.model.CellState;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.List;
-
 import cs3500.reversi.model.BasicReversi;
+import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.Move;
+import java.util.List;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Public class ExamplarModelTests tests the methods in the
@@ -544,8 +541,10 @@ public class ExamplarModelTests {
     Assert.assertEquals("Game board has 1st legal move match col!", 2, moves.get(0).getPosn().col);
     Assert.assertEquals("Game board has last legal move match is pass-turn!", true, model.getLegalMoves().get(6).isPassTurn());
 
-    Assert.assertEquals("Game board has 1st legal move match row!", 1, model.getFirstAvailableMove().getRow());
-    Assert.assertEquals("Game board has 1st legal move match col!", 2, model.getFirstAvailableMove().getColumn());
+    Assert.assertEquals("Game board has 1st legal move match row!",
+        1, model.getLegalMoves().get(0).getPosn().row);
+    Assert.assertEquals("Game board has 1st legal move match col!",
+        2, model.getLegalMoves().get(0).getPosn().col);
 
     Assert.assertEquals("Player next instructions match!", "Player one turn (Black)!\n", model.getNextStepInstructions());
     Assert.assertEquals("Game do not have any error now!", "", model.getLastErrorMessage());

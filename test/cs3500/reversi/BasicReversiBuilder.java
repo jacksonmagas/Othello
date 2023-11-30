@@ -32,6 +32,15 @@ class BasicReversiBuilder {
     return new BasicReversi(sideLength, lastPlayerPassed, currentPlayer, blackTiles, whiteTiles);
   }
 
+  /**
+   * Terminal operation builds a Mock of the basic reversi set up by this builder.
+   * @return a configured basic reversi
+   */
+  MockModel buildMock() {
+    return new MockModel(new BasicReversi(sideLength, lastPlayerPassed,
+        currentPlayer, blackTiles, whiteTiles));
+  }
+
   // add a new white tile at the location
   BasicReversiBuilder wAt(int row, int index) {
     this.whiteTiles.add(new Location(row, index));

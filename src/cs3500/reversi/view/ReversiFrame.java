@@ -53,10 +53,11 @@ public interface ReversiFrame {
   void setModel(ReadonlyReversiModel model);
 
   /**
-   * Add the given player to the view. //TODO: the view doesn't seem to interact with the player. Is this an oversight?
+   * Add the given player to the view.
    * @param viewPlayer the player to add to the view
    */
   void addPlayer(CellState viewPlayer);
+  //TODO: the view doesn't seem to interact with the player. Is this an oversight?
 
   /**
    * Make the view visible or invisible.

@@ -269,11 +269,10 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
 
   }
 
-  // MyMouseListener class listens for mouse movements.
+  // Key Listener controls final making of moves
   static class MyKeyListener extends KeyAdapter implements KeyListener {
     ReversiModel model;
     ReversiFrame view;
-    //int playerIndex;
     final Player player;
 
     /**

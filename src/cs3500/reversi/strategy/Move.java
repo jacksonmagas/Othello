@@ -108,6 +108,6 @@ public class Move {
     } else {
       asString = "Nonsense Move";
     }
-    return asString;
+    return asString + System.lineSeparator();
   }
 }

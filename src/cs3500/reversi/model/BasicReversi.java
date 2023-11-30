@@ -583,7 +583,7 @@ public class BasicReversi implements ReversiModel {
   @Override
   public int[][] getBoard() {
     //board size.
-    int bSize = 14; //this.totalNumRows;
+    int bSize = this.totalNumRows; //this.totalNumRows;
     int[][] board = new int[bSize][bSize];
     // initialize with 0s
     for (int i = 0; i < this.horizontalRows.size(); i++) {
@@ -660,30 +660,7 @@ public class BasicReversi implements ReversiModel {
     return false;
   }
 
-  /**
-   * Gets the first available move.
-   */
-  @Override
-  public Cell.Location getFirstAvailableMove() {
-    int rowSize = center + 1;
-    for (int hRow = 0; hRow < this.totalNumRows; hRow++) {
-      for (int hIndex = 0; hIndex < rowSize; hIndex++) {
-        if (isValidMove(hRow, hIndex)) {
-          return new Location(hRow, hIndex);
-        }
-      }
-      if (hRow < center) {
-        rowSize++;
-      } else {
-        rowSize--;
-      }
-    }
-    return null;
-  }
 
-  /**
-   * Gets the directions for the next step of the game at any given time.
-   */
   @Override
   public String getNextStepInstructions() {
     StringBuilder instructions = new StringBuilder();

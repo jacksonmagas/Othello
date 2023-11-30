@@ -8,146 +8,184 @@ import cs3500.reversi.strategy.Move;
 import java.util.List;
 
 public class MockModel implements ReversiModel {
+  private final ReversiModel delegate;
+  private final StringBuilder transcript;
+  private final boolean isCopy;
 
+  public MockModel(ReversiModel delegate) {
+    this.delegate = delegate;
+    isCopy = false;
+    this.transcript = new StringBuilder();
+  }
+
+  // copy this mock, maintaining references to the same transcript but copying the delegate
+  private MockModel(MockModel template) {
+    this.delegate = template.delegate.copy();
+    this.transcript = template.transcript;
+    this.isCopy = true;
+  }
+
+  /** 
+   * print the message to the transcript.
+   * @param msg message to print
+   */
+  private void printT(String msg) {
+    transcript.append(msg).append(System.lineSeparator());
+  }
+  
   @Override
   public int getPlayerScore(CellState player) {
-    System.out.println("GetPlayerScore: " + player);
-    return 0;
+    printT("GetPlayerScore: " + player);
+    return delegate.getPlayerScore(player);
   }
 
   @Override
   public CellState getCurrentPlayer() {
-    System.out.println("GetCurrentPlayer: ");
-    return null;
+    printT("GetCurrentPlayer: ");
+    return delegate.getCurrentPlayer();
   }
 
   @Override
   public boolean isGameOver() {
-    System.out.println("isGameOver: ");
-    return false;
+    printT("isGameOver: ");
+    return delegate.isGameOver();
   }
 
   @Override
   public List<List<CellState>> getGameBoard() {
-    System.out.println("getGameBoard: ");
-    return null;
+    printT("getGameBoard: ");
+    return delegate.getGameBoard();
   }
 
   @Override
   public int[][] getBoard() {
-    System.out.println("getBoard: ");
-    return new int[0][];
+    printT("getBoard: ");
+    return delegate.getBoard();
   }
 
   @Override
   public CellState getTileAt(int hRow, int hIndex) {
-    System.out.println("getTileAt: ");
-    return null;
+    printT("getTileAt: ");
+    return delegate.getTileAt(hRow, hIndex);
   }
 
   @Override
   public int sideLength() {
-    System.out.println("sideLength: ");
-    return 0;
+    printT("sideLength: ");
+    return delegate.sideLength();
   }
 
   @Override
   public boolean anyLegalMoves() {
-    System.out.println("anyLegalMoves: ");
-    return false;
-  }
-
-  @Override
-  public Location getFirstAvailableMove() {
-    System.out.println("getFirstAvailableMove: ");
-    return null;
+    printT("anyLegalMoves: ");
+    return delegate.anyLegalMoves();
   }
 
   @Override
   public String getNextStepInstructions() {
-    System.out.println("getNextStepInstructions: ");
-    return null;
+    printT("getNextStepInstructions: ");
+    return delegate.getNextStepInstructions();
   }
 
   @Override
   public String getLastErrorMessage() {
-    System.out.println("getLastErrorMessage: ");
-    return null;
+    printT("getLastErrorMessage: ");
+    return delegate.getLastErrorMessage();
   }
 
   @Override
   public CellState getPieceAt(int r, int c) {
-    System.out.printf("getPieceAt: r = %d, c = %d%n", r, c);
-    return null;
+    printT(String.format("getPieceAt: r = %d, c = %d%n", r, c));
+    return delegate.getPieceAt(r, c);
   }
 
   @Override
   public List<Move> getLegalMoves() {
-    System.out.println("getLegalMoves: ");
-    return null;
+    printT("getLegalMoves: ");
+    return delegate.getLegalMoves();
   }
 
   @Override
   public Location getHighlightedCell() {
-    System.out.println("getHighlightedCell: ");
-    return null;
+    printT("getHighlightedCell: ");
+    return delegate.getHighlightedCell();
   }
 
   @Override
   public ReversiModel copy() {
-    System.out.println("copy: ");
-    return null;
+    printT("copy: ");
+    return new MockModel(this);
   }
 
   @Override
   public int getColumns(int row) {
-    System.out.printf("getColumns: row = %d%n", row);
-    return 0;
+    printT(String.format("getColumns: row = %d%n", row));
+    return delegate.getColumns(row);
   }
 
   @Override
   public int getRows() {
-    System.out.println("getRows: ");
-    return 0;
+    printT("getRows: ");
+    return delegate.getRows();
   }
 
   @Override
   public void refreshAllViews() {
-    System.out.println("refreshAllViews: ");
+    printT("refreshAllViews: ");
+    delegate.refreshAllViews();
   }
 
   @Override
   public void makeMove(int row, int column) {
-    System.out.printf("makeMove: row = %d, column = %d%n", row, column);
+    Move move = new Move(row, column);
+    transcript.append(isCopy ? "Testing move: " : "Making move: ").append(move);
+    transcript.append(" for ").append(getCurrentPlayer());
+    delegate.makeMove(row, column);
   }
 
   @Override
   public void makeMove(Move move) {
-    System.out.println("makeMove: " + move.toString());
+    transcript.append(isCopy ? "Testing move: " : "Making move: ").append(move);
+    transcript.append(" for ").append(getCurrentPlayer());
+    delegate.makeMove(move);
   }
 
   @Override
   public void passTurn() {
-    System.out.println("passTurn ");
+    printT("passTurn ");
+    transcript.append("passing turn/n");
+    delegate.passTurn();
   }
 
   @Override
   public void setHighlightedCell(int row, int col) {
-    System.out.println("setHighlightedCell: ");
+    printT("setHighlightedCell: ");
+    delegate.setHighlightedCell(row, col);
   }
 
   @Override
   public void newGame() {
-    System.out.println("newGame: ");
+    printT("newGame: ");
+    delegate.newGame();
   }
 
   @Override
   public void startGame() {
-    System.out.println("startGame: ");
+    printT("startGame: ");
+    delegate.startGame();
   }
 
   @Override
   public void addYourTurnListener(YourTurnListener listener) {
-    System.out.println("addTurnListener for player: " + listener.getPlayer());
+    printT("addTurnListener for player: " + listener.getPlayer());
+    delegate.addYourTurnListener(listener);
+  }
+
+  /**
+   * Show the transcript from this mock.
+   * @return the transcript from this mock
+   */
+  String viewTranscript() {
+    return this.transcript.toString();
   }
 }

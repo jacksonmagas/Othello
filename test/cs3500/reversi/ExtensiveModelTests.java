@@ -19,7 +19,6 @@ public class ExtensiveModelTests {
   }
 
   // All of these moves should throw because they are going off the edge.
-  //TODO: keep investigating this, found more strange moves in manual tests
   @Test
   public void testMovesOffEdgeOfBoardWhite() {
     //horizontal going left

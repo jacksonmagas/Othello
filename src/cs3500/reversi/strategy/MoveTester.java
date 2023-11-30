@@ -7,6 +7,7 @@ public interface MoveTester {
   /**
    * Tests the given move according to the evaluation function of the move tester and gives it a
    * score for how good the move is.
+   *
    * @param move The move to evaluate
    * @return The score given to the move
    * @throws IllegalArgumentException if the move is not legal according to this move tester.

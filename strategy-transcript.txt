@@ -1,0 +1,61 @@
+getLegalMoves: 
+copy: 
+Testing move: Move at 2, 1
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 1, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 2, 4
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 1, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 4, 1
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 1, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 4, 4
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 1, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 5, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 1, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Pass Turn
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X
+copy: 
+Testing move: Move at 1, 2
+ for GetCurrentPlayer: 
+XGetCurrentPlayer: 
+GetPlayerScore: X

@@ -37,7 +37,12 @@ public interface ReversiModel extends ReadonlyReversiModel {
    */
   void passTurn();
 
-  //TODO fix this
+  //TODO The refactor mentioned in readonlyreversimodel will allow removing this too
+  /**
+   * Set the highlighted cell in this model to the given cell
+   * @param row the row of the cell
+   * @param col the column of the cell
+   */
   void setHighlightedCell(int row, int col);
 
   /**
