@@ -1,8 +1,7 @@
 package cs3500.reversi.view.hexgrid;
 
 import cs3500.reversi.model.CellState;
-import cs3500.reversi.model.Move;
-import cs3500.reversi.view.MoveListener;
+import cs3500.reversi.model.ReadonlyReversiModel;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,18 +13,11 @@ import java.awt.Point;
 import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-
-import cs3500.reversi.model.Cell;
-import cs3500.reversi.model.ReadonlyReversiModel;
 
 /**
  * Public class MainPanel creates the panel of the hexgrid view.

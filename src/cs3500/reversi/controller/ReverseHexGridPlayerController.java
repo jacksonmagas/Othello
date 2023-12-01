@@ -100,7 +100,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
    */
   @Override
   public void receiveGUIAction(Move m) {
-    if (player.getPiece() == model.getCurrentPlayer()){
+    if (player.getPiece() == model.getCurrentPlayer()) {
       model.makeMove(new Move(false, true, false));
     }
   }

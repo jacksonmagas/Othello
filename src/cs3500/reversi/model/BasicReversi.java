@@ -262,7 +262,7 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * This function is the core game loop, notifying each player of their turn
+   * This function is the core game loop, notifying each player of their turn.
    */
   private void notifyPlayer() {
     if (!this.isGameOver() && !listeners.isEmpty()) {
