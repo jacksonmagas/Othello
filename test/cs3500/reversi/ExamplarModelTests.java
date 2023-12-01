@@ -266,6 +266,7 @@ public class ExamplarModelTests {
             model.toString());
     Assert.assertThrows("There is no legal move at 15, 15", IllegalArgumentException.class, ()
         -> model.makeMove(15, 15));
+    Assert.assertEquals("There is no legal move at 15, 15.", "There is no legal move at 15, 15.", model.getLastErrorMessage());
   }
 
   @Test
@@ -289,8 +290,8 @@ public class ExamplarModelTests {
                     + "_ O _ X _ \n"
                     + " _ X O _  \n"
                     + "  _ _ _   \n"
-                    + "Player one Score: 5\n" 
-                    + "Player two Score: 2\n" 
+                    + "Player one Score: 5\n"
+                    + "Player two Score: 2\n"
                     + "Player two turn (White)!\n",
             model.toString());
     model.makeMove(0, 1);
@@ -537,32 +538,31 @@ public class ExamplarModelTests {
 
     List<Move> moves =  model.getLegalMoves();
     Assert.assertEquals("Game board has 7 legal moves!", 7, moves.size());
-    Assert.assertEquals("Game board has 1st legal move match row!",
-        1, moves.get(0).getPosn().row);
-    Assert.assertEquals("Game board has 1st legal move match col!",
-        2, moves.get(0).getPosn().col);
-    Assert.assertTrue("Game board has last legal move match is pass-turn!",
-        model.getLegalMoves().get(6).isPassTurn());
+    Assert.assertEquals("Game board has 1st legal move match row!", 1, moves.get(0).getPosn().row);
+    Assert.assertEquals("Game board has 1st legal move match col!", 2, moves.get(0).getPosn().col);
+    Assert.assertEquals("Game board has last legal move match is pass-turn!", true, model.getLegalMoves().get(6).isPassTurn());
 
     Assert.assertEquals("Game board has 1st legal move match row!",
         1, model.getLegalMoves().get(0).getPosn().row);
     Assert.assertEquals("Game board has 1st legal move match col!",
         2, model.getLegalMoves().get(0).getPosn().col);
 
-    Assert.assertEquals("Player next instructions match!",
-        "Player one turn (Black)!\n", model.getNextStepInstructions());
-    Assert.assertEquals("Game do not have any error now!",
-        "", model.getLastErrorMessage());
+    Assert.assertEquals("Player next instructions match!", "Player one turn (Black)!\n", model.getNextStepInstructions());
+    Assert.assertEquals("Game do not have any error now!", "", model.getLastErrorMessage());
 
-    Assert.assertEquals("Game current row matched!",
-        0, model.getHighlightedCell().getRow());
-    Assert.assertEquals("Game current column matched!",
-        0, model.getHighlightedCell().getColumn());
+    Assert.assertEquals("Game current row matched!", 0, model.getHighlightedCell().getRow());
+    Assert.assertEquals("Game current column matched!", 0, model.getHighlightedCell().getColumn());
     model.setHighlightedCell(1,1);
-    Assert.assertEquals("Game current row matched!",
-        1, model.getHighlightedCell().getRow());
-    Assert.assertEquals("Game current column matched!",
-        1, model.getHighlightedCell().getColumn());
+    Assert.assertEquals("Game current row matched!", 1, model.getHighlightedCell().getRow());
+    Assert.assertEquals("Game current column matched!", 1, model.getHighlightedCell().getColumn());
+    model.newGame();
+    gameBoard = model.getGameBoard();
+    Assert.assertEquals("Player one turn (Black)!", CellState.BLACK, gameBoard.get(2).get(2));
+    Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, gameBoard.get(2).get(3));
+    Assert.assertEquals("Player one turn (BLACK)!", CellState.BLACK, model.getTileAt(2, 2));
+    Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, model.getTileAt(2, 3));
+    Assert.assertEquals("Game board side length is 4!", 4, model.sideLength());
+    Assert.assertEquals("Empty!", CellState.EMPTY, gameBoard.get(0).get(0));
   }
 
   @Test
@@ -639,13 +639,106 @@ public class ExamplarModelTests {
             model.toString());
     model.newGame();
     Assert.assertEquals("Game is updated",
-            "  _ _ _   \n"
-                    + " _ X O _  \n"
-                    + "_ O _ X _ \n"
-                    + " _ X O _  \n"
-                    + "  _ _ _   \n"
+            "  _ _ _   \n" +
+                    " _ X O _  \n" +
+                    "_ O _ X _ \n" +
+                    " _ X O _  \n" +
+                    "  _ _ _   \n" +
+                    "Player one Score: 3\n" +
+                    "Player two Score: 3\n" +
+                    "Player one turn (Black)!\n",
+            model.toString());
+    int[][] board = model.getBoard();
+    Assert.assertEquals("X match", (int)'X', board[1][1]);
+    Assert.assertEquals("O match", (int)'O', board[1][2]);
+    Assert.assertEquals("X match", (int)'O', board[2][1]);
+    Assert.assertEquals("O match", (int)'X', board[2][3]);
+    Assert.assertEquals("X match", (int)'X', board[3][1]);
+    Assert.assertEquals("O match", (int)'O', board[3][2]);
+    Assert.assertEquals("Empty match", (int)' ', board[2][2]);
+    Assert.assertEquals("Empty match", (int)' ', board[0][0]);
+    Assert.assertEquals("Cell match", CellState.EMPTY, model.getPieceAt(0, 0));
+    Assert.assertEquals("Cell match", CellState.BLACK, model.getPieceAt(1, 1));
+  }
+
+  @Test
+  public void testReversiGameCheckCopy() {
+    ReversiModel model = new BasicReversi(3);
+
+    Assert.assertEquals("Game is started",
+            "  _ _ _   \n" +
+                    " _ X O _  \n" +
+                    "_ O _ X _ \n" +
+                    " _ X O _  \n" +
+                    "  _ _ _   \n" +
+                    "Player one Score: 3\n" +
+                    "Player two Score: 3\n" +
+                    "Player one turn (Black)!\n",
+            model.toString());
+    ReversiModel modelCopy = model.copy();
+    Assert.assertEquals("Game is started",
+            "  _ _ _   \n" +
+                    " _ X O _  \n" +
+                    "_ O _ X _ \n" +
+                    " _ X O _  \n" +
+                    "  _ _ _   \n" +
+                    "Player one Score: 3\n" +
+                    "Player two Score: 3\n" +
+                    "Player one turn (Black)!\n",
+            modelCopy.toString());
+    Assert.assertEquals("Rows match", 5, model.getRows());
+    Assert.assertEquals("Columns match for row 0", 3, model.getColumns(0));
+    Assert.assertEquals("Columns match for row 2", 5, model.getColumns(2));
+  }
+
+  @Test
+  public void testReversiGameCheckListeners() {
+    ReversiModel model = new BasicReversi(3);
+
+    Assert.assertEquals("Game is started",
+            "  _ _ _   \n" +
+                    " _ X O _  \n" +
+                    "_ O _ X _ \n" +
+                    " _ X O _  \n" +
+                    "  _ _ _   \n" +
+                    "Player one Score: 3\n" +
+                    "Player two Score: 3\n" +
+                    "Player one turn (Black)!\n",
+            model.toString());
+    model.addYourTurnListener(null);
+    model.refreshAllViews();
+    Assert.assertEquals("No exceptions!", 5, model.getRows());
+  }
+
+
+  @Test
+  public void testReversiGameMakeMoveOthers() {
+    ReversiModel model = new BasicReversi(4);
+    model.startGame();
+    Assert.assertEquals("Game is started",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ _ X O _ _  \n"
+                    + "  _ _ _ _ _   \n"
+                    + "   _ _ _ _    \n"
                     + "Player one Score: 3\n"
                     + "Player two Score: 3\n"
+                    + "Player one turn (Black)!\n",
+            model.toString());
+    model.makeMove(new Move(true, false, false));
+    model.makeMove(new Move(4, 1));
+    Assert.assertEquals("Game is updated",
+            "   _ _ _ _    \n"
+                    + "  _ _ _ _ _   \n"
+                    + " _ _ X O _ _  \n"
+                    + "_ _ O _ X _ _ \n"
+                    + " _ O O O _ _  \n"
+                    + "  _ _ _ _ _   \n"
+                    + "   _ _ _ _    \n"
+                    + "Player one Score: 2\n"
+                    + "Player two Score: 5\n"
                     + "Player one turn (Black)!\n",
             model.toString());
   }

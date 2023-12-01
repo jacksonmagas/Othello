@@ -80,6 +80,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     } catch (IllegalArgumentException e) {
       System.out.println("That was an illegal move.");
       this.refreshView();
+      JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), e.getMessage(),
+              "Message", JOptionPane.ERROR_MESSAGE);
       makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
   }
