@@ -601,13 +601,8 @@ public class BasicReversi implements ReversiModel {
    */
   @Override
   public int[][] getBoard() {
-<<<<<<< HEAD
     //todo: this should be folded into board()
     int bSize = this.totalNumRows; //this.totalNumRows;
-=======
-    //board size.
-    int bSize = this.totalNumRows;
->>>>>>> refs/remotes/origin/main
     int[][] board = new int[bSize][bSize];
     // initialize with 0s
     for (int i = 0; i < this.horizontalRows.size(); i++) {
