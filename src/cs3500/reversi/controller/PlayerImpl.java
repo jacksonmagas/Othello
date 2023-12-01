@@ -3,7 +3,7 @@ package cs3500.reversi.controller;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.strategy.InfallibleMoveStrategy;
-import cs3500.reversi.strategy.Move;
+import cs3500.reversi.model.Move;
 
 /**
  * A simple Player implementation that delegates most of its
@@ -41,7 +41,7 @@ public class PlayerImpl implements Player {
   }
 
   @Override
-  public void recieveGUIMove(Move m) {
+  public void receiveGUIAction(Move m) {
     this.moveStrategy.newGUIMove(m);
   }
 }

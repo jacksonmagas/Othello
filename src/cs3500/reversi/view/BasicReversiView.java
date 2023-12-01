@@ -1,13 +1,10 @@
 package cs3500.reversi.view;
 
-import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.view.hexgrid.MainPanel;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
@@ -16,27 +13,18 @@ import javax.swing.JFrame;
  * It sets the size, model, view and mouse/key listeners for the game.
  */
 public class BasicReversiView extends JFrame implements ReversiFrame {
-
-  /**
-   * Adds a listener.
-   */
-  @Override
-  public void addFeatureListener(ViewFeatures features) {
-    // adds feature listener
-  }
-
   private final MainPanel drawPanel;
+  private final ReversiMouseListener mouseListener;
 
   /**
    * Constructor for BasicReversiView.
    */
   public BasicReversiView(ReadonlyReversiModel model, String playerLabel) {
-    StringBuffer text = new StringBuffer();
-    text.append("Reversi Hex Grid Game");
-    text.append(" ");
-    text.append(playerLabel);
-    text.append(" View");
-    setTitle(text.toString());
+    String text = "Reversi Hex Grid Game"
+        + " "
+        + playerLabel
+        + " View";
+    setTitle(text);
 
     setSize(new Dimension(WIDTH, HEIGHT));
     //setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -50,13 +38,11 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     setResizable(true);
     setVisible(true);
     setFocusable(true);
-
+    mouseListener = new ReversiMouseListener(model, this);
+    drawPanel.addMouseListener(mouseListener);
+    drawPanel.addMouseMotionListener(mouseListener);
   }
 
-  @Override
-  public void addPlayer(CellState viewPlayer) {
-    drawPanel.addPlayer(viewPlayer);
-  }
 
   @Override
   public void setVisibleView(boolean visible) {
@@ -79,12 +65,6 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.repaint();
   }
 
-  // sets the model
-  @Override
-  public void setModel(ReadonlyReversiModel model) {
-    drawPanel.setModel(model);
-  }
-
   // repaints the board
   @Override
   public void repaint() {
@@ -95,18 +75,6 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.setFocusable(true);
   }
 
-  // sets the mouse listener
-  @Override
-  public void setMouseListener(MouseListener listener) {
-    drawPanel.addMouseListener(listener);
-  }
-
-  // sets the mouse motion listener
-  @Override
-  public void setMouseMotionListener(MouseMotionListener listener) {
-    drawPanel.addMouseMotionListener(listener);
-  }
-
   // sets the key listener
   @Override
   public void setKeyListener(KeyListener listener) {
@@ -114,9 +82,22 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.addKeyListener(listener);
   }
 
+  /**
+   * Adds a move listener to this view.
+   */
+  @Override
+  public void addMoveListener(MoveListener listener) {
+    mouseListener.register(listener);
+  }
+
   @Override
   public void setFocusable(boolean focus) {
     drawPanel.setFocusable(focus);
+  }
+
+  @Override
+  public void setHighlightedCell(int row, int col) {
+    drawPanel.setHighlightedCell(row, col);
   }
 
   // gets the hashMap

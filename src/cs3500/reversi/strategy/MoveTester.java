@@ -1,5 +1,7 @@
 package cs3500.reversi.strategy;
 
+import cs3500.reversi.model.Move;
+
 /**
  * A move tester is able to evaluate a move or sequence of moves and give each move a score.
  */

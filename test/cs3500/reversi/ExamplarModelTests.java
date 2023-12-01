@@ -3,7 +3,7 @@ package cs3500.reversi;
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.strategy.Move;
+import cs3500.reversi.model.Move;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;

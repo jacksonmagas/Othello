@@ -1,5 +1,7 @@
 package cs3500.reversi.strategy;
 
+import cs3500.reversi.model.Move;
+
 /**
  * An interface for a game tree for any game whose moves can be represented by Move.
  * This interface is primarily intended for the game of reversi, and enables a minimax

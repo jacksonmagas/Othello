@@ -1,7 +1,6 @@
 package cs3500.reversi.model;
 
 import cs3500.reversi.controller.YourTurnListener;
-import cs3500.reversi.strategy.Move;
 
 /**
  * Represents the primary model interface for playing a game of Reversi.
@@ -47,6 +46,8 @@ public interface ReversiModel extends ReadonlyReversiModel {
 
   /**
    * Create a new reversi model of the same type in the new game configuration.
+   * This method cannot be called from a different thread of a currently running game, it will
+   * not properly restart the game.
    */
   void newGame();
 

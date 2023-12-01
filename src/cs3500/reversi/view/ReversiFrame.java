@@ -14,26 +14,15 @@ import cs3500.reversi.model.ReadonlyReversiModel;
  * and size for the game.
  */
 public interface ReversiFrame {
-
   /**
    * Adds a feature listener to the reversiFrame.
    */
-  void addFeatureListener(ViewFeatures features);
+  void addMoveListener(MoveListener features);
 
   /**
    * This method will be called when the drawing area has changed.
    */
   void setCanvasSize(int width, int height);
-
-  /**
-   * This method will be called to set a mouse listener.
-   */
-  void setMouseListener(MouseListener listener);
-
-  /**
-   * This method will be called to set a mouse motion listener.
-   */
-  void setMouseMotionListener(MouseMotionListener listener);
 
   /**
    * Redraws the view.
@@ -45,19 +34,6 @@ public interface ReversiFrame {
    * @return The map from point to coordinate
    */
   HashMap<Point, Point> getMap();
-
-  /**
-   * Sets the model that the main panel will use to draw the game.
-   * @param model the model to draw.
-   */
-  void setModel(ReadonlyReversiModel model);
-
-  /**
-   * Add the given player to the view.
-   * @param viewPlayer the player to add to the view
-   */
-  void addPlayer(CellState viewPlayer);
-  //TODO: the view doesn't seem to interact with the player. Is this an oversight?
 
   /**
    * Make the view visible or invisible.
@@ -74,4 +50,11 @@ public interface ReversiFrame {
    * This method will be called to set focus for keyboard support.
    */
   void setFocusable(boolean focus);
+
+  /**
+   * Set the highlighted cell to be the given row and column.
+   * @param row the row of the cell
+   * @param col the column of the cell
+   */
+  void setHighlightedCell(int row, int col);
 }

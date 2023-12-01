@@ -4,7 +4,7 @@ import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.strategy.Move;
+import cs3500.reversi.model.Move;
 import java.util.List;
 
 /**

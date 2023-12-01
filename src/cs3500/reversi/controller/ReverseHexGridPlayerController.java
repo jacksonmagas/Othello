@@ -1,21 +1,15 @@
 package cs3500.reversi.controller;
 
-import java.awt.Point;
+import cs3500.reversi.model.Cell;
+import cs3500.reversi.model.CellState;
+import cs3500.reversi.model.Move;
+import cs3500.reversi.model.ReversiModel;
+import cs3500.reversi.view.ReversiFrame;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashMap;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import cs3500.reversi.model.Cell;
-import cs3500.reversi.model.CellState;
-import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.strategy.Move;
-import cs3500.reversi.view.ReversiFrame;
 
 
 /**
@@ -44,8 +38,8 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   }
 
   private void setListeners() {
-    view.setMouseListener(new MyMouseListener(model, view, player));
-    view.setMouseMotionListener(new MyMouseListener(model, view, player));
+    view.addMoveListener(this);
+    view.addMoveListener(this.player);
     view.setKeyListener(new MyKeyListener(model, view, player));
   }
 
@@ -61,14 +55,11 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     // Make view visible
     view.setFocusable(true);
     view.repaint();
-    //view.setVisibleView(false);
 
-    // check if computer move is enabled
     Move move = this.player.play(this.model);
     if (move != null) {
       makeMoveUntilLegalOrTooManyAttempts(move, 0);
       System.out.println("model after move\n" + model);
-      view.setModel(this.model);
       view.repaint();
     }
   }
@@ -97,176 +88,26 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   public void refreshView() {
     System.out.println("Refresh View event received for player " + this.player.getPiece()
             + " with model\n" + this.model);
-    view.setModel(this.model);
+    
     view.repaint();
   }
 
-  // MyMouseListener class listens for mouse movements.
-  static class MyMouseListener extends MouseAdapter {
-
-    ReversiModel model;
-    ReversiFrame view;
-    //int playerIndex;
-    final Player player;
-
-    /**
-     * Constructor for MyMouseListener class.
-     */
-    public MyMouseListener(ReversiModel model, ReversiFrame view,
-                           Player player) {
-      super();
-      this.model = model;
-      this.view = view;
-      this.player = player;
+  /**
+   * Forward the GUI action to the player of this model.
+   * If the action from the GUI is restarting the game and not the current player then restart
+   * the model because the current player doesn't know about the restart event.
+   * @param m the move that corresponds to the last click
+   */
+  @Override
+  public void receiveGUIAction(Move m) {
+    if (player.getPiece() == model.getCurrentPlayer()){
+      model.makeMove(new Move(false, true, false));
     }
+  }
 
-    @Override
-    public void mouseMoved(MouseEvent e) {
-      CellState currentPlayer = this.model.getCurrentPlayer();
-      if (!(currentPlayer != null && currentPlayer.equals(this.player.getPiece()))) {
-        // un highlight cell
-        //Cell.Location currentCell = this.model.getHighlightedCell();
-        this.model.setHighlightedCell(-1, -1);
-
-        view.setModel(this.model);
-        view.repaint();
-        return;
-      }
-      int x = e.getX();
-      int y = e.getY();
-
-      // Determine row, col using x, y
-      HashMap<Point, Point> keyMap = view.getMap();
-      //Point rowCol = (Point) keyMap.get(new Point(x, y));
-      // 0,0=467,170 0,1=555,170 0,2=644,170
-      // 1,0=423,247 1,1=511,247 1,2=600,247
-      // horizontal cell distance 44
-      // vertical cell distance 33
-      Point rowCol = findRowCols(keyMap, new Point(x, y));
-      this.model.getBoard();
-      //board[x][y] = (int)'X';
-      //System.out.println("Controller mouse click event - x "+x+" y "+y);
-      //System.out.println("Component "+e.getComponent().toString());
-      //System.out.println("Source "+e.getSource());
-      int row = -1;
-      int col = -1;
-      if (rowCol != null) {
-        //System.out.println("row " + rowCol.x + " col " + rowCol.y);
-        row = rowCol.x;
-        col = rowCol.y;
-      }
-      // highlight cell
-      this.model.setHighlightedCell(row, col);
-      view.setModel(this.model);
-      view.repaint();
-    }
-
-    /**
-     * MouseClicked checks for if a mouse was clicked on the game board.
-     */
-    @Override
-    public void mouseClicked(MouseEvent e) {
-      CellState currentPlayer = this.model.getCurrentPlayer();
-      if (currentPlayer == null) {
-        return;
-      }
-      int x = e.getX();
-      int y = e.getY();
-
-      // Determine row, col using x, y
-      HashMap<Point, Point> keyMap = view.getMap();
-      //Point rowCol = (Point) keyMap.get(new Point(x, y));
-      // 0,0=467,170 0,1=555,170 0,2=644,170
-      // 1,0=423,247 1,1=511,247 1,2=600,247
-      // horizontal cell distance 44
-      // vertical cell distance 33
-      Point rowCol = findRowCols(keyMap, new Point(x, y));
-      this.model.getBoard();
-
-      //board[x][y] = (int)'X';
-      System.out.println("Controller mouse click event - x " + x + " y " + y);
-      //System.out.println("Component "+e.getComponent().toString());
-      //System.out.println("Source "+e.getSource());
-      if (rowCol != null) {
-        int row = rowCol.x;
-        int col = rowCol.y;
-        try {
-          System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to "
-                  + row + " " + col);
-          this.player.recieveGUIMove(new Move(row, col));
-          //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-          System.out.println("model after move\n" + this.model.toString());
-
-        } catch (IllegalArgumentException | IllegalStateException ex) {
-          System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-          JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
-                  "Message", JOptionPane.ERROR_MESSAGE);
-          view.setModel(this.model);
-          view.repaint();
-        }
-      } else {
-        // check if user click Pass Turn button
-        //if (x >= 248 && x <= 299 && y >= 51 && y <= 96) {
-        //if (x >= 250 && x <= 363 && y >= 51 && y <= 163) {
-        if (x >= 33 && x <= 148 && y >= 33 && y <= 142) {
-          System.out.println("Pass Turn button is clicked!");
-          try {
-            System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
-            this.player.recieveGUIMove(new Move(true, false, false));
-            //this.playerIndex = (this.playerIndex + 1) % this.players.size();
-            System.out.println("model after pass-turn\n" + this.model.toString());
-          } catch (IllegalArgumentException | IllegalStateException ex) {
-            System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-            JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
-                    "Message", JOptionPane.ERROR_MESSAGE);
-            view.setModel(this.model);
-            view.repaint();
-          }
-          //} else if (x >= 851 && x <= 931 && y >= 62 && y <= 142) {
-        } else if (x >= 146 && x <= 716 && y >= 43 && y <= 128) {
-          // check if user click Restart button
-          System.out.println("Restart button is clicked!");
-          try {
-            this.player.recieveGUIMove(new Move(false, true, false));
-            view.setModel(this.model);
-            view.repaint();
-          } catch (IllegalArgumentException | IllegalStateException ex) {
-            System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
-            JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
-                    "Message", JOptionPane.ERROR_MESSAGE);
-            view.setModel(this.model);
-            view.repaint();
-          }
-        }
-      }
-    }
-
-    // finds the rows and columns of a point
-    private Point findRowCols(HashMap<Point, Point> keyMap, Point mouseClickedPoint) {
-      Point rowColPoint = null;
-      if (keyMap != null && mouseClickedPoint != null) {
-        for (Point key : keyMap.keySet()) {
-          if (key != null
-                  && isRowMatch(key.x, mouseClickedPoint.x)
-                  && isColMatch(key.y, mouseClickedPoint.y)) {
-            rowColPoint = keyMap.get(key);
-            break;
-          }
-        }
-      }
-      return rowColPoint;
-    }
-
-    // checks if the row matches
-    boolean isRowMatch(int x1, int x2) {
-      return (Math.abs(x1 - x2) <= 44);
-    }
-
-    // checks if the columns matches
-    boolean isColMatch(int y1, int y2) {
-      return (Math.abs(y1 - y2) <= 33);
-    }
-
+  @Override
+  public void endTurn() {
+    this.player.receiveGUIAction(new Move(false, false, false));
   }
 
   // Key Listener controls final making of moves
@@ -304,7 +145,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         //Cell.Location currentCell = this.model.getHighlightedCell();
         this.model.setHighlightedCell(-1, -1);
 
-        view.setModel(this.model);
+        
         view.repaint();
         return;
       }
@@ -330,7 +171,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         }
         // highlight cell
         this.model.setHighlightedCell(row, col);
-        view.setModel(this.model);
+        
         view.repaint();
       } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
         System.out.println("Down arrow Key pressed!");
@@ -339,7 +180,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         }
         // highlight cell
         this.model.setHighlightedCell(row, col);
-        view.setModel(this.model);
+        
         view.repaint();
       } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
         System.out.println("Left Arrow Key pressed!");
@@ -348,7 +189,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         }
         // highlight cell
         this.model.setHighlightedCell(row, col);
-        view.setModel(this.model);
+        
         view.repaint();
       } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
         System.out.println("Right Arrow Key pressed!");
@@ -357,7 +198,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         }
         // highlight cell
         this.model.setHighlightedCell(row, col);
-        view.setModel(this.model);
+        
         view.repaint();
       }
 
@@ -366,16 +207,16 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         try {
           System.out.println("Player " + this.model.getCurrentPlayer() + " is doing move to "
                   + row + " " + col);
-          this.player.recieveGUIMove(new Move(row, col));
+          this.player.receiveGUIAction(new Move(row, col));
           System.out.println("model after move\n" + this.model);
-          view.setModel(this.model);
+          
           view.repaint();
           this.model.refreshAllViews();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
                   "Message", JOptionPane.ERROR_MESSAGE);
-          view.setModel(this.model);
+          
           view.repaint();
         }
       }  else if (e.getKeyCode() == KeyEvent.VK_P) {
@@ -383,32 +224,32 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("Pass Turn button is clicked!");
         try {
           System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
-          this.player.recieveGUIMove(new Move(true, false, false));
+          this.player.receiveGUIAction(new Move(true, false, false));
           System.out.println("model after pass-turn\n" + this.model);
-          view.setModel(this.model);
+          
           view.repaint();
           this.model.refreshAllViews();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
                   "Message", JOptionPane.ERROR_MESSAGE);
-          view.setModel(this.model);
+          
           view.repaint();
         }
       } else if (e.getKeyCode() == KeyEvent.VK_R) {
         System.out.println("R Key pressed!");
         System.out.println("Restart button is clicked!");
         try {
-          this.player.recieveGUIMove(new Move(false, true, false));
+          this.player.receiveGUIAction(new Move(false, true, false));
           System.out.println("model after restart\n" + this.model);
-          view.setModel(this.model);
+          
           view.repaint();
           this.model.refreshAllViews();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
                   "Message", JOptionPane.ERROR_MESSAGE);
-          view.setModel(this.model);
+          
           view.repaint();
         }
 

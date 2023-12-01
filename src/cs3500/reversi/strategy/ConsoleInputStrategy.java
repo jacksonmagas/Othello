@@ -1,5 +1,6 @@
 package cs3500.reversi.strategy;
 
+import cs3500.reversi.model.Move;
 import java.util.Scanner;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;

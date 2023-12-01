@@ -7,7 +7,7 @@ import cs3500.reversi.strategy.ConsoleInputStrategy;
 import cs3500.reversi.strategy.CornersStrategy;
 import cs3500.reversi.strategy.HighestScoringMove;
 import cs3500.reversi.strategy.InfallibleMoveStrategy;
-import cs3500.reversi.strategy.Move;
+import cs3500.reversi.model.Move;
 import cs3500.reversi.strategy.PassIfWin;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -2,7 +2,6 @@ package cs3500.reversi.model;
 
 import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.model.Cell.Location;
-import cs3500.reversi.strategy.Move;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,9 +41,11 @@ public class BasicReversi implements ReversiModel {
 
   private String lastErrorMessage;
 
-  private Status gameState;
+  private volatile Status gameState;
+  private volatile boolean restartGame;
 
   private CellState winner;
+  boolean quitGame;
 
   private final List<YourTurnListener> listeners = new ArrayList<>();
 
@@ -61,6 +62,8 @@ public class BasicReversi implements ReversiModel {
     if (sideLength < 3) {
       throw new IllegalArgumentException("sideLength should be at-least 3 or above !");
     }
+    this.quitGame = false;
+    this.restartGame = false;
     this.horizontalRows = new ArrayList<>();
     this.downRightRows = new ArrayList<>();
     this.downLeftRows = new ArrayList<>();
@@ -147,6 +150,7 @@ public class BasicReversi implements ReversiModel {
     this.horizontalRows = copyCells(base.horizontalRows);
     this.downLeftRows = copyCells(base.downLeftRows);
     this.downRightRows = copyCells(base.downRightRows);
+    this.quitGame = base.quitGame;
     //this.isGameOver = base.isGameOver;
     this.gameState = base.gameState;
     this.winner = base.winner;
@@ -164,10 +168,6 @@ public class BasicReversi implements ReversiModel {
       this.gameState = Status.Playing;
       refreshAllViews();
       notifyPlayer();
-    }
-    // let listeners apply restart game command
-    for (YourTurnListener listener : listeners) {
-      listener.yourTurn();
     }
   }
 
@@ -261,15 +261,25 @@ public class BasicReversi implements ReversiModel {
     }
   }
 
+  /**
+   * This function is the core game loop, notifying each player of their turn
+   */
   private void notifyPlayer() {
     if (!this.isGameOver() && !listeners.isEmpty()) {
       // Notify controller that has current turn
-      for (YourTurnListener listener : listeners) {
-        if (listener != null && listener.getPlayer().equals(this.currentPlayer)) {
-          listener.yourTurn();
-        }
+      listeners.stream()
+          .filter((YourTurnListener l) -> l.getPlayer().equals(this.currentPlayer))
+          .forEach(YourTurnListener::yourTurn);
+      if (restartGame) {
+        newGame();
       }
       notifyPlayer();
+    }
+    while (isGameOver() && !quitGame) {
+      Thread.onSpinWait();
+      if (restartGame) {
+        newGame();
+      }
     }
   }
 
@@ -520,11 +530,20 @@ public class BasicReversi implements ReversiModel {
     if (move.isPassTurn()) {
       passTurn();
     } else if (move.isRestartGame()) {
-      newGame();
+      //in single threaded running we can call new game from this thread
+      if (this.listeners.isEmpty()) {
+        newGame();
+      }
+      //otherwise we have to get the current move to be restart game so the main thread
+      //can restart the game
+      restartGame = true;
+      // end the current player's turn to allow for restart
+      listeners.stream()
+          .filter((YourTurnListener l) -> l.getPlayer() == this.getCurrentPlayer())
+          .forEach(YourTurnListener::endTurn);
     } else if (move.isQuitGame()) {
-      //ignore for now
-      return;
-    } else {
+      quitGame = true;
+    } else if (move.getPosn() != null) {
       makeMove(move.getPosn().row, move.getPosn().col);
     }
   }
@@ -563,7 +582,7 @@ public class BasicReversi implements ReversiModel {
    */
   @Override
   public boolean isGameOver() {
-    return this.gameState != Status.Playing && this.gameState != Status.NotStarted;
+    return this.gameState == Status.Won || this.gameState == Status.Tied;
   }
 
   /**
@@ -578,11 +597,11 @@ public class BasicReversi implements ReversiModel {
 
 
   /**
-   * Gets the board.
+   * Gets the board as an int array.
    */
   @Override
   public int[][] getBoard() {
-    //board size.
+    //todo: this should be folded into board()
     int bSize = this.totalNumRows; //this.totalNumRows;
     int[][] board = new int[bSize][bSize];
     // initialize with 0s
@@ -768,6 +787,7 @@ public class BasicReversi implements ReversiModel {
 
   @Override
   public void newGame() {
+    this.restartGame = false;
     // Keep model reference same but reset all params to start new game
     lastErrorMessage = "";
 
@@ -833,8 +853,6 @@ public class BasicReversi implements ReversiModel {
       incrementScore(CellState.WHITE);
     }
     this.currentPlayer = CellState.BLACK;
-    this.gameState = Status.NotStarted;
-    startGame();
   }
 
   //take a cell and get the move that would go in that cell for that cell

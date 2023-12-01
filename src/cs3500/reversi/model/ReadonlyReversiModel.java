@@ -1,6 +1,5 @@
 package cs3500.reversi.model;
 
-import cs3500.reversi.strategy.Move;
 import java.util.List;
 
 /**

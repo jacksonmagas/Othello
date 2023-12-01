@@ -1,6 +1,8 @@
 package cs3500.reversi.view.hexgrid;
 
 import cs3500.reversi.model.CellState;
+import cs3500.reversi.model.Move;
+import cs3500.reversi.view.MoveListener;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,8 +45,6 @@ public class MainPanel extends JPanel {
 
   private int currentCol = 0;
 
-  private final List<CellState> players;
-
   private ReadonlyReversiModel model;
 
   public static HashMap<Point, Point> POINTS_TO_ROW_COLS = new HashMap<>();
@@ -56,7 +56,6 @@ public class MainPanel extends JPanel {
     this.model = model;
     board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    this.players = new ArrayList<>();
     setFocusable(true);
     requestFocusInWindow();
 
@@ -150,26 +149,6 @@ public class MainPanel extends JPanel {
       System.out.println(SPACE);
     }
   };
-
-  /**
-   * Adds a player to the view.
-   */
-  public void addPlayer(CellState player) {
-    this.players.add(Objects.requireNonNull(player));
-  }
-
-  /**
-   * Sets the model.
-   */
-  public void setModel(ReadonlyReversiModel model) {
-    this.model = model;
-    board = model.getBoard();
-    Cell.Location location = model.getHighlightedCell();
-    this.currentRow = location.getRow();
-    this.currentCol = location.getColumn();
-    model.getCurrentPlayer();
-    setPreferredSize(new Dimension(WIDTH, HEIGHT));
-  }
 
   // paints the component
   @Override
@@ -266,6 +245,7 @@ public class MainPanel extends JPanel {
 
   // draws the hexgrid loop
   private void drawHexGridLoop(Graphics g, Point origin, int size, int radius, int padding) {
+    board = model.getBoard();
     double ang30 = Math.toRadians(30);
     double xOff = Math.cos(ang30) * (radius + padding);
     double yOff = Math.sin(ang30) * (radius + padding);
@@ -368,20 +348,13 @@ public class MainPanel extends JPanel {
     g.setStroke(tmpS);
   }
 
-  /*
-  public static void main(String[] args) {
-
-    int noOfCells = 4;
-    ReversiModel reversi = new BasicReversi(noOfCells);
-    JFrame f = new JFrame();
-    MainPanel p = new MainPanel(reversi);
-    board = reversi.getBoard();
-
-    f.setContentPane(p);
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.pack();
-    f.setLocationRelativeTo(null);
-    f.setVisible(true);
+  /**
+   * Set the cell to highlight cyan.
+   * @param row the row of the cell
+   * @param col the column of the cell
+   */
+  public void setHighlightedCell(int row, int col) {
+    this.currentCol = col;
+    this.currentRow = row;
   }
-  */
 }
