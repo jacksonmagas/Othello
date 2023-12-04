@@ -1,8 +1,9 @@
 package cs3500.reversi.provider.controller;
 
-import cs3500.reversi.player.IPlayer;
-import cs3500.reversi.view.IGraphicalReversiView;
-
+//import cs3500.reversi.player.IPlayer;
+//import cs3500.reversi.view.IGraphicalReversiView;
+import cs3500.reversi.provider.player.IPlayer;
+import cs3500.reversi.provider.view.IGraphicalReversiView;
 /**
  * The interface {@code IFeatures} represents the features that the controller can perform on
  * the view. It is used to connect the controller to the view, so that the view can call the
