@@ -9,7 +9,6 @@ import cs3500.reversi.provider.controller.IViewFeatures;
  * for the view.
  */
 public interface IGraphicalReversiView extends IView {
-
   /**
    * Adds the given IViewFeatures to the list of features that this view can interact with.
    * The methods used by the {@code IViewFeatures} represents the high-level events that the

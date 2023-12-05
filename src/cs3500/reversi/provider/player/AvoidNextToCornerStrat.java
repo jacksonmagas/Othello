@@ -11,7 +11,7 @@ import cs3500.reversi.provider.model.IROModel;
 import cs3500.reversi.provider.model.PlayerDisc;
 
 /**
- * The class {code AvoidNextToCornerStrat }represents a strategy for choosing a move in Reversi
+ * The class {@code AvoidNextToCornerStrat }represents a strategy for choosing a move in Reversi
  * that avoids the cells adjacent to corners. For instance, if there was a game of Reversi with
  * the radius of 2, the hex (0, -2) would be the corner, and this strategy would
  * avoid the cells (1, -2), (1, -1), and (0, -1).
