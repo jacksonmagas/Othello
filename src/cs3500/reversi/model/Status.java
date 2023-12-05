@@ -1,3 +1,4 @@
+
 package cs3500.reversi.model;
 
 /**

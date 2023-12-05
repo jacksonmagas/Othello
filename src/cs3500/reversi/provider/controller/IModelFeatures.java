@@ -1,7 +1,9 @@
 package cs3500.reversi.provider.controller;
 
-import cs3500.reversi.model.IMutableModel;
-import cs3500.reversi.model.PlayerDisc;
+//import cs3500.reversi.model.IMutableModel;
+//import cs3500.reversi.model.PlayerDisc;
+import cs3500.reversi.provider.model.IMutableModel;
+import cs3500.reversi.provider.model.PlayerDisc;
 
 /**
  * The interface {@code IModelFeatures} represents the features that the model can perform.
