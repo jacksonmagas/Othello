@@ -1,5 +1,6 @@
 package cs3500.reversi;
 
+import cs3500.reversi.model.ReversiModelToIMutableModelAdapter;
 import java.util.HashMap;
 
 import cs3500.reversi.controller.Player;
@@ -8,10 +9,7 @@ import cs3500.reversi.controller.ReverseHexGridPlayerController;
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
-import cs3500.reversi.provider.model.Board;
-import cs3500.reversi.provider.model.Hex;
 import cs3500.reversi.provider.model.IROModel;
-import cs3500.reversi.provider.model.MutableModel;
 import cs3500.reversi.provider.model.PlayerDisc;
 import cs3500.reversi.provider.player.IPlayer;
 import cs3500.reversi.provider.player.PlayerType;
@@ -28,7 +26,7 @@ import cs3500.reversi.view.ReversiFrame;
 
 /**
  * Represent a Reversi game class which creates two views of reversi, one for each player.
- * The main expects 3 command line arguments: an integer representing the size of the board,
+ * The main expects 4 command line arguments: an integer representing the size of the board,
  * the strategy for the first player, and the strategy for the second player.
  * The valid strategies are: human, firstmove, highestscoring, combined, console, and minimax
  */
@@ -56,7 +54,7 @@ public class Reversi {
   public static void main(String[] args) {
 
     // defaults
-    int noOfCells = 4;
+    int size = 4;
     String player1Strategy = HUMAN;
     String player2StrategyProvider = PROVIDER_TEAM;
     String player2Strategy = STRATEGY1;
@@ -65,34 +63,42 @@ public class Reversi {
 
     if (args.length > 0) {
       try {
-        noOfCells = Integer.parseInt(args[0]);
+        size = Integer.parseInt(args[0]);
       } catch (NumberFormatException e) {
-        System.err.println("Argument 1 - " + args[0] + " must be an integer and greater or equal to 3.");
-        throw new IllegalArgumentException("Argument 1 - " + args[0] + " must be an integer and greater or equal to 3.");
+        System.err.println("Argument 1 - " + args[0]
+            + " must be an integer and greater or equal to 3.");
+        throw new IllegalArgumentException("Argument 1 - " + args[0]
+            + " must be an integer and greater or equal to 3.");
       }
       try {
         player1Strategy = args[1];
       } catch (Exception e) {
-        System.err.println("Argument 2 must be present as player1 strategy. Valid values are Human or FirstMove or HighestScoring or Combined or MiniMax or Console.");
-        throw new IllegalArgumentException("Argument 2 must be present as player1 strategy. Valid values are Human or FirstMove or HighestScoring or Combined or MiniMax or Console.");
+        System.err.println("Argument 2 must be present as player1 strategy."
+            + "Valid values are Human or FirstMove or HighestScoring or Combined or MiniMax or Console.");
+        throw new IllegalArgumentException("Argument 2 must be present as player1 strategy."
+            + "Valid values are Human or FirstMove or HighestScoring or Combined or MiniMax or Console.");
       }
       try {
         player2Strategy = args[2];
       } catch (Exception e) {
-        System.err.println("Argument 3 must be present as player2 strategy. Valid values are Human or Capture or Avoid or Corner or MiniMax or Combo.");
-        throw new IllegalArgumentException("Argument 3 must be present as player2 strategy. Valid values are Human or Capture or Avoid or Corner or MiniMax or Combo.");
+        System.err.println("Argument 3 must be present as player2 strategy."
+            + "Valid values are Human or Capture or Avoid or Corner or MiniMax or Combo.");
+        throw new IllegalArgumentException("Argument 3 must be present as player2 strategy."
+            + "Valid values are Human or Capture or Avoid or Corner or MiniMax or Combo.");
       }
       try {
         player2StrategyProvider = args[3];
       } catch (Exception e) {
-        System.err.println("Argument 4 must be present as player2 strategy provider. Valid values are HomeTeam or ProviderTeam.");
-        throw new IllegalArgumentException("Argument 4 must be present. Valid values are HomeTeam or ProviderTeam.");
+        System.err.println("Argument 4 must be present as player2 strategy provider."
+            + "Valid values are HomeTeam or ProviderTeam.");
+        throw new IllegalArgumentException("Argument 4 must be present."
+            + "Valid values are HomeTeam or ProviderTeam.");
       }
     } else {
       System.err.println("Requires 4 argument.");
     }
 
-    ReversiModel reversi = new BasicReversi(noOfCells);
+    ReversiModel reversi = new BasicReversi(size);
     ReversiFrame viewPlayer1 = new BasicReversiView(reversi, "Black");
     Player player1 = getPlayerUsingHomeTeamStrategy(player1Strategy, CellState.BLACK);
     ReverseHexGridPlayerController controller1 = new ReverseHexGridPlayerController(reversi,
@@ -100,38 +106,8 @@ public class Reversi {
     reversi.addYourTurnListener(controller1);
     viewPlayer1.setVisibleView(true);
 
-    if (PROVIDER_TEAM.equalsIgnoreCase(player2StrategyProvider)) {
-      int[][] homeTeamBoard = reversi.getBoard();
-      HashMap<Hex, PlayerDisc> hexagons = new HashMap<Hex, PlayerDisc>();
-      int rowSize = noOfCells;
-      int totalNumRows = 2 * noOfCells - 1;
-      int center = noOfCells - 1;
-      // build grid
-      for (int rowNum = 0, rowNum2 = 0; rowNum < totalNumRows; rowNum++) {
-        for (int col2 = 0, col = -rowNum2; col2 < rowSize; col++,col2++) {
-          if (homeTeamBoard[rowNum][col2] == (int)'X') {
-            hexagons.put(new Hex(col, rowNum-center), PlayerDisc.BLACK);
-          } else if (homeTeamBoard[rowNum][col2] == (int)'O') {
-            hexagons.put(new Hex(col, rowNum-center), PlayerDisc.WHITE);
-          } else {
-            hexagons.put(new Hex(col, rowNum-center), PlayerDisc.EMPTY);
-          }
-        }
-        if ((rowNum-center) < 0) {
-          rowNum2++;
-        }
-        if (rowNum < center) {
-          rowSize++;
-        } else {
-          rowSize--;
-        }
-      }
-
-
-      //Board board = new Board(noOfCells);
-      Board board = new Board(hexagons);
-
-      IROModel providerModel = new MutableModel(noOfCells, board, PlayerDisc.WHITE);
+    if (player2StrategyProvider.equalsIgnoreCase(PROVIDER_TEAM)) {
+      IROModel providerModel = new ReversiModelToIMutableModelAdapter(new BasicReversi(size));
       JFrameView viewPlayer2 = new JFrameView(providerModel);
       BoardPanel panel = new BoardPanel(providerModel, viewPlayer2);
       IPlayer player2 = getPlayerUsingProviderStrategy(player2Strategy, CellState.WHITE);
