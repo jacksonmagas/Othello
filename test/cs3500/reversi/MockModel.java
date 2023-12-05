@@ -6,6 +6,7 @@ import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
 import cs3500.reversi.model.Status;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -77,12 +78,6 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
-  public CellState getStateAt(int hRow, int hIndex) {
-    printT("getTileAt: ");
-    return delegate.getStateAt(hRow, hIndex);
-  }
-
-  @Override
   public int sideLength() {
     printT("sideLength: ");
     return delegate.sideLength();
@@ -108,7 +103,7 @@ public class MockModel implements ReversiModel {
 
   @Override
   public CellState getStateAt(int r, int c) {
-    printT(String.format("getPieceAt: r = %d, c = %d%n", r, c));
+    printT(String.format("getStateAt: r = %d, c = %d%n", r, c));
     return delegate.getStateAt(r, c);
   }
 
