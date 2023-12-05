@@ -7,12 +7,15 @@ import cs3500.reversi.provider.model.IMutableModel;
 import cs3500.reversi.provider.model.IROModel;
 import cs3500.reversi.provider.model.PlayerDisc;
 import cs3500.reversi.provider.model.Status;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * This class is an adaptor for a model that implements ReversiModel to allow it to be used
@@ -86,13 +89,17 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
     }
   }
 
-  // TODO: write coordinate conversion function
+  // TODO: write coordinate conversion functions
   private int row(int q, int r) {
     return 0;
   }
 
   private int col(int q, int r) {
     return 0;
+  }
+
+  private Hex hex(int row, int col) {
+    return null;
   }
 
   @Override
@@ -133,8 +140,13 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public Board getBoard() {
-    //TODO
-    return null;
+    HashMap<Hex, PlayerDisc> boardAsMep = new HashMap<>();
+    for (int row = 0; row < base.getRows(); row++) {
+      for (int col = 0; col < base.getColumns(row); col++) {
+        boardAsMep.put(hex(row, col), disc(base.getStateAt(row, col)));
+      }
+    }
+    return new Board(boardAsMep);
   }
 
   @Override
@@ -149,7 +161,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public PlayerDisc getDiscAt(int coordQ, int coordR) {
-    return disc(base.getPieceAt(row(coordQ, coordR), col(coordQ, coordR)));
+    return disc(base.getStateAt(row(coordQ, coordR), col(coordQ, coordR)));
   }
 
   @Override
@@ -165,14 +177,49 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public List<Hex> getInboundNeighbors(int q, int r) {
-    //TODO
-    return null;
+    List<Hex> neighbors = new ArrayList<>();
+    neighbors.add(new Hex(q + 1, r));
+    neighbors.add(new Hex(q - 1, r));
+    neighbors.add(new Hex(q, r + 1));
+    neighbors.add(new Hex(q, r - 1));
+    neighbors.add(new Hex(q + 1, r - 1));
+    neighbors.add(new Hex(q - 1, r + 1));
+    return neighbors.stream()
+        .filter((Hex h) -> h.isWithinGrid(getRadius()))
+        .collect(Collectors.toList());
   }
 
   @Override
   public List<List<Hex>> getAllValidPaths(Hex startHex) {
-    //TODO
-    return null;
+    try {
+      ReversiModel copy = base.copy();
+      copy.makeMove(row(startHex.getQ(), startHex.getR()), col(startHex.getQ(), startHex.getR()));
+      List<Hex> changedHexes = new ArrayList<>();
+      for (int row = 0; row < base.getRows(); row++) {
+        for (int col = 0; col < base.getColumns(row); col++) {
+          if (base.getStateAt(row, col) != copy.getStateAt(row, col)) {
+            changedHexes.add(hex(row, col));
+          }
+        }
+      }
+      changedHexes.remove(startHex);
+      // function classifies a hex based on which axis it shares with the start hex
+      // and whether a second axis is greater than that axis of the start hex
+      Function<Hex, Integer> dirClassifier = (Hex h) -> {
+        if (startHex.getQ() == h.getQ()) {
+          return startHex.getR() > h.getR() ? 0 : 1;
+        } else if (startHex.getR() == h.getR()) {
+          return startHex.getQ() > h.getQ() ? 2 : 3;
+        } else {
+          return startHex.getQ() > h.getQ() ? 4 : 5;
+        }
+      };
+      return new ArrayList<>(changedHexes.stream()
+          .collect(Collectors.groupingBy(dirClassifier))
+          .values());
+    } catch (IllegalArgumentException e) {
+      return List.of(new ArrayList<>());
+    }
   }
 
   @Override
@@ -188,8 +235,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public IMutableModel getPreviousModel(IROModel currentModel) {
-    // todo
-    return null;
+    return new ReversiModelToIMutableModelAdapter(base.copy());
   }
 
   @Override
@@ -199,7 +245,8 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public void startGame(boolean initializeGrid) {
-    // todo
+    // ignore parameter unless needed for functionality
+    base.startGame();
   }
 
   @Override

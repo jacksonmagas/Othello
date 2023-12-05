@@ -477,7 +477,7 @@ public class BasicReversi implements ReversiModel {
    * Gets the piece at a row and col location.
    */
   @Override
-  public CellState getPieceAt(int row, int col) {
+  public CellState getStateAt(int row, int col) {
     if (row < 0 || row >= this.horizontalRows.size()) {
       lastErrorMessage = "Bad row: " + row;
       throw new IllegalArgumentException("Bad row: " + row);
@@ -648,7 +648,7 @@ public class BasicReversi implements ReversiModel {
    * Gets the tile at a hRow and hIndex location.
    */
   @Override
-  public CellState getTileAt(int hRow, int hIndex) {
+  public CellState getStateAt(int hRow, int hIndex) {
     return this.horizontalRows.get(hRow).get(hIndex).getState();
   }
 

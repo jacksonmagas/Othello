@@ -530,8 +530,8 @@ public class ExamplarModelTests {
     List<List<CellState>> gameBoard = model.getGameBoard();
     Assert.assertEquals("Player one turn (Black)!", CellState.BLACK, gameBoard.get(2).get(2));
     Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, gameBoard.get(2).get(3));
-    Assert.assertEquals("Player one turn (BLACK)!", CellState.BLACK, model.getTileAt(2, 2));
-    Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, model.getTileAt(2, 3));
+    Assert.assertEquals("Player one turn (BLACK)!", CellState.BLACK, model.getStateAt(2, 2));
+    Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, model.getStateAt(2, 3));
     Assert.assertEquals("Game board side length is 4!", 4, model.sideLength());
 
     Assert.assertEquals("Game board has any legal moves!", true, model.anyLegalMoves());
@@ -559,8 +559,8 @@ public class ExamplarModelTests {
     gameBoard = model.getGameBoard();
     Assert.assertEquals("Player one turn (Black)!", CellState.BLACK, gameBoard.get(2).get(2));
     Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, gameBoard.get(2).get(3));
-    Assert.assertEquals("Player one turn (BLACK)!", CellState.BLACK, model.getTileAt(2, 2));
-    Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, model.getTileAt(2, 3));
+    Assert.assertEquals("Player one turn (BLACK)!", CellState.BLACK, model.getStateAt(2, 2));
+    Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, model.getStateAt(2, 3));
     Assert.assertEquals("Game board side length is 4!", 4, model.sideLength());
     Assert.assertEquals("Empty!", CellState.EMPTY, gameBoard.get(0).get(0));
   }
@@ -657,8 +657,8 @@ public class ExamplarModelTests {
     Assert.assertEquals("O match", (int)'O', board[3][2]);
     Assert.assertEquals("Empty match", (int)' ', board[2][2]);
     Assert.assertEquals("Empty match", (int)' ', board[0][0]);
-    Assert.assertEquals("Cell match", CellState.EMPTY, model.getPieceAt(0, 0));
-    Assert.assertEquals("Cell match", CellState.BLACK, model.getPieceAt(1, 1));
+    Assert.assertEquals("Cell match", CellState.EMPTY, model.getStateAt(0, 0));
+    Assert.assertEquals("Cell match", CellState.BLACK, model.getStateAt(1, 1));
   }
 
   @Test

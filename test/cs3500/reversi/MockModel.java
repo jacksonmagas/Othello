@@ -5,7 +5,9 @@ import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
+import cs3500.reversi.model.Status;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A MockModel is a fully functional implementation of a ReversiModel that also stores a log
@@ -75,9 +77,9 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
-  public CellState getTileAt(int hRow, int hIndex) {
+  public CellState getStateAt(int hRow, int hIndex) {
     printT("getTileAt: ");
-    return delegate.getTileAt(hRow, hIndex);
+    return delegate.getStateAt(hRow, hIndex);
   }
 
   @Override
@@ -105,9 +107,9 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
-  public CellState getPieceAt(int r, int c) {
+  public CellState getStateAt(int r, int c) {
     printT(String.format("getPieceAt: r = %d, c = %d%n", r, c));
-    return delegate.getPieceAt(r, c);
+    return delegate.getStateAt(r, c);
   }
 
   @Override
@@ -144,6 +146,18 @@ public class MockModel implements ReversiModel {
   public void refreshAllViews() {
     printT("refreshAllViews: ");
     delegate.refreshAllViews();
+  }
+
+  @Override
+  public Optional<CellState> getWinner() {
+    printT("getWinner: ");
+    return delegate.getWinner();
+  }
+
+  @Override
+  public Status getStatus() {
+    printT("getStatus: ");
+    return delegate.getStatus();
   }
 
   @Override

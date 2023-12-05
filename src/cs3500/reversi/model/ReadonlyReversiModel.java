@@ -31,14 +31,11 @@ public interface ReadonlyReversiModel {
    */
   List<List<CellState>> getGameBoard();
 
-  int[][] getBoard();
-
   /**
-   * Returns the state of the cell at the given horizontal row and index.
-   * The state is either empty, occupied by black, or occupied by white.
-   * @return The state of the cell
+   * Returns a copy of the game board.
+   * @return an array containing each row of the game board with the state of each cell in the row.
    */
-  CellState getTileAt(int hRow, int hIndex);
+  int[][] getBoard();
 
   /**
    * Returns the side length of the board.
@@ -73,7 +70,7 @@ public interface ReadonlyReversiModel {
    * @param c the column of the piece
    * @return the state of the piece at that row
    */
-  CellState getPieceAt(int r, int c);
+  CellState getStateAt(int r, int c);
 
   /**
    * Get a list of the legal moves for this model.
