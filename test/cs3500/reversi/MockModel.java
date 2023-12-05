@@ -5,7 +5,10 @@ import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
+import cs3500.reversi.model.Status;
+
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A MockModel is a fully functional implementation of a ReversiModel that also stores a log
@@ -144,6 +147,16 @@ public class MockModel implements ReversiModel {
   public void refreshAllViews() {
     printT("refreshAllViews: ");
     delegate.refreshAllViews();
+  }
+
+  @Override
+  public Optional<CellState> getWinner() {
+    return Optional.empty();
+  }
+
+  @Override
+  public Status getStatus() {
+    return null;
   }
 
   @Override

@@ -325,7 +325,7 @@ public class BoardPanel extends JPanel implements IReversiPanel {
     try {
       URL fontPath = ClassLoader.getSystemResource("LondrinaSolid-Regular.ttf");
       return Font.createFont(Font.TRUETYPE_FONT, fontPath.openStream()).deriveFont(fontSize);
-    } catch (IOException | FontFormatException e) {
+    } catch (IOException | FontFormatException | NullPointerException e) {
       return new Font("Times New Roman", Font.PLAIN, 20);
     }
   }
