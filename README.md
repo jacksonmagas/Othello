@@ -115,12 +115,12 @@ Added:
     Reversi 4 "Human" "Combined" "HomeTeam"<br/>
     Reversi 4 "Human" "MiniMax" "HomeTeam"<br/>
     Reversi 4 "Human" "Console" "HomeTeam"<br/>
-    Reversi 4 "Human" "Human" "CustomerTeam"<br/>
-    Reversi 4 "Human" "Capture" "CustomerTeam"<br/>
-    Reversi 4 "Human" "Avoid" "CustomerTeam"<br/>
-    Reversi 4 "Human" "Corner" "CustomerTeam"<br/>
-    Reversi 4 "Human" "MiniMax" "CustomerTeam"<br/>
-    Reversi 4 "Human" "Combo" "CustomerTeam"<br/>
+    Reversi 4 "Human" "Human" "ProviderTeam"<br/>
+    Reversi 4 "Human" "Capture" "ProviderTeam"<br/>
+    Reversi 4 "Human" "Avoid" "ProviderTeam"<br/>
+    Reversi 4 "Human" "Corner" "ProviderTeam"<br/>
+    Reversi 4 "Human" "MiniMax" "ProviderTeam"<br/>
+    Reversi 4 "Human" "Combo" "ProviderTeam"<br/>
     where<br/>
     1st param = Number of cells = 4<br/>
     2nd param = Player1Strategy of HomeTeam<br/>
@@ -131,15 +131,15 @@ Added:
     MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
     Console - Console based Moves Strategy<br/>
     Human - Human Mouse or Keys based Moves Strategy<br/>
-    3rd param = Player2Strategy of either HomeTeam or CustomerTeam<br/>
-    Valid values from CustomerTeam:<br/>
+    3rd param = Player2Strategy of either HomeTeam or ProviderTeam<br/>
+    Valid values from ProviderTeam:<br/>
     Capture - Capture Max Strategy<br/>
     Avoid = Avoid Next To Corner Strategy<br/>
     Corner - Go For Corner Strategy<br/>
     MiniMax - Mini Max to choose the best move<br/>
     Combo - Combined Move Strategy using MiniMax, Corner, Avoid and Capture<br/>
     Human - Human Mouse or Keys based Moves Strategy<br/>
-    4th param = Player2StrategyProvider. Valid value is either HomeTeam or CustomerTeam.<br/>
+    4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
 3. Mouse event handling decoupled from controller, view now sends the controller the logical result of the click instead of exact location
 4. Implemented 2 Controllers and 2 Views as Part3 requirements as part of Reversi main class method and kept Part 2 implementation as part of previous ReversiGUI main class method.
 5. Your Turn and Refresh View events are implemented to enable Player 2 to simulate the moves as per implemented strategies.

@@ -1,5 +1,7 @@
 package cs3500.reversi;
 
+import java.util.HashMap;
+
 import cs3500.reversi.controller.Player;
 import cs3500.reversi.controller.PlayerImpl;
 import cs3500.reversi.controller.ReverseHexGridPlayerController;
@@ -7,6 +9,7 @@ import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.provider.model.Board;
+import cs3500.reversi.provider.model.Hex;
 import cs3500.reversi.provider.model.IROModel;
 import cs3500.reversi.provider.model.MutableModel;
 import cs3500.reversi.provider.model.PlayerDisc;
@@ -45,7 +48,7 @@ public class Reversi {
   static final String PROVIDER_STRATEGY5 = "combo";
 
   static final String HOME_TEAM = "hometeam";
-  static final String CUSTOMER_TEAM = "customerteam";
+  static final String PROVIDER_TEAM = "providerteam";
 
   /**
    * Constructor for Reversi public class.
@@ -55,7 +58,7 @@ public class Reversi {
     // defaults
     int noOfCells = 4;
     String player1Strategy = HUMAN;
-    String player2StrategyProvider = HOME_TEAM;
+    String player2StrategyProvider = PROVIDER_TEAM;
     String player2Strategy = STRATEGY1;
     int width = 1200;
     int height = 800;
@@ -82,8 +85,8 @@ public class Reversi {
       try {
         player2StrategyProvider = args[3];
       } catch (Exception e) {
-        System.err.println("Argument 4 must be present as player2 strategy provider. Valid values are HomeTeam or CustomerTeam.");
-        throw new IllegalArgumentException("Argument 4 must be present. Valid values are HomeTeam or CustomerTeam.");
+        System.err.println("Argument 4 must be present as player2 strategy provider. Valid values are HomeTeam or ProviderTeam.");
+        throw new IllegalArgumentException("Argument 4 must be present. Valid values are HomeTeam or ProviderTeam.");
       }
     } else {
       System.err.println("Requires 4 argument.");
@@ -97,11 +100,42 @@ public class Reversi {
     reversi.addYourTurnListener(controller1);
     viewPlayer1.setVisibleView(true);
 
-    if (CUSTOMER_TEAM.equalsIgnoreCase(player2StrategyProvider)) {
-      IROModel providerModel = new MutableModel(noOfCells, new Board(noOfCells), PlayerDisc.WHITE);
+    if (PROVIDER_TEAM.equalsIgnoreCase(player2StrategyProvider)) {
+      int[][] homeTeamBoard = reversi.getBoard();
+      HashMap<Hex, PlayerDisc> hexagons = new HashMap<Hex, PlayerDisc>();
+      int rowSize = noOfCells;
+      int totalNumRows = 2 * noOfCells - 1;
+      int center = noOfCells - 1;
+      // build grid
+      for (int rowNum = 0, rowNum2 = 0; rowNum < totalNumRows; rowNum++) {
+        for (int col2 = 0, col = -rowNum2; col2 < rowSize; col++,col2++) {
+          if (homeTeamBoard[rowNum][col2] == (int)'X') {
+            hexagons.put(new Hex(col, rowNum-center), PlayerDisc.BLACK);
+          } else if (homeTeamBoard[rowNum][col2] == (int)'O') {
+            hexagons.put(new Hex(col, rowNum-center), PlayerDisc.WHITE);
+          } else {
+            hexagons.put(new Hex(col, rowNum-center), PlayerDisc.EMPTY);
+          }
+        }
+        if ((rowNum-center) < 0) {
+          rowNum2++;
+        }
+        if (rowNum < center) {
+          rowSize++;
+        } else {
+          rowSize--;
+        }
+      }
+
+
+      //Board board = new Board(noOfCells);
+      Board board = new Board(hexagons);
+
+      IROModel providerModel = new MutableModel(noOfCells, board, PlayerDisc.WHITE);
       JFrameView viewPlayer2 = new JFrameView(providerModel);
       BoardPanel panel = new BoardPanel(providerModel, viewPlayer2);
       IPlayer player2 = getPlayerUsingProviderStrategy(player2Strategy, CellState.WHITE);
+      viewPlayer2.setSize(width, height);
       viewPlayer2.render();
       panel.setVisible(true);
     } else {
