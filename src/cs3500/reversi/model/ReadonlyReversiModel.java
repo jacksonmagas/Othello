@@ -1,6 +1,7 @@
 package cs3500.reversi.model;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents the read-only model interface for playing a game of Reversi.
@@ -115,4 +116,17 @@ public interface ReadonlyReversiModel {
    * Refreshes all views of the game.
    */
   void refreshAllViews();
+
+  /**
+   * Get the winner of the game if one exists.
+   * @return An optional containing the winner's CellState, or an empty optional if there is
+   *         no winner.
+   */
+  Optional<CellState> getWinner();
+
+  /**
+   * Get the status of the game, which is either NotStarted, Playing, Won, or Tied.
+   * @return The current status of the game
+   */
+  Status getStatus();
 }

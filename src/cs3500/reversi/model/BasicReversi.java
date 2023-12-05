@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -76,6 +77,10 @@ public class BasicReversi implements ReversiModel {
     int rowSize = sideLength;
     totalNumRows = 2 * sideLength - 1;
 
+    playerScores.put(CellState.BLACK, 0);
+    playerScores.put(CellState.WHITE, 0);
+    playerScores.put(CellState.EMPTY, 0);
+
     //create empty arrayLists to hold cells, and temporarily fills them will nulls
     for (int row = 0; row < totalNumRows; row++) {
       this.horizontalRows.add(new ArrayList<>());
@@ -106,8 +111,7 @@ public class BasicReversi implements ReversiModel {
       }
     }
 
-    playerScores.put(CellState.BLACK, 0);
-    playerScores.put(CellState.WHITE, 0);
+
 
     //Place player discs
     for (Cell.Location l : blackTiles) {
@@ -195,6 +199,7 @@ public class BasicReversi implements ReversiModel {
     horizontalRows.get(hRow).set(hIndex, c);
     downRightRows.get(getRRow(hRow, hIndex)).set(getRIndex(hRow, hIndex), c);
     downLeftRows.get(getLRow(hRow, hIndex)).set(getLIndex(hRow, hIndex), c);
+    incrementScore(CellState.EMPTY);
   }
 
   //get the downRightRow row coordinate of the cell at the given horizontal row and index
@@ -449,9 +454,7 @@ public class BasicReversi implements ReversiModel {
 
   // sets the game to win or tie
   private void setWinOrTieGame(boolean passTurnsReached) {
-    int totalCells = 37;
-    if (passTurnsReached
-        || playerScores.get(CellState.BLACK) + playerScores.get(CellState.WHITE) == totalCells) {
+    if (passTurnsReached) {
       if (playerScores.get(CellState.BLACK).equals(playerScores.get(CellState.WHITE))) {
         this.gameState = Status.Tied;
       } else {
@@ -691,8 +694,8 @@ public class BasicReversi implements ReversiModel {
       }
     } else {
       instructions.append("Game is over!\n");
-      if (gameStatus() == Status.Won) {
-        instructions.append(" Player ").append(getWinner()).append(" won");
+      if (getStatus() == Status.Won) {
+        instructions.append(" Player ").append(getWinnerText()).append(" won");
       }
       else {
         instructions.append(" Tie game");
@@ -709,13 +712,13 @@ public class BasicReversi implements ReversiModel {
     return lastErrorMessage != null ? lastErrorMessage : "" ;
   }
 
-  // returns the gameStatus
-  private Status gameStatus() {
+  @Override
+  public Status getStatus() {
     return this.gameState;
   }
 
   // gets the winner of the game
-  private String getWinner() {
+  private String getWinnerText() {
     if (!isGameOver()) {
       throw new IllegalStateException("Game isn't over");
     }
@@ -726,6 +729,11 @@ public class BasicReversi implements ReversiModel {
       winnerName = "two (White)";
     }
     return winnerName;
+  }
+
+  @Override
+  public Optional<CellState> getWinner() {
+    return getStatus() == Status.Won ? Optional.of(this.winner) : Optional.empty();
   }
 
   public void setHighlightedCell(int row, int col) {
@@ -769,8 +777,8 @@ public class BasicReversi implements ReversiModel {
       }
     } else {
       output.append("Game is over!\n");
-      if (gameStatus() == Status.Won) {
-        output.append(" Player ").append(getWinner()).append(" won");
+      if (getStatus() == Status.Won) {
+        output.append(" Player ").append(getWinnerText()).append(" won");
       }
       else {
         output.append(" Tie game");
