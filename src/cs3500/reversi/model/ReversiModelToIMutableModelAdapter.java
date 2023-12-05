@@ -89,17 +89,43 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
     }
   }
 
-  // TODO: write coordinate conversion functions
-  private int row(int q, int r) {
-    return 0;
+  /**
+   * Get the row of all hexes with the given axial r coordinate.
+   * The q coordinate is not needed to determine row, only board size and r.
+   * @param r the r coordinate
+   * @return the row of the cell
+   */
+  private int row(int r) {
+    int mid = base.sideLength() - 1;
+    return r + mid;
   }
 
+  /**
+   * Get the column of the hex at the axial coordinate (q, r).
+   * @param q the q coordinate
+   * @param r the r coordinate
+   * @return the column of the cell
+   */
   private int col(int q, int r) {
-    return 0;
+    int mid = base.sideLength() - 1;
+    if (r < 0) {
+      return q + mid + r;
+    } else {
+      return q + mid;
+    }
   }
 
+  /**
+   * Get the hex pointed to by the given row and column by doing a coordinate conversion.
+   * @param row the row for the hex
+   * @param col the column for the hex
+   * @return the hex at the row and column
+   */
   private Hex hex(int row, int col) {
-    return null;
+    int mid = base.sideLength() - 1;
+    int r = row - mid;
+    int q = row >= mid ? col - mid : col - mid - r;
+    return new Hex(q, r);
   }
 
   @Override
@@ -161,7 +187,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public PlayerDisc getDiscAt(int coordQ, int coordR) {
-    return disc(base.getStateAt(row(coordQ, coordR), col(coordQ, coordR)));
+    return disc(base.getStateAt(row(coordR), col(coordQ, coordR)));
   }
 
   @Override
@@ -172,7 +198,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
   @Override
   public boolean isLegal(int q, int r) {
     return base.getLegalMoves().stream()
-        .anyMatch((Move m) -> m.getPosn().row == row(q, r) && m.getPosn().col == col(q, r));
+        .anyMatch((Move m) -> m.getPosn().row == row(r) && m.getPosn().col == col(q, r));
   }
 
   @Override
@@ -193,7 +219,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
   public List<List<Hex>> getAllValidPaths(Hex startHex) {
     try {
       ReversiModel copy = base.copy();
-      copy.makeMove(row(startHex.getQ(), startHex.getR()), col(startHex.getQ(), startHex.getR()));
+      copy.makeMove(row(startHex.getR()), col(startHex.getQ(), startHex.getR()));
       List<Hex> changedHexes = new ArrayList<>();
       for (int row = 0; row < base.getRows(); row++) {
         for (int col = 0; col < base.getColumns(row); col++) {
@@ -255,7 +281,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
       throw new IllegalStateException("Not this player's turn");
     }
     try {
-      base.makeMove(row(coordQ, coordR), col(coordQ, coordR));
+      base.makeMove(row(coordR), col(coordQ, coordR));
       latestMove = new Hex(coordQ, coordR);
     } catch (IllegalArgumentException e) {
       throw new IllegalStateException("No legal move in the given hex.", e);
