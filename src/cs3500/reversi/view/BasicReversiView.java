@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * BasicReversiView creates a frame for a view extending JFrame and implementing the ReversiFrame.
@@ -50,21 +51,6 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     this.setVisible(visible);
   }
 
-  /**
-   * This method is called whenever the drawing area changes Our drawing area is drawPanel, which is
-   * decorated by the JScrollPane We reset the area of the drawPanel, and then ask it to revalidate.
-   * This will cause its parent, the scrollbar, to update itself. Read more at {@see <a
-   * href="https://docs.oracle.com/javase/7/docs/api/javax/swing/JComponent.html#revalidate()"
-   * revalidate documentation</a>}
-   * Finally, call repaint to redraw the panel
-   */
-  @Override
-  public void setCanvasSize(int width, int height) {
-    drawPanel.setPreferredSize(new Dimension(width, height));
-    drawPanel.revalidate();
-    drawPanel.repaint();
-  }
-
   // repaints the board
   @Override
   public void repaint() {
@@ -73,6 +59,12 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.revalidate();
     drawPanel.repaint();
     drawPanel.setFocusable(true);
+  }
+
+  @Override
+  public void displayErrorMessage(String message) {
+    JOptionPane.showMessageDialog(this.getContentPane(), message,
+        "Message", JOptionPane.ERROR_MESSAGE);
   }
 
   // sets the key listener
@@ -91,18 +83,12 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   }
 
   @Override
-  public void setFocusable(boolean focus) {
-    drawPanel.setFocusable(focus);
-  }
-
-  @Override
   public void setHighlightedCell(int row, int col) {
     drawPanel.setHighlightedCell(row, col);
   }
 
-  // gets the hashMap
-  @Override
-  public HashMap<Point, Point> getMap() {
+  // gets a map from on screen coordinates to logical coordinates
+  HashMap<Point, Point> getMap() {
     return drawPanel.getMap();
   }
 }

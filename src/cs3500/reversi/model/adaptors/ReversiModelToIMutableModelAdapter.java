@@ -1,5 +1,12 @@
-package cs3500.reversi.model;
+package cs3500.reversi.model.adaptors;
 
+import static cs3500.reversi.model.adaptors.ProviderEnumConverter.disc;
+import static cs3500.reversi.model.adaptors.ProviderEnumConverter.state;
+import static cs3500.reversi.model.adaptors.ProviderEnumConverter.status;
+
+import cs3500.reversi.model.CellState;
+import cs3500.reversi.model.Move;
+import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.provider.controller.IModelFeatures;
 import cs3500.reversi.provider.model.Board;
 import cs3500.reversi.provider.model.Hex;
@@ -11,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -23,10 +29,9 @@ import java.util.stream.Collectors;
  */
 public class ReversiModelToIMutableModelAdapter implements IMutableModel {
   private final ReversiModel base;
+  private final CoordinateConverter converter;
   private Hex latestMove;
-  private final Map<CellState, PlayerDisc> stateMap;
-  private final Map<PlayerDisc, CellState> discMap;
-  private final Map<cs3500.reversi.model.Status, cs3500.reversi.provider.model.Status> statusMap;
+
 
   /**
    * Create a new IROModel which adapts the given ReversiModel to implement the IROModel interface.
@@ -34,98 +39,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
    */
   public ReversiModelToIMutableModelAdapter(ReversiModel base) {
     this.base = base;
-    this.stateMap = new HashMap<>();
-    this.discMap = new HashMap<>();
-    this.statusMap = new HashMap<>();
-    initEnumConversionLookup();
-  }
-
-  /**
-   * Initialize maps storing the bidirectional correspondence between CellStates and PlayerDiscs.
-   */
-  private void initEnumConversionLookup() {
-    this.stateMap.put(CellState.BLACK, PlayerDisc.BLACK);
-    this.stateMap.put(CellState.WHITE, PlayerDisc.WHITE);
-    this.stateMap.put(CellState.EMPTY, PlayerDisc.EMPTY);
-    this.discMap.put(PlayerDisc.EMPTY, CellState.EMPTY);
-    this.discMap.put(PlayerDisc.WHITE, CellState.WHITE);
-    this.discMap.put(PlayerDisc.BLACK, CellState.BLACK);
-    this.statusMap.put(cs3500.reversi.model.Status.Playing, Status.Playing);
-    this.statusMap.put(cs3500.reversi.model.Status.Won, Status.Won);
-    this.statusMap.put(cs3500.reversi.model.Status.Tied, Status.Stalemate);
-  }
-
-  /**
-   * Convert a CellState to the equivalent PlayerDisc.
-   * @param state The CellState to convert
-   * @return The corresponding PlayerDisc
-   */
-  private PlayerDisc disc(CellState state) {
-    return stateMap.get(state);
-  }
-
-  /**
-   * Convert a PlayerDisc to the equivalent CellState.
-   * @param disc The PlayerDisc to convert
-   * @return The corresponding CellState
-   */
-  private CellState state(PlayerDisc disc) {
-    return discMap.get(disc);
-  }
-
-  /**
-   * Convert a ReversiModel implementation of status to a provider implementation of status.
-   * When the status is not started an exception is thrown because the provider implementation of
-   * status does not include a not started status, and expects exceptions instead.
-   * @param status the status to convert
-   * @return the converted status
-   * @throws IllegalStateException if the status is Status.NotStarted
-   */
-  private Status status(cs3500.reversi.model.Status status) {
-    if (status == cs3500.reversi.model.Status.NotStarted) {
-      throw new IllegalStateException("Game not started");
-    } else {
-      return statusMap.get(status);
-    }
-  }
-
-  /**
-   * Get the row of all hexes with the given axial r coordinate.
-   * The q coordinate is not needed to determine row, only board size and r.
-   * @param r the r coordinate
-   * @return the row of the cell
-   */
-  private int row(int r) {
-    int mid = base.sideLength() - 1;
-    return r + mid;
-  }
-
-  /**
-   * Get the column of the hex at the axial coordinate (q, r).
-   * @param q the q coordinate
-   * @param r the r coordinate
-   * @return the column of the cell
-   */
-  private int col(int q, int r) {
-    int mid = base.sideLength() - 1;
-    if (r < 0) {
-      return q + mid + r;
-    } else {
-      return q + mid;
-    }
-  }
-
-  /**
-   * Get the hex pointed to by the given row and column by doing a coordinate conversion.
-   * @param row the row for the hex
-   * @param col the column for the hex
-   * @return the hex at the row and column
-   */
-  private Hex hex(int row, int col) {
-    int mid = base.sideLength() - 1;
-    int r = row - mid;
-    int q = row >= mid ? col - mid : col - mid - r;
-    return new Hex(q, r);
+    converter = new CoordinateConverter(base.sideLength());
   }
 
   @Override
@@ -169,7 +83,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
     HashMap<Hex, PlayerDisc> boardAsMep = new HashMap<>();
     for (int row = 0; row < base.getRows(); row++) {
       for (int col = 0; col < base.getColumns(row); col++) {
-        boardAsMep.put(hex(row, col), disc(base.getStateAt(row, col)));
+        boardAsMep.put(converter.hexFromRowCol(row, col), disc(base.getStateAt(row, col)));
       }
     }
     return new Board(boardAsMep);
@@ -177,7 +91,9 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public PlayerDisc getNextPlayerTurn() {
-    return disc(base.getCurrentPlayer().opposite());
+    // while logically this would return the opposite of the current player it ends up being called
+    // at the start of a player's turn, so it led to the wrong player displayed
+    return disc(base.getCurrentPlayer());
   }
 
   @Override
@@ -187,7 +103,8 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public PlayerDisc getDiscAt(int coordQ, int coordR) {
-    return disc(base.getStateAt(row(coordR), col(coordQ, coordR)));
+    return disc(base.getStateAt(converter.rowFromAxial(coordR),
+        converter.colFromAxial(coordQ, coordR)));
   }
 
   @Override
@@ -198,7 +115,8 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
   @Override
   public boolean isLegal(int q, int r) {
     return base.getLegalMoves().stream()
-        .anyMatch((Move m) -> m.getPosn().row == row(r) && m.getPosn().col == col(q, r));
+        .anyMatch((Move m) -> m.getPosn().row == converter.rowFromAxial(r)
+            && m.getPosn().col == converter.colFromAxial(q, r));
   }
 
   @Override
@@ -219,12 +137,13 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
   public List<List<Hex>> getAllValidPaths(Hex startHex) {
     try {
       ReversiModel copy = base.copy();
-      copy.makeMove(row(startHex.getR()), col(startHex.getQ(), startHex.getR()));
+      copy.makeMove(converter.rowFromAxial(startHex.getR()),
+          converter.colFromAxial(startHex.getQ(), startHex.getR()));
       List<Hex> changedHexes = new ArrayList<>();
       for (int row = 0; row < base.getRows(); row++) {
         for (int col = 0; col < base.getColumns(row); col++) {
           if (base.getStateAt(row, col) != copy.getStateAt(row, col)) {
-            changedHexes.add(hex(row, col));
+            changedHexes.add(converter.hexFromRowCol(row, col));
           }
         }
       }
@@ -281,7 +200,8 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
       throw new IllegalStateException("Not this player's turn");
     }
     try {
-      base.makeMove(row(coordR), col(coordQ, coordR));
+      base.makeMove(converter.rowFromAxial(coordR),
+          converter.colFromAxial(coordQ, coordR));
       latestMove = new Hex(coordQ, coordR);
     } catch (IllegalArgumentException e) {
       throw new IllegalStateException("No legal move in the given hex.", e);

@@ -4,6 +4,7 @@ import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.Move;
 import cs3500.reversi.model.ReversiModel;
+import cs3500.reversi.view.BasicReversiView;
 import cs3500.reversi.view.ReversiFrame;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -53,7 +54,6 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     System.out.println("Your Turn event received for player " + this.model.getCurrentPlayer()
             + " with model\n" + this.model);
     // Make view visible
-    view.setFocusable(true);
     view.repaint();
 
     Move move = this.player.play(this.model);
@@ -80,8 +80,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     } catch (IllegalArgumentException e) {
       System.out.println("That was an illegal move.");
       this.refreshView();
-      JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), e.getMessage(),
-              "Message", JOptionPane.ERROR_MESSAGE);
+      view.displayErrorMessage(e.getMessage());
       makeMoveUntilLegalOrTooManyAttempts(this.player.play(this.model), numAttempts + 1);
     }
   }
@@ -95,15 +94,14 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   }
 
   /**
-   * Forward the GUI action to the player of this model.
-   * If the action from the GUI is restarting the game and not the current player then restart
-   * the model because the current player doesn't know about the restart event.
+   * Forward the GUI action to non-current players if it is a pass or a quit.
+   * This allows non-active board to quit.
    * @param m the move that corresponds to the last click
    */
   @Override
   public void receiveGUIAction(Move m) {
-    if (player.getPiece() == model.getCurrentPlayer()) {
-      model.makeMove(new Move(false, true, false));
+    if (player.getPiece() != model.getCurrentPlayer() && m.isQuitGame() || m.isPassTurn()) {
+      player.receiveGUIAction(m);
     }
   }
 

@@ -1,5 +1,6 @@
 package cs3500.reversi.view;
 
+import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.Move;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import java.awt.Point;
@@ -18,13 +19,13 @@ import javax.swing.JOptionPane;
  */
 class ReversiMouseListener extends MouseAdapter {
   ReadonlyReversiModel model;
-  ReversiFrame frame;
+  BasicReversiView frame;
   final List<MoveListener> listeners;
 
   /**
    * Constructor for MyMouseListener class.
    */
-  public ReversiMouseListener(ReadonlyReversiModel model, ReversiFrame frame) {
+  public ReversiMouseListener(ReadonlyReversiModel model, BasicReversiView frame) {
     super();
     this.model = model;
     this.frame = frame;

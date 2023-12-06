@@ -1,6 +1,6 @@
 package cs3500.reversi;
 
-import cs3500.reversi.model.ReversiModelToIMutableModelAdapter;
+import cs3500.reversi.model.adaptors.ReversiModelToIMutableModelAdapter;
 import cs3500.reversi.controller.Player;
 import cs3500.reversi.controller.PlayerImpl;
 import cs3500.reversi.controller.ReverseHexGridPlayerController;
@@ -8,8 +8,7 @@ import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.provider.model.IROModel;
-import cs3500.reversi.provider.player.IPlayer;
-import cs3500.reversi.controller.PlayerToIPlayerAdapter;
+import cs3500.reversi.controller.adaptors.PlayerToIPlayerAdapter;
 import cs3500.reversi.provider.player.PlayerType;
 import cs3500.reversi.provider.view.BoardPanel;
 import cs3500.reversi.provider.view.JFrameView;
@@ -20,6 +19,7 @@ import cs3500.reversi.strategy.GUIInputStrategy;
 import cs3500.reversi.strategy.HighestScoringMove;
 import cs3500.reversi.strategy.ConsoleInputStrategy;
 import cs3500.reversi.view.BasicReversiView;
+import cs3500.reversi.view.adaptors.IGraphicalReversiViewToReversiFrame;
 import cs3500.reversi.view.ReversiFrame;
 
 /**
@@ -105,19 +105,23 @@ public class Reversi {
     viewPlayer1.setVisibleView(true);
 
 
+
     if (player2StrategyProvider.equalsIgnoreCase(PROVIDER_TEAM)) {
-      IROModel providerModel = new ReversiModelToIMutableModelAdapter(new BasicReversi(size));
-      JFrameView viewPlayer2 = new JFrameView(providerModel);
-      BoardPanel panel = new BoardPanel(providerModel, viewPlayer2);
-      IPlayer player2 = getPlayerUsingProviderStrategy(player2Strategy, CellState.WHITE);
-      viewPlayer2.setSize(width, height);
-      viewPlayer2.render();
+      Player player2 = getPlayerUsingProviderStrategy(player2Strategy, CellState.WHITE);
+      IROModel providerModel = new ReversiModelToIMutableModelAdapter(reversi);
+      JFrameView player2Frame = new JFrameView(providerModel);
+      BoardPanel panel = new BoardPanel(providerModel, player2Frame);
+      player2Frame.setSize(width, height);
+      player2Frame.render();
+      ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
+          new IGraphicalReversiViewToReversiFrame(player2Frame, size), player2);
+      reversi.addYourTurnListener(controller2);
       panel.setVisible(true);
     } else {
-      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, "White");
       Player player2 = getPlayerUsingHomeTeamStrategy(player2Strategy, CellState.WHITE);
+      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, "White");
       ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
-              viewPlayer2, player2);
+          viewPlayer2, player2);
       reversi.addYourTurnListener(controller2);
       viewPlayer2.setVisibleView(true);
     }
@@ -151,26 +155,26 @@ public class Reversi {
   }
 
   // gets player using provider strategy
-  private static IPlayer getPlayerUsingProviderStrategy(String strategy, CellState cellState) {
-    IPlayer player;
+  private static Player getPlayerUsingProviderStrategy(String strategy, CellState cellState) {
+    Player player;
     switch (strategy.toLowerCase()) {
       case PROVIDER_STRATEGY1:
-        player = new PlayerToIPlayerAdapter(PlayerType.CAPTURE);
+        player = new PlayerToIPlayerAdapter(PlayerType.CAPTURE, cellState);
         break;
       case PROVIDER_STRATEGY2:
-        player = new PlayerToIPlayerAdapter(PlayerType.AVOID);
+        player = new PlayerToIPlayerAdapter(PlayerType.AVOID, cellState);
         break;
       case PROVIDER_STRATEGY3:
-        player = new PlayerToIPlayerAdapter(PlayerType.CORNER);
+        player = new PlayerToIPlayerAdapter(PlayerType.CORNER, cellState);
         break;
       case PROVIDER_STRATEGY4:
-        player = new PlayerToIPlayerAdapter(PlayerType.MINIMAX);
+        player = new PlayerToIPlayerAdapter(PlayerType.MINIMAX, cellState);
         break;
       case PROVIDER_STRATEGY5:
-        player = new PlayerToIPlayerAdapter(PlayerType.COMBO);
+        player = new PlayerToIPlayerAdapter(PlayerType.COMBO, cellState);
         break;
       default:
-        player = new PlayerToIPlayerAdapter(PlayerType.HUMAN);
+        player = new PlayerToIPlayerAdapter(PlayerType.HUMAN, cellState);
     }
     return player;
   }

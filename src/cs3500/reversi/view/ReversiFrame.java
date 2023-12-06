@@ -15,20 +15,15 @@ public interface ReversiFrame {
   void addMoveListener(MoveListener features);
 
   /**
-   * This method will be called when the drawing area has changed.
-   */
-  void setCanvasSize(int width, int height);
-
-  /**
    * Redraws the view.
    */
   void repaint();
 
   /**
-   * Get a map from points on the GUI to the corresponding logical coordinates for the game.
-   * @return The map from point to coordinate
+   * Display the given message as an error
+   * @param message the message to display
    */
-  HashMap<Point, Point> getMap();
+  void displayErrorMessage(String message);
 
   /**
    * Make the view visible or invisible.
@@ -40,11 +35,6 @@ public interface ReversiFrame {
    * This method will be called to set a key listener.
    */
   void setKeyListener(KeyListener listener);
-
-  /**
-   * This method will be called to set focus for keyboard support.
-   */
-  void setFocusable(boolean focus);
 
   /**
    * Set the highlighted cell to be the given row and column.
