@@ -2,7 +2,6 @@ package cs3500.reversi.model;
 
 import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.model.Cell.Location;
-import cs3500.reversi.view.MoveListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -171,7 +170,7 @@ public class BasicReversi implements ReversiModel {
       throw new IllegalStateException("Game is already started!");
     } else {
       this.gameState = Status.Playing;
-      notifyGameOver();
+      notifyStateChanged();
       notifyPlayer();
     }
   }
@@ -258,7 +257,7 @@ public class BasicReversi implements ReversiModel {
   /**
    * Notify all controllers that the game is over.
    */
-  public void notifyGameOver() {
+  public void notifyStateChanged() {
     // Notify controllers to refresh view
     for (YourTurnListener listener : listeners) {
       if (listener != null) {
@@ -271,7 +270,7 @@ public class BasicReversi implements ReversiModel {
    * This function is the core game loop, notifying each player of their turn.
    */
   private void notifyPlayer() {
-    if (!this.isGameOver() && !listeners.isEmpty()) {
+    while (!this.isGameOver() && !listeners.isEmpty()) {
       // Notify controller that has current turn
       listeners.stream()
           .filter((YourTurnListener l) -> l.getPlayer().equals(this.currentPlayer))
@@ -279,12 +278,12 @@ public class BasicReversi implements ReversiModel {
       if (restartGame) {
         newGame();
       }
-      notifyPlayer();
     }
     while (isGameOver() && !quitGame) {
       Thread.onSpinWait();
       if (restartGame) {
         newGame();
+        notifyPlayer();
       }
     }
   }
@@ -867,6 +866,7 @@ public class BasicReversi implements ReversiModel {
       incrementScore(CellState.WHITE);
     }
     this.currentPlayer = CellState.BLACK;
+    notifyStateChanged();
   }
 
   //take a cell and get the move that would go in that cell for that cell

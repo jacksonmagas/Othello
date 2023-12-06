@@ -110,9 +110,10 @@ public interface ReadonlyReversiModel {
   int getRows();
 
   /**
-   * Refreshes all views of the game.
+   * Notify all controllers that the state of the model has changed,
+   * and they should refresh their views.
    */
-  void notifyGameOver();
+  void notifyStateChanged();
 
   /**
    * Get the winner of the game if one exists.
