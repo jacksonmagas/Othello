@@ -114,9 +114,13 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public boolean isLegal(int q, int r) {
-    return base.getLegalMoves().stream()
-        .anyMatch((Move m) -> m.getPosn().row == converter.rowFromAxial(r)
-            && m.getPosn().col == converter.colFromAxial(q, r));
+    try {
+      return base.getLegalMoves().stream()
+              .anyMatch((Move m) -> m.getPosn().row == converter.rowFromAxial(r)
+                      && m.getPosn().col == converter.colFromAxial(q, r));
+    } catch (Exception ex) {
+      return false;
+    }
   }
 
   @Override

@@ -55,7 +55,7 @@ public class Reversi {
     int size = 4;
     String player1Strategy = HUMAN;
     String player2StrategyProvider = PROVIDER_TEAM;
-    String player2Strategy = STRATEGY1;
+    String player2Strategy = PROVIDER_STRATEGY1;
     int width = 1200;
     int height = 800;
 
