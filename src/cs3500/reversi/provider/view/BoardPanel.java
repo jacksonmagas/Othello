@@ -44,7 +44,6 @@ import cs3500.reversi.provider.controller.IViewFeatures;
 import cs3500.reversi.provider.model.Board;
 import cs3500.reversi.provider.model.Hex;
 import cs3500.reversi.provider.model.IROModel;
-import cs3500.reversi.provider.model.MutableModel;
 import cs3500.reversi.provider.model.PlayerDisc;
 
 
@@ -326,7 +325,7 @@ public class BoardPanel extends JPanel implements IReversiPanel {
     try {
       URL fontPath = ClassLoader.getSystemResource("LondrinaSolid-Regular.ttf");
       return Font.createFont(Font.TRUETYPE_FONT, fontPath.openStream()).deriveFont(fontSize);
-    } catch (IOException | FontFormatException | NullPointerException e) {
+    } catch (IOException | FontFormatException e) {
       return new Font("Times New Roman", Font.PLAIN, 20);
     }
   }
@@ -804,46 +803,6 @@ public class BoardPanel extends JPanel implements IReversiPanel {
         throw new IllegalArgumentException("q, r, and s must be positive");
       }
     }
-  }
-  public static void main(String[] args) {
-
-    int width = 1200;
-    int height = 800;
-    int noOfCells = 4;
-    HashMap<Hex, PlayerDisc> hexagons = new HashMap<Hex, PlayerDisc>();
-    int rowSize = noOfCells;
-    int totalNumRows = 2 * noOfCells - 1;
-    int center = noOfCells - 1;
-    // build grid
-
-    for (int rowNum = 0, rowNum2 = 0; rowNum < totalNumRows; rowNum++) {
-      for (int col2 = 0, col = -rowNum2; col2 < rowSize; col++,col2++) {
-        System.out.println("row "+(rowNum-center)+" col "+col);
-        hexagons.put(new Hex(col, rowNum-center), PlayerDisc.EMPTY);
-      }
-      if ((rowNum-center) < 0) {
-        rowNum2++;
-      }
-      if (rowNum < center) {
-        rowSize++;
-      } else {
-        rowSize--;
-      }
-    }
-
-
-    //Board board = new Board(noOfCells);
-    Board board = new Board(hexagons);
-    IROModel providerModel = new MutableModel(noOfCells, board, PlayerDisc.WHITE);
-    JFrameView f = new JFrameView(providerModel);
-    //BoardPanel p = new BoardPanel(providerModel, f);
-
-    //f.setContentPane(p);
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.pack();
-    f.setLocationRelativeTo(null);
-    f.setSize(width, height);
-    f.setVisible(true);
   }
 }
 

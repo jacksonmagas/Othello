@@ -108,38 +108,20 @@ Added:
 1. Keyboard support is implemented to support make-move, pass-turn, restart and quit commends as part of ReversiGUI.
 2. Reversi main class is created to accept command line strategies from user to simulate the computer player strategy.<br/>
    If Strategy is unable to return valid move then it defaults to pass turn.
-    For example:<br/>
-    Reversi 4 "Human" "Human" "HomeTeam"<br/>
-    Reversi 4 "Human" "FirstMove" "HomeTeam"<br/>
-    Reversi 4 "Human" "HighestScoring" "HomeTeam"<br/>
-    Reversi 4 "Human" "Combined" "HomeTeam"<br/>
-    Reversi 4 "Human" "MiniMax" "HomeTeam"<br/>
-    Reversi 4 "Human" "Console" "HomeTeam"<br/>
-    Reversi 4 "Human" "Human" "ProviderTeam"<br/>
-    Reversi 4 "Human" "Capture" "ProviderTeam"<br/>
-    Reversi 4 "Human" "Avoid" "ProviderTeam"<br/>
-    Reversi 4 "Human" "Corner" "ProviderTeam"<br/>
-    Reversi 4 "Human" "MiniMax" "ProviderTeam"<br/>
-    Reversi 4 "Human" "Combo" "ProviderTeam"<br/>
-    where<br/>
-    1st param = Number of cells = 4<br/>
-    2nd param = Player1Strategy of HomeTeam<br/>
-    Valid values from HomeTeam:<br/>
-    FirstMove - First Available Opening Strategy<br/>
-    HighestScoring - Highest Scoring Strategy<br/>
-    Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
-    MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
-    Console - Console based Moves Strategy<br/>
-    Human - Human Mouse or Keys based Moves Strategy<br/>
-    3rd param = Player2Strategy of either HomeTeam or ProviderTeam<br/>
-    Valid values from ProviderTeam:<br/>
-    Capture - Capture Max Strategy<br/>
-    Avoid = Avoid Next To Corner Strategy<br/>
-    Corner - Go For Corner Strategy<br/>
-    MiniMax - Mini Max to choose the best move<br/>
-    Combo - Combined Move Strategy using MiniMax, Corner, Avoid and Capture<br/>
-    Human - Human Mouse or Keys based Moves Strategy<br/>
-    4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
+   For example:<br/>
+   Reversi "Human" "Human"<br/>
+   Reversi "Human" "FirstMove"<br/>
+   Reversi "Human" "HighestScoring"<br/>
+   Reversi "Human" "Combined"<br/>
+   Reversi "Human" "MiniMax"<br/>
+   Reversi "Human" "Console"<br/>
+   where<br/>
+   FirstMove - First Available Opening Strategy<br/>
+   HighestScoring - Highest Scoring Strategy<br/>
+   Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
+   MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
+   Console - Console based Moves Strategy<br/>
+   Human - Human Mouse or Keys based Moves Strategy<br/>
 3. Mouse event handling decoupled from controller, view now sends the controller the logical result of the click instead of exact location
 4. Implemented 2 Controllers and 2 Views as Part3 requirements as part of Reversi main class method and kept Part 2 implementation as part of previous ReversiGUI main class method.
 5. Your Turn and Refresh View events are implemented to enable Player 2 to simulate the moves as per implemented strategies.
@@ -151,4 +133,40 @@ Added:
 9. Created mock for the model that records all method calls and their arguments in a transcript including
    method calls in copies of the model. This allows strategies to be tested by seeing which of the legal moves they check.
 
-
+# Changes for part 4
+Added:
+1. Integrated Provider view for player2 based upon command line params.
+2. Reversi main class is updated to accept command line strategies from user to simulate the computer player strategy.<br/>
+   The 4th param as Player2StrategyProvider is added to determine the Home Team strategy vs the Provider Team strategy.
+      For example:<br/>
+      Reversi 4 "Human" "Human" "HomeTeam"<br/>
+      Reversi 4 "Human" "FirstMove" "HomeTeam"<br/>
+      Reversi 4 "Human" "HighestScoring" "HomeTeam"<br/>
+      Reversi 4 "Human" "Combined" "HomeTeam"<br/>
+      Reversi 4 "Human" "MiniMax" "HomeTeam"<br/>
+      Reversi 4 "Human" "Console" "HomeTeam"<br/>
+      Reversi 4 "Human" "Human" "ProviderTeam"<br/>
+      Reversi 4 "Human" "Capture" "ProviderTeam"<br/>
+      Reversi 4 "Human" "Avoid" "ProviderTeam"<br/>
+      Reversi 4 "Human" "Corner" "ProviderTeam"<br/>
+      Reversi 4 "Human" "MiniMax" "ProviderTeam"<br/>
+      Reversi 4 "Human" "Combo" "ProviderTeam"<br/>
+      where<br/>
+      1st param = Number of cells = 4<br/>
+      2nd param = Player1Strategy of HomeTeam<br/>
+      Valid values from HomeTeam:<br/>
+      FirstMove - First Available Opening Strategy<br/>
+      HighestScoring - Highest Scoring Strategy<br/>
+      Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
+      MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
+      Console - Console based Moves Strategy<br/>
+      Human - Human Mouse or Keys based Moves Strategy<br/>
+      3rd param = Player2Strategy of either HomeTeam or ProviderTeam<br/>
+      Valid values from ProviderTeam:<br/>
+      Capture - Capture Max Strategy<br/>
+      Avoid = Avoid Next To Corner Strategy<br/>
+      Corner - Go For Corner Strategy<br/>
+      MiniMax - Mini Max to choose the best move<br/>
+      Combo - Combined Move Strategy using MiniMax, Corner, Avoid and Capture<br/>
+      Human - Human Mouse or Keys based Moves Strategy<br/>
+      4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
