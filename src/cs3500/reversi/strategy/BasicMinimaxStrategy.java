@@ -11,7 +11,8 @@ import cs3500.reversi.model.ReversiModel;
 public class BasicMinimaxStrategy implements InfallibleMoveStrategy {
   @Override
   public Move chooseMove(ReversiModel model, CellState player) {
-    return new GameTree(model, 2).getBestMove();
+    // potential optimization: start with the game tree from the last move and build from there
+    return new GameTree(model, 3).getBestMove();
   }
 
   @Override
