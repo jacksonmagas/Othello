@@ -26,15 +26,15 @@ import cs3500.reversi.view.ReversiFrame;
  * Represent a Reversi game class which creates two views of reversi, one for each player.
  * The main expects 4 command line arguments: an integer representing the size of the board,
  * the strategy for the first player, and the strategy for the second player.
- * The valid strategies are: human, firstmove, highestscoring, combined, console, and minimax
+ * The valid strategies are: human, first-move, highest-scoring, combined, console, and tree-minimax
  */
 public class Reversi {
 
   static final String HUMAN = "human";
-  static final String STRATEGY1 = "firstmove";
-  static final String STRATEGY2 = "highestscoring";
+  static final String STRATEGY1 = "first-move";
+  static final String STRATEGY2 = "highest-scoring";
   static final String STRATEGY3 = "combined";
-  static final String STRATEGY4 = "minimax";
+  static final String STRATEGY4 = "tree-minimax";
   static final String STRATEGY5 = "console";
 
   static final String PROVIDER_STRATEGY1 = "capture";
@@ -43,89 +43,139 @@ public class Reversi {
   static final String PROVIDER_STRATEGY4 = "minimax";
   static final String PROVIDER_STRATEGY5 = "combo";
 
-  static final String HOME_TEAM = "hometeam";
-  static final String PROVIDER_TEAM = "providerteam";
+  static final String OURS = "ours";
+  static final String PROVIDER = "provider";
+  static int depth = 3;
+  static int size = 4;
+  static Player player1;
+  static Player player2;
+  static String VIEW1;
+  static String VIEW2;
 
   /**
    * Constructor for Reversi public class.
    */
   public static void main(String[] args) {
-
     // defaults
-    int size = 4;
-    String player1Strategy = HUMAN;
-    String player2StrategyProvider = PROVIDER_TEAM;
-    String player2Strategy = PROVIDER_STRATEGY1;
     int width = 1200;
     int height = 800;
 
-    if (args.length > 0) {
-      try {
-        size = Integer.parseInt(args[0]);
-      } catch (NumberFormatException e) {
-        System.err.println("Argument 1 - " + args[0]
-            + " must be an integer and greater or equal to 3.");
-        throw new IllegalArgumentException("Argument 1 - " + args[0]
-            + " must be an integer and greater or equal to 3.");
-      }
-      try {
-        player1Strategy = args[1];
-      } catch (Exception e) {
-        System.err.println("Argument 2 must be present as player1 strategy."
-            + "Valid values are Human or FirstMove or HighestScoring or Combined or MiniMax or Console.");
-        throw new IllegalArgumentException("Argument 2 must be present as player1 strategy."
-            + "Valid values are Human or FirstMove or HighestScoring or Combined or MiniMax or Console.");
-      }
-      try {
-        player2Strategy = args[2];
-      } catch (Exception e) {
-        System.err.println("Argument 3 must be present as player2 strategy."
-            + "Valid values are Human or Capture or Avoid or Corner or MiniMax or Combo.");
-        throw new IllegalArgumentException("Argument 3 must be present as player2 strategy."
-            + "Valid values are Human or Capture or Avoid or Corner or MiniMax or Combo.");
-      }
-      try {
-        player2StrategyProvider = args[3];
-      } catch (Exception e) {
-        System.err.println("Argument 4 must be present as player2 strategy provider."
-            + "Valid values are HomeTeam or ProviderTeam.");
-        throw new IllegalArgumentException("Argument 4 must be present."
-            + "Valid values are HomeTeam or ProviderTeam.");
-      }
-    } else {
-      System.err.println("Requires 4 argument.");
-    }
+    parseArgs(args);
 
-    ReversiModel reversi = new BasicReversi(size);
-    ReversiFrame viewPlayer1 = new BasicReversiView(reversi, "Black");
-    Player player1 = getPlayerUsingHomeTeamStrategy(player1Strategy, CellState.BLACK);
-    ReverseHexGridPlayerController controller1 = new ReverseHexGridPlayerController(reversi,
-            viewPlayer1, player1);
-    viewPlayer1.setVisibleView(true);
+    ReversiModel baseModel = new BasicReversi(size);
+    setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK, player1);
+    setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE, player2);
 
+    baseModel.startGame();
+  }
 
-
-    if (player2StrategyProvider.equalsIgnoreCase(PROVIDER_TEAM)) {
-      Player player2 = getPlayerUsingProviderStrategy(player2Strategy, CellState.WHITE);
+  private static void setUpPlayer(String s, ReversiModel reversi,
+      int width, int height, CellState player, Player strategy) {
+    if (s.equalsIgnoreCase(PROVIDER)) {
       IROModel providerModel = new ReversiModelToIMutableModelAdapter(reversi);
       JFrameView player2Frame = new JFrameView(providerModel);
       BoardPanel panel = new BoardPanel(providerModel, player2Frame);
       player2Frame.setSize(width, height);
       player2Frame.render();
-      ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
+      new ReverseHexGridPlayerController(reversi,
           new IGraphicalReversiViewToReversiFrame(player2Frame,
               providerModel,
-              CellState.WHITE), player2);
+              player), strategy);
       panel.setVisible(true);
     } else {
-      Player player2 = getPlayerUsingHomeTeamStrategy(player2Strategy, CellState.WHITE);
-      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, "White");
-      ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
-          viewPlayer2, player2);
+      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, player.name());
+      new ReverseHexGridPlayerController(reversi,
+          viewPlayer2, strategy);
       viewPlayer2.setVisibleView(true);
     }
+  }
 
-    reversi.startGame();
+  private static void parseArgs(String[] args) {
+    try {
+      for (int i = 0; i < args.length; i++) {
+        switch (args[i]) {
+          case "-p1":
+            player1 = getPlayer(args[i + 1], CellState.BLACK);
+            break;
+          case "-p2":
+            player2 = getPlayer(args[i + 1], CellState.WHITE);
+            break;
+          case "-size":
+          case "-s":
+            try {
+              size = Integer.parseInt(args[i + 1]);
+              if ((size <= 2)) {
+                throw new NumberFormatException();
+              }
+            } catch (NumberFormatException e) {
+              System.err.println("-s flag must be followed by an integer"
+                  + "greater than 2");
+              throw new IllegalArgumentException("-s flag must be followed by an integer"
+                  + "greater than 2");
+            }
+            break;
+          case "-depth":
+          case "-d":
+            try {
+              depth = Integer.parseInt(args[i + 1]);
+              if ((size < 1)) {
+                throw new NumberFormatException();
+              }
+            } catch (NumberFormatException e) {
+              System.err.println("-d flag must be followed by a positive integer");
+              throw new IllegalArgumentException("-d flag must be followed by a positive integer");
+            }
+            break;
+          case "-v1":
+            if (args[i + 1].equalsIgnoreCase(OURS)) {
+              VIEW1 = OURS;
+            } else if (args[i + 1].equalsIgnoreCase(PROVIDER)) {
+              VIEW1 = PROVIDER;
+            } else {
+              System.err.println("view flags must be followed by a valid view specifier, either"
+                  + "ours, or provider.");
+              throw new IllegalArgumentException("view flags must be followed by a valid view"
+                  + "specifier, either ours, or provider.");
+            }
+            break;
+          case "-v2":
+            if (args[i + 1].equalsIgnoreCase(OURS)) {
+              VIEW2 = OURS;
+            } else if (args[i + 1].equalsIgnoreCase(PROVIDER)) {
+              VIEW2 = PROVIDER;
+            } else {
+              System.err.println("view flags must be followed by a valid view specifier, either"
+                  + "ours, or provider.");
+              throw new IllegalArgumentException("view flags must be followed by a valid view"
+                  + "specifier, either ours, or provider.");
+            }
+            break;
+          default:
+        }
+      }
+    } catch (IndexOutOfBoundsException e) {
+      System.err.println("Last argument cannot be a flag without it's value.");
+    }
+  }
+
+  private static Player getPlayer(String arg, CellState player) {
+    Player temp;
+    try {
+      temp = getPlayerUsingHomeTeamStrategy(arg, player);
+    } catch (IllegalArgumentException e) {
+      try {
+        temp = getPlayerUsingProviderStrategy(arg, player);
+      } catch (IllegalArgumentException exception) {
+        System.err.println("player 1 strategy must be specified with the -p1 flag"
+            + "Valid values are human, first-move, highest-scoring, combined, tree-minimax,"
+            + " Console, capture, avoid, corner, minimax, and combo");
+        throw  new IllegalArgumentException("player 1 strategy must be specified with the"
+            + "-p1 flag"
+            + "Valid values are human, first-move, highest-scoring, combined, tree-minimax,"
+            + " Console, capture, avoid, corner, minimax, and combo");
+      }
+    }
+    return temp;
   }
 
   // gets player using home team strategy
@@ -147,8 +197,11 @@ public class Reversi {
       case STRATEGY5:
         player = new PlayerImpl(cellState, new ConsoleInputStrategy());
         break;
-      default:
+      case HUMAN:
         player = new PlayerImpl(cellState, new GUIInputStrategy());
+        break;
+      default:
+        throw new IllegalArgumentException("Not our strategy");
     }
     return player;
   }
@@ -172,8 +225,11 @@ public class Reversi {
       case PROVIDER_STRATEGY5:
         player = new PlayerToIPlayerAdapter(PlayerType.COMBO, cellState);
         break;
-      default:
+      case HUMAN:
         player = new PlayerToIPlayerAdapter(PlayerType.HUMAN, cellState);
+        break;
+      default:
+        throw new IllegalArgumentException("Not a provider strategy");
     }
     return player;
   }
