@@ -2,6 +2,7 @@ package cs3500.reversi.model;
 
 import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.model.Cell.Location;
+import cs3500.reversi.view.MoveListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

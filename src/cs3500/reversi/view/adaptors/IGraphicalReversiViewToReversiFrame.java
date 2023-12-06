@@ -10,12 +10,14 @@ import cs3500.reversi.view.ReversiFrame;
 import java.awt.event.KeyListener;
 
 public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
+  private boolean gameOverShown;
   private final IGraphicalReversiView base;
   private final IROModel model;
   private final MoveListenerFromProviderFeatures providerFeatureListener;
 
   public IGraphicalReversiViewToReversiFrame(IGraphicalReversiView base, IROModel model,
       CellState player) {
+    this.gameOverShown = false;
     this.model = model;
     this.base = base;
     CoordinateConverter converter = new CoordinateConverter(model.getRadius() + 1);
@@ -33,14 +35,19 @@ public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
   @Override
   public void repaint() {
     if (model.isGameOver()) {
-      // this try-catch is nasty and could be removed by making model.getWinner() in the adaptor
-      // model use orElse(PlayerDisc.Empty) instead of orElseThrow(IllegalStateException),
-      // however that would violate the interface
-      try {
-        base.displayGameOver(model.getWinner().toString());
-      } catch (IllegalStateException e) {
-        base.displayGameOver(PlayerDisc.EMPTY.name());
+      if (!gameOverShown) {
+        // this try-catch is nasty and could be removed by making model.getWinner() in the adaptor
+        // model use orElse(PlayerDisc.Empty) instead of orElseThrow(IllegalStateException),
+        // however that would violate the interface
+        try {
+          base.displayGameOver(model.getWinner().toString());
+        } catch (IllegalStateException e) {
+          base.displayGameOver(PlayerDisc.EMPTY.name());
+        }
       }
+      this.gameOverShown = true;
+    } else {
+      gameOverShown = false;
     }
     base.updateView();
   }

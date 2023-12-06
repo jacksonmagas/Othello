@@ -96,14 +96,16 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   }
 
   /**
-   * Forward the GUI action to non-current players if it is a pass or a quit.
-   * This allows non-active board to quit.
+   * Handle restarts when they happen, and if this player is waiting for their move
+   * skip it to allow restart.
    * @param m the move that corresponds to the last click
    */
   @Override
   public void receiveGUIAction(Move m) {
-    if (player.getPiece() != model.getCurrentPlayer() && m.isQuitGame() || m.isPassTurn()) {
-      player.receiveGUIAction(m);
+    if (m.isRestartGame()) {
+      model.makeMove(new Move(false, true, false));
+    } else if (m.isQuitGame()) {
+      model.makeMove(new Move(false, false, true));
     }
   }
 
