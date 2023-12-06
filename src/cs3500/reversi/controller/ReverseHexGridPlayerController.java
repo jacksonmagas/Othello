@@ -63,7 +63,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
       view.repaint();
     }
     if (model.isGameOver()) {
-      model.notifyGameOver();
+      model.notifyStateChanged();
     }
   }
 
@@ -215,7 +215,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           System.out.println("model after move\n" + this.model);
           
           view.repaint();
-          this.model.notifyGameOver();
+          this.model.notifyStateChanged();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),
@@ -232,7 +232,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           System.out.println("model after pass-turn\n" + this.model);
           
           view.repaint();
-          this.model.notifyGameOver();
+          this.model.notifyStateChanged();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame) view).getContentPane(), ex.getMessage(),
@@ -248,7 +248,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
           System.out.println("model after restart\n" + this.model);
           
           view.repaint();
-          this.model.notifyGameOver();
+          this.model.notifyStateChanged();
         } catch (IllegalArgumentException | IllegalStateException ex) {
           System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
           JOptionPane.showMessageDialog(((JFrame)view).getContentPane(), ex.getMessage(),

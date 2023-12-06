@@ -138,9 +138,9 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
-  public void notifyGameOver() {
+  public void notifyStateChanged() {
     printT("refreshAllViews: ");
-    delegate.notifyGameOver();
+    delegate.notifyStateChanged();
   }
 
   @Override
