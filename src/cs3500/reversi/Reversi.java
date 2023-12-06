@@ -1,8 +1,6 @@
 package cs3500.reversi;
 
 import cs3500.reversi.model.ReversiModelToIMutableModelAdapter;
-import java.util.HashMap;
-
 import cs3500.reversi.controller.Player;
 import cs3500.reversi.controller.PlayerImpl;
 import cs3500.reversi.controller.ReverseHexGridPlayerController;
@@ -10,8 +8,8 @@ import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.provider.model.IROModel;
-import cs3500.reversi.provider.model.PlayerDisc;
 import cs3500.reversi.provider.player.IPlayer;
+import cs3500.reversi.controller.PlayerToIPlayerAdapter;
 import cs3500.reversi.provider.player.PlayerType;
 import cs3500.reversi.provider.view.BoardPanel;
 import cs3500.reversi.provider.view.JFrameView;
@@ -40,7 +38,7 @@ public class Reversi {
   static final String STRATEGY5 = "console";
 
   static final String PROVIDER_STRATEGY1 = "capture";
-  static final String PROVIDER_STRATEGY2 = "pavoid";
+  static final String PROVIDER_STRATEGY2 = "avoid";
   static final String PROVIDER_STRATEGY3 = "corner";
   static final String PROVIDER_STRATEGY4 = "minimax";
   static final String PROVIDER_STRATEGY5 = "combo";
@@ -106,6 +104,7 @@ public class Reversi {
     reversi.addYourTurnListener(controller1);
     viewPlayer1.setVisibleView(true);
 
+
     if (player2StrategyProvider.equalsIgnoreCase(PROVIDER_TEAM)) {
       IROModel providerModel = new ReversiModelToIMutableModelAdapter(new BasicReversi(size));
       JFrameView viewPlayer2 = new JFrameView(providerModel);
@@ -156,22 +155,22 @@ public class Reversi {
     IPlayer player;
     switch (strategy.toLowerCase()) {
       case PROVIDER_STRATEGY1:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.CAPTURE);
+        player = new PlayerToIPlayerAdapter(PlayerType.CAPTURE);
         break;
       case PROVIDER_STRATEGY2:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.AVOID);
+        player = new PlayerToIPlayerAdapter(PlayerType.AVOID);
         break;
       case PROVIDER_STRATEGY3:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.CORNER);
+        player = new PlayerToIPlayerAdapter(PlayerType.CORNER);
         break;
       case PROVIDER_STRATEGY4:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.MINIMAX);
+        player = new PlayerToIPlayerAdapter(PlayerType.MINIMAX);
         break;
       case PROVIDER_STRATEGY5:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.COMBO);
+        player = new PlayerToIPlayerAdapter(PlayerType.COMBO);
         break;
       default:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.HUMAN);
+        player = new PlayerToIPlayerAdapter(PlayerType.HUMAN);
     }
     return player;
   }
