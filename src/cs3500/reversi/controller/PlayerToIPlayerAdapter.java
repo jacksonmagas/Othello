@@ -1,16 +1,18 @@
-package cs3500.reversi.provider.player;
+package cs3500.reversi.controller;
 
 import cs3500.reversi.provider.controller.IViewFeatures;
 import cs3500.reversi.provider.model.PlayerDisc;
+import cs3500.reversi.provider.player.IPlayer;
+import cs3500.reversi.provider.player.PlayerType;
 
-public class Player implements IPlayer {
+public class PlayerToIPlayerAdapter implements IPlayer {
 
   private final PlayerType playerType;
 
   /**
    * Constructor for Player class.
    */
-  public Player(PlayerType playerType) {
+  public PlayerToIPlayerAdapter(PlayerType playerType) {
     this.playerType = playerType;
   }
 

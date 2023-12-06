@@ -9,6 +9,7 @@ import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.ReversiModelToIMutableModelAdapter;
 import cs3500.reversi.provider.model.IROModel;
 import cs3500.reversi.provider.player.IPlayer;
+import cs3500.reversi.controller.PlayerToIPlayerAdapter;
 import cs3500.reversi.provider.player.PlayerType;
 import cs3500.reversi.provider.view.BoardPanel;
 import cs3500.reversi.provider.view.JFrameView;
@@ -145,22 +146,22 @@ public class Reversi {
     IPlayer player;
     switch (strategy.toLowerCase()) {
       case PROVIDER_STRATEGY1:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.CAPTURE);
+        player = new PlayerToIPlayerAdapter(PlayerType.CAPTURE);
         break;
       case PROVIDER_STRATEGY2:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.AVOID);
+        player = new PlayerToIPlayerAdapter(PlayerType.AVOID);
         break;
       case PROVIDER_STRATEGY3:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.CORNER);
+        player = new PlayerToIPlayerAdapter(PlayerType.CORNER);
         break;
       case PROVIDER_STRATEGY4:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.MINIMAX);
+        player = new PlayerToIPlayerAdapter(PlayerType.MINIMAX);
         break;
       case PROVIDER_STRATEGY5:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.COMBO);
+        player = new PlayerToIPlayerAdapter(PlayerType.COMBO);
         break;
       default:
-        player = new cs3500.reversi.provider.player.Player(PlayerType.HUMAN);
+        player = new PlayerToIPlayerAdapter(PlayerType.HUMAN);
     }
     return player;
   }
