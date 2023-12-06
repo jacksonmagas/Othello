@@ -1,5 +1,37 @@
 # CS3500-Reversi
-Overview:
+How to play:
+The main function requires the following arguments:
+<ul><li> -p1 strategy
+<li> -p2 strategy
+</ul><p>
+Where strategy is one of our strategies:
+<ul><li> human
+<li> first-move
+<li> highest-scoring
+<li> combined
+<li> tree-minimax
+<li> console
+</ul> Or one of the provider strategies: <ul>
+<li> capture
+<li> avoid
+<li> corner
+<li> minimax
+<li> combo
+</ul><p>
+And accepts the following additional arguments:
+<ul>
+<li> -s n or -size n, where n is an integer greater than 2
+<li> -d n or -depth n where n is a positive integer.
+WARNING: Using tree-minimax with a depth that is above 3 or on a very large board can cause
+out of memory errors.
+<li> -v1 ours, or -v1 provider, which chooses which view to use for player 1
+<li> -v2 ours, or -v2 provider, which chooses which view to use for player 2
+</ul>
+
+Controls: For our view moves are made by clicking on the respective cell and passing is done by clicking the pass-turn button.
+For the provider view moves are made by clicking on a cell and then pressing Enter, and passing turn is done by clicking s.
+
+# Overview:
 Invariants: 
 - All three lists contain the same cells
 - The horizontal rows 0 indexed from top
