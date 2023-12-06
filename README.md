@@ -170,3 +170,27 @@ Added:
       Combo - Combined Move Strategy using MiniMax, Corner, Avoid and Capture<br/>
       Human - Human Mouse or Keys based Moves Strategy<br/>
       4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
+
+# Provider Code Review
+# Design Critique:
+The model should have ideally provided functionalities to restart the game. It would also be 
+helpful if the next step instructions were displayed to opposing player, so they would know the 
+appropriate next actions in the game. Also extended key support would have been a helpful ability 
+to have that would have been implemented through KeyListener. When the mouse moves over cells in 
+the UI of the game, it should have captured highlighted cells as the mouse moves(up, down, left, 
+right), so the user could see where a potential move would take place before committing the move.
+# Implementation Critique:
+The model was lacking some functionalities that would have been nice to have such as pass turn, 
+and restart game. The colorful gameplay made the Reversi game more interactive and easy 
+to play/use. Overall, implementation was well done, and we encountered no major issues working with
+the provided code. 
+# Documentation Critique:
+Noticed no major documentation issues in provider code. Readme was adequate in understanding 
+provider implementation of the Reversi game. Comments for interface and method explanations were 
+very descriptive and made code easy to work with and understand. Examples would have been helpful 
+when documenting difference between Model vs View features.
+# Design/Code Limitations:
+The following functionalities were missing from provider code: missing Pass-Turn actions in UI and
+doesn't have a restart option in UI. While pass-turn action in UI was a necessary actions missing 
+from the game, the restart option in UI is purely optional and just would have been nice to have. 
+Keyboard support could've been helpful to implement and should've been done through KeyListener. 
