@@ -101,7 +101,6 @@ public class Reversi {
     Player player1 = getPlayerUsingHomeTeamStrategy(player1Strategy, CellState.BLACK);
     ReverseHexGridPlayerController controller1 = new ReverseHexGridPlayerController(reversi,
             viewPlayer1, player1);
-    reversi.addYourTurnListener(controller1);
     viewPlayer1.setVisibleView(true);
 
 
@@ -114,15 +113,15 @@ public class Reversi {
       player2Frame.setSize(width, height);
       player2Frame.render();
       ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
-          new IGraphicalReversiViewToReversiFrame(player2Frame, size), player2);
-      reversi.addYourTurnListener(controller2);
+          new IGraphicalReversiViewToReversiFrame(player2Frame,
+              providerModel,
+              CellState.WHITE), player2);
       panel.setVisible(true);
     } else {
       Player player2 = getPlayerUsingHomeTeamStrategy(player2Strategy, CellState.WHITE);
       ReversiFrame viewPlayer2 = new BasicReversiView(reversi, "White");
       ReverseHexGridPlayerController controller2 = new ReverseHexGridPlayerController(reversi,
           viewPlayer2, player2);
-      reversi.addYourTurnListener(controller2);
       viewPlayer2.setVisibleView(true);
     }
 

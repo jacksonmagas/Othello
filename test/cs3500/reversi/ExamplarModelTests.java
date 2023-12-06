@@ -706,7 +706,7 @@ public class ExamplarModelTests {
                     "Player one turn (Black)!\n",
             model.toString());
     model.addYourTurnListener(null);
-    model.refreshAllViews();
+    model.notifyGameOver();
     Assert.assertEquals("No exceptions!", 5, model.getRows());
   }
 

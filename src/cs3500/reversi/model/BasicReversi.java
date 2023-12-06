@@ -170,7 +170,7 @@ public class BasicReversi implements ReversiModel {
       throw new IllegalStateException("Game is already started!");
     } else {
       this.gameState = Status.Playing;
-      refreshAllViews();
+      notifyGameOver();
       notifyPlayer();
     }
   }
@@ -255,13 +255,13 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Refreshes all views of the game.
+   * Notify all controllers that the game is over.
    */
-  public void refreshAllViews() {
+  public void notifyGameOver() {
     // Notify controllers to refresh view
     for (YourTurnListener listener : listeners) {
       if (listener != null) {
-        listener.refreshView();
+        listener.gameOver();
       }
     }
   }
@@ -290,7 +290,10 @@ public class BasicReversi implements ReversiModel {
 
   @Override
   public void addYourTurnListener(YourTurnListener listener) {
-    listeners.add(listener);
+    // avoid double notifying
+    if(!listeners.contains(listener)) {
+      listeners.add(listener);
+    }
   }
 
   // gets the cell at its current position

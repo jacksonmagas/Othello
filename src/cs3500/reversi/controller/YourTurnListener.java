@@ -25,7 +25,7 @@ public interface YourTurnListener extends MoveListener {
   /**
    * Refreshes all views on demand such as restart game event.
    */
-  void refreshView();
+  void gameOver();
 
   /**
    * End the turn of this player.

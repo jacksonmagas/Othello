@@ -112,7 +112,7 @@ public interface ReadonlyReversiModel {
   /**
    * Refreshes all views of the game.
    */
-  void refreshAllViews();
+  void notifyGameOver();
 
   /**
    * Get the winner of the game if one exists.
