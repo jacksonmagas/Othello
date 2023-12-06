@@ -23,10 +23,34 @@ import cs3500.reversi.view.adaptors.IGraphicalReversiViewToReversiFrame;
 import cs3500.reversi.view.ReversiFrame;
 
 /**
- * Represent a Reversi game class which creates two views of reversi, one for each player.
- * The main expects 4 command line arguments: an integer representing the size of the board,
- * the strategy for the first player, and the strategy for the second player.
- * The valid strategies are: human, first-move, highest-scoring, combined, console, and tree-minimax
+ * Represent a Reversi game class which creates two views of reversi, one for each player, and
+ * plays the game of reversi.
+ * <p>
+ * The main function requires the following arguments:
+ * <ul><li> {@code -p1} strategy
+ * <li> {@code -p2} strategy
+ * </ul><p>
+ * Where strategy is one of our strategies:
+ * <ul><li> human
+ * <li> first-move
+ * <li> highest-scoring
+ * <li> combined
+ * <li> tree-minimax
+ * <li> console
+ * </ul> Or one of the provider strategies: <ul>
+ * <li> capture
+ * <li> avoid
+ * <li> corner
+ * <li> minimax
+ * <li> combo
+ * </ul><p>
+ * And accepts the following additional arguments:
+ * <li> -s n or -size n, where n is an integer greater than 2
+ * <li> -d n or -depth n where n is a positive integer.
+ * WARNING: Using tree-minimax with a depth that is above 3 or on a very large board can cause
+ * out of memory errors.
+ * <li> -v1 ours, or -v1 provider, which chooses which view to use for player 1
+ * <li> -v2 ours, or -v2 provider, which chooses which view to use for player 2
  */
 public class Reversi {
 
