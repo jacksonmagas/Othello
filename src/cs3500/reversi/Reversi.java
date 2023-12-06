@@ -106,7 +106,7 @@ public class Reversi {
 
 
     if (player2StrategyProvider.equalsIgnoreCase(PROVIDER_TEAM)) {
-      IROModel providerModel = new ReversiModelToIMutableModelAdapter(new BasicReversi(size));
+      IROModel providerModel = new ReversiModelToIMutableModelAdapter(reversi);
       JFrameView viewPlayer2 = new JFrameView(providerModel);
       BoardPanel panel = new BoardPanel(providerModel, viewPlayer2);
       IPlayer player2 = getPlayerUsingProviderStrategy(player2Strategy, CellState.WHITE);
