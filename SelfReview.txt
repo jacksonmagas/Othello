@@ -1,0 +1,10 @@
+Self Review:
+
+What do you wish you had done differently in your design/implementation? Did you learn any lessons
+from the code given to you, or the updates you had to make for your customers?
+-
+What was your experience like with your providers?
+- We received the complete Provider code late after few email discussions back and forth to get all
+the applicable files and as a result had a shorter amount of time to integrate it with our Reversi
+Game. Provider Team was helpful in terms of providing the code and being willing to answer any
+questions that came up. Overall, we had a good experience with our providers.
