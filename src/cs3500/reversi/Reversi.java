@@ -25,12 +25,12 @@ import cs3500.reversi.view.ReversiFrame;
 /**
  * Represent a Reversi game class which creates two views of reversi, one for each player, and
  * plays the game of reversi.
- * <p>
- * The main function requires the following arguments:
+ *
+ * <p>The main function requires the following arguments:
  * <ul><li> {@code -p1} strategy
  * <li> {@code -p2} strategy
- * </ul><p>
- * Where strategy is one of our strategies:
+ * </ul>
+ * <p>Where strategy is one of our strategies:
  * <ul><li> human
  * <li> first-move
  * <li> highest-scoring
@@ -43,8 +43,8 @@ import cs3500.reversi.view.ReversiFrame;
  * <li> corner
  * <li> minimax
  * <li> combo
- * </ul><p>
- * And accepts the following additional arguments:
+ * </ul>
+ * <p>And accepts the following additional arguments:
  * <li> -s n or -size n, where n is an integer greater than 2
  * <li> -d n or -depth n where n is a positive integer.
  * WARNING: Using tree-minimax with a depth that is above 3 or on a very large board can cause

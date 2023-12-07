@@ -16,6 +16,9 @@ import cs3500.reversi.strategy.GUIInputStrategy;
 import cs3500.reversi.strategy.InfallibleMoveStrategy;
 import cs3500.reversi.strategy.adaptors.ProviderStrategyToInfallibleMoveStrategy;
 
+/**
+ * Public class player to IPlayer adapter implements Player interface and allows controller usage.
+ */
 public class PlayerToIPlayerAdapter implements Player {
   private final InfallibleMoveStrategy strat;
   private final CellState player;

@@ -6,6 +6,9 @@ import cs3500.reversi.provider.model.PlayerDisc;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ProviderEnumConvert converts provider enums to work with our implementation.
+ */
 public class ProviderEnumConverter {
   private static final Map<CellState, PlayerDisc> stateMap = initStateMap();
   private static final Map<PlayerDisc, CellState> discMap = initDiscMap();
@@ -14,7 +17,8 @@ public class ProviderEnumConverter {
 
   private static Map<cs3500.reversi.model.Status,
       cs3500.reversi.provider.model.Status> initStatusMap() {
-    Map<cs3500.reversi.model.Status, cs3500.reversi.provider.model.Status> statusMap = new HashMap<>();
+    Map<cs3500.reversi.model.Status, cs3500.reversi.provider.model.Status> statusMap = new
+            HashMap<>();
     statusMap.put(Status.Playing, cs3500.reversi.provider.model.Status.Playing);
     statusMap.put(Status.Won, cs3500.reversi.provider.model.Status.Won);
     statusMap.put(Status.Tied, cs3500.reversi.provider.model.Status.Stalemate);

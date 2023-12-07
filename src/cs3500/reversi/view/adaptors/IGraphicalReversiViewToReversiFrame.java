@@ -9,12 +9,18 @@ import cs3500.reversi.view.MoveListener;
 import cs3500.reversi.view.ReversiFrame;
 import java.awt.event.KeyListener;
 
+/**
+ * IGrpahicalReversiViewToReversiFrame serves as an adapter for the view to frame for Reversi.
+ */
 public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
   private boolean gameOverShown;
   private final IGraphicalReversiView base;
   private final IROModel model;
   private final MoveListenerFromProviderFeatures providerFeatureListener;
 
+  /**
+   * Controller for public class IGraphicalReversiViewToReversiFrame.
+   */
   public IGraphicalReversiViewToReversiFrame(IGraphicalReversiView base, IROModel model,
       CellState player) {
     this.gameOverShown = false;

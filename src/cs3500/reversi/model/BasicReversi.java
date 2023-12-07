@@ -648,16 +648,6 @@ public class BasicReversi implements ReversiModel {
   }
 
   /**
-   * Gets the tile at a hRow and hIndex location.
-   */
-  /*
-  @Override
-  public CellState getStateAt(int hRow, int hIndex) {
-    return this.horizontalRows.get(hRow).get(hIndex).getState();
-  }
-  */
-
-  /**
    * Gets the side length of a game board.
    */
   @Override

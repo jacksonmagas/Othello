@@ -9,8 +9,10 @@ import cs3500.reversi.view.MoveListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Public class MoveListenerFromProviderFeatures moves listener from provider code.
+ */
 public class MoveListenerFromProviderFeatures implements IViewFeatures {
-  private IGraphicalReversiView view;
   private final List<MoveListener> listeners;
   private final CoordinateConverter converter;
 
@@ -49,7 +51,6 @@ public class MoveListenerFromProviderFeatures implements IViewFeatures {
 
   @Override
   public void setView(IGraphicalReversiView v) {
-    view = v;
   }
 
   @Override
