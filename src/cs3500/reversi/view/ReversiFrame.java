@@ -1,8 +1,6 @@
 package cs3500.reversi.view;
 
-import java.awt.Point;
 import java.awt.event.KeyListener;
-import java.util.HashMap;
 
 /**
  * Interface ReversiFrame creates frame for Reversi game. Sets the mouse/key listeners, view
@@ -20,7 +18,7 @@ public interface ReversiFrame {
   void repaint();
 
   /**
-   * Display the given message as an error
+   * Display the given message as an error.
    * @param message the message to display
    */
   void displayErrorMessage(String message);

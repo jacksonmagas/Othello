@@ -1,6 +1,5 @@
 package cs3500.reversi.view;
 
-import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.Move;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import java.awt.Point;

@@ -266,7 +266,8 @@ public class ExamplarModelTests {
             model.toString());
     Assert.assertThrows("There is no legal move at 15, 15", IllegalArgumentException.class, ()
         -> model.makeMove(15, 15));
-    Assert.assertEquals("There is no legal move at 15, 15.", "There is no legal move at 15, 15.", model.getLastErrorMessage());
+    Assert.assertEquals("There is no legal move at 15, 15.",
+            "There is no legal move at 15, 15.", model.getLastErrorMessage());
   }
 
   @Test
@@ -538,16 +539,20 @@ public class ExamplarModelTests {
 
     List<Move> moves =  model.getLegalMoves();
     Assert.assertEquals("Game board has 7 legal moves!", 7, moves.size());
-    Assert.assertEquals("Game board has 1st legal move match row!", 1, moves.get(0).getPosn().row);
-    Assert.assertEquals("Game board has 1st legal move match col!", 2, moves.get(0).getPosn().col);
-    Assert.assertEquals("Game board has last legal move match is pass-turn!", true, model.getLegalMoves().get(6).isPassTurn());
+    Assert.assertEquals("Game board has 1st legal move match row!", 1,
+            moves.get(0).getPosn().row);
+    Assert.assertEquals("Game board has 1st legal move match col!", 2,
+            moves.get(0).getPosn().col);
+    Assert.assertEquals("Game board has last legal move match is pass-turn!",
+            true, model.getLegalMoves().get(6).isPassTurn());
 
     Assert.assertEquals("Game board has 1st legal move match row!",
         1, model.getLegalMoves().get(0).getPosn().row);
     Assert.assertEquals("Game board has 1st legal move match col!",
         2, model.getLegalMoves().get(0).getPosn().col);
 
-    Assert.assertEquals("Player next instructions match!", "Player one turn (Black)!\n", model.getNextStepInstructions());
+    Assert.assertEquals("Player next instructions match!",
+            "Player one turn (Black)!\n", model.getNextStepInstructions());
     Assert.assertEquals("Game do not have any error now!", "", model.getLastErrorMessage());
 
     Assert.assertEquals("Game current row matched!", 0, model.getHighlightedCell().getRow());
