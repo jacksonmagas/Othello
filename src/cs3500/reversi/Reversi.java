@@ -87,8 +87,14 @@ public class Reversi {
     parseArgs(args);
 
     ReversiModel baseModel = new BasicReversi(size);
-    setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK, player1);
-    setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE, player2);
+    try {
+      setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK, player1);
+      setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE, player2);
+    } catch (NullPointerException e) {
+      System.err.println("-p1 and -p2 flags are required to specify strategies");
+      throw new IllegalArgumentException("-p1 and -p2 flags are required to specify player"
+          + "strategies");
+    }
 
     baseModel.startGame();
   }
