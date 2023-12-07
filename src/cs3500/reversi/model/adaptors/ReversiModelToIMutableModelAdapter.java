@@ -178,8 +178,7 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
 
   @Override
   public void addFeatures(IModelFeatures features) {
-    //TODO: this is either a stub implementation that can stay empty or it will need to add
-    //TODO: YourTurnListeners to the base.
+    // this is not needed for our implementation
   }
 
   @Override
@@ -228,6 +227,5 @@ public class ReversiModelToIMutableModelAdapter implements IMutableModel {
   @Override
   public void notifyGameOver(String winner) {
     // stub implementation does nothing because the base takes care of notifying players
-    // TODO: this might actually be needed at some point for their view
   }
 }

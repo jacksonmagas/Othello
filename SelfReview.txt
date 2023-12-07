@@ -1,7 +1,35 @@
 Self Review:
 
-What do you wish you had done differently in your design/implementation? Did you learn any lessons
-from the code given to you, or the updates you had to make for your customers?
+One thing that I wish we had done differently in our design was doing a better job of separation of
+responsibilities. For example the highlighted cell is stored in the model instead of the view, even
+though the model does not need to interact with the highlighted cell directly. Also, the
+KeyboardListener and MouseListener were originally internal classes in the controller, meaning that
+the controller had to do some calculations with graphical points instead of only handling logical
+concepts. The MouseListener was refactored into the view, and only communicated with the controller
+through Moves, which greatly simplified reasoning about control flow and reduced coupling, however
+we ran out of time to do the same with the KeyboardListener.
+
+That said, using Move throughout the project to communicate between view, controller, strategy, and
+model made it easier to reason about.
+
+The process of adapting the provider code went smoothly, partially because they had several concepts
+that were nearly identical to our implementation, such as enums representing the same things which
+simply needed us to make lookup tables to convert between.
+
+Most of our code didn't need to be changed, we simply made adaptor classes which allowed their
+strategies to use our model through their model interface, and adaptor classes which allowed our
+controller to use their view and strategies through our interfaces.
+
+There we did add a few things such as the getWinner method to the ReadonlyReversiModel interface
+because their interface required it, and it seemed like a useful feature.
+
+The feature which took the most work to get working was properly restarting the game both during and
+after a game had been finished. This was because the model and controller had to be able to receive
+a restart game move from the AWT EventListener thread at any time and properly reset the state of
+the model, the control flow of the model, the views, and ensure that no player was waiting for a move.
+This was difficult to debug because the program could get stuck in an infinite loop where the event
+listener thread started executing core game logic, or the core game loop could finish silently with
+the view still responding normally but failing to restart the game.
 -
 What was your experience like with your providers?
 - We received the complete Provider code late after few email discussions back and forth to get all
