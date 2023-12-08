@@ -76,7 +76,7 @@ public class PlayerImpl implements Player {
 
     private ScoreTester(ReadonlyReversiModel model) {
       this.delegate = new ParameterizedMoveTester(model,
-              (ReadonlyReversiModel m) -> m.getPlayerScore(m.getCurrentPlayer()));
+              (ReadonlyReversiModel m) -> m.getPlayerScore(m.getCurrentPlayer().opposite()));
     }
 
     @Override
