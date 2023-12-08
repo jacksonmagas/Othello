@@ -37,6 +37,7 @@ public class BasicReversi implements ReversiModel {
   private CellState currentPlayer;
 
   private final Map<CellState, Integer> playerScores;
+  private final Map<CellState, Boolean> playerHints;
 
   private boolean lastPlayerPassed;
 
@@ -49,6 +50,7 @@ public class BasicReversi implements ReversiModel {
   boolean quitGame;
 
   private final List<YourTurnListener> listeners = new ArrayList<>();
+
 
   /**
    * Detailed constructor for reversi game that allows creating a specified board state.
@@ -69,6 +71,7 @@ public class BasicReversi implements ReversiModel {
     this.downRightRows = new ArrayList<>();
     this.downLeftRows = new ArrayList<>();
     this.playerScores = new HashMap<>();
+    this.playerHints = new HashMap<>();
     this.lastPlayerPassed = lastPlayerPassed;
     //initialize game
     this.center = sideLength - 1;
@@ -80,6 +83,9 @@ public class BasicReversi implements ReversiModel {
     playerScores.put(CellState.BLACK, 0);
     playerScores.put(CellState.WHITE, 0);
     playerScores.put(CellState.EMPTY, 0);
+
+    playerHints.put(CellState.BLACK, false);
+    playerHints.put(CellState.WHITE, false);
 
     //create empty arrayLists to hold cells, and temporarily fills them will nulls
     for (int row = 0; row < totalNumRows; row++) {
@@ -151,6 +157,7 @@ public class BasicReversi implements ReversiModel {
     this.totalNumRows = base.totalNumRows;
     this.lastPlayerPassed = base.lastPlayerPassed;
     this.playerScores = new HashMap<>(base.playerScores);
+    this.playerHints = new HashMap<>(base.playerHints);
     this.horizontalRows = copyCells(base.horizontalRows);
     this.downLeftRows = copyCells(base.downLeftRows);
     this.downRightRows = copyCells(base.downRightRows);
@@ -173,6 +180,27 @@ public class BasicReversi implements ReversiModel {
       notifyStateChanged();
       notifyPlayer();
     }
+  }
+
+  @Override
+  public boolean isPlayerHintsEnabled(CellState player) {
+    Boolean hints = playerHints.get(player);
+    if (hints == null) {
+      return false;
+    }
+    System.out.println("Player "+player.toString()+" hints are present as "+ hints);
+    return hints;
+  }
+
+  @Override
+  public void togglePlayerHints(CellState player) {
+    Boolean hints = playerHints.get(player);
+    if (hints == null) {
+      hints = Boolean.FALSE;
+    }
+    hints = hints ? Boolean.FALSE : Boolean.TRUE;
+    playerHints.put(player, hints);
+    System.out.println("Player "+player.toString()+" hints are now "+ hints);
   }
 
   private void incrementScore(CellState player) {
@@ -734,6 +762,7 @@ public class BasicReversi implements ReversiModel {
   public void setHighlightedCell(int row, int col) {
     this.currentRow = row;
     this.currentCol = col;
+    System.out.println("currentRow " + row + " currentCol " + col);
   }
 
   public Cell.Location getHighlightedCell() {
@@ -839,6 +868,9 @@ public class BasicReversi implements ReversiModel {
     playerScores.put(CellState.BLACK, 0);
     playerScores.put(CellState.WHITE, 0);
 
+    playerHints.put(CellState.BLACK, false);
+    playerHints.put(CellState.WHITE, false);
+
     //Place player discs
     List<Cell.Location> blackTiles = List.of(new Location(sideLength - 2, sideLength - 2),
             new Location(sideLength - 1, sideLength),
@@ -877,7 +909,7 @@ public class BasicReversi implements ReversiModel {
         .map(this::cellToMove)
         .filter(this::isValidMove)
         .collect(Collectors.toList());
-    result.add(new Move(true, false, false));
+    result.add(new Move(true, false, false, false));
 
     return result;
   }

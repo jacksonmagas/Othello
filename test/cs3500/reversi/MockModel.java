@@ -171,6 +171,18 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
+  public boolean isPlayerHintsEnabled(CellState player) {
+    printT("IsPlayerHintsEnabled: " + player);
+    return delegate.isPlayerHintsEnabled(player);
+  }
+
+  @Override
+  public void togglePlayerHints(CellState player) {
+    printT("togglePlayerHints: " + player);
+    delegate.togglePlayerHints(player);
+  }
+
+  @Override
   public void passTurn() {
     printT("passTurn ");
     transcript.append("passing turn/n");

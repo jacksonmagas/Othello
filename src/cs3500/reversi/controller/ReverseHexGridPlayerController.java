@@ -42,6 +42,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
     view.addMoveListener(this);
     view.addMoveListener(this.player);
     view.setKeyListener(new MyKeyListener(model, view, player));
+    view.addHintsListener(player);
   }
 
   @Override
@@ -103,15 +104,17 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
   @Override
   public void receiveGUIAction(Move m) {
     if (m.isRestartGame()) {
-      model.makeMove(new Move(false, true, false));
+      model.makeMove(new Move(false, true, false, false));
     } else if (m.isQuitGame()) {
-      model.makeMove(new Move(false, false, true));
+      model.makeMove(new Move(false, false, true, false));
+    } else if (m.isToggleHints()) {
+      model.togglePlayerHints(this.player.getPiece());
     }
   }
 
   @Override
   public void endTurn() {
-    this.player.receiveGUIAction(new Move(false, false, false));
+    this.player.receiveGUIAction(new Move(false, false, false, false));
   }
 
   // Key Listener controls final making of moves
@@ -193,7 +196,6 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         }
         // highlight cell
         this.model.setHighlightedCell(row, col);
-        
         view.repaint();
       } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
         System.out.println("Right Arrow Key pressed!");
@@ -228,7 +230,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("Pass Turn button is clicked!");
         try {
           System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
-          this.player.receiveGUIAction(new Move(true, false, false));
+          this.player.receiveGUIAction(new Move(true, false, false, false));
           System.out.println("model after pass-turn\n" + this.model);
           
           view.repaint();
@@ -244,7 +246,7 @@ public class ReverseHexGridPlayerController implements YourTurnListener {
         System.out.println("R Key pressed!");
         System.out.println("Restart button is clicked!");
         try {
-          this.player.receiveGUIAction(new Move(false, true, false));
+          this.player.receiveGUIAction(new Move(false, true, false, false));
           System.out.println("model after restart\n" + this.model);
           
           view.repaint();

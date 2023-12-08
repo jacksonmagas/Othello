@@ -12,8 +12,18 @@ import cs3500.reversi.provider.player.PlayerMoves;
 import cs3500.reversi.strategy.InfallibleMoveStrategy;
 import java.util.Objects;
 
+/**
+ * Adaptor class for using provider strategies in our controller.
+ * Wraps the provider strategy and uses it to choose the move to make.
+ */
 public class ProviderStrategyToInfallibleMoveStrategy implements InfallibleMoveStrategy {
   private final InfallibleReversiStrat base;
+
+  /**
+   * Create a new InfallibleMoveStrategy that uses the given InfallibleReversiStrat to choose
+   * its move.
+   * @param base the reversi strat to use.
+   */
   public ProviderStrategyToInfallibleMoveStrategy(InfallibleReversiStrat base) {
     this.base = base;
   }
@@ -24,7 +34,7 @@ public class ProviderStrategyToInfallibleMoveStrategy implements InfallibleMoveS
       int r = move.getSelectedHex().getR();
       return new Move(converter.rowFromAxial(r), converter.colFromAxial(q, r));
     } else {
-      return new Move(true, false, false);
+      return new Move(true, false, false, false);
     }
   }
 

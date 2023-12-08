@@ -16,7 +16,7 @@ public class PassIfWin implements FallibleMoveStrategy {
     copy.passTurn();
     if (copy.isGameOver()
         && copy.getPlayerScore(player) > copy.getPlayerScore(player.opposite())) {
-      return Optional.of(new Move(true, false, false));
+      return Optional.of(new Move(true, false, false, false));
     } else {
       return Optional.empty();
     }

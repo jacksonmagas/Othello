@@ -127,4 +127,9 @@ public interface ReadonlyReversiModel {
    * @return The current status of the game
    */
   Status getStatus();
+
+  /**
+   * Retrieve current player hints enable mode.
+   */
+  boolean isPlayerHintsEnabled(CellState player);
 }

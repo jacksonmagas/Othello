@@ -20,6 +20,7 @@ class ReversiMouseListener extends MouseAdapter {
   ReadonlyReversiModel model;
   BasicReversiView frame;
   final List<MoveListener> listeners;
+  private HintsListener hintsListener;
 
   /**
    * Constructor for MyMouseListener class.
@@ -46,6 +47,22 @@ class ReversiMouseListener extends MouseAdapter {
     }
   }
 
+  /**
+   * Register a new MoveListener.
+   * @param subscriber the listener to register
+   */
+  public void registerHintsListener(HintsListener subscriber) {
+    hintsListener = subscriber;
+  }
+
+  // receive hints from subscriber
+  private int getPossiblePoints(Move move) {
+    if (hintsListener != null) {
+      return hintsListener.getPossiblePoints(this.model, this.frame.getPlayer(), move);
+    }
+    return 0;
+  }
+
   @Override
   public void mouseMoved(MouseEvent e) {
     int x = e.getX();
@@ -60,13 +77,21 @@ class ReversiMouseListener extends MouseAdapter {
     Point rowCol = findRowCols(keyMap, new Point(x, y));
     int row = -1;
     int col = -1;
+    String hints = null;
     if (rowCol != null) {
       //System.out.println("row " + rowCol.x + " col " + rowCol.y);
       row = rowCol.x;
       col = rowCol.y;
+      try {
+        if (this.model.isPlayerHintsEnabled(this.frame.getPlayer())) {
+          hints = "" + getPossiblePoints(new Move(row, col));
+        }
+      } catch (IllegalArgumentException | IllegalStateException ex) {
+        System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+      }
     }
     // highlight cell
-    frame.setHighlightedCell(row, col);
+    frame.setHighlightedCell(row, col, hints);
     frame.repaint();
   }
 
@@ -108,7 +133,7 @@ class ReversiMouseListener extends MouseAdapter {
         System.out.println("Pass Turn button is clicked!");
         try {
           System.out.println("Player " + this.model.getCurrentPlayer() + " is passing turn");
-          notifyListeners(new Move(true, false, false));
+          notifyListeners(new Move(true, false, false, false));
           //this.playerIndex = (this.playerIndex + 1) % this.players.size();
           System.out.println("model after pass-turn\n" + this.model.toString());
         } catch (IllegalArgumentException | IllegalStateException ex) {
@@ -122,7 +147,7 @@ class ReversiMouseListener extends MouseAdapter {
         // check if user click Restart button
         System.out.println("Restart button is clicked!");
         try {
-          notifyListeners(new Move(false, true, false));
+          notifyListeners(new Move(false, true, false, false));
           
           frame.repaint();
         } catch (IllegalArgumentException | IllegalStateException ex) {
@@ -130,6 +155,20 @@ class ReversiMouseListener extends MouseAdapter {
           JOptionPane.showMessageDialog(((JFrame) frame).getContentPane(), ex.getMessage(),
               "Message", JOptionPane.ERROR_MESSAGE);
           
+          frame.repaint();
+        }
+      } else if (x >= 18 && x <= 77 && y >= 648 && y <= 705) {
+        // check if user click Enable/Disable Hints button
+        System.out.println("Hints button is clicked!");
+        try {
+          notifyListeners(new Move(false, false, false, true));
+
+          frame.repaint();
+        } catch (IllegalArgumentException | IllegalStateException ex) {
+          System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
+          JOptionPane.showMessageDialog(((JFrame) frame).getContentPane(), ex.getMessage(),
+                  "Message", JOptionPane.ERROR_MESSAGE);
+
           frame.repaint();
         }
       }

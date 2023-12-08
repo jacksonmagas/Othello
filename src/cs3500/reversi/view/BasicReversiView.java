@@ -1,5 +1,6 @@
 package cs3500.reversi.view;
 
+import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.view.hexgrid.MainPanel;
 import java.awt.Dimension;
@@ -16,21 +17,23 @@ import javax.swing.JOptionPane;
 public class BasicReversiView extends JFrame implements ReversiFrame {
   private final MainPanel drawPanel;
   private final ReversiMouseListener mouseListener;
+  private CellState player;
 
   /**
    * Constructor for BasicReversiView.
    */
-  public BasicReversiView(ReadonlyReversiModel model, String playerLabel) {
+  public BasicReversiView(ReadonlyReversiModel model, CellState player) {
     String text = "Reversi Hex Grid Game"
         + " "
-        + playerLabel
+        + player.name()
         + " View";
     setTitle(text);
 
     setSize(new Dimension(WIDTH, HEIGHT));
     //setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-    drawPanel = new MainPanel(model, playerLabel);
+    this.player = player;
+    drawPanel = new MainPanel(model, player);
     drawPanel.setFocusable(true);
     setContentPane(drawPanel);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +47,10 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     drawPanel.addMouseMotionListener(mouseListener);
   }
 
+  @Override
+  public CellState getPlayer() {
+    return this.player;
+  }
 
   @Override
   public void setVisibleView(boolean visible) {
@@ -83,8 +90,13 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   }
 
   @Override
-  public void setHighlightedCell(int row, int col) {
-    drawPanel.setHighlightedCell(row, col);
+  public void setHighlightedCell(int row, int col, String hints) {
+    drawPanel.setHighlightedCell(row, col, hints);
+  }
+
+  @Override
+  public void addHintsListener(HintsListener features) {
+    mouseListener.registerHintsListener(features);
   }
 
   // gets a map from on screen coordinates to logical coordinates

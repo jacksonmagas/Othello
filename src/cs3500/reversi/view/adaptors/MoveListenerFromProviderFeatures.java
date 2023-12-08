@@ -23,7 +23,7 @@ public class MoveListenerFromProviderFeatures implements IViewFeatures {
 
   @Override
   public void skipTurn() {
-    notifyListeners(new Move(true, false, false));
+    notifyListeners(new Move(true, false, false, false));
   }
 
   /**
@@ -51,6 +51,7 @@ public class MoveListenerFromProviderFeatures implements IViewFeatures {
 
   @Override
   public void setView(IGraphicalReversiView v) {
+    // not meaningful in this context
   }
 
   @Override

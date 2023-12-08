@@ -5,6 +5,7 @@ import cs3500.reversi.model.adaptors.CoordinateConverter;
 import cs3500.reversi.provider.model.IROModel;
 import cs3500.reversi.provider.model.PlayerDisc;
 import cs3500.reversi.provider.view.IGraphicalReversiView;
+import cs3500.reversi.view.HintsListener;
 import cs3500.reversi.view.MoveListener;
 import cs3500.reversi.view.ReversiFrame;
 import java.awt.event.KeyListener;
@@ -76,7 +77,17 @@ public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
   }
 
   @Override
-  public void setHighlightedCell(int row, int col) {
+  public void setHighlightedCell(int row, int col, String hints) {
     // also doesn't make sense here
+  }
+
+  @Override
+  public void addHintsListener(HintsListener features) {
+
+  }
+
+  @Override
+  public CellState getPlayer() {
+    return null;
   }
 }

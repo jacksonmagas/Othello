@@ -2,6 +2,8 @@ package cs3500.reversi.view;
 
 import java.awt.event.KeyListener;
 
+import cs3500.reversi.model.CellState;
+
 /**
  * Interface ReversiFrame creates frame for Reversi game. Sets the mouse/key listeners, view
  * and size for the game.
@@ -38,6 +40,17 @@ public interface ReversiFrame {
    * Set the highlighted cell to be the given row and column.
    * @param row the row of the cell
    * @param col the column of the cell
+   * @param hints
    */
-  void setHighlightedCell(int row, int col);
+  void setHighlightedCell(int row, int col, String hints);
+
+  /**
+   * Adds a Hints listener to the reversiFrame.
+   */
+  void addHintsListener(HintsListener features);
+
+  /**
+   * Get view's player
+   */
+  CellState getPlayer();
 }

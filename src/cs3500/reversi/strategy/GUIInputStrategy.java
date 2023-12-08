@@ -24,7 +24,7 @@ public class GUIInputStrategy implements InfallibleMoveStrategy {
   public Move chooseMove(ReversiModel model, CellState player) {
     // if the only legal move is passing, then pass
     if (model.getLegalMoves().size() == 1) {
-      return new Move(true, false, false);
+      return new Move(true, false, false, false);
     }
     // wait for a new move from the GUI
     while (!newMove) {

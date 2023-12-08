@@ -732,7 +732,7 @@ public class ExamplarModelTests {
                     + "Player two Score: 3\n"
                     + "Player one turn (Black)!\n",
             model.toString());
-    model.makeMove(new Move(true, false, false));
+    model.makeMove(new Move(true, false, false, false));
     model.makeMove(new Move(4, 1));
     Assert.assertEquals("Game is updated",
             "   _ _ _ _    \n"

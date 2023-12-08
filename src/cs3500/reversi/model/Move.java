@@ -10,16 +10,18 @@ public class Move {
   boolean passTurn;
   boolean restartGame;
   boolean quitGame;
+  boolean toggleHints;
   Posn posn;
 
   /**
    * Constructor for Move class.
    */
-  public Move(boolean passTurn, boolean restartGame, boolean quitGame) {
+  public Move(boolean passTurn, boolean restartGame, boolean quitGame, boolean toggleHints) {
     this.passTurn = passTurn;
     this.restartGame = restartGame;
     this.quitGame = quitGame;
     this.posn = null;
+    this.toggleHints = toggleHints;
   }
 
   /**
@@ -27,6 +29,7 @@ public class Move {
    */
   public Move(int row, int col) {
     this.passTurn = false;
+    this.toggleHints = false;
     this.posn = new Posn(row, col);
   }
 
@@ -43,6 +46,11 @@ public class Move {
   // checks if game is being quit
   public boolean isQuitGame() {
     return quitGame;
+  }
+
+  // checks if game hints is being toggled
+  public boolean isToggleHints() {
+    return toggleHints;
   }
 
   // gets the position
@@ -83,6 +91,7 @@ public class Move {
   public boolean equals(Object o) {
     return (o instanceof Move)
         && ((Move) o).passTurn == this.passTurn
+        && ((Move) o).toggleHints == this.toggleHints
         && ((Move) o).quitGame == this.quitGame
         && ((Move) o).restartGame == this.restartGame
         && Objects.equals(((Move) o).posn, this.posn);
@@ -90,7 +99,7 @@ public class Move {
 
   @Override
   public int hashCode() {
-    return Objects.hash(passTurn, restartGame, quitGame, posn);
+    return Objects.hash(passTurn, restartGame, quitGame, toggleHints, posn);
   }
 
 
@@ -103,6 +112,8 @@ public class Move {
       asString = "Quit Game";
     } else if (isRestartGame()) {
       asString = "Restart Game";
+    } else if (isToggleHints()) {
+      asString = "Hints Toggled";
     } else if (posn != null) {
       asString = String.format("Move at %d, %d", posn.row, posn.col);
     } else {

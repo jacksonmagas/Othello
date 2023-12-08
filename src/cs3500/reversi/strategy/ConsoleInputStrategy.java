@@ -34,7 +34,7 @@ public class ConsoleInputStrategy implements InfallibleMoveStrategy {
       String moveCommand = input.next().toLowerCase();
       switch (moveCommand) {
         case "pass-turn":
-          move = new Move(true, false, false);
+          move = new Move(true, false, false, false);
           break waitForInput;
         case "make-move":
           //System.out.println("Enter a row and column");
@@ -60,10 +60,10 @@ public class ConsoleInputStrategy implements InfallibleMoveStrategy {
           move = new Move(r, c);
           break waitForInput;
         case "restart":
-          move = new Move(false, true, false);
+          move = new Move(false, true, false, false);
           break waitForInput;
         case "quit":
-          move = new Move(false, false, true);
+          move = new Move(false, false, true, false);
           break waitForInput;
         default:
           //empty default for style checker

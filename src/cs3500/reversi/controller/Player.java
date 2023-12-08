@@ -3,13 +3,14 @@ package cs3500.reversi.controller;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
+import cs3500.reversi.view.HintsListener;
 import cs3500.reversi.view.MoveListener;
 
 /**
  * A player is an actor that can play moves on a model using a particular piece.
  * Players can also get notified of moves from the GUI.
  */
-public interface Player extends MoveListener {
+public interface Player extends MoveListener, HintsListener {
   /**
    * The play method returns the move this player will choose according to their strategy.
    * @param model the model to try and play a move on
