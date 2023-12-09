@@ -40,7 +40,7 @@ public interface ReversiFrame {
    * Set the highlighted cell to be the given row and column.
    * @param row the row of the cell
    * @param col the column of the cell
-   * @param hints
+   * @param hints the number coins that can be flipped on given cell
    */
   void setHighlightedCell(int row, int col, String hints);
 

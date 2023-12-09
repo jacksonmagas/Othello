@@ -48,6 +48,13 @@ public class PlayerImpl implements Player {
     this.moveStrategy.newGUIMove(m);
   }
 
+  /**
+   * Retrieves the Scoring hints for given player based upon selected cell.
+   * @param model
+   * @param player
+   * @param m the move that corresponds to the last mouse or key move
+   * @return scoring hints i.e. possible coins that can be flipped
+   */
   @Override
   public int getPossiblePoints(ReadonlyReversiModel model, CellState player, Move m) {
     int score = 0;
@@ -67,8 +74,9 @@ public class PlayerImpl implements Player {
   }
 
   /**
-   * An implementation of move tester which evaluates moves based on the score for the player
-   * making the move. (Which is the opposite of the current player after the move is made.)
+   * An implementation of move tester as part of scoring hints determination which
+   * evaluates possible move based on the score for the player making the move.
+   * (Which is the opposite of the current player after the move is made.)
    */
   private static class ScoreTester implements MoveTester {
 
