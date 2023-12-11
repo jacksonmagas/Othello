@@ -30,6 +30,11 @@ public interface ReversiModel extends ReadonlyReversiModel {
   void makeMove(Move move);
 
   /**
+   * Allow current player to toggle hints display.
+   */
+  void togglePlayerHints(CellState player);
+
+  /**
    * Allow current player to pass the move.
    * If both players does their own passes then game will be over.
    * @throws IllegalStateException if game is over!

@@ -53,7 +53,7 @@ public class StrategyTests {
         .player('b')
         .buildMock();
     game.startGame();
-    Assert.assertEquals(Optional.of(new Move(true, false, false)),
+    Assert.assertEquals(Optional.of(new Move(true, false, false, false)),
         new PassIfWin().chooseMove(game, CellState.BLACK));
   }
 
@@ -205,7 +205,7 @@ public class StrategyTests {
         .buildMock();
     game.startGame();
     Assert.assertEquals(new CombinedMoveStrategy().chooseMove(game, CellState.BLACK),
-        new Move(true, false, false));
+        new Move(true, false, false, false));
   }
 
   @Test
@@ -264,7 +264,7 @@ public class StrategyTests {
     String response = "pass-turn";
     StringReader reader = new StringReader(response);
     InfallibleMoveStrategy prompt = new ConsoleInputStrategy(new Scanner(reader));
-    Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(true, false, false));
+    Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(true, false, false, false));
   }
 
   @Test
@@ -277,7 +277,7 @@ public class StrategyTests {
     String response = "restart";
     InfallibleMoveStrategy prompt =
         new ConsoleInputStrategy(new Scanner(new StringReader(response)));
-    Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, true, false));
+    Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, true, false, false));
   }
 
   @Test
@@ -290,7 +290,7 @@ public class StrategyTests {
     String response = "quit";
     InfallibleMoveStrategy prompt =
         new ConsoleInputStrategy(new Scanner(new StringReader(response)));
-    Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, false, true));
+    Assert.assertEquals(prompt.chooseMove(game, CellState.BLACK), new Move(false, false, true, false));
   }
 
   @Test

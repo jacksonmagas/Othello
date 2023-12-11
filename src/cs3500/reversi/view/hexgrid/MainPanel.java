@@ -36,16 +36,19 @@ public class MainPanel extends JPanel {
   private int currentRow = 0;
 
   private int currentCol = 0;
+  private String hints;
 
   private ReadonlyReversiModel model;
 
   public static HashMap<Point, Point> POINTS_TO_ROW_COLS = new HashMap<>();
+  private CellState player;
 
   /**
    * Constructor for MainPanel class.
    */
-  public MainPanel(ReadonlyReversiModel model, String playerLabel) {
+  public MainPanel(ReadonlyReversiModel model, CellState player) {
     this.model = model;
+    this.player = player;
     board = model.getBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     setFocusable(true);
@@ -158,6 +161,7 @@ public class MainPanel extends JPanel {
     drawPassTurnButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
     drawRestartButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
     //drawErrorMessages(g2d, origin, 380, true, Color.lightGray);
+    drawEnableHintsButton(g2d, origin, 380, true, Color.LIGHT_GRAY);
   }
 
   // draws the restart button
@@ -194,6 +198,24 @@ public class MainPanel extends JPanel {
 
     g.setColor(Color.BLACK);
     g.drawString(text.toString(), x2 + w / 2 + 25, y2 + w + w / 2);
+  }
+
+  // draws the enable/disable Hints button
+  private void drawEnableHintsButton(Graphics2D g, Point origin, int radius,
+                                  boolean centered, Color colorValue) {
+    int x2 = centered ? origin.x - radius : origin.x;
+    int y2 = centered ? origin.y + 250 : origin.y;
+
+    StringBuilder text = new StringBuilder();
+    text.append("Hints");
+    int w = metrics.stringWidth(text.toString());
+    int h = metrics.getHeight();
+
+    g.setColor(colorValue);
+    g.fillOval(x2 + w / 2, y2 + w / 2, w * 2, w * 2);
+
+    g.setColor(Color.BLACK);
+    g.drawString(text.toString(), x2 + w, y2 + w + w/2 + 5);
   }
 
   // draws the status messages
@@ -257,6 +279,7 @@ public class MainPanel extends JPanel {
         int y = (int) (origin.y + yOff * (row - half) * 3);
         POINTS_TO_ROW_COLS.put(new Point(x, y), new Point(row, col));
         defaultValue = null;
+        String text = null;
         Color hightlightColor = null;
         if (board[row][col] != 0) {
           if (board[row][col] == (int)'X') {
@@ -265,10 +288,15 @@ public class MainPanel extends JPanel {
             defaultValue = Color.WHITE;
           }
           if (this.currentRow == row && this.currentCol == col) {
+            //System.out.println("currentRow " + row + " currentCol " + col);
             hightlightColor = Color.CYAN;
+            if (defaultValue == null) {
+              text = this.hints;
+              //System.out.println("hints text " + text);
+            }
           }
         }
-        drawHex(g, xLbl, yLbl, x, y, radius, defaultValue, hightlightColor);
+        drawHex(g, xLbl, yLbl, x, y, radius, defaultValue, hightlightColor, text);
       }
     }
   }
@@ -280,14 +308,10 @@ public class MainPanel extends JPanel {
 
   // draw the hexagon
   private void drawHex(Graphics g, int posX, int posY, int x, int y, int r, Color colorValue,
-                       Color hightlightColor) {
+                       Color hightlightColor, String text) {
     Graphics2D g2d = (Graphics2D) g;
 
     Hexagon hex = new Hexagon(x, y, r);
-
-    String text = String.format("%s : %s", coord(posX), coord(posY));
-    int w = metrics.stringWidth(text);
-    int h = metrics.getHeight();
 
     if (hightlightColor != null) {
       hex.draw(g2d, 0, hightlightColor, true);
@@ -296,12 +320,20 @@ public class MainPanel extends JPanel {
     }
     hex.draw(g2d, 4, Color.DARK_GRAY, false);
 
-
     if (colorValue != null) {
       g.setColor(colorValue);
-      g.drawString(text, x - w / 2, y + h / 2);
+      text = String.format("%s : %s", coord(posX), coord(posY));
+      int w = metrics.stringWidth(text);
+      int h = metrics.getHeight();
       g.fillOval(x - w, y - w, w * 2, w * 2);
-
+    } else {
+      //System.out.println("Hints "+text);
+      if (text != null) {
+        int w = metrics.stringWidth(text);
+        int h = metrics.getHeight();
+        g.setColor(Color.BLACK);
+        g.drawString(text, x - w / 2, y + h / 2);
+      }
     }
 
   }
@@ -345,8 +377,9 @@ public class MainPanel extends JPanel {
    * @param row the row of the cell
    * @param col the column of the cell
    */
-  public void setHighlightedCell(int row, int col) {
+  public void setHighlightedCell(int row, int col, String hints) {
     this.currentCol = col;
     this.currentRow = row;
+    this.hints = hints;
   }
 }

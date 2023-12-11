@@ -3,6 +3,7 @@ package cs3500.reversi.controller.adaptors;
 import cs3500.reversi.controller.Player;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.Move;
+import cs3500.reversi.model.ReadonlyReversiModel;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.provider.player.AvoidNextToCornerStrat;
 import cs3500.reversi.provider.player.CaptureMaxStrat;
@@ -68,5 +69,10 @@ public class PlayerToIPlayerAdapter implements Player {
   @Override
   public void receiveGUIAction(Move m) {
     strat.newGUIMove(m);
+  }
+
+  @Override
+  public int getPossiblePoints(ReadonlyReversiModel model, CellState player, Move m) {
+    return 0;
   }
 }

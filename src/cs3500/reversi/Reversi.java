@@ -115,7 +115,7 @@ public class Reversi {
               player), strategy);
       panel.setVisible(true);
     } else {
-      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, player.name());
+      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, player);
       new ReverseHexGridPlayerController(reversi,
           viewPlayer2, strategy);
       viewPlayer2.setVisibleView(true);

@@ -169,32 +169,29 @@ Added:
 Added:
 1. Integrated Provider view for player2 based upon command line params.
 2. Reversi main class is updated to accept command line strategies from user to simulate the computer player strategy.<br/>
-   The 4th param as Player2StrategyProvider is added to determine the Home Team strategy vs the Provider Team strategy.
+   New command line parameters are added to Reversi main class to determine ours Team strategy vs provider Team strategy.<br/>
       For example:<br/>
-      Reversi 4 "Human" "Human" "HomeTeam"<br/>
-      Reversi 4 "Human" "FirstMove" "HomeTeam"<br/>
-      Reversi 4 "Human" "HighestScoring" "HomeTeam"<br/>
-      Reversi 4 "Human" "Combined" "HomeTeam"<br/>
-      Reversi 4 "Human" "MiniMax" "HomeTeam"<br/>
-      Reversi 4 "Human" "Console" "HomeTeam"<br/>
-      Reversi 4 "Human" "Human" "ProviderTeam"<br/>
-      Reversi 4 "Human" "Capture" "ProviderTeam"<br/>
-      Reversi 4 "Human" "Avoid" "ProviderTeam"<br/>
-      Reversi 4 "Human" "Corner" "ProviderTeam"<br/>
-      Reversi 4 "Human" "MiniMax" "ProviderTeam"<br/>
-      Reversi 4 "Human" "Combo" "ProviderTeam"<br/>
+      Reversi -s 4 -p1 Human -p2 Human -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 FirstMove -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 HighestScoring -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 Combined -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 MiniMax -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 Console -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 Human -v1 Ours -v2 Provider<br/>
+      Reversi -s 4 -p1 Human -p2 Capture -v1 Ours -v2 Provider<br/>
+      Reversi -s 4 -p1 Human -p2 Avoid -v1 Ours -v2 Provider<br/>
+      Reversi -s 4 -p1 Human -p2 Corner -v1 Ours -v2 Provider<br/>
+      Reversi -s 4 -p1 Human -p2 MiniMax -v1 Ours -v2 Provider<br/>
+      Reversi -s 4 -p1 Human -p2 Combo -v1 Ours -v2 Provider<br/>
       where<br/>
-      1st param = Number of cells = 4<br/>
-      2nd param = Player1Strategy of HomeTeam<br/>
-      Valid values from HomeTeam:<br/>
+      Valid player values from Ours:<br/>
       FirstMove - First Available Opening Strategy<br/>
       HighestScoring - Highest Scoring Strategy<br/>
       Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
       MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
       Console - Console based Moves Strategy<br/>
       Human - Human Mouse or Keys based Moves Strategy<br/>
-      3rd param = Player2Strategy of either HomeTeam or ProviderTeam<br/>
-      Valid values from ProviderTeam:<br/>
+      Valid player values from Provider:<br/>
       Capture - Capture Max Strategy<br/>
       Avoid = Avoid Next To Corner Strategy<br/>
       Corner - Go For Corner Strategy<br/>
@@ -204,3 +201,8 @@ Added:
       4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
 3. Implemented adaptors to support integration of our models, controllers, players, and views with provider strategies and view.
 4. Provider strategies integrated with both provider view and our view.
+
+# Changes for part 5
+1. Showing scoring hints (i.e. Level 0) is implemented.
+   New Listener is added to support this Hints feature. Each player can enable or disable the scoring hints using Hints button on his view and he will then be subscribed to receive this event with respect to only his view.
+2. ExamplarPlayerTests class is added to ensure that all possible hints are validated.
