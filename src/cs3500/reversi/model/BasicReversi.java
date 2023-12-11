@@ -291,7 +291,7 @@ public class BasicReversi implements ReversiModel {
   @Override
   public void addYourTurnListener(YourTurnListener listener) {
     // avoid double notifying
-    if(!listeners.contains(listener)) {
+    if (!listeners.contains(listener)) {
       listeners.add(listener);
     }
   }

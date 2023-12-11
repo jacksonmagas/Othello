@@ -30,6 +30,7 @@ import cs3500.reversi.view.ReversiFrame;
  * <ul><li> {@code -p1} strategy
  * <li> {@code -p2} strategy
  * </ul>
+ *
  * <p>Where strategy is one of our strategies:
  * <ul><li> human
  * <li> first-move
@@ -44,6 +45,7 @@ import cs3500.reversi.view.ReversiFrame;
  * <li> minimax
  * <li> combo
  * </ul>
+ *
  * <p>And accepts the following additional arguments:
  * <li> -s n or -size n, where n is an integer greater than 2
  * <li> -d n or -depth n where n is a positive integer.

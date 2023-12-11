@@ -51,6 +51,7 @@ public class MoveListenerFromProviderFeatures implements IViewFeatures {
 
   @Override
   public void setView(IGraphicalReversiView v) {
+    // not meaningful in this context
   }
 
   @Override
