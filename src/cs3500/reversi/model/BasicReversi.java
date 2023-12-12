@@ -367,7 +367,7 @@ public class BasicReversi implements ReversiModel {
 
   // sets the game to win or tie
   private void setWinOrTieGame(boolean passTurnsReached) {
-    if (passTurnsReached) {
+    if (passTurnsReached || board.numTiles(CellState.EMPTY) == 0) {
       if (board.numTiles(CellState.BLACK) == board.numTiles(CellState.WHITE)) {
         this.gameState = Status.Tied;
       } else {

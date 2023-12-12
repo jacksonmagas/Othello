@@ -79,6 +79,8 @@ public class Reversi {
   static String VIEW1;
   static String VIEW2;
 
+  static BoardType boardType;
+
   /**
    * Constructor for Reversi public class.
    */
@@ -89,7 +91,13 @@ public class Reversi {
 
     parseArgs(args);
 
-    ReversiModel baseModel = new BasicReversi(BoardType.HEXAGON, size);
+    // defaulting board type
+    if (boardType == null) {
+      boardType = BoardType.HEXAGON;
+    }
+    System.out.println("BoardType "+boardType.toString());
+
+    ReversiModel baseModel = new BasicReversi(boardType, size);
     try {
       setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK, player1);
       setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE, player2);
@@ -145,6 +153,15 @@ public class Reversi {
                   + "greater than 2");
               throw new IllegalArgumentException("-s flag must be followed by an integer"
                   + "greater than 2");
+            }
+            break;
+          case "-board":
+          case "-b":
+            try {
+              boardType = BoardType.valueOf(args[i + 1].toUpperCase());
+            } catch (IllegalArgumentException | NullPointerException e) {
+              System.err.println("board flag must be followed by a valid board specifier, either HEXAGON, or SQUARE.");
+              throw new IllegalArgumentException("board flag must be followed by a valid board specifier, either HEXAGON, or SQUARE.");
             }
             break;
           case "-depth":

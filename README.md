@@ -184,21 +184,20 @@ Added:
       Reversi -s 4 -p1 Human -p2 MiniMax -v1 Ours -v2 Provider<br/>
       Reversi -s 4 -p1 Human -p2 Combo -v1 Ours -v2 Provider<br/>
       where<br/>
-      Valid player values from Ours:<br/>
+      Valid strategy values from Ours:<br/>
       FirstMove - First Available Opening Strategy<br/>
       HighestScoring - Highest Scoring Strategy<br/>
       Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
       MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
       Console - Console based Moves Strategy<br/>
       Human - Human Mouse or Keys based Moves Strategy<br/>
-      Valid player values from Provider:<br/>
+      Valid strategy values from Provider:<br/>
       Capture - Capture Max Strategy<br/>
       Avoid = Avoid Next To Corner Strategy<br/>
       Corner - Go For Corner Strategy<br/>
       MiniMax - Mini Max to choose the best move<br/>
       Combo - Combined Move Strategy using MiniMax, Corner, Avoid and Capture<br/>
       Human - Human Mouse or Keys based Moves Strategy<br/>
-      4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
 3. Implemented adaptors to support integration of our models, controllers, players, and views with provider strategies and view.
 4. Provider strategies integrated with both provider view and our view.
 
@@ -206,3 +205,12 @@ Added:
 1. Showing scoring hints (i.e. Level 0) is implemented.
    New Listener is added to support this Hints feature. Each player can enable or disable the scoring hints using Hints button on his view and he will then be subscribed to receive this event with respect to only his view.
 2. ExamplarPlayerTests class is added to ensure that all possible hints are validated.
+3. Square Reversi (i.e. Level 1) is implemented.
+4. ReversiText is updated to play the game using HEXAGON or SQUARE as board type with textual view displayed on console and one can play game using console based commands such as make-move row col or pass-turn or quit commands.
+   For example:<br/>
+   ReversiText 4 HEXAGON<br/>
+   ReversiText 4 SQUARE<br/>
+   where<br/>
+   1st param - SideLength. It must be at-least 3 or above and it must be even number for SQUARE board type.<br/>
+   2nd param - BoardType. Valid values are HEXAGON, SQUARE.<br/>
+5. SquareModelTests class is added to ensure that all possible horizontal, vertical and diagonal valid moves are validated. It is also validating the invalid arguments.

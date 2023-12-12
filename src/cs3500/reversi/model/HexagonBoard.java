@@ -253,13 +253,14 @@ class HexagonBoard implements ReversiBoard {
   @Override
   public void reset() {
     // set all cells to empty
-    numTilesEachState.put(CellState.EMPTY, 0);
+    Arrays.stream(CellState.values()).forEach((CellState c) -> numTilesEachState.put(c, 0));
     horizontalRows.stream()
         .flatMap(Collection::stream)
         .forEach((Cell c) -> {
           c.setState(CellState.EMPTY);
           incrementTileCount(CellState.EMPTY);
         });
+
     starterBlackTiles.forEach((Location l) -> placeDisc(l, CellState.BLACK));
     starterWhiteTiles.forEach((Location l) -> placeDisc(l, CellState.WHITE));
   }

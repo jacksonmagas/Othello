@@ -232,7 +232,7 @@ class SquareBoard implements ReversiBoard {
   @Override
   public void reset() {
     // set all cells to empty
-    numTilesEachState.put(CellState.EMPTY, 0);
+    Arrays.stream(CellState.values()).forEach((CellState c) -> numTilesEachState.put(c, 0));
     horizontalRows.stream()
         .flatMap(Collection::stream)
         .forEach((Cell c) -> {

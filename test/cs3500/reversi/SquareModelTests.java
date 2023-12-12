@@ -21,6 +21,14 @@ public class SquareModelTests {
   }
 
   @Test
+  public void testInvalidArguments() {
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, 3));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, -1));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, 0));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, 5));
+  }
+
+  @Test
   public void testGameStartView() {
     BasicReversi testModel4 = new BasicReversi(BoardType.SQUARE, 4);
     Assert.assertEquals("_ _ _ _ \n"
