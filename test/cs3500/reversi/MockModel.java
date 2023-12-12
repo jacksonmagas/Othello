@@ -1,6 +1,7 @@
 package cs3500.reversi;
 
 import cs3500.reversi.controller.YourTurnListener;
+import cs3500.reversi.model.BoardType;
 import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
@@ -72,12 +73,6 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
-  public int[][] getBoard() {
-    printT("getBoard: ");
-    return delegate.getBoard();
-  }
-
-  @Override
   public int sideLength() {
     printT("sideLength: ");
     return delegate.sideLength();
@@ -111,12 +106,6 @@ public class MockModel implements ReversiModel {
   public List<Move> getLegalMoves() {
     printT("getLegalMoves: ");
     return delegate.getLegalMoves();
-  }
-
-  @Override
-  public Location getHighlightedCell() {
-    printT("getHighlightedCell: ");
-    return delegate.getHighlightedCell();
   }
 
   @Override
@@ -177,6 +166,12 @@ public class MockModel implements ReversiModel {
   }
 
   @Override
+  public BoardType getBoardType() {
+    printT("getBoardType: ");
+    return delegate.getBoardType();
+  }
+
+  @Override
   public void togglePlayerHints(CellState player) {
     printT("togglePlayerHints: " + player);
     delegate.togglePlayerHints(player);
@@ -187,12 +182,6 @@ public class MockModel implements ReversiModel {
     printT("passTurn ");
     transcript.append("passing turn/n");
     delegate.passTurn();
-  }
-
-  @Override
-  public void setHighlightedCell(int row, int col) {
-    printT("setHighlightedCell: ");
-    delegate.setHighlightedCell(row, col);
   }
 
   @Override

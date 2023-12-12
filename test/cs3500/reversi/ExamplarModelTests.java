@@ -1,6 +1,8 @@
 package cs3500.reversi;
 
 import cs3500.reversi.model.BasicReversi;
+import cs3500.reversi.model.BoardType;
+import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
@@ -15,14 +17,14 @@ import org.junit.Test;
 public class ExamplarModelTests {
   @Test
   public void testReversiGameInvalidArguments() {
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(2));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(-1));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(0));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON, 2));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON, -1));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON, 0));
   }
 
   @Test
   public void testReversiGame() {
-    ReversiModel model = new BasicReversi(6);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 6);
     Assert.assertEquals("Game is started",
             "     _ _ _ _ _ _      \n"
                 + "    _ _ _ _ _ _ _     \n"
@@ -44,7 +46,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameSmallestSize() {
-    ReversiModel model = new BasicReversi(3);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 3);
     Assert.assertEquals("Game is started",
             "  _ _ _   \n"
                 + " _ X O _  \n"
@@ -59,7 +61,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameSmallSize() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -76,7 +78,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameMediumSize() {
-    ReversiModel model = new BasicReversi(5);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 5);
     Assert.assertEquals("Game is started",
             "    _ _ _ _ _     \n"
                 + "   _ _ _ _ _ _    \n"
@@ -95,7 +97,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameLargeSize() {
-    ReversiModel model = new BasicReversi(10);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 10);
     Assert.assertEquals("Game is started",
             "         _ _ _ _ _ _ _ _ _ _          \n"
                 + "        _ _ _ _ _ _ _ _ _ _ _         \n"
@@ -124,7 +126,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameMakeMove() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                   + "  _ _ _ _ _   \n"
@@ -167,7 +169,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameMakeVertMove() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -211,7 +213,7 @@ public class ExamplarModelTests {
   @Test
   public void testReversiGameMakeVertInvalidMoveExpectError() {
     // confirm that a player cannot move to a location that won't flip any tiles
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -231,7 +233,7 @@ public class ExamplarModelTests {
   @Test
   public void testReversiGameMakeVertOutOfBoundsMoveExpectError() {
     // confirm that a player cannot move to a location that's out of bounds negative coordinates
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -251,7 +253,7 @@ public class ExamplarModelTests {
   @Test
   public void testReversiGameMakeVertOutOfBoundsMoveExpectError2() {
     // confirm that a player cannot move to a location that's out of bounds beyond coordinates
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -272,7 +274,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameWithWin() {
-    ReversiModel model = new BasicReversi(3);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 3);
     
     Assert.assertEquals("Game is started",
             "  _ _ _   \n"
@@ -346,7 +348,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGamePassTurn() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -377,7 +379,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameBothPassTurns() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -410,7 +412,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameGetScores() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                 + "  _ _ _ _ _   \n"
@@ -429,7 +431,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameGetPlayers() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -461,7 +463,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameIsGameOver() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -495,7 +497,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameGetBoard() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -508,14 +510,14 @@ public class ExamplarModelTests {
                     + "Player two Score: 3\n"
                     + "Player one turn (Black)!\n",
             model.toString());
-    int[][] board = model.getBoard();
-    Assert.assertEquals("X match", (int)'X', board[2][2]);
-    Assert.assertEquals("O match", (int)'O', board[2][3]);
+    List<List<CellState>> board = model.getGameBoard();
+    Assert.assertEquals("X match", CellState.BLACK, board.get(2).get(2));
+    Assert.assertEquals("O match", CellState.WHITE, board.get(2).get(3));
   }
 
   @Test
   public void testReversiGameBoardValidMovesFirstAvailableMoveValidateCells() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     Assert.assertEquals("Game is started",
              "   _ _ _ _    \n"
                     + "  _ _ _ _ _   \n"
@@ -535,7 +537,7 @@ public class ExamplarModelTests {
     Assert.assertEquals("Player two turn (WHITE)!", CellState.WHITE, model.getStateAt(2, 3));
     Assert.assertEquals("Game board side length is 4!", 4, model.sideLength());
 
-    Assert.assertEquals("Game board has any legal moves!", true, model.anyLegalMoves());
+    Assert.assertTrue("Game board has any legal moves!", model.anyLegalMoves());
 
     List<Move> moves =  model.getLegalMoves();
     Assert.assertEquals("Game board has 7 legal moves!", 7, moves.size());
@@ -543,8 +545,8 @@ public class ExamplarModelTests {
             moves.get(0).getPosn().row);
     Assert.assertEquals("Game board has 1st legal move match col!", 2,
             moves.get(0).getPosn().col);
-    Assert.assertEquals("Game board has last legal move match is pass-turn!",
-            true, model.getLegalMoves().get(6).isPassTurn());
+    Assert.assertTrue("Game board has last legal move match is pass-turn!",
+        model.getLegalMoves().get(6).isPassTurn());
 
     Assert.assertEquals("Game board has 1st legal move match row!",
         1, model.getLegalMoves().get(0).getPosn().row);
@@ -555,11 +557,6 @@ public class ExamplarModelTests {
             "Player one turn (Black)!\n", model.getNextStepInstructions());
     Assert.assertEquals("Game do not have any error now!", "", model.getLastErrorMessage());
 
-    Assert.assertEquals("Game current row matched!", 0, model.getHighlightedCell().getRow());
-    Assert.assertEquals("Game current column matched!", 0, model.getHighlightedCell().getColumn());
-    model.setHighlightedCell(1,1);
-    Assert.assertEquals("Game current row matched!", 1, model.getHighlightedCell().getRow());
-    Assert.assertEquals("Game current column matched!", 1, model.getHighlightedCell().getColumn());
     model.newGame();
     gameBoard = model.getGameBoard();
     Assert.assertEquals("Player one turn (Black)!", CellState.BLACK, gameBoard.get(2).get(2));
@@ -572,7 +569,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameWithWinThenRestart() {
-    ReversiModel model = new BasicReversi(3);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 3);
 
     Assert.assertEquals("Game is started",
             "  _ _ _   \n"
@@ -653,22 +650,22 @@ public class ExamplarModelTests {
                     "Player two Score: 3\n" +
                     "Player one turn (Black)!\n",
             model.toString());
-    int[][] board = model.getBoard();
-    Assert.assertEquals("X match", (int)'X', board[1][1]);
-    Assert.assertEquals("O match", (int)'O', board[1][2]);
-    Assert.assertEquals("X match", (int)'O', board[2][1]);
-    Assert.assertEquals("O match", (int)'X', board[2][3]);
-    Assert.assertEquals("X match", (int)'X', board[3][1]);
-    Assert.assertEquals("O match", (int)'O', board[3][2]);
-    Assert.assertEquals("Empty match", (int)' ', board[2][2]);
-    Assert.assertEquals("Empty match", (int)' ', board[0][0]);
+    List<List<CellState>> board = model.getGameBoard();
+    Assert.assertEquals("X match", CellState.BLACK, board.get(1).get(1));
+    Assert.assertEquals("O match", CellState.WHITE, board.get(1).get(2));
+    Assert.assertEquals("X match", CellState.WHITE, board.get(2).get(1));
+    Assert.assertEquals("O match", CellState.BLACK, board.get(2).get(3));
+    Assert.assertEquals("X match", CellState.BLACK, board.get(3).get(1));
+    Assert.assertEquals("O match", CellState.WHITE, board.get(3).get(2));
+    Assert.assertEquals("Empty match", CellState.EMPTY, board.get(2).get(2));
+    Assert.assertEquals("Empty match", CellState.EMPTY, board.get(0).get(0));
     Assert.assertEquals("Cell match", CellState.EMPTY, model.getStateAt(0, 0));
     Assert.assertEquals("Cell match", CellState.BLACK, model.getStateAt(1, 1));
   }
 
   @Test
   public void testReversiGameCheckCopy() {
-    ReversiModel model = new BasicReversi(3);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 3);
 
     Assert.assertEquals("Game is started",
             "  _ _ _   \n" +
@@ -698,7 +695,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameCheckListeners() {
-    ReversiModel model = new BasicReversi(3);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 3);
 
     Assert.assertEquals("Game is started",
             "  _ _ _   \n" +
@@ -718,7 +715,7 @@ public class ExamplarModelTests {
 
   @Test
   public void testReversiGameMakeMoveOthers() {
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     model.startGame();
     Assert.assertEquals("Game is started",
             "   _ _ _ _    \n"

@@ -1,5 +1,6 @@
 package cs3500.reversi;
 
+import cs3500.reversi.model.BoardType;
 import java.io.InputStreamReader;
 import cs3500.reversi.controller.ReversiController;
 import cs3500.reversi.controller.ReversiTextualController;
@@ -26,7 +27,7 @@ public class ReversiText {
         throw new IllegalArgumentException("Argument " + args[0] + " must be an integer.");
       }
     }
-    ReversiModel reversi = new BasicReversi(noOfCells);
+    ReversiModel reversi = new BasicReversi(BoardType.HEXAGON, noOfCells);
     Readable rd = new InputStreamReader(System.in);
     Appendable ap = System.out;
     ReversiController controller = new ReversiTextualController(rd, ap);

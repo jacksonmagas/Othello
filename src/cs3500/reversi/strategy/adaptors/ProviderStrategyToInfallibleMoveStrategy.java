@@ -34,7 +34,7 @@ public class ProviderStrategyToInfallibleMoveStrategy implements InfallibleMoveS
       int r = move.getSelectedHex().getR();
       return new Move(converter.rowFromAxial(r), converter.colFromAxial(q, r));
     } else {
-      return new Move(true, false, false);
+      return new Move(true, false, false, false);
     }
   }
 

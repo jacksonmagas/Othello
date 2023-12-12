@@ -1,5 +1,6 @@
 package cs3500.reversi;
 
+import cs3500.reversi.model.BoardType;
 import org.junit.Test;
 import java.io.Reader;
 import java.io.StringReader;
@@ -18,7 +19,7 @@ public class ExamplarControllerTests {
   public void testStartGame() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("q");
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
@@ -31,7 +32,7 @@ public class ExamplarControllerTests {
   public void testStartGameMakeMoves() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("make-move 2 4 make-move 4 1 q");
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
@@ -44,7 +45,7 @@ public class ExamplarControllerTests {
   public void testStartGamePassTurn() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("pass-turn q");
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
@@ -57,7 +58,7 @@ public class ExamplarControllerTests {
   public void testStartGameBothPassTurns() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("pass-turn pass-turn q");
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());
@@ -71,7 +72,7 @@ public class ExamplarControllerTests {
   public void testStartGameInvalidCommand() {
     StringBuffer out = new StringBuffer();
     Reader in = new StringReader("invalid q");
-    ReversiModel model = new BasicReversi(4);
+    ReversiModel model = new BasicReversi(BoardType.HEXAGON, 4);
     ReversiController controller = new ReversiTextualController(in, out);
     controller.playGame(model);
     assertFalse(out.toString().isEmpty());

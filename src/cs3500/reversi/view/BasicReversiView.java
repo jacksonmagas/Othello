@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class BasicReversiView extends JFrame implements ReversiFrame {
   private final MainPanel drawPanel;
-  private final ReversiMouseListener mouseListener;
+  private final ReversiEventListener mouseListener;
   private CellState player;
 
   /**
@@ -42,7 +42,7 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     setResizable(true);
     setVisible(true);
     setFocusable(true);
-    mouseListener = new ReversiMouseListener(model, this);
+    mouseListener = new ReversiEventListener(model, this);
     drawPanel.addMouseListener(mouseListener);
     drawPanel.addMouseMotionListener(mouseListener);
   }

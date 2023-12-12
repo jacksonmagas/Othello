@@ -1,5 +1,6 @@
 package cs3500.reversi;
 
+import cs3500.reversi.model.BoardType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class ExamplarPlayerTests {
   @Test
   public void testHints() {
     int size = 4;
-    ReversiModel reversi = new BasicReversi(size);
+    ReversiModel reversi = new BasicReversi(BoardType.HEXAGON, size);
     Player player1 = new PlayerImpl(CellState.BLACK, new GUIInputStrategy());
     Player player2 = new PlayerImpl(CellState.WHITE, new GUIInputStrategy());
     reversi.startGame();

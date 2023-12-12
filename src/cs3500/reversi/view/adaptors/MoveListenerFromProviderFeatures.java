@@ -23,7 +23,7 @@ public class MoveListenerFromProviderFeatures implements IViewFeatures {
 
   @Override
   public void skipTurn() {
-    notifyListeners(new Move(true, false, false));
+    notifyListeners(new Move(true, false, false, false));
   }
 
   /**
