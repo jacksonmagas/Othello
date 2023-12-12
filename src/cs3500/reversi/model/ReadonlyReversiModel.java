@@ -32,12 +32,6 @@ public interface ReadonlyReversiModel {
   List<List<CellState>> getGameBoard();
 
   /**
-   * Returns a copy of the game board.
-   * @return an array containing each row of the game board with the state of each cell in the row.
-   */
-  int[][] getBoard();
-
-  /**
    * Returns the side length of the board.
    * @return the length of one side of the board.
    */
@@ -78,16 +72,6 @@ public interface ReadonlyReversiModel {
    * @return the legal moves for this model.
    */
   List<Move> getLegalMoves();
-
-  /*
-  TODO: reorganize listeners from controller to view and have controller listen to player actions
-  this will allow removal of model interacting with highlighted cell
-  */
-  /**
-   * Get the location of the current active cell in the model.
-   * @return the location of the highlighted cell
-   */
-  Cell.Location getHighlightedCell();
 
   /**
    * Create a read/write copy of the read only model.
@@ -130,6 +114,12 @@ public interface ReadonlyReversiModel {
 
   /**
    * Retrieve current player hints enable mode.
+   * @return true if hints are enabled for this player
    */
   boolean isPlayerHintsEnabled(CellState player);
+
+  /**
+   * Get the type of board that this model is being played on.
+   */
+  BoardType getBoardType();
 }

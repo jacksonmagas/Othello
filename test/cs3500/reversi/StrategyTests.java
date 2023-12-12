@@ -1,6 +1,7 @@
 package cs3500.reversi;
 
 import cs3500.reversi.model.BasicReversi;
+import cs3500.reversi.model.BoardType;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.strategy.CombinedMoveStrategy;
 import cs3500.reversi.strategy.ConsoleInputStrategy;
@@ -31,7 +32,7 @@ public class StrategyTests {
 
   @Test
   public void highestScoringMovePrintTranscript() {
-    MockModel game = new MockModel(new BasicReversi(4));
+    MockModel game = new MockModel(new BasicReversi(BoardType.HEXAGON, 4));
     new HighestScoringMove().chooseMove(game, CellState.BLACK);
     try {
       try (FileWriter output = new FileWriter("strategy-transcript.txt")) {

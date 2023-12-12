@@ -14,6 +14,7 @@ import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
@@ -31,7 +32,7 @@ public class MainPanel extends JPanel {
 
   FontMetrics metrics;
 
-  private static int[][] board;
+  private static List<List<CellState>> board;
 
   private int currentRow = 0;
 
@@ -49,7 +50,7 @@ public class MainPanel extends JPanel {
   public MainPanel(ReadonlyReversiModel model, CellState player) {
     this.model = model;
     this.player = player;
-    board = model.getBoard();
+    board = model.getGameBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     setFocusable(true);
     requestFocusInWindow();
@@ -259,7 +260,7 @@ public class MainPanel extends JPanel {
 
   // draws the hexgrid loop
   private void drawHexGridLoop(Graphics g, Point origin, int size, int radius, int padding) {
-    board = model.getBoard();
+    board = model.getGameBoard();
     double ang30 = Math.toRadians(30);
     double xOff = Math.cos(ang30) * (radius + padding);
     double yOff = Math.sin(ang30) * (radius + padding);
@@ -281,12 +282,7 @@ public class MainPanel extends JPanel {
         defaultValue = null;
         String text = null;
         Color hightlightColor = null;
-        if (board[row][col] != 0) {
-          if (board[row][col] == (int)'X') {
-            defaultValue = Color.BLACK;
-          } else if (board[row][col] == (int)'O') {
-            defaultValue = Color.WHITE;
-          }
+        if (board.get(row).get(col) == CellState.EMPTY) {
           if (this.currentRow == row && this.currentCol == col) {
             //System.out.println("currentRow " + row + " currentCol " + col);
             hightlightColor = Color.CYAN;
@@ -295,6 +291,10 @@ public class MainPanel extends JPanel {
               //System.out.println("hints text " + text);
             }
           }
+        } else if (board.get(row).get(col) == CellState.BLACK) {
+          defaultValue = Color.BLACK;
+        } else if (board.get(row).get(col) == CellState.WHITE) {
+          defaultValue = Color.WHITE;
         }
         drawHex(g, xLbl, yLbl, x, y, radius, defaultValue, hightlightColor, text);
       }

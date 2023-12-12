@@ -198,8 +198,9 @@ Added:
       MiniMax - Mini Max to choose the best move<br/>
       Combo - Combined Move Strategy using MiniMax, Corner, Avoid and Capture<br/>
       Human - Human Mouse or Keys based Moves Strategy<br/>
-3. Implemented Adapters to support integration from HomeTeam's models, controllers, players and views to ProviderTeam's models, controllers, players and views.
-4. All HomeTeam and ProviderTeam strategies are also integrated and tested.
+      4th param = Player2StrategyProvider. Valid value is either HomeTeam or ProviderTeam.<br/>
+3. Implemented adaptors to support integration of our models, controllers, players, and views with provider strategies and view.
+4. Provider strategies integrated with both provider view and our view.
 
 # Changes for part 5
 1. Showing scoring hints (i.e. Level 0) is implemented.

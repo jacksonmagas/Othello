@@ -1,5 +1,6 @@
 package cs3500.reversi;
 
+import cs3500.reversi.model.BoardType;
 import cs3500.reversi.model.adaptors.ReversiModelToIMutableModelAdapter;
 import cs3500.reversi.controller.Player;
 import cs3500.reversi.controller.PlayerImpl;
@@ -88,7 +89,7 @@ public class Reversi {
 
     parseArgs(args);
 
-    ReversiModel baseModel = new BasicReversi(size);
+    ReversiModel baseModel = new BasicReversi(BoardType.HEXAGON, size);
     try {
       setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK, player1);
       setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE, player2);
