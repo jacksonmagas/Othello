@@ -31,7 +31,6 @@ public class ParameterizedMoveTester implements MoveTester {
   public int testMove(Move move) throws IllegalArgumentException {
     ReversiModel testModel = baseModel.copy();
     testModel.makeMove(move);
-    int netScore = evalFunc.apply(testModel)-baseModel.getPlayerScore(baseModel.getCurrentPlayer());
-    return netScore;
+    return evalFunc.apply(testModel) - baseModel.getPlayerScore(baseModel.getCurrentPlayer());
   }
 }

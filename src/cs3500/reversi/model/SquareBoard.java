@@ -113,7 +113,7 @@ class SquareBoard implements ReversiBoard {
     this.starterWhiteTiles = base.starterWhiteTiles;
     this.sideLength = base.sideLength;
     this.horizontalRows = dirCopy(base.horizontalRows);
-    this.verticalRows = dirCopy(base.horizontalRows);
+    this.verticalRows = dirCopy(base.verticalRows);
     this.downLeftRows = dirCopy(base.downLeftRows);
     this.downRightRows = dirCopy(base.downRightRows);
     this.numTilesEachState = new HashMap<>();

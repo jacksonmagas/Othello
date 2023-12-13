@@ -4,6 +4,7 @@ import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.BoardType;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.Move;
+import cs3500.reversi.model.ReversiModel;
 import java.util.List;
 import java.util.Optional;
 import org.junit.Assert;
@@ -93,6 +94,15 @@ public class SquareModelTests {
         + "Player one Score: 3\n"
         + "Player two Score: 5\n"
         + "Player one turn (Black)!\n", testModel6.toString());
+  }
+
+  @Test
+  public void testCopyPreservesEquality() {
+    ReversiModel testModel1 = new BasicReversi(BoardType.SQUARE, 6);
+    testModel1.makeMove(1, 3);
+    ReversiModel testModel2 = new BasicReversi(BoardType.SQUARE, 6);
+    testModel2.makeMove(1, 3);
+    Assert.assertEquals(testModel1.copy(), testModel2);
   }
 
   @Test

@@ -20,6 +20,7 @@ import cs3500.reversi.strategy.GUIInputStrategy;
 import cs3500.reversi.strategy.HighestScoringMove;
 import cs3500.reversi.strategy.ConsoleInputStrategy;
 import cs3500.reversi.view.BasicReversiView;
+import cs3500.reversi.view.SquareReversiView;
 import cs3500.reversi.view.adaptors.IGraphicalReversiViewToReversiFrame;
 import cs3500.reversi.view.ReversiFrame;
 
@@ -48,10 +49,13 @@ import cs3500.reversi.view.ReversiFrame;
  * </ul>
  *
  * <p>And accepts the following additional arguments:
- * <li> -s n or -size n, where n is an integer greater than 2
+ * <li> -s n or -size n, where n is an integer greater than 2. If square board is chosen the size
+ * must be even and at least 4.
  * <li> -d n or -depth n where n is a positive integer.
  * WARNING: Using tree-minimax with a depth that is above 3 or on a very large board can cause
  * out of memory errors.
+ * <li> -b or -board followed by either hexagon, or square. Our view is the only view that
+ * supports square game.
  * <li> -v1 ours, or -v1 provider, which chooses which view to use for player 1
  * <li> -v2 ours, or -v2 provider, which chooses which view to use for player 2
  */
@@ -74,8 +78,8 @@ public class Reversi {
   static final String PROVIDER = "provider";
   static int depth = 3;
   static int size = 4;
-  static Player player1;
-  static Player player2;
+  static String player1;
+  static String player2;
   static String VIEW1;
   static String VIEW2;
 
@@ -94,13 +98,19 @@ public class Reversi {
     // defaulting board type
     if (boardType == null) {
       boardType = BoardType.HEXAGON;
+    } else if (boardType == BoardType.SQUARE &&
+        (VIEW1.equalsIgnoreCase("provider") || VIEW2.equalsIgnoreCase("provider"))) {
+      throw new IllegalArgumentException("Provider view not supported for square boards.");
     }
-    System.out.println("BoardType "+boardType.toString());
+
+    System.out.println("BoardType "+ boardType.toString());
 
     ReversiModel baseModel = new BasicReversi(boardType, size);
     try {
-      setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK, player1);
-      setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE, player2);
+      setUpPlayer(VIEW1, baseModel, width, height, CellState.BLACK,
+          getPlayer(player1, CellState.BLACK));
+      setUpPlayer(VIEW2, baseModel, width, height, CellState.WHITE,
+          getPlayer(player2, CellState.WHITE));
     } catch (NullPointerException e) {
       System.err.println("-p1 and -p2 flags are required to specify strategies");
       throw new IllegalArgumentException("-p1 and -p2 flags are required to specify player"
@@ -124,7 +134,12 @@ public class Reversi {
               player), strategy);
       panel.setVisible(true);
     } else {
-      ReversiFrame viewPlayer2 = new BasicReversiView(reversi, player);
+      ReversiFrame viewPlayer2;
+      if (boardType == BoardType.HEXAGON) {
+        viewPlayer2 = new BasicReversiView(reversi, player);
+      } else {
+        viewPlayer2 = new SquareReversiView(reversi, player);
+      }
       new ReverseHexGridPlayerController(reversi,
           viewPlayer2, strategy);
       viewPlayer2.setVisibleView(true);
@@ -136,10 +151,10 @@ public class Reversi {
       for (int i = 0; i < args.length; i++) {
         switch (args[i]) {
           case "-p1":
-            player1 = getPlayer(args[i + 1], CellState.BLACK);
+            player1 = args[i + 1];
             break;
           case "-p2":
-            player2 = getPlayer(args[i + 1], CellState.WHITE);
+            player2 = args[i + 1];
             break;
           case "-size":
           case "-s":
@@ -242,7 +257,7 @@ public class Reversi {
         player = new PlayerImpl(cellState, new CombinedMoveStrategy());
         break;
       case STRATEGY4:
-        player = new PlayerImpl(cellState, new BasicMinimaxStrategy());
+        player = new PlayerImpl(cellState, new BasicMinimaxStrategy(depth));
         break;
       case STRATEGY5:
         player = new PlayerImpl(cellState, new ConsoleInputStrategy());
