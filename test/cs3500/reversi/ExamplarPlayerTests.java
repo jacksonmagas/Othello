@@ -28,7 +28,7 @@ public class ExamplarPlayerTests {
     Assert.assertEquals("Player2 Hints disabled", false, reversi.isPlayerHintsEnabled(player2.getPiece()));
     reversi.togglePlayerHints(player1.getPiece());
     Assert.assertEquals("Player1 Hints enabled", true, reversi.isPlayerHintsEnabled(player1.getPiece()));
-    Assert.assertEquals("No coins will be flipped", 0, player1.getPossiblePoints(reversi, player1.getPiece(), new Move(0, 0)));
+    Assert.assertEquals("No coins will be flipped", -1, player1.getPossiblePoints(reversi, player1.getPiece(), new Move(0, 0)));
     Assert.assertEquals("1 coins will be flipped", 1, player1.getPossiblePoints(reversi, player1.getPiece(), new Move(1, 2)));
     reversi.togglePlayerHints(player1.getPiece());
     Assert.assertEquals("Player1 Hints disabled", false, reversi.isPlayerHintsEnabled(player1.getPiece()));
@@ -38,7 +38,7 @@ public class ExamplarPlayerTests {
     Assert.assertEquals("Player2 Turn", CellState.WHITE, reversi.getCurrentPlayer());
     reversi.togglePlayerHints(player2.getPiece());
     Assert.assertEquals("Player2 Hints enabled", true, reversi.isPlayerHintsEnabled(player2.getPiece()));
-    Assert.assertEquals("No coins will be flipped", 0, player2.getPossiblePoints(reversi, player2.getPiece(), new Move(0, 0)));
+    Assert.assertEquals("No coins will be flipped", -1, player2.getPossiblePoints(reversi, player2.getPiece(), new Move(0, 0)));
     Assert.assertEquals("2 coins will be flipped", 2, player2.getPossiblePoints(reversi, player2.getPiece(), new Move(0, 2)));
     reversi.togglePlayerHints(player2.getPiece());
     Assert.assertEquals("Player2 Hints disabled", false, reversi.isPlayerHintsEnabled(player2.getPiece()));

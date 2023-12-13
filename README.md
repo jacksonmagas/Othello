@@ -172,10 +172,10 @@ Added:
    New command line parameters are added to Reversi main class to determine ours Team strategy vs provider Team strategy.<br/>
       For example:<br/>
       Reversi -s 4 -p1 Human -p2 Human -v1 Ours -v2 Ours<br/>
-      Reversi -s 4 -p1 Human -p2 FirstMove -v1 Ours -v2 Ours<br/>
-      Reversi -s 4 -p1 Human -p2 HighestScoring -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 First-Move -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 Highest-Scoring -v1 Ours -v2 Ours<br/>
       Reversi -s 4 -p1 Human -p2 Combined -v1 Ours -v2 Ours<br/>
-      Reversi -s 4 -p1 Human -p2 MiniMax -v1 Ours -v2 Ours<br/>
+      Reversi -s 4 -p1 Human -p2 Tree-MiniMax -v1 Ours -v2 Ours<br/>
       Reversi -s 4 -p1 Human -p2 Console -v1 Ours -v2 Ours<br/>
       Reversi -s 4 -p1 Human -p2 Human -v1 Ours -v2 Provider<br/>
       Reversi -s 4 -p1 Human -p2 Capture -v1 Ours -v2 Provider<br/>
@@ -185,10 +185,10 @@ Added:
       Reversi -s 4 -p1 Human -p2 Combo -v1 Ours -v2 Provider<br/>
       where<br/>
       Valid strategy values from Ours:<br/>
-      FirstMove - First Available Opening Strategy<br/>
-      HighestScoring - Highest Scoring Strategy<br/>
+      First-Move - First Available Opening Strategy<br/>
+      Highest-Scoring - Highest Scoring Strategy<br/>
       Combined - Combined Moved Strategy using Pass If Win, Corners and Highest Scoring Move<br/>
-      MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
+      Tree-MiniMax - Game tree search of depth 2 using minimax to choose the best move<br/>
       Console - Console based Moves Strategy<br/>
       Human - Human Mouse or Keys based Moves Strategy<br/>
       Valid strategy values from Provider:<br/>
@@ -205,7 +205,7 @@ Added:
 1. Showing scoring hints (i.e. Level 0) is implemented.
    New Listener is added to support this Hints feature. Each player can enable or disable the scoring hints using Hints button on his view and he will then be subscribed to receive this event with respect to only his view.
 2. ExamplarPlayerTests class is added to ensure that all possible hints are validated.
-3. Square Reversi (i.e. Level 1) is implemented.
+3. Square Reversi (i.e. Level 1) is implemented using HexagonalBoard and SquareBoard.
 4. ReversiText is updated to play the game using HEXAGON or SQUARE as board type with textual view displayed on console and one can play game using console based commands such as make-move row col or pass-turn or quit commands.
    For example:<br/>
    ReversiText 4 HEXAGON<br/>
@@ -214,3 +214,9 @@ Added:
    1st param - SideLength. It must be at-least 3 or above and it must be even number for SQUARE board type.<br/>
    2nd param - BoardType. Valid values are HEXAGON, SQUARE.<br/>
 5. SquareModelTests class is added to ensure that all possible horizontal, vertical and diagonal valid moves are validated. It is also validating the invalid arguments.
+6. Visualizing Square Reversi (i.e. Level 2) is implemented using SquareMainPanel and SquareReversiView.
+   It is implemented to support both HEXAGON and SQUARE boards views based upon type of board created.
+7. Controlling Square Reversi (i.e. Level 3) is implemented.
+   It is implemented to support both HEXAGON and SQUARE boards.
+8. Strategic Square Reversi (i.e. Level 4) is implemented.
+   It is implemented to support both HEXAGON and SQUARE boards.
