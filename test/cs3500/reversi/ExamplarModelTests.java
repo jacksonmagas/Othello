@@ -2,7 +2,6 @@ package cs3500.reversi;
 
 import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.BoardType;
-import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
@@ -17,9 +16,12 @@ import org.junit.Test;
 public class ExamplarModelTests {
   @Test
   public void testReversiGameInvalidArguments() {
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON, 2));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON, -1));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON, 0));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON,
+            2));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON,
+            -1));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.HEXAGON,
+            0));
   }
 
   @Test

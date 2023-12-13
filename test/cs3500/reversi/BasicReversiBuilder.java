@@ -4,7 +4,6 @@ import cs3500.reversi.model.BasicReversi;
 import cs3500.reversi.model.BoardType;
 import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.model.CellState;
-import cs3500.reversi.view.hexgrid.Hexagon;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,8 @@ class BasicReversiBuilder {
    * @return a configured basic reversi
    */
   BasicReversi build() {
-    return new BasicReversi(type, sideLength, lastPlayerPassed, currentPlayer, blackTiles, whiteTiles);
+    return new BasicReversi(type, sideLength, lastPlayerPassed, currentPlayer,
+            blackTiles, whiteTiles);
   }
 
   /**

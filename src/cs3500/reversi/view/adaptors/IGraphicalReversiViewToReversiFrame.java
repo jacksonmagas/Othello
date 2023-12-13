@@ -93,7 +93,7 @@ public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
   }
 
   @Override
-  public Point XYToRowCol(int x, int y) {
+  public Point xyToRowCol(int x, int y) {
     // this is a stub because it is not needed when using their model
     return null;
   }

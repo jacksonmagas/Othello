@@ -10,7 +10,7 @@ import java.util.List;
  */
 interface ReversiBoard {
   /**
-   * Set the cell in the given location to the given state
+   * Set the cell in the given location to the given state.
    * @param location the location to place the cell according to this board's coordinate system
    * @param state the cell state to place in the cell
    * @throws IllegalArgumentException if the location is outside the bounds of this board

@@ -2,7 +2,6 @@ package cs3500.reversi.view;
 
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
-import cs3500.reversi.view.hexgrid.MainPanel;
 import cs3500.reversi.view.squaregrid.SquareMainPanel;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -13,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * TODO find some way to fold this in with basic reversi view
+ * TODO find some way to fold this in with basic reversi view.
  */
 public class SquareReversiView extends JFrame implements ReversiFrame {
   private final SquareMainPanel drawPanel;
@@ -106,7 +105,7 @@ public class SquareReversiView extends JFrame implements ReversiFrame {
   }
 
   @Override
-  public Point XYToRowCol(int x, int y) {
+  public Point xyToRowCol(int x, int y) {
     Point rowColPoint = null;
     Map<Point, Point> keyMap = drawPanel.getMap();
     if (keyMap != null) {

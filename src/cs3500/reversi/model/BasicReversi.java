@@ -46,8 +46,9 @@ public class BasicReversi implements ReversiModel {
    * @param blackTiles a list of the locations to put black tiles
    * @param whiteTiles a list of the locations to put white tiles
    */
-  public BasicReversi(BoardType type, int sideLength, boolean lastPlayerPassed, CellState currentPlayer,
-      List<Cell.Location> blackTiles, List<Cell.Location> whiteTiles) {
+  public BasicReversi(BoardType type, int sideLength, boolean lastPlayerPassed,
+                      CellState currentPlayer, List<Cell.Location> blackTiles,
+                      List<Cell.Location> whiteTiles) {
     if (sideLength < 3) {
       throw new IllegalArgumentException("sideLength should be at-least 3 or above !");
     }

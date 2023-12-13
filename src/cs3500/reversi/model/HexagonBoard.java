@@ -114,7 +114,7 @@ class HexagonBoard implements ReversiBoard {
   }
 
   /**
-   * Copy constructor for HexagonBoard;
+   * Copy constructor for HexagonBoard.
    * @param base the HexagonBoard to copy
    */
   private HexagonBoard(HexagonBoard base) {

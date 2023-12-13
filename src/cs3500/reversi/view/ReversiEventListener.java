@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -70,7 +69,7 @@ class ReversiEventListener extends MouseAdapter {
     int x = e.getX();
     int y = e.getY();
 
-    Point rowCol = frame.XYToRowCol(x, y);
+    Point rowCol = frame.xyToRowCol(x, y);
     int row = -1;
     int col = -1;
     String hints = null;
@@ -100,7 +99,7 @@ class ReversiEventListener extends MouseAdapter {
     int x = e.getX();
     int y = e.getY();
 
-    Point rowCol = frame.XYToRowCol(x, y);
+    Point rowCol = frame.xyToRowCol(x, y);
 
     System.out.println("Controller mouse click event - x " + x + " y " + y);
     if (rowCol != null) {

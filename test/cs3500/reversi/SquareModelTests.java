@@ -23,10 +23,14 @@ public class SquareModelTests {
 
   @Test
   public void testInvalidArguments() {
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, 3));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, -1));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, 0));
-    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE, 5));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE,
+            3));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE,
+            -1));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE,
+            0));
+    Assert.assertThrows(IllegalArgumentException.class, () -> new BasicReversi(BoardType.SQUARE,
+            5));
   }
 
   @Test

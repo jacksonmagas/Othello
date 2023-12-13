@@ -1,6 +1,5 @@
 package cs3500.reversi.view.squaregrid;
 
-import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
 import java.awt.BasicStroke;
@@ -16,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
@@ -46,14 +44,12 @@ public class SquareMainPanel extends JPanel {
 
   // Map from the top left corner of each rectangle to the row and column of the rectangle
   public static HashMap<Point, Point> POINTS_TO_ROW_COLS;
-  private CellState player;
 
   /**
    * Constructor for MainPanel class.
    */
   public SquareMainPanel(ReadonlyReversiModel model, CellState player) {
     this.model = model;
-    this.player = player;
     board = model.getGameBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     setFocusable(true);
@@ -220,7 +216,7 @@ public class SquareMainPanel extends JPanel {
     g.fillOval(x2 + w / 2, y2 + w / 2, w * 2, w * 2);
 
     g.setColor(Color.BLACK);
-    g.drawString(text.toString(), x2 + w, y2 + w + w/2 + 5);
+    g.drawString(text.toString(), x2 + w, y2 + w + w / 2 + 5);
   }
 
   // draws the status messages

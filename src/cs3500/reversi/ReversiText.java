@@ -30,8 +30,10 @@ public class ReversiText {
       try {
         boardType = BoardType.valueOf(args[1].toUpperCase());
       } catch (IllegalArgumentException | NullPointerException e) {
-        System.err.println("Argument " + args[1] + " must be board type. Valid values are HEXAGON or SQUARE.");
-        throw new IllegalArgumentException("Argument " + args[1] + " must be board type. Valid values are HEXAGON or SQUARE.");
+        System.err.println("Argument " + args[1] + " must be board type. Valid values are " +
+                "HEXAGON or SQUARE.");
+        throw new IllegalArgumentException("Argument " + args[1] + " must be board type. " +
+                "Valid values are HEXAGON or SQUARE.");
       }
     }
     try {

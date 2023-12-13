@@ -100,7 +100,7 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
   }
 
   @Override
-  public Point XYToRowCol(int x, int y) {
+  public Point xyToRowCol(int x, int y) {
     Point rowColPoint = null;
     Map<Point, Point> keyMap = drawPanel.getMap();
     if (keyMap != null) {

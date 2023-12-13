@@ -1,15 +1,9 @@
 package cs3500.reversi.controller;
 
-import cs3500.reversi.model.Cell;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.Move;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.view.ReversiFrame;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 
 /**

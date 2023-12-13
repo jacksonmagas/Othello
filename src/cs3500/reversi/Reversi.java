@@ -103,7 +103,7 @@ public class Reversi {
       throw new IllegalArgumentException("Provider view not supported for square boards.");
     }
 
-    System.out.println("BoardType "+ boardType.toString());
+    System.out.println("BoardType " + boardType.toString());
 
     ReversiModel baseModel = new BasicReversi(boardType, size);
     try {
@@ -175,8 +175,10 @@ public class Reversi {
             try {
               boardType = BoardType.valueOf(args[i + 1].toUpperCase());
             } catch (IllegalArgumentException | NullPointerException e) {
-              System.err.println("board flag must be followed by a valid board specifier, either HEXAGON, or SQUARE.");
-              throw new IllegalArgumentException("board flag must be followed by a valid board specifier, either HEXAGON, or SQUARE.");
+              System.err.println("board flag must be followed by a valid board specifier," +
+                      " either HEXAGON, or SQUARE.");
+              throw new IllegalArgumentException("board flag must be followed by a valid board " +
+                      "specifier, either HEXAGON, or SQUARE.");
             }
             break;
           case "-depth":

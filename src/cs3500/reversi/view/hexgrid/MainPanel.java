@@ -42,14 +42,12 @@ public class MainPanel extends JPanel {
   private ReadonlyReversiModel model;
 
   public static HashMap<Point, Point> POINTS_TO_ROW_COLS = new HashMap<>();
-  private CellState player;
 
   /**
    * Constructor for MainPanel class.
    */
   public MainPanel(ReadonlyReversiModel model, CellState player) {
     this.model = model;
-    this.player = player;
     board = model.getGameBoard();
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     setFocusable(true);
@@ -216,7 +214,7 @@ public class MainPanel extends JPanel {
     g.fillOval(x2 + w / 2, y2 + w / 2, w * 2, w * 2);
 
     g.setColor(Color.BLACK);
-    g.drawString(text.toString(), x2 + w, y2 + w + w/2 + 5);
+    g.drawString(text.toString(), x2 + w, y2 + w + w / 2 + 5);
   }
 
   // draws the status messages

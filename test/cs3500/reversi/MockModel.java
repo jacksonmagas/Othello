@@ -2,7 +2,6 @@ package cs3500.reversi;
 
 import cs3500.reversi.controller.YourTurnListener;
 import cs3500.reversi.model.BoardType;
-import cs3500.reversi.model.Cell.Location;
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReversiModel;
 import cs3500.reversi.model.Move;
