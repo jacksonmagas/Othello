@@ -84,7 +84,7 @@ public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
 
   @Override
   public void addHintsListener(HintsListener features) {
-
+    // The provider view doesn't support enabling/disabling hints
   }
 
   @Override

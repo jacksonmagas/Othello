@@ -1,14 +1,12 @@
 package cs3500.reversi.provider.player;
 
-import java.sql.Array;
+import cs3500.reversi.provider.model.Hex;
+import cs3500.reversi.provider.model.IROModel;
+import cs3500.reversi.provider.model.PlayerDisc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-import cs3500.reversi.provider.model.Hex;
-import cs3500.reversi.provider.model.IROModel;
-import cs3500.reversi.provider.model.PlayerDisc;
 
 /**
  * The class {@code CaptureMax} represents a strategy for choosing a move in Reversi that
