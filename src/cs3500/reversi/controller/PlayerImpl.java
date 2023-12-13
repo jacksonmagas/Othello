@@ -50,27 +50,33 @@ public class PlayerImpl implements Player {
 
   /**
    * Retrieves the Scoring hints for given player based upon selected cell.
-   * @param model
-   * @param player
+   * @param model the model to check score of the move on
+   * @param player the player to check the move for
    * @param m the move that corresponds to the last mouse or key move
-   * @return scoring hints i.e. possible coins that can be flipped
+   * @return the number of points the move would score, or -1 if the move is not legal
    */
   @Override
   public int getPossiblePoints(ReadonlyReversiModel model, CellState player, Move m) {
     int score = 0;
-    if (player.equals(model.getCurrentPlayer())) {
-      ScoreTester tester = new ScoreTester(model);
-      try {
-        score = tester.testMove(m);
-        if (score < 0) {
-          score = 0;
+    if (model.getLegalMoves().contains(m)) {
+      if (player.equals(model.getCurrentPlayer())) {
+        ScoreTester tester = new ScoreTester(model);
+        try {
+          score = tester.testMove(m);
+          if (score < 0) {
+            score = 0;
+          }
+        } catch (IllegalStateException e) {
+          // do not print error message for game over message
+        } catch (Exception ex) {
+          // print error message for other errors
+          System.err.println("getPossiblePoints error " + ex);
         }
-      } catch (Exception ex) {
-        System.err.println("getPossiblePoints error " + ex);
+        // System.out.println("Move " + m.toString() + " has points " + score);
       }
-      System.out.println("Move " + m.toString() + " has points " + score);
+      return score;
     }
-    return score;
+    return -1;
   }
 
   /**
@@ -89,7 +95,7 @@ public class PlayerImpl implements Player {
 
     @Override
     public int testMove(Move move) throws IllegalArgumentException {
-      return delegate.testMove(move)-1;
+      return delegate.testMove(move) - 1;
     }
   }
 

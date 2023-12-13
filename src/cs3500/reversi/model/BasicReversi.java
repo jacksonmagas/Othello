@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
@@ -650,5 +651,33 @@ public class BasicReversi implements ReversiModel {
     result.add(new Move(true, false, false, false));
 
     return result;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    BasicReversi that = (BasicReversi) o;
+    return totalNumRows == that.totalNumRows
+        && lastPlayerPassed == that.lastPlayerPassed
+        && restartGame == that.restartGame
+        && quitGame == that.quitGame
+        && Objects.equals(board, that.board)
+        && currentPlayer == that.currentPlayer
+        && Objects.equals(playerHints, that.playerHints)
+        && Objects.equals(lastErrorMessage, that.lastErrorMessage)
+        && gameState == that.gameState
+        && winner == that.winner
+        && Objects.equals(listeners, that.listeners);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(board, totalNumRows, currentPlayer, playerHints, lastPlayerPassed,
+        lastErrorMessage, gameState, restartGame, winner, quitGame, listeners);
   }
 }

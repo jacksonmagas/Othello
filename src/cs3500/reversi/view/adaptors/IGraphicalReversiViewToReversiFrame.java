@@ -8,6 +8,7 @@ import cs3500.reversi.provider.view.IGraphicalReversiView;
 import cs3500.reversi.view.HintsListener;
 import cs3500.reversi.view.MoveListener;
 import cs3500.reversi.view.ReversiFrame;
+import java.awt.Point;
 import java.awt.event.KeyListener;
 
 /**
@@ -88,6 +89,12 @@ public class IGraphicalReversiViewToReversiFrame implements ReversiFrame {
 
   @Override
   public CellState getPlayer() {
+    return null;
+  }
+
+  @Override
+  public Point XYToRowCol(int x, int y) {
+    // this is a stub because it is not needed when using their model
     return null;
   }
 }

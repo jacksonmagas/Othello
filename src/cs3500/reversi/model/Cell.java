@@ -1,5 +1,7 @@
 package cs3500.reversi.model;
 
+import java.util.Objects;
+
 /**
  * A cell is a space for a tile to be placed in inside the hexagon grid.
  */
@@ -32,6 +34,23 @@ public class Cell {
     // gets the column of a cell
     public int getColumn() {
       return column;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+      Location location = (Location) o;
+      return row == location.row && column == location.column;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(row, column);
     }
   }
 
@@ -93,5 +112,22 @@ public class Cell {
       output = this.state.toString();
     }
     return output;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Cell cell = (Cell) o;
+    return state == cell.state && Objects.equals(location, cell.location);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(state, location);
   }
 }

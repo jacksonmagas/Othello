@@ -18,14 +18,16 @@ import javax.swing.JOptionPane;
  */
 class ReversiEventListener extends MouseAdapter {
   ReadonlyReversiModel model;
-  BasicReversiView frame;
+  ReversiFrame frame;
   final List<MoveListener> listeners;
   private HintsListener hintsListener;
+  private int rowHeight;
+  private int colWidth;
 
   /**
    * Constructor for MyMouseListener class.
    */
-  public ReversiEventListener(ReadonlyReversiModel model, BasicReversiView frame) {
+  public ReversiEventListener(ReadonlyReversiModel model, ReversiFrame frame) {
     super();
     this.model = model;
     this.frame = frame;
@@ -60,7 +62,7 @@ class ReversiEventListener extends MouseAdapter {
     if (hintsListener != null) {
       return hintsListener.getPossiblePoints(this.model, this.frame.getPlayer(), move);
     }
-    return 0;
+    return -1;
   }
 
   @Override
@@ -68,13 +70,7 @@ class ReversiEventListener extends MouseAdapter {
     int x = e.getX();
     int y = e.getY();
 
-    // Determine row, col using x, y
-    HashMap<Point, Point> keyMap = frame.getMap();
-    // 0,0=467,170 0,1=555,170 0,2=644,170
-    // 1,0=423,247 1,1=511,247 1,2=600,247
-    // horizontal cell distance 44
-    // vertical cell distance 33
-    Point rowCol = findRowCols(keyMap, new Point(x, y));
+    Point rowCol = frame.XYToRowCol(x, y);
     int row = -1;
     int col = -1;
     String hints = null;
@@ -84,7 +80,8 @@ class ReversiEventListener extends MouseAdapter {
       col = rowCol.y;
       try {
         if (this.model.isPlayerHintsEnabled(this.frame.getPlayer())) {
-          hints = "" + getPossiblePoints(new Move(row, col));
+          int numFlipped = getPossiblePoints(new Move(row, col));
+          hints = numFlipped == -1 ? "" : String.valueOf(numFlipped);
         }
       } catch (IllegalArgumentException | IllegalStateException ex) {
         System.err.println("Error: " + ex.getMessage() + System.lineSeparator());
@@ -103,14 +100,7 @@ class ReversiEventListener extends MouseAdapter {
     int x = e.getX();
     int y = e.getY();
 
-    // Determine row, col using x, y
-    HashMap<Point, Point> keyMap = frame.getMap();
-    //Point rowCol = (Point) keyMap.get(new Point(x, y));
-    // 0,0=467,170 0,1=555,170 0,2=644,170
-    // 1,0=423,247 1,1=511,247 1,2=600,247
-    // horizontal cell distance 44
-    // vertical cell distance 33
-    Point rowCol = findRowCols(keyMap, new Point(x, y));
+    Point rowCol = frame.XYToRowCol(x, y);
 
     System.out.println("Controller mouse click event - x " + x + " y " + y);
     if (rowCol != null) {
@@ -172,31 +162,5 @@ class ReversiEventListener extends MouseAdapter {
         }
       }
     }
-  }
-
-  // finds the rows and columns of a point in graphics coordinates in reversi logical coordinates
-  private Point findRowCols(HashMap<Point, Point> keyMap, Point mouseClickedPoint) {
-    Point rowColPoint = null;
-    if (keyMap != null && mouseClickedPoint != null) {
-      for (Point key : keyMap.keySet()) {
-        if (key != null
-            && isRowMatch(key.x, mouseClickedPoint.x)
-            && isColMatch(key.y, mouseClickedPoint.y)) {
-          rowColPoint = keyMap.get(key);
-          break;
-        }
-      }
-    }
-    return rowColPoint;
-  }
-
-  // checks if the two points are in the same row
-  private boolean isRowMatch(int x1, int x2) {
-    return (Math.abs(x1 - x2) <= 44);
-  }
-
-  // checks if the two points are in the same column
-  private boolean isColMatch(int y1, int y2) {
-    return (Math.abs(y1 - y2) <= 33);
   }
 }

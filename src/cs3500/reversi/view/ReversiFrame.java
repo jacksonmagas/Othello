@@ -1,5 +1,6 @@
 package cs3500.reversi.view;
 
+import java.awt.Point;
 import java.awt.event.KeyListener;
 
 import cs3500.reversi.model.CellState;
@@ -53,4 +54,12 @@ public interface ReversiFrame {
    * Get view's player
    */
   CellState getPlayer();
+
+  /**
+   * Convert a point in screen coordinates to a point in logical coordinates
+   * @param x the x coordinate of the point
+   * @param y the y coordinate of the point
+   * @return a point representing the row and column that the x, y point are in
+   */
+  Point XYToRowCol(int x, int y);
 }

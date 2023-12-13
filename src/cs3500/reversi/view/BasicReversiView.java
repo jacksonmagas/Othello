@@ -6,7 +6,7 @@ import cs3500.reversi.view.hexgrid.MainPanel;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyListener;
-import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -99,8 +99,30 @@ public class BasicReversiView extends JFrame implements ReversiFrame {
     mouseListener.registerHintsListener(features);
   }
 
-  // gets a map from on screen coordinates to logical coordinates
-  HashMap<Point, Point> getMap() {
-    return drawPanel.getMap();
+  @Override
+  public Point XYToRowCol(int x, int y) {
+    Point rowColPoint = null;
+    Map<Point, Point> keyMap = drawPanel.getMap();
+    if (keyMap != null) {
+      for (Point key : keyMap.keySet()) {
+        if (key != null
+            && isSameRow(key.x, x)
+            && isSameCol(key.y, y)) {
+          rowColPoint = keyMap.get(key);
+          break;
+        }
+      }
+    }
+    return rowColPoint;
+  }
+
+  // checks if the two points are in the same row
+  private boolean isSameRow(int x1, int x2) {
+    return (Math.abs(x1 - x2) <= 44);
+  }
+
+  // checks if the two points are in the same column
+  private boolean isSameCol(int y1, int y2) {
+    return (Math.abs(y1 - y2) <= 33);
   }
 }
