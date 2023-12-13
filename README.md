@@ -203,7 +203,8 @@ Added:
 
 # Changes for part 5
 1. Showing scoring hints (i.e. Level 0) is implemented.
-   New Listener is added to support this Hints feature. Each player can enable or disable the scoring hints using Hints button on his view and he will then be subscribed to receive this event with respect to only his view.
+   New Listener is added to support this hints feature. Each player can enable or disable the scoring hints using the Hints button on 
+   player view, and they will then receive this event with respect to only their view.
 2. ExamplarPlayerTests class is added to ensure that all possible hints are validated.
 3. Square Reversi (i.e. Level 1) is implemented using HexagonalBoard and SquareBoard.
 4. ReversiText is updated to play the game using HEXAGON or SQUARE as board type with textual view displayed on console and one can play game using console based commands such as make-move row col or pass-turn or quit commands.
