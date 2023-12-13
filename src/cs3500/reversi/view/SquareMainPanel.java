@@ -1,4 +1,4 @@
-package cs3500.reversi.view.squaregrid;
+package cs3500.reversi.view;
 
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;

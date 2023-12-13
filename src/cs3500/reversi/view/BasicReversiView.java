@@ -2,7 +2,6 @@ package cs3500.reversi.view;
 
 import cs3500.reversi.model.CellState;
 import cs3500.reversi.model.ReadonlyReversiModel;
-import cs3500.reversi.view.hexgrid.MainPanel;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyListener;
