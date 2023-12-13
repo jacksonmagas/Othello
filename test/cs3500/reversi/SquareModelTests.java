@@ -16,6 +16,7 @@ import org.junit.Test;
  */
 public class SquareModelTests {
   private BasicReversiBuilder b;
+
   @Before
   public void init() {
     b = new BasicReversiBuilder(4).boardType('s');

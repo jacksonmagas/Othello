@@ -98,7 +98,7 @@ public class SquareReversiView extends JFrame implements ReversiFrame {
     mouseListener.registerHintsListener(features);
   }
 
-  // gets a map from on screen coordinates to logical coordinates
+  // gets a map from on-screen coordinates to logical coordinates
   HashMap<Point, Point> getMap() {
     return drawPanel.getMap();
   }
